@@ -212,6 +212,33 @@ Open http://localhost:3000 → Register → Shop → Add to Cart → Checkout �
 
 ---
 
+---
+
+## 📸 Proof of Work
+
+### Account Dashboard
+![Account Dashboard](proof-of-work/ACCOUNT-DASHBOARD.png)
+
+### User Accounts in Valkey
+![Accounts](proof-of-work/accounts.png)
+
+### Dashboard — Logged In User
+![Dashboard of User](proof-of-work/dashboard-of-user.png)
+
+### Orders via Dashboard
+![Orders via Dashboard](proof-of-work/orders-via-dashboard.png)
+
+### Order Data in Valkey
+![Orders](proof-of-work/orders.png)
+
+### Active Sessions in Valkey
+![Sessions](proof-of-work/sessions.png)
+
+### User-Specific Data in Valkey
+![User Specific](proof-of-work/user-specific.png)
+
+---
+
 ## 📜 License
 
 MIT — Built for the Build Beyond Limits Hackathon powered by Valkey.
