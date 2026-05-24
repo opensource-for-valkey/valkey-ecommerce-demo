@@ -1,8 +1,22 @@
 import React, { useEffect, useState } from "react";
 import query from "jquery";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import SearchSuggestions from "./common/SearchSuggestions";
 
 const HeaderOne = () => {
+  const navigate = useNavigate();
+  const [searchQ, setSearchQ] = useState("");
+  const [suggestOpen, setSuggestOpen] = useState(false);
+  const submitSearch = (raw) => {
+    const q = String(raw || "").trim();
+    if (!q) return;
+    setSuggestOpen(false);
+    navigate(`/search?q=${encodeURIComponent(q)}`);
+  };
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    submitSearch(searchQ);
+  };
   const [scroll, setScroll] = useState(false);
   useEffect(() => {
     window.onscroll = () => {
@@ -67,32 +81,7 @@ const HeaderOne = () => {
       <div
         className={`side-overlay ${(menuActive || activeCategory) && "show"}`}
       />
-      {/* ==================== Search Box Start Here ==================== */}
-      <form action='#' className={`search-box ${activeSearch && "active"}`}>
-        <button
-          onClick={handleSearchToggle}
-          type='button'
-          className='search-box__close position-absolute inset-block-start-0 inset-inline-end-0 m-16 w-48 h-48 border border-gray-100 rounded-circle flex-center text-white hover-text-gray-800 hover-bg-white text-2xl transition-1'
-        >
-          <i className='ph ph-x' />
-        </button>
-        <div className='container'>
-          <div className='position-relative'>
-            <input
-              type='text'
-              className='form-control py-16 px-24 text-xl rounded-pill pe-64'
-              placeholder='Search for a product or brand'
-            />
-            <button
-              type='submit'
-              className='w-48 h-48 bg-main-600 rounded-circle flex-center text-xl text-white position-absolute top-50 translate-middle-y inset-inline-end-0 me-8'
-            >
-              <i className='ph ph-magnifying-glass' />
-            </button>
-          </div>
-        </div>
-      </form>
-      {/* ==================== Search Box End Here ==================== */}
+      {/* Overlay search removed — inline form below is always visible. */}
       {/* ==================== Mobile Menu Start Here ==================== */}
       <div
         className={`mobile-menu scroll-sm d-lg-none d-block ${
@@ -218,10 +207,7 @@ const HeaderOne = () => {
                   activeIndex === 2 ? "d-block" : ""
                 }`}
               >
-                <span className='badge-notification bg-warning-600 text-white text-sm py-2 px-8 rounded-4'>
-                  New
-                </span>
-                <Link to='#' className='nav-menu__link'>
+<Link to='#' className='nav-menu__link'>
                   Pages
                 </Link>
                 <ul
@@ -287,10 +273,7 @@ const HeaderOne = () => {
                   activeIndex === 3 ? "d-block" : ""
                 }`}
               >
-                <span className='badge-notification bg-tertiary-600 text-white text-sm py-2 px-8 rounded-4'>
-                  New
-                </span>
-                <Link to='#' className='nav-menu__link'>
+<Link to='#' className='nav-menu__link'>
                   Vendors
                 </Link>
                 <ul
@@ -675,39 +658,44 @@ const HeaderOne = () => {
             {/* Logo End  */}
             {/* form location Start */}
             <form
-              action='#'
+              onSubmit={handleSearchSubmit}
               className='flex-align flex-wrap form-location-wrapper'
+              role='search'
+              style={{ flexGrow: 1 }}
             >
-              <div className='search-category d-flex h-48 select-border-end-0 radius-end-0 search-form d-sm-flex d-none'>
-                <select
-                  defaultValue={1}
-                  className='js-example-basic-single border border-gray-200 border-end-0'
-                  name='state'
-                >
-                  <option value={1}>All Categories</option>
-                  <option value={1}>Grocery</option>
-                  <option value={1}>Breakfast &amp; Dairy</option>
-                  <option value={1}>Vegetables</option>
-                  <option value={1}>Milks and Dairies</option>
-                  <option value={1}>Pet Foods &amp; Toy</option>
-                  <option value={1}>Breads &amp; Bakery</option>
-                  <option value={1}>Fresh Seafood</option>
-                  <option value={1}>Fronzen Foods</option>
-                  <option value={1}>Noodles &amp; Rice</option>
-                  <option value={1}>Ice Cream</option>
-                </select>
-                <div className='search-form__wrapper position-relative'>
+              <div className='search-category d-flex h-48 search-form flex-grow-1 position-relative'>
+                <div className='search-form__wrapper position-relative flex-grow-1'>
                   <input
                     type='text'
-                    className='search-form__input common-input py-13 ps-16 pe-18 rounded-end-pill pe-44'
-                    placeholder='Search for a product or brand'
+                    value={searchQ}
+                    onChange={(e) => { setSearchQ(e.target.value); setSuggestOpen(true); }}
+                    onFocus={() => setSuggestOpen(true)}
+                    className='search-form__input common-input py-13 ps-16 pe-80 rounded-pill border border-gray-100'
+                    placeholder='Search the catalogue — try "more expensive", "under £150", "gift for a friend"'
+                    aria-label='Search products'
+                    aria-autocomplete='list'
+                    autoComplete='off'
                   />
+                  <Link
+                    to='/search/image'
+                    title='Search by image'
+                    className='w-32 h-32 bg-gray-100 rounded-circle flex-center text-lg text-heading position-absolute top-50 translate-middle-y inset-inline-end-0 me-44 hover-bg-main-100'
+                  >
+                    <i className='ph ph-camera' />
+                  </Link>
                   <button
                     type='submit'
                     className='w-32 h-32 bg-main-600 rounded-circle flex-center text-xl text-white position-absolute top-50 translate-middle-y inset-inline-end-0 me-8'
+                    aria-label='Submit search'
                   >
                     <i className='ph ph-magnifying-glass' />
                   </button>
+                  <SearchSuggestions
+                    value={searchQ}
+                    open={suggestOpen}
+                    onPick={(label) => { setSearchQ(label); submitSearch(label); }}
+                    onClose={() => setSuggestOpen(false)}
+                  />
                 </div>
               </div>
               <div className='location-box bg-white flex-align gap-8 py-6 px-16 rounded-pill border border-gray-100'>
@@ -1265,10 +1253,7 @@ const HeaderOne = () => {
                     </ul>
                   </li>
                   <li className='on-hover-item nav-menu__item has-submenu'>
-                    <span className='badge-notification bg-warning-600 text-white text-sm py-2 px-8 rounded-4'>
-                      New
-                    </span>
-                    <Link to='#' className='nav-menu__link'>
+<Link to='#' className='nav-menu__link'>
                       Pages
                     </Link>
                     <ul className='on-hover-dropdown common-dropdown nav-submenu scroll-sm'>
@@ -1339,10 +1324,7 @@ const HeaderOne = () => {
                     </ul>
                   </li>
                   <li className='on-hover-item nav-menu__item has-submenu'>
-                    <span className='badge-notification bg-tertiary-600 text-white text-sm py-2 px-8 rounded-4'>
-                      New
-                    </span>
-                    <Link to='#' className='nav-menu__link'>
+<Link to='#' className='nav-menu__link'>
                       Vendors
                     </Link>
                     <ul className='on-hover-dropdown common-dropdown nav-submenu scroll-sm'>
@@ -1460,15 +1442,7 @@ const HeaderOne = () => {
               </Link>
               <div className='me-16 d-lg-none d-block'>
                 <div className='flex-align flex-wrap gap-12'>
-                  <button
-                    onClick={handleSearchToggle}
-                    type='button'
-                    className='search-icon flex-align d-lg-none d-flex gap-4 item-hover'
-                  >
-                    <span className='text-2xl text-gray-700 d-flex position-relative item-hover__text'>
-                      <i className='ph ph-magnifying-glass' />
-                    </span>
-                  </button>
+                  {/* search-icon overlay button removed — inline search bar is always visible */}
                   <Link to='/wishlist' className='flex-align gap-4 item-hover'>
                     <span className='text-2xl text-gray-700 d-flex position-relative me-6 mt-6 item-hover__text'>
                       <i className='ph ph-heart' />

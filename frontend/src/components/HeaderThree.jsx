@@ -1,8 +1,22 @@
 import React, { useEffect, useState } from "react";
 import query from "jquery";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import SearchSuggestions from "./common/SearchSuggestions";
 
 const HeaderThree = () => {
+  const navigate = useNavigate();
+  const [searchQ, setSearchQ] = useState("");
+  const [suggestOpen, setSuggestOpen] = useState(false);
+  const submitSearch = (raw) => {
+    const q = String(raw || "").trim();
+    if (!q) return;
+    setSuggestOpen(false);
+    navigate(`/search?q=${encodeURIComponent(q)}`);
+  };
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    submitSearch(searchQ);
+  };
   const [scroll, setScroll] = useState(false);
   useEffect(() => {
     window.onscroll = () => {
@@ -217,10 +231,7 @@ const HeaderThree = () => {
                   activeIndex === 2 ? "d-block" : ""
                 }`}
               >
-                <span className='badge-notification bg-warning-600 text-white text-sm py-2 px-8 rounded-4'>
-                  New
-                </span>
-                <Link to='#' className='nav-menu__link'>
+<Link to='#' className='nav-menu__link'>
                   Pages
                 </Link>
                 <ul
@@ -282,10 +293,7 @@ const HeaderThree = () => {
                   activeIndex === 3 ? "d-block" : ""
                 }`}
               >
-                <span className='badge-notification bg-tertiary-600 text-white text-sm py-2 px-8 rounded-4'>
-                  New
-                </span>
-                <Link to='#' className='nav-menu__link'>
+<Link to='#' className='nav-menu__link'>
                   Vendors
                 </Link>
                 <ul
@@ -586,38 +594,34 @@ const HeaderThree = () => {
                 {/* Dropdown Select End */}
               </div>
               <form
-                action='#'
+                onSubmit={handleSearchSubmit}
                 className='flex-align flex-wrap form-location-wrapper'
+                role='search'
               >
-                <div className='search-category style-two d-flex h-48 search-form d-sm-flex d-none'>
-                  <select
-                    className='js-example-basic-single border border-gray-200 border-end-0 rounded-0 border-0'
-                    name='state'
-                  >
-                    <option defaultValue={1}>
-                      All Categories
-                    </option>
-                    <option value={1}>Grocery</option>
-                    <option value={1}>Breakfast &amp; Dairy</option>
-                    <option value={1}>Vegetables</option>
-                    <option value={1}>Milks and Dairies</option>
-                    <option value={1}>Pet Foods &amp; Toy</option>
-                    <option value={1}>Breads &amp; Bakery</option>
-                    <option value={1}>Fresh Seafood</option>
-                    <option value={1}>Fronzen Foods</option>
-                    <option value={1}>Noodles &amp; Rice</option>
-                    <option value={1}>Ice Cream</option>
-                  </select>
-                  <div className='search-form__wrapper position-relative'>
+                <div className='search-category style-two d-flex h-48 search-form flex-grow-1 position-relative'>
+                  <div className='search-form__wrapper position-relative flex-grow-1'>
                     <input
                       type='text'
+                      value={searchQ}
+                      onChange={(e) => { setSearchQ(e.target.value); setSuggestOpen(true); }}
+                      onFocus={() => setSuggestOpen(true)}
                       className='search-form__input common-input py-13 ps-16 pe-18 rounded-0 border-0'
-                      placeholder='Search for a product or brand'
+                      placeholder='Search the catalogue — try "more expensive", "under £150", "gift for a friend"'
+                      aria-label='Search products'
+                      aria-autocomplete='list'
+                      autoComplete='off'
+                    />
+                    <SearchSuggestions
+                      value={searchQ}
+                      open={suggestOpen}
+                      onPick={(label) => { setSearchQ(label); submitSearch(label); }}
+                      onClose={() => setSuggestOpen(false)}
                     />
                   </div>
                   <button
                     type='submit'
-                    className='bg-main-two-600 flex-center text-xl text-white flex-shrink-0 w-48 hover-bg-main-two-700 d-lg-flex d-none'
+                    className='bg-main-two-600 flex-center text-xl text-white flex-shrink-0 w-48 hover-bg-main-two-700 d-flex'
+                    aria-label='Submit search'
                   >
                     <i className='ph ph-magnifying-glass' />
                   </button>
@@ -1776,10 +1780,7 @@ const HeaderThree = () => {
                     </ul>
                   </li>
                   <li className='on-hover-item nav-menu__item has-submenu'>
-                    <span className='badge-notification bg-warning-600 text-white text-sm py-2 px-8 rounded-4'>
-                      New
-                    </span>
-                    <Link to='#' className='nav-menu__link'>
+<Link to='#' className='nav-menu__link'>
                       Pages
                     </Link>
                     <ul className='on-hover-dropdown common-dropdown nav-submenu scroll-sm'>
@@ -1847,10 +1848,7 @@ const HeaderThree = () => {
                     </ul>
                   </li>
                   <li className='on-hover-item nav-menu__item has-submenu'>
-                    <span className='badge-notification bg-tertiary-600 text-white text-sm py-2 px-8 rounded-4'>
-                      New
-                    </span>
-                    <Link to='#' className='nav-menu__link'>
+<Link to='#' className='nav-menu__link'>
                       Vendors
                     </Link>
                     <ul className='on-hover-dropdown common-dropdown nav-submenu scroll-sm'>

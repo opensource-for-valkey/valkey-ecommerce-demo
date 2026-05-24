@@ -1,70 +1,98 @@
-# Getting Started with Create React App
+# Nocturne & Co. — Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React 18 + Create React App. Bootstrap 5 utility classes plus a hand-written Nocturne theme layer in `src/styles/nocturne.css`. Every page that shows products talks to the backend at `http://localhost:4000/api/...` — there is no local product data path left in the rendered flow.
 
-## Available Scripts
+## Run
 
-In the project directory, you can run:
+```
+npm install
+npm start
+```
 
-### `npm start`
+The dev server runs on `http://localhost:3000` and expects the backend to be reachable at `http://localhost:4000`. To point at a different backend:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+echo "REACT_APP_CATALOG_URL=https://api.example.com/api" > .env.local
+echo "REACT_APP_API_URL=https://api.example.com/api/agent" >> .env.local
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Folder layout
 
-### `npm test`
+```
+frontend/
+  public/
+    index.html                  # preconnects for images.unsplash.com, loremflickr, picsum
+    assets/                     # template CSS, fonts, fallback product PNGs
+  src/
+    App.js                      # Router. Real product routes: /category/:slug,
+                                # /product/:id, /search, /categories
+    index.js                    # CRA entry; imports nocturne.css globally
+    lib/
+      api.js                    # Single fetch wrapper. fetchCategories,
+                                # fetchProducts, fetchProduct, fetchSimilar,
+                                # fetchTrending. Every page goes through here.
+      img.js                    # sized(), srcSet(), lqip() helpers
+      category-art.js           # One curated keyword image per category
+      brand-logos.js            # Wikimedia logo URLs per brand
+    components/
+      HeaderOne.jsx             # Wired to the always-on inline search
+      HeaderTwo.jsx
+      HeaderThree.jsx
+      common/
+        ProductImage.jsx        # Zero-CLS image wrapper with blur-up fade
+        SearchSuggestions.jsx   # Debounced dropdown backed by
+                                # GET /api/agent/suggestions
+    pages/
+      CategoryPage.jsx          # /category/:slug — fetchProducts({category})
+      ProductPage.jsx           # /product/:id — fetchProduct + fetchSimilar
+      CategoriesPage.jsx        # /categories — fetchCategories + preview grid
+      SearchResultsPage.jsx     # /search?q=... — POST /api/agent/search,
+                                # honors notInCatalog flag with Nocturne chips
+      HomePageOne.jsx
+      ProductDetailsPageOne.jsx
+      ...
+    helper/
+      mockCatalog.js            # Fallback shape mirror of the Nocturne data
+      NocturneEnhance.jsx       # The Nocturne CSS + small DOM glue
+    styles/
+      nocturne.css              # The brand layer that turns the template into
+                                # Nocturne & Co.
+    index.scss                  # Template SCSS entry
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Where data comes from
 
-### `npm run build`
+| Page | API call |
+| --- | --- |
+| `/categories` | `GET /api/categories` plus `GET /api/products?category=<slug>&pageSize=4` per tile |
+| `/category/:slug` | `GET /api/categories`, `GET /api/products?category=<slug>&sort=<sort>` |
+| `/product/:id` | `GET /api/products/:id` (or slug lookup), `GET /api/products/:id/similar` |
+| `/search?q=...` | `POST /api/agent/search` with `{ sessionId, message }` |
+| Header search dropdown | `GET /api/agent/suggestions?q=&sessionId=` |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The session id lives in `localStorage["agent_sid"]` and is regenerated only if the user clears site data.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Search interaction
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The header form is always visible and always editable. It does three things:
 
-### `npm run eject`
+1. Submitting on Enter or clicking the magnifier navigates to `/search?q=<value>` which kicks off the agent search.
+2. While typing, the `SearchSuggestions` dropdown debounces and pulls suggestions from `GET /api/agent/suggestions`. The list is keyboard-navigable (`Up`, `Down`, `Enter`, `Esc`). Picking a suggestion submits the search immediately.
+3. With an empty input it shows recent searches first, then popular ones.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+`SearchResultsPage` interprets the `notInCatalog` flag from the backend. When the catalogue does not carry the requested item it renders an honest warning with a row of real Nocturne categories pulled from `GET /api/categories` (no hardcoded chip list).
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Available scripts
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+npm start          # development server on :3000
+npm test           # Jest in watch mode
+CI=true npm test   # single CI run
+npm run build      # production bundle in ./build
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Notes
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `src/data/products.js` is preserved as a structural reference but no rendered page imports from it.
+- `helper/NocturneEnhance.jsx` injects a slim sticky category strip after the last `<header>`. The strip is React-router-friendly and survives client-side navigation.
+- The previous "New" badges above the Pages and Vendors menu items have been removed. The header has no toggleable search overlay anymore — the inline form replaces it.

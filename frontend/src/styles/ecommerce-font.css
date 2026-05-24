@@ -1,0 +1,76 @@
+/* ============================================================
+   E-commerce typography overlay
+   Loaded after nocturne.css to apply Inter (body) + Plus Jakarta Sans
+   (display/headings) site-wide. Overrides the template's
+   --body-font / --heading-font CSS variables so every rule using
+   var(--body-font) resolves to Inter automatically.
+   ============================================================ */
+
+:root,
+html,
+body {
+  --body-font: "Inter", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  --heading-font: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif !important;
+  --font-body: "Inter", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+}
+
+/* Brute-force override everywhere. !important + universal selector so we
+   beat the template's own !important rules. */
+html body,
+html body * {
+  font-family: var(--font-body) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.005em;
+}
+
+/* Headings & CTAs get the display font */
+html body h1,
+html body h2,
+html body h3,
+html body h4,
+html body h5,
+html body h6,
+html body .title,
+html body .heading,
+html body .section-heading,
+html body .btn,
+html body button {
+  font-family: var(--font-display) !important;
+  letter-spacing: -0.02em;
+}
+
+/* Keep icon fonts (Phosphor / FontAwesome / glyph icons) untouched */
+html body i.ph,
+html body i.ph-fill,
+html body i.ph-bold,
+html body i.ph-light,
+html body i.ph-regular,
+html body i.ph-duotone,
+html body i.ph-thin,
+html body i[class^="ph-"],
+html body i[class*=" ph-"],
+html body i.fa,
+html body i.fas,
+html body i.far,
+html body i.fab,
+html body i[class^="fa-"],
+html body i[class*=" fa-"],
+html body .noct-mono,
+html body .noct-mono * {
+  font-family: "Phosphor", "Font Awesome 5 Free", "JetBrains Mono",
+    ui-monospace, monospace !important;
+}
+
+/* Weights */
+html body { font-size: 15px; line-height: 1.55; font-weight: 400; }
+html body h1 { font-weight: 800; }
+html body h2 { font-weight: 700; }
+html body h3, html body h4 { font-weight: 700; }
+html body h5, html body h6 { font-weight: 600; }
+html body .btn, html body button { font-weight: 600; }

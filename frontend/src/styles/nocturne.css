@@ -1,0 +1,3407 @@
+/* =========================================================================
+   NOCTURNE & CO. — Palette overlay for the existing Valkey template.
+   Applied globally. Does not change layout, fonts, or component structure —
+   only re-themes colors. Loaded after index.scss so it wins the cascade.
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+:root,
+.color-two:root,
+html.color-two {
+  /* Brand accents ---------------------------------------------------------
+     The template's main palette is driven by --main-h/s/l (default 230 100% 71%)
+     and --main-two-h/s/l (default 257 65% 26%). All --main-50..900 shades are
+     derived from those via calc(), so re-pointing just these three vars
+     re-skins everything that uses var(--main) across the entire app.
+
+     We also override .color-two:root so any page that toggles ColorInit({color:true})
+     can't fall back to the bright orange theme that ships with the template. */
+
+  /* antique brass #C5A572 → hsl(37, 42%, 61%) */
+  --main-h: 37;
+  --main-s: 42%;
+  --main-l: 49%;          /* slightly darker than #C5A572 so brass on cream stays readable */
+
+  /* burgundy #5A1E22 → hsl(355, 50%, 24%) — used for secondary accents/CTAs */
+  --main-two-h: 355;
+  --main-two-s: 50%;
+  --main-two-l: 24%;
+
+  /* Surfaces --------------------------------------------------------------- */
+  /* parchment cream replaces white-ish surfaces */
+  --bg-color-one:   #F5EFE0;   /* lightest parchment */
+  --bg-color-two:   #FBF6E8;   /* page chrome cream  */
+  --bg-color-three: #E6D6BB;   /* warm sand for muted blocks */
+  --body-bg-color:  #F5EFE0;   /* page background    */
+
+  /* Typography colors ------------------------------------------------------ */
+  /* HSL-space versions of the dark ink so the template's hsl() consumers work */
+  --black: 354 41% 8%;          /* deep ink, almost black wine */
+  --heading-color: var(--black);
+  --light: 354 18% 28%;         /* warm sepia for body copy */
+  --body-color: var(--light);
+  --neutral: #221012;           /* deep burgundy-ink */
+
+  /* Borders & subtle dividers --------------------------------------------- */
+  --border-color: 37 35% 70%;   /* warm brass-tan border */
+}
+
+/* The body bg in the template comes from a `--gray` token that index.scss
+   may set; pin the html/body background to parchment so the page floor
+   shows the new ground even where components don't paint. */
+html, body {
+  background: #F5EFE0 !important;
+  color: #3B2A24;               /* warm sepia body text */
+}
+
+/* Many components in the template hard-code white (#fff, #FFFFFF or rgb(255,255,255))
+   for card surfaces, headers, modals etc. Soften those to a near-parchment
+   so the warmth carries through without breaking contrast inside cards. */
+.bg-white,
+.bg-light,
+.card,
+.modal-content,
+.dropdown-menu,
+.offcanvas,
+.navbar,
+header,
+footer {
+  background-color: #FBF6E8 !important;
+}
+
+/* Common pure-white utility on text becomes ivory so it doesn't disappear
+   on dark hero blocks that use a --main-700/800 fill (now brass-deep). */
+.text-white { color: #F5EFE0 !important; }
+
+/* Section backgrounds the template paints as faint blue (#F7FBFE / #EFF6FF /
+   #F1F4FF etc.) — re-map any element that has these as inline styles or
+   class-driven backgrounds to a parchment tone via a low-cost attribute
+   selector fallback. */
+[style*="#F7FBFE"], [style*="#f7fbfe"],
+[style*="#EFF6FF"], [style*="#eff6ff"],
+[style*="#F1F4FF"], [style*="#f1f4ff"] { background-color: #F5EFE0 !important; }
+
+/* Buttons: keep template's shape, restate hover so brass and burgundy
+   coexist nicely. The template often uses .btn-main and .btn-outline-main. */
+.btn-main,
+.btn-main-two,
+button.bg-main-600,
+.bg-main-600 {
+  background-color: hsl(var(--main-h), var(--main-s), var(--main-l)) !important;
+  color: #FBF6E8 !important;
+  border-color: hsl(var(--main-h), var(--main-s), var(--main-l)) !important;
+}
+.btn-main:hover,
+.btn-main-two:hover,
+.bg-main-600:hover {
+  background-color: hsl(var(--main-two-h), var(--main-two-s), var(--main-two-l)) !important;
+  border-color:     hsl(var(--main-two-h), var(--main-two-s), var(--main-two-l)) !important;
+  color: #FBF6E8 !important;
+}
+
+.btn-outline-main {
+  background: transparent !important;
+  color:        hsl(var(--main-h), var(--main-s), var(--main-l)) !important;
+  border-color: hsl(var(--main-h), var(--main-s), var(--main-l)) !important;
+}
+.btn-outline-main:hover {
+  background:   hsl(var(--main-h), var(--main-s), var(--main-l)) !important;
+  color: #FBF6E8 !important;
+}
+
+/* Badges/tags/labels that ride on --main */
+.bg-main-50,  .bg-main-100, .bg-main-200 { background-color: #EFE0C2 !important; color: #5A1E22 !important; }
+.bg-main-two-50, .bg-main-two-100        { background-color: #EFD9D6 !important; color: #5A1E22 !important; }
+
+/* Links — give them brass with a burgundy underline-on-hover */
+a {
+  color: hsl(var(--main-h), var(--main-s), 38%);
+}
+a:hover {
+  color: hsl(var(--main-two-h), var(--main-two-s), var(--main-two-l));
+}
+
+/* Headings use the new ink color naturally via --heading-color override above.
+   But some templates declare `h*` with an inline color — restate. */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  color: hsl(var(--black));
+}
+
+/* Star ratings — recolor the gold to brass so it sits with the palette */
+.rating, .star, [class*="star"] svg {
+  color: hsl(var(--main-h), 55%, 48%) !important;
+  fill:  hsl(var(--main-h), 55%, 48%);
+}
+
+/* Form fields — soften focus rings to brass instead of bright blue */
+.form-control:focus,
+.form-select:focus,
+input:focus, textarea:focus, select:focus {
+  border-color: hsl(var(--main-h), var(--main-s), 50%) !important;
+  box-shadow: 0 0 0 .2rem hsla(37, 42%, 50%, .25) !important;
+}
+
+/* Bootstrap link-success / text-success / bg-success used by the template
+   for the green #299E60 accent — re-point to a moss green that lives in
+   the palette without breaking semantics. */
+.text-success { color: #5F7A47 !important; }       /* moss */
+.bg-success,
+.btn-success { background-color: #5F7A47 !important; border-color: #5F7A47 !important; color: #FBF6E8 !important; }
+.btn-success:hover { background-color: #4C6238 !important; border-color: #4C6238 !important; }
+
+/* Borders — re-skin the template's grey hairlines to a warm sand */
+.border, .border-top, .border-end, .border-bottom, .border-start,
+hr {
+  border-color: #E0CDA8 !important;
+}
+hr { background-color: #E0CDA8 !important; opacity: 1; }
+
+/* The two scroll-to-top circular buttons in HomePageOne pass color="#299E60"
+   as a JSX prop on react-scroll-to-top, which renders as inline fill. Catch
+   that exact color and shift to moss so the chrome agrees with the rest. */
+[fill="#299E60"],
+[stroke="#299E60"],
+[style*="#299E60"] {
+  fill: #5F7A47 !important;
+  stroke: #5F7A47 !important;
+  background-color: #5F7A47 !important;
+}
+
+/* Light gray placeholders / muted text — warm them slightly toward sepia */
+.text-muted,
+.text-gray-300,
+.text-gray-400,
+.text-gray-500 { color: #8A6E5C !important; }
+
+/* Selection highlight */
+::selection {
+  background: #5A1E22;
+  color: #F5EFE0;
+}
+
+/* =========================================================================
+   ANIMATION + INTERACTION LAYER
+   Universal hover polish, scroll-reveal, toasts, preloader fade, focus rings.
+   Scoped via :where() where helpful so specificity stays modest.
+   ========================================================================= */
+
+/* Honour user reduced-motion preference globally */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html { scroll-behavior: smooth; }
+
+/* ── Buttons, links, badges: smooth state transitions ──────────────────── */
+:where(.btn, button, a, input, .form-control, .form-select,
+       .card, .product-card, .product-card__cart) {
+  transition: background-color .28s ease,
+              color .28s ease,
+              border-color .28s ease,
+              transform .35s cubic-bezier(.2,.7,.2,1),
+              box-shadow .35s cubic-bezier(.2,.7,.2,1),
+              opacity .25s ease;
+}
+
+/* Button press feedback */
+:where(.btn, button):active { transform: translateY(1px) scale(.985); }
+
+/* Brass underline-grow on text links inside content */
+.nav-menu__link,
+.menu-list a,
+.footer-menu a,
+.text-link {
+  position: relative;
+}
+.nav-menu__link::after,
+.menu-list a::after,
+.footer-menu a::after,
+.text-link::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 100%; height: 1px;
+  background: hsl(var(--main-h), var(--main-s), 48%);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .4s cubic-bezier(.2,.7,.2,1);
+}
+.nav-menu__link:hover::after,
+.menu-list a:hover::after,
+.footer-menu a:hover::after,
+.text-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ── Product cards: lift, soft shadow, image zoom on hover ─────────────── */
+.product-card,
+.product-item,
+:where(.card):not(.modal-content):not(.dropdown-menu) {
+  will-change: transform;
+}
+.product-card:hover,
+.product-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 50px -22px rgba(58, 22, 26, .35),
+              0 8px 16px -8px rgba(58, 22, 26, .18);
+}
+.product-card img,
+.product-item img {
+  transition: transform .9s cubic-bezier(.2,.7,.2,1), filter .5s ease;
+}
+.product-card:hover img,
+.product-item:hover img {
+  transform: scale(1.04);
+}
+
+/* Add-to-cart pill: warm brass on hover, slight expand */
+.product-card__cart {
+  letter-spacing: .02em;
+}
+.product-card__cart:hover {
+  background-color: hsl(var(--main-h), var(--main-s), 38%) !important;
+  color: #FBF6E8 !important;
+  letter-spacing: .04em;
+}
+
+/* Primary buttons get a brass→burgundy crossfade with a subtle lift */
+.btn-main,
+.btn-main-two,
+.bg-main-600 {
+  position: relative;
+  overflow: hidden;
+}
+.btn-main::before,
+.btn-main-two::before,
+.bg-main-600::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: hsl(var(--main-two-h), var(--main-two-s), var(--main-two-l));
+  transform: translateX(-101%);
+  transition: transform .45s cubic-bezier(.2,.7,.2,1);
+  z-index: 0;
+}
+.btn-main:hover::before,
+.btn-main-two:hover::before,
+.bg-main-600:hover::before {
+  transform: translateX(0);
+}
+.btn-main > *,
+.btn-main-two > *,
+.bg-main-600 > * { position: relative; z-index: 1; }
+
+/* Star rating shimmer on hover */
+.product-card:hover [class*="star"] svg,
+.product-card:hover .rating { filter: drop-shadow(0 0 6px hsla(37, 60%, 60%, .55)); }
+
+/* ── Scroll reveal: noct-reveal → is-visible (toggled by JS observer) ──── */
+.noct-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);
+  will-change: transform, opacity;
+}
+.noct-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.noct-reveal--right { transform: translateX(28px); }
+.noct-reveal--right.is-visible { transform: translateX(0); }
+.noct-reveal--left  { transform: translateX(-28px); }
+.noct-reveal--left.is-visible  { transform: translateX(0); }
+.noct-reveal--scale { transform: scale(.96); }
+.noct-reveal--scale.is-visible { transform: scale(1); }
+
+/* When a row of cards reveals, stagger each child */
+.noct-reveal.is-visible > * { animation: noct-rise .8s cubic-bezier(.2,.7,.2,1) backwards; }
+.noct-reveal.is-visible > *:nth-child(1) { animation-delay: .05s; }
+.noct-reveal.is-visible > *:nth-child(2) { animation-delay: .15s; }
+.noct-reveal.is-visible > *:nth-child(3) { animation-delay: .25s; }
+.noct-reveal.is-visible > *:nth-child(4) { animation-delay: .35s; }
+.noct-reveal.is-visible > *:nth-child(5) { animation-delay: .45s; }
+.noct-reveal.is-visible > *:nth-child(6) { animation-delay: .55s; }
+@keyframes noct-rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Preloader graceful fade-out ───────────────────────────────────────── */
+.preloader {
+  transition: opacity .45s ease, visibility 0s linear .45s;
+}
+.preloader.noct-fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Failsafe: if the preloader is still around after the page is ready,
+   hide it (in case the React state never flips). */
+html.noct-ready .preloader,
+html.noct-ready .preloader * { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+
+/* Belt-and-braces — also force-hide via a fixed timer-driven attribute the
+   helper sets, so even if .noct-ready class application fails the preloader
+   cannot persist past 2 seconds. */
+html[data-noct-loaded] .preloader { display: none !important; }
+
+/* ── Toast (used by NocturneEnhance) ───────────────────────────────────── */
+.noct-toast-stack {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+}
+.noct-toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 280px;
+  max-width: 360px;
+  padding: 14px 18px;
+  background: #FBF6E8;
+  color: #2A1216;
+  border: 1px solid #E0CDA8;
+  border-left: 4px solid hsl(var(--main-h), var(--main-s), 45%);
+  border-radius: 4px;
+  box-shadow: 0 18px 40px -16px rgba(58, 22, 26, .35),
+              0 4px 10px -4px rgba(58, 22, 26, .18);
+  font-family: var(--body-font), "Inter", sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  transform: translateX(110%);
+  opacity: 0;
+  transition: transform .5s cubic-bezier(.2,.7,.2,1), opacity .35s ease;
+}
+.noct-toast.is-visible { transform: translateX(0); opacity: 1; }
+.noct-toast.is-leaving { transform: translateX(110%); opacity: 0; }
+.noct-toast__icon {
+  flex: 0 0 auto;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: hsl(var(--main-h), var(--main-s), 50%);
+  color: #FBF6E8;
+  display: grid; place-items: center;
+  font-size: 18px;
+}
+.noct-toast__title {
+  font-weight: 600;
+  font-size: 14.5px;
+  letter-spacing: .01em;
+  color: #2A1216;
+}
+.noct-toast__sub {
+  font-size: 12.5px;
+  color: #6E4C3F;
+  margin-top: 2px;
+}
+.noct-toast--wish .noct-toast__icon { background: #5A1E22; }
+.noct-toast--err  .noct-toast__icon { background: #8B3A3A; }
+
+/* ── Cart/Wishlist badge pulse when count changes ──────────────────────── */
+.noct-badge-bump {
+  animation: noct-bump .6s cubic-bezier(.2,.7,.2,1);
+}
+@keyframes noct-bump {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.55); background-color: hsl(37, 55%, 50%) !important; }
+  70%  { transform: scale(.92); }
+  100% { transform: scale(1); }
+}
+
+/* Hide the hardcoded "2" the template ships with — JS will fill in live count */
+[data-noct-badge] { transition: transform .3s, background-color .3s; }
+
+/* ── Heart toggle filled state ────────────────────────────────────────── */
+.noct-wishlisted .ph-heart::before { content: "\f6c4"; /* ph-fill heart codepoint approximated */ }
+.noct-wishlisted .ph-heart {
+  color: #5A1E22 !important;
+  transform: scale(1.12);
+  transition: transform .3s cubic-bezier(.2,.7,.2,1);
+}
+
+/* ── Focus rings: brass instead of default browser blue ───────────────── */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid hsl(var(--main-h), var(--main-s), 50%);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Mobile menu drawer: ensure visible above everything when active ───── */
+.mobile-menu {
+  transition: transform .45s cubic-bezier(.2,.7,.2,1);
+}
+.mobile-menu.active {
+  transform: translateX(0) !important;
+}
+.side-overlay.show {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+/* (Removed body opacity:0 fade-in — risk of stuck blank page if CSSOM stalls.
+   Body is visible from first paint; section reveals handle the entrance.) */
+
+/* =========================================================================
+   NAV CHROME — header re-skin
+   Targets the existing HeaderOne markup. Hides clutter, replaces the logo
+   with a serif italic wordmark, harmonises the chrome to the palette.
+   Strategy: visual restyle only — does not touch React state, so search /
+   mobile menu / category / cart all keep working.
+   ========================================================================= */
+
+/* Fraunces only loads when the @import above resolves; cap a body-fallback
+   so first paint isn't blank on the wordmark. */
+.noct-display { font-family: "Plus Jakarta Sans", "Inter", sans-serif; }
+.noct-mono    { font-family: "Inter", "Plus Jakarta Sans", sans-serif; }
+
+/* ── (1) TOP UTILITY BAR ─────────────────────────────────────────────────
+   Suppress the marketing link list. Keep language/currency selectors on
+   the right. Inject a single italic announcement in the middle. */
+.header-top {
+  background: #2E0F12 !important;   /* deep oxblood — sits above the parchment chrome */
+  color: #EFE7D6 !important;
+  padding: 6px 0 !important;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  border-bottom: 1px solid rgba(197,165,114,.3) !important;
+  position: relative;
+}
+.header-top .container,
+.header-top .container-lg {
+  position: relative;
+}
+/* Suppress marketing links (Become A Seller / About us / Free Delivery / Returns Policy) */
+.header-top ul.flex-align:first-of-type { display: none !important; }
+
+/* Insert the announcement: pseudo-elements can't live on an empty container,
+   so place it on the header-top wrapper itself */
+.header-top .container > .flex-between::before {
+  content: "Free post within the British Isles · orders over £140 · hand-numbered, none mass-produced";
+  flex: 1;
+  text-align: center;
+  color: #EFE7D6;
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+  font-style: italic;
+  font-weight: 320;
+  font-size: 13px;
+  letter-spacing: .02em;
+  text-transform: none;
+  opacity: .92;
+}
+
+/* Restyle right-side language/currency selectors */
+.header-top__right .selected-text {
+  color: #EFE7D6 !important;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11px !important;
+  letter-spacing: .2em !important;
+  text-transform: uppercase !important;
+}
+.header-top__right a,
+.header-top__right li {
+  color: #EFE7D6 !important;
+}
+.header-top__right .selectable-text-list li,
+.header-top__right .common-dropdown li {
+  color: #2A1216 !important;
+}
+.header-top a:hover { color: #DDBB7E !important; }
+
+/* On small screens, hide the announcement so the row stays clean */
+@media (max-width: 768px) {
+  .header-top .container > .flex-between::before { display: none; }
+}
+
+/* ── (2) MIDDLE HEADER (logo + category + search) ──────────────────────── */
+.header-middle {
+  background: #FBF6E8 !important;
+  border-bottom: 1px solid #E0CDA8 !important;
+  padding: 10px 0 !important;
+}
+
+/* Logo: hide the stock image, place a serif italic wordmark in its place. */
+.header-middle .logo a,
+.mobile-menu__logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  position: relative;
+}
+.header-middle .logo a img,
+.mobile-menu__logo img { display: none !important; }
+.header-middle .logo a::before,
+.mobile-menu__logo::before {
+  content: "Nocturne & Co.";
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+  font-style: italic;
+  font-weight: 360;
+  font-size: 30px;
+  line-height: 1;
+  color: #2A1216;
+  letter-spacing: -.018em;
+  font-variation-settings: "opsz" 72, "SOFT" 50, "WONK" 1;
+  padding-right: 6px;
+}
+.header-middle .logo a::after,
+.mobile-menu__logo::after {
+  content: "MAISON · MMXXVI";
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 9px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: #8E7042;
+  margin-left: 12px;
+  padding-left: 12px;
+  border-left: 1px solid rgba(142,112,66,.45);
+  align-self: center;
+  white-space: nowrap;
+}
+@media (max-width: 768px) {
+  .header-middle .logo a::before,
+  .mobile-menu__logo::before { font-size: 24px; }
+  .header-middle .logo a::after,
+  .mobile-menu__logo::after { display: none; }
+}
+
+/* Search bar (the form sat inline in the middle header) */
+.header-middle .search-form,
+.header-middle .search-category {
+  border: 1px solid #C5A572 !important;
+  border-radius: 999px !important;
+  background: #F5EFE0 !important;
+  overflow: hidden;
+  height: 48px !important;
+}
+.header-middle .search-form input,
+.header-middle .search-category input {
+  background: transparent !important;
+  border: 0 !important;
+  color: #2A1216 !important;
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif !important;
+  font-style: italic !important;
+  font-size: 15px !important;
+  padding: 0 18px !important;
+}
+.header-middle .search-form input::placeholder,
+.header-middle .search-category input::placeholder {
+  color: #8E7042 !important;
+  opacity: .8;
+}
+.header-middle .search-form button,
+.header-middle .search-category button[type="submit"] {
+  background: #2A1216 !important;
+  color: #EFE7D6 !important;
+  border-radius: 999px !important;
+  padding: 0 22px !important;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11px !important;
+  letter-spacing: .26em !important;
+  text-transform: uppercase !important;
+  border: 0 !important;
+  height: 100% !important;
+}
+.header-middle .search-form button:hover,
+.header-middle .search-category button[type="submit"]:hover {
+  background: #5A1E22 !important;
+}
+
+/* The phone-call CTA (top-right of header-middle) becomes a refined brass pill */
+.header-right a.bg-main-600 {
+  background: transparent !important;
+  color: #2A1216 !important;
+  border: 1px solid #C5A572 !important;
+  border-radius: 999px !important;
+  padding: 10px 18px !important;
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif !important;
+  font-style: italic !important;
+  font-size: 15px !important;
+  letter-spacing: -.005em !important;
+  height: auto !important;
+  gap: 10px !important;
+}
+.header-right a.bg-main-600 .text-32 { font-size: 20px !important; }
+.header-right a.bg-main-600:hover {
+  background: #2A1216 !important;
+  color: #EFE7D6 !important;
+  border-color: #2A1216 !important;
+}
+
+/* Action icon cluster (search/wishlist/cart on mobile + desktop) */
+.item-hover {
+  padding: 8px 4px !important;
+  transition: transform .3s cubic-bezier(.2,.7,.2,1);
+}
+.item-hover:hover { transform: translateY(-2px); }
+.item-hover__text i {
+  color: #2A1216 !important;
+  transition: color .3s ease;
+}
+.item-hover:hover .item-hover__text i { color: #5A1E22 !important; }
+.item-hover .text-md.text-gray-500 {
+  color: #5A1E22 !important;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 10.5px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+}
+
+/* The cart/wishlist badge: brass, with subtle shadow */
+[data-noct-badge],
+.item-hover .position-absolute.bg-main-600 {
+  background: #5A1E22 !important;
+  color: #F5EFE0 !important;
+  border: 1.5px solid #FBF6E8;
+  box-shadow: 0 2px 6px rgba(58,22,26,.35);
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 9.5px !important;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+/* Badge count overlay: keep React's text node intact, drive the visible
+   number from a CSS variable set by NocturneEnhance.syncBadges(). */
+.noct-badge-overlay {
+  font-size: 0 !important;            /* hide React's hardcoded "2" */
+  position: relative;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.noct-badge-overlay::before {
+  content: var(--noct-count, "0");
+  font-size: 9.5px;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1;
+  color: #F5EFE0;
+}
+
+/* ── (3) MAIN NAV (.header) ─────────────────────────────────────────────
+   STICKY (not fixed!) so the nav stays put without yanking content up
+   and creating the dislocation jump. position:sticky keeps the element
+   in normal flow until it reaches top:0, then pins it — no layout shift.
+   ────────────────────────────────────────────────────────────────────── */
+.header,
+.header.bg-white {
+  background: #FBF6E8 !important;
+  border-bottom: 1px solid #E0CDA8 !important;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background-color .3s ease,
+              backdrop-filter .3s ease,
+              box-shadow .3s ease;
+}
+
+/* When the React scroll-state flips .fixed-header on, we DON'T re-position
+   (sticky already handles that). We only add a subtle visual hint: a
+   slightly tinted parchment + soft shadow so the nav reads as "pinned". */
+.header.fixed-header {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 0 !important;
+  left: auto !important;
+  right: auto !important;
+  background: rgba(251, 246, 232, .94) !important;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px -16px rgba(58, 22, 26, .25);
+  padding: 0 !important;
+  animation: none !important;
+}
+
+/* Category "All Categories" button */
+.category__button {
+  background: transparent !important;
+  border-left: 1px solid #E0CDA8 !important;
+  border-right: 1px solid #E0CDA8 !important;
+  color: #2A1216 !important;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11.5px !important;
+  letter-spacing: .24em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  padding: 14px 20px !important;
+  transition: background-color .25s ease, color .25s ease;
+}
+.category__button:hover {
+  background: #F0E5C9 !important;
+  color: #5A1E22 !important;
+}
+.category__button .icon i { color: #5A1E22 !important; }
+.category__button .arrow-icon i { color: #8E7042 !important; }
+
+/* Main nav menu links */
+.nav-menu__link {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11.5px !important;
+  letter-spacing: .26em !important;
+  text-transform: uppercase !important;
+  color: #2A1216 !important;
+  font-weight: 500 !important;
+  padding: 18px 16px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px;
+  transition: color .3s ease;
+}
+.nav-menu__link:hover,
+.nav-menu__item.active > .nav-menu__link {
+  color: #5A1E22 !important;
+}
+
+/* The "Hot Item" / "New" labels next to menu items — restyle to brass chips */
+.nav-menu__link .text-xs,
+.nav-menu__link .badge,
+.nav-menu__link span[class*="bg-"] {
+  background: #5A1E22 !important;
+  color: #F5EFE0 !important;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 8.5px !important;
+  letter-spacing: .2em !important;
+  padding: 3px 7px !important;
+  border-radius: 2px !important;
+  text-transform: uppercase !important;
+  margin-left: 6px;
+}
+
+/* Mega-menu / submenu dropdowns */
+.common-dropdown,
+.nav-submenu,
+.on-hover-dropdown.common-dropdown {
+  background: #FBF6E8 !important;
+  border: 1px solid #E0CDA8 !important;
+  box-shadow: 0 30px 60px -20px rgba(58, 22, 26, .25),
+              0 8px 16px -8px rgba(58, 22, 26, .12) !important;
+  border-radius: 2px !important;
+  padding: 14px !important;
+}
+.common-dropdown__item,
+.nav-submenu__item,
+.common-dropdown li {
+  border-bottom: 1px solid rgba(224, 205, 168, .5) !important;
+}
+.common-dropdown__item:last-child,
+.nav-submenu__item:last-child,
+.common-dropdown li:last-child { border-bottom: 0 !important; }
+
+.common-dropdown__link,
+.nav-submenu__link,
+.common-dropdown a {
+  color: #2A1216 !important;
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 320 !important;
+  padding: 8px 12px !important;
+  display: block !important;
+  transition: color .25s ease, padding-left .3s ease, background-color .25s ease;
+  border-radius: 0 !important;
+}
+.common-dropdown__link:hover,
+.nav-submenu__link:hover,
+.common-dropdown a:hover {
+  color: #5A1E22 !important;
+  padding-left: 18px !important;
+  background-color: transparent !important;
+}
+
+/* Mega-menu submenus column titles */
+.submenus-submenu__title {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 10.5px !important;
+  letter-spacing: .28em !important;
+  text-transform: uppercase !important;
+  color: #8E7042 !important;
+  margin-bottom: 10px !important;
+  padding-bottom: 8px !important;
+  border-bottom: 1px solid #E0CDA8 !important;
+}
+
+/* Mobile hamburger toggle */
+.toggle-mobileMenu {
+  color: #2A1216 !important;
+  padding: 8px 12px !important;
+  border-radius: 50% !important;
+  transition: background-color .25s ease, color .25s ease;
+}
+.toggle-mobileMenu:hover {
+  background: #F0E5C9 !important;
+  color: #5A1E22 !important;
+}
+
+/* ── (4) MOBILE DRAWER ─────────────────────────────────────────────────── */
+.mobile-menu {
+  background: #2A1216 !important;
+  color: #EFE7D6 !important;
+}
+.mobile-menu .nav-menu__link,
+.mobile-menu .nav-submenu__link,
+.mobile-menu a {
+  color: #EFE7D6 !important;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 12px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+}
+.mobile-menu .nav-menu__link:hover,
+.mobile-menu a:hover { color: #DDBB7E !important; }
+.mobile-menu .close-button {
+  color: #EFE7D6 !important;
+  background: rgba(239, 231, 214, .12) !important;
+  border: 1px solid rgba(239, 231, 214, .25) !important;
+  border-radius: 50%;
+  width: 40px; height: 40px;
+}
+.mobile-menu .close-button:hover {
+  background: #DDBB7E !important;
+  color: #2A1216 !important;
+}
+.mobile-menu__logo::before { color: #EFE7D6 !important; }
+.mobile-menu__logo::after  { color: #DDBB7E !important; border-left-color: rgba(221,187,126,.4) !important; }
+.mobile-menu .nav-submenu {
+  background: rgba(239,231,214,.06) !important;
+  border-color: rgba(197,165,114,.25) !important;
+}
+.mobile-menu .nav-submenu .nav-submenu__link {
+  color: #EFE7D6 !important;
+}
+.mobile-menu .nav-submenu .nav-submenu__link:hover {
+  color: #DDBB7E !important;
+}
+
+/* Side overlay darkens behind the drawer */
+.side-overlay {
+  background: rgba(26, 10, 12, .65) !important;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+/* ── (5) Search overlay (full-screen) ──────────────────────────────────── */
+.search-box {
+  background: rgba(26, 10, 12, .94) !important;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.search-box .form-control {
+  background: #FBF6E8 !important;
+  border-color: #C5A572 !important;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-style: italic !important;
+  font-size: 22px !important;
+  color: #2A1216 !important;
+}
+.search-box .form-control::placeholder { color: #8E7042 !important; }
+.search-box__close {
+  background: rgba(239,231,214,.1) !important;
+  border-color: rgba(239,231,214,.3) !important;
+  color: #EFE7D6 !important;
+}
+.search-box__close:hover {
+  background: #DDBB7E !important;
+  color: #2A1216 !important;
+}
+
+/* ── (6) Account / sign-in micro-icon if present in header-top right ─── */
+.header-top__right a:hover { text-decoration: none !important; }
+
+/* ── (7) UNIFY HeaderTwo + HeaderThree with HeaderOne ─────────────────────
+   The template uses three Header components across the site (HeaderOne,
+   HeaderTwo, HeaderThree). They share base classes but each variant adds
+   .style-two / .bg-color-neutral / .header-two-activities. We re-target
+   those variants so the nav looks IDENTICAL on every route.
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* The dark `bg-color-neutral` band HeaderTwo uses → parchment chrome */
+.bg-color-neutral,
+.header-middle.bg-color-neutral,
+.header-middle.style-two {
+  background: #FBF6E8 !important;
+  border-bottom: 1px solid #E0CDA8 !important;
+}
+
+/* Hide the old "All Categories" mega-menu trigger + dropdown — the slim
+   category strip below the nav already lists the real 8 categories. */
+.category,
+.category-two,
+.menu-category-wrapper > .category,
+.menu-category-wrapper > .category-two {
+  display: none !important;
+}
+/* Re-balance the nav row now that the category trigger is gone */
+.header .header-inner > .menu-category-wrapper {
+  flex: 1;
+}
+.header .nav-menu { justify-content: flex-start; padding-left: 0 !important; }
+
+/* Apply the same logo wordmark on style-two header middle */
+.header-middle.style-two .logo a,
+.header-middle.bg-color-neutral .logo a {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+.header-middle.style-two .logo a img,
+.header-middle.bg-color-neutral .logo a img { display: none !important; }
+.header-middle.style-two .logo a::before,
+.header-middle.bg-color-neutral .logo a::before {
+  content: "Nocturne & Co.";
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+  font-style: italic;
+  font-weight: 360;
+  font-size: 30px;
+  line-height: 1;
+  color: #2A1216;
+  letter-spacing: -.018em;
+  font-variation-settings: "opsz" 72, "SOFT" 50, "WONK" 1;
+  padding-right: 6px;
+}
+.header-middle.style-two .logo a::after,
+.header-middle.bg-color-neutral .logo a::after {
+  content: "MAISON · MMXXVI";
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 9px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: #8E7042;
+  margin-left: 12px;
+  padding-left: 12px;
+  border-left: 1px solid rgba(142,112,66,.45);
+  align-self: center;
+  white-space: nowrap;
+}
+@media (max-width: 768px) {
+  .header-middle.style-two .logo a::before,
+  .header-middle.bg-color-neutral .logo a::before { font-size: 24px; }
+  .header-middle.style-two .logo a::after,
+  .header-middle.bg-color-neutral .logo a::after { display: none; }
+}
+
+/* Only the OUTER search container gets the brass pill border; the inner
+   .search-form__wrapper is a transparent flex child that holds the input
+   and the absolutely-positioned submit button. Styling both was producing
+   nested pills with the button floating in the gap between them. */
+.search-form,
+.search-category,
+.search-category.style-two {
+  border: 1px solid #C5A572 !important;
+  border-radius: 999px !important;
+  background: #F5EFE0 !important;
+  overflow: hidden !important;
+  height: 48px !important;
+  padding: 0 !important;
+}
+.search-form__wrapper {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+}
+.search-form input,
+.search-category input,
+.search-form__wrapper input {
+  background: transparent !important;
+  border: 0 !important;
+  color: #2A1216 !important;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-style: italic !important;
+  font-size: 15px !important;
+  padding: 0 18px !important;
+  height: 48px !important;
+  width: 100% !important;
+}
+.search-form input::placeholder,
+.search-category input::placeholder,
+.search-form__wrapper input::placeholder { color: #8E7042 !important; opacity: .8; }
+.search-form button[type="submit"],
+.search-category button[type="submit"],
+.search-form__wrapper button[type="submit"] {
+  background: #2A1216 !important;
+  color: #EFE7D6 !important;
+  border-radius: 999px !important;
+  padding: 0 22px !important;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11px !important;
+  letter-spacing: .26em !important;
+  text-transform: uppercase !important;
+  border: 0 !important;
+  /* HeaderTwo button is sized w-48; HeaderOne is w-32 absolutely positioned.
+     Keep both clean: just style colors + border-radius. */
+}
+.search-form button[type="submit"]:hover,
+.search-category button[type="submit"]:hover,
+.search-form__wrapper button[type="submit"]:hover { background: #5A1E22 !important; }
+
+/* HeaderTwo's "activities" cluster (wishlist/cart/account icons on the right) */
+.header-two-activities {
+  gap: 24px !important;
+}
+.header-two-activities > * {
+  padding: 8px 4px !important;
+  transition: transform .3s cubic-bezier(.2,.7,.2,1);
+}
+.header-two-activities > *:hover { transform: translateY(-2px); }
+.header-two-activities i,
+.header-two-activities .ph {
+  color: #2A1216 !important;
+  transition: color .3s ease;
+}
+.header-two-activities a:hover i,
+.header-two-activities a:hover .ph { color: #5A1E22 !important; }
+.header-two-activities a .text-md,
+.header-two-activities span.text-md {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 10.5px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: #5A1E22 !important;
+}
+/* Cart/wishlist badges in HeaderTwo follow the same data-noct-badge mark */
+
+/* HeaderThree's `.category-two` button — match `.category__button` */
+.category-two,
+.category-two .category__button,
+.category__button.style-two {
+  background: transparent !important;
+  border-left: 1px solid #E0CDA8 !important;
+  border-right: 1px solid #E0CDA8 !important;
+  color: #2A1216 !important;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11.5px !important;
+  letter-spacing: .24em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+}
+.category-two:hover { background: #F0E5C9 !important; color: #5A1E22 !important; }
+
+/* Sometimes the second-variant header middle wraps in a different padding */
+.header-middle.style-two,
+.header-middle.bg-color-neutral {
+  padding: 10px 0 !important;
+}
+
+/* The 'select-dropdown-for-home-two' (currency/lang picker shown on mobile
+   header-two) should pick up form-control styling rather than its own */
+.select-dropdown-for-home-two {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+}
+
+/* All Header variants — main `.header` strip styled identically */
+header.header,
+.header.style-two,
+.header.style-three {
+  background: #FBF6E8 !important;
+  border-bottom: 1px solid #E0CDA8 !important;
+}
+
+/* Responsive dropdown on HeaderTwo behaves the same as common-dropdown */
+.responsive-dropdown,
+.responsive-dropdown.common-dropdown {
+  background: #FBF6E8 !important;
+  border: 1px solid #E0CDA8 !important;
+  box-shadow: 0 30px 60px -20px rgba(58, 22, 26, .25),
+              0 8px 16px -8px rgba(58, 22, 26, .12) !important;
+}
+
+/* Make sure none of the .header parents have overflow:hidden which would
+   break position:sticky — explicit safety net */
+.header-wrapper,
+body, html { overflow-x: clip !important; overflow-y: visible; }
+
+/* =========================================================================
+   NAV BAR CLEAN-UP — kill duplicates, tame clutter, tighten layout
+   The template ships with a kitchen-sink of nav widgets that don't fit a
+   refined maison: grocery-state dropdown ("Alabama"), redundant category
+   filter in the search bar, peach/lavender bubble notification badges with
+   speech-bubble tails. Remove all of them via CSS so the nav reads as
+   ONE clean object across every page.
+   ========================================================================= */
+
+/* (1) Hide the "Alabama" / state location selector — grocery feature, not
+   relevant to an apothecary. Used in HeaderOne. */
+.location-box,
+.location-form-wrapper,
+.form-location-wrapper > .location-box {
+  display: none !important;
+}
+
+/* (2) Hide the duplicate "All Categories" select inside the search bar.
+   This is a Select2-wrapped <select> that overlaps with the real category
+   menu in the row below. Only the bottom one (the actual mega-menu) stays. */
+.search-category select.js-example-basic-single,
+.search-category .select2-container,
+.search-form select[name="state"],
+.search-form .select2-container,
+.form-location-wrapper .select2-container,
+.form-location-wrapper select.js-example-basic-single {
+  display: none !important;
+}
+
+/* Once the dropdown is hidden, the search bar (.search-category) gets back
+   to a single-pill shape — remove the divider/border that separated it. */
+.search-category.style-two,
+.search-category {
+  border-left: 1px solid #C5A572 !important;
+}
+
+/* (3) Kill the speech-bubble tail under "New" / "Hot" badges and unify
+   their colors. The template's .badge-notification::before clip-paths a
+   little triangle pointing down. Remove it. */
+.badge-notification::before,
+.badge-notification::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* All notification badges in the nav → ONE color (oxblood) instead of
+   peach/lavender/green mix. Overrides the .bg-warning-* / .bg-tertiary-*
+   utility classes when they're applied to a .badge-notification. */
+.badge-notification,
+.badge-notification.bg-warning-600,
+.badge-notification.bg-tertiary-600,
+.badge-notification.bg-danger-600,
+.badge-notification.bg-info-600 {
+  background: #5A1E22 !important;
+  color: #F5EFE0 !important;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 8.5px !important;
+  font-weight: 500 !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  padding: 3px 7px !important;
+  border-radius: 2px !important;
+  border: 1px solid #C5A572 !important;
+  box-shadow: 0 2px 6px rgba(58, 22, 26, .25);
+  position: absolute !important;
+  inset-block-start: -10px !important;
+  inset-inline-start: 4px !important;
+}
+
+/* (4) HeaderTwo's "Compare" icon — apothecary doesn't need product compare.
+   Hide unless you want it back. Reduces clutter in the action cluster. */
+.header-two-activities a[href="/cart"]:has(.ph-shuffle),
+.header-two-activities a:has(.ph-fill.ph-shuffle) {
+  display: none !important;
+}
+
+/* (5) Give .header-middle proper breathing room so the wordmark
+   ("Nocturne & Co. MAISON · MMXXVI") never gets clipped at the top. */
+.header-middle,
+.header-middle.style-two,
+.header-middle.bg-color-neutral {
+  padding-top: 18px !important;
+  padding-bottom: 18px !important;
+  min-height: 76px;
+}
+
+/* (6) Tighten the gap between the three header bars so they read as one
+   stacked object, not three competing rows. */
+.header-top { padding-top: 8px !important; padding-bottom: 8px !important; }
+
+/* (7) Hide the "01-234 567 890" phone CTA on the main nav row — too loud
+   for a maison. The phone number itself can live elsewhere (footer).     */
+.header .header-right a.bg-main-600,
+.header header-right a[href*="tel"],
+.header-right a[href*="tel"].bg-main-600 {
+  display: none !important;
+}
+
+/* (8) Center-balance the main nav: when the phone is hidden, push the
+   menu and the action icons to fill the row evenly. */
+.header .header-inner {
+  align-items: center;
+}
+.header .nav-menu { gap: 4px !important; }
+
+/* (9) On HeaderTwo's main bar (the dark category button "ALL CATEGORIES"
+   on burgundy), the .bg-main-two-600 produces deep burgundy. Keep it but
+   make sure the text reads. */
+.category-two .category__button,
+.category__button.bg-main-two-600 {
+  background: #5A1E22 !important;
+  color: #FBF6E8 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+}
+.category-two .category__button:hover {
+  background: #2A1216 !important;
+  color: #FBF6E8 !important;
+}
+
+/* (10) Avoid odd flex stretching in flex-align containers used everywhere */
+.flex-align { align-items: center !important; }
+.flex-between { align-items: center !important; }
+
+/* =========================================================================
+   BANNER (homepage hero — BannerOne) — repaint the lime-green grocery
+   banner with a parchment + brass treatment that matches the maison.
+   ========================================================================= */
+.banner { padding: 36px 0 56px; background: #F5EFE0 !important; }
+.banner-item,
+.banner .banner-item,
+.banner-item.rounded-24 {
+  background: linear-gradient(135deg, #F0E5C9 0%, #EFE0C2 50%, #F0E5C9 100%) !important;
+  border: 1px solid #E0CDA8 !important;
+  border-radius: 4px !important;
+  position: relative;
+  overflow: hidden;
+}
+.banner-item::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='6' height='6'><circle cx='1' cy='1' r='.4' fill='%23C5A572' opacity='.45'/></svg>");
+  background-size: 6px 6px;
+  pointer-events: none;
+  opacity: .7;
+}
+/* The cover image inside (.banner-img) — fade it out so the grocery
+   background never punches through */
+.banner-img {
+  opacity: .15 !important;
+  filter: sepia(.4) hue-rotate(-25deg) saturate(.55);
+  mix-blend-mode: multiply;
+}
+
+.banner-slider__inner {
+  position: relative;
+  padding: 60px 64px !important;
+}
+@media (max-width: 720px) { .banner-slider__inner { padding: 36px 24px !important; } }
+
+.banner-item__content { position: relative; z-index: 2; max-width: 540px; }
+.banner-item__title,
+.banner-item__title.bounce {
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif !important;
+  font-weight: 360 !important;
+  font-size: clamp(38px, 5.4vw, 76px) !important;
+  letter-spacing: -.022em !important;
+  line-height: 1.05 !important;
+  color: #2A1216 !important;
+  font-variation-settings: "opsz" 96, "SOFT" 30 !important;
+  text-transform: none !important;
+  animation: none !important;
+}
+.banner-item__content p,
+.banner-item__content .text-md,
+.banner-item__content .text-lg {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-style: italic !important;
+  font-size: 18px !important;
+  color: #5A463A !important;
+  font-variation-settings: "opsz" 24 !important;
+}
+
+/* "Explore Shop" CTA in the banner */
+.banner-item__content .btn-main,
+.banner .btn-main {
+  background: #5A1E22 !important;
+  color: #FBF6E8 !important;
+  border-radius: 999px !important;
+  padding: 14px 28px !important;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11.5px !important;
+  letter-spacing: .26em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  border: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.banner-item__content .btn-main:hover {
+  background: #2A1216 !important;
+  letter-spacing: .3em !important;
+}
+
+/* Banner's circular "scroll down" disc */
+.banner .scroll-down,
+.banner-item .scroll-down {
+  background: #C5A572 !important;
+  border-color: #FBF6E8 !important;
+  color: #2A1216 !important;
+  width: 64px !important;
+  height: 64px !important;
+}
+.banner .scroll-down:hover { background: #5A1E22 !important; color: #FBF6E8 !important; }
+
+/* Slick carousel arrows in the banner */
+.banner .slick-arrow,
+.banner .slick-next,
+.banner .slick-prev {
+  background: #FBF6E8 !important;
+  border: 1px solid #C5A572 !important;
+  color: #2A1216 !important;
+  width: 44px !important;
+  height: 44px !important;
+}
+.banner .slick-arrow:hover {
+  background: #5A1E22 !important;
+  color: #FBF6E8 !important;
+  border-color: #5A1E22 !important;
+}
+
+/* Big placeholder image area in BannerOne (where "597X354" shows) */
+.banner-slider__inner > img,
+.banner-item img:not(.banner-img) {
+  filter: sepia(.25) saturate(.7);
+  border-radius: 4px;
+  border: 1px solid #E0CDA8;
+  background: #F5EFE0;
+  mix-blend-mode: multiply;
+}
+
+/* =========================================================================
+   CATEGORY PAGE — /category/:slug
+   ========================================================================= */
+.noct-cat-hero {
+  padding: 80px 0 56px;
+  background:
+    radial-gradient(80% 60% at 50% 100%, #EFE0C2 0%, #F5EFE0 65%, #F5EFE0 100%);
+  border-bottom: 1px solid #E0CDA8;
+  position: relative;
+  overflow: hidden;
+}
+.noct-cat-hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='6' height='6'><circle cx='1' cy='1' r='.4' fill='%23C5A572' opacity='.3'/></svg>");
+  background-size: 6px 6px;
+  pointer-events: none;
+}
+.noct-cat-hero__inner {
+  position: relative;
+  text-align: center;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.noct-cat-hero__rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+.noct-cat-hero__label {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 10.5px;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: #8E7042;
+}
+.noct-cat-hero__breadcrumb {
+  display: flex; gap: 10px;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #5A463A;
+  list-style: none;
+  padding: 0; margin: 0;
+}
+.noct-cat-hero__breadcrumb a { color: #5A463A; }
+.noct-cat-hero__breadcrumb a:hover { color: #5A1E22; }
+.noct-cat-hero__breadcrumb b { color: #5A1E22; font-weight: 500; }
+
+.noct-cat-hero__title {
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif !important;
+  font-weight: 340 !important;
+  font-size: clamp(54px, 8vw, 124px);
+  line-height: 1;
+  letter-spacing: -.028em;
+  color: #2A1216;
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+  margin: 0 0 20px;
+}
+.noct-cat-hero__title em {
+  font-style: italic;
+  color: #5A1E22;
+  font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+  padding-right: .04em;
+}
+
+.noct-cat-hero__sprig { width: 220px; margin: 8px auto 22px; opacity: .9; }
+
+.noct-cat-hero__sub {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-style: italic;
+  font-size: 18px;
+  color: #5A463A;
+  max-width: 620px;
+  margin: 0 auto;
+  font-variation-settings: "opsz" 24;
+  line-height: 1.55;
+}
+
+/* BODY */
+.noct-cat-body { padding: 60px 0 100px; background: #F5EFE0; }
+
+.noct-cat-rail {
+  background: #FBF6E8;
+  border: 1px solid #E0CDA8;
+  border-radius: 4px;
+  padding: 22px;
+  margin-bottom: 22px;
+}
+.noct-cat-rail__title {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 10.5px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: #8E7042;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid #E0CDA8;
+}
+.noct-cat-rail__list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.noct-cat-rail__list a {
+  display: block;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 15px;
+  color: #2A1216;
+  padding: 5px 0;
+  transition: color .25s ease, padding-left .25s ease;
+}
+.noct-cat-rail__list a:hover {
+  color: #5A1E22;
+  padding-left: 6px;
+}
+.noct-cat-rail__list a.is-active {
+  color: #5A1E22;
+  font-style: italic;
+  padding-left: 12px;
+  position: relative;
+}
+.noct-cat-rail__list a.is-active::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #C5A572;
+}
+
+.noct-cat-rail__price-track {
+  height: 4px;
+  background: #E0CDA8;
+  border-radius: 999px;
+  position: relative;
+  overflow: hidden;
+}
+.noct-cat-rail__price-track span {
+  display: block;
+  height: 100%;
+  background: #5A1E22;
+}
+.noct-cat-rail__price-marks {
+  display: flex; justify-content: space-between;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 11px;
+  color: #5A463A;
+  margin-top: 10px;
+  letter-spacing: .15em;
+}
+.noct-cat-rail__chips {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.noct-cat-rail__chips li {
+  background: #F0E5C9;
+  border: 1px solid #E0CDA8;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  border-radius: 2px;
+  color: #5A1E22;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+.noct-cat-rail__chips li:hover {
+  background: #5A1E22;
+  color: #F5EFE0;
+  border-color: #5A1E22;
+}
+
+/* TOOLBAR + GRID */
+.noct-cat-toolbar {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 18px;
+  padding: 14px 0 28px;
+  border-bottom: 1px solid #E0CDA8;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.noct-cat-toolbar__count {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #5A463A;
+}
+.noct-cat-toolbar__count b { color: #5A1E22; }
+.noct-cat-toolbar__count em {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-style: italic;
+  color: #2A1216;
+  text-transform: none;
+  font-size: 14px;
+  letter-spacing: 0;
+}
+.noct-cat-toolbar__sort {
+  display: flex; align-items: center; gap: 10px;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #8E7042;
+}
+.noct-cat-toolbar__sort select {
+  background: transparent;
+  border: 1px solid #C5A572;
+  border-radius: 2px;
+  padding: 8px 32px 8px 12px;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: #2A1216;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M2 4 L6 8 L10 4' stroke='%235A1E22' stroke-width='1.4' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+.noct-cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+@media (max-width: 960px) { .noct-cat-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .noct-cat-grid { grid-template-columns: 1fr; } }
+
+.noct-cat-card {
+  background: linear-gradient(180deg, #FBF6E8 0%, #F5EFE0 100%);
+  border: 1px solid #E0CDA8;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: transform .45s cubic-bezier(.2,.7,.2,1),
+              border-color .3s ease,
+              box-shadow .4s ease;
+}
+.noct-cat-card:hover {
+  transform: translateY(-4px);
+  border-color: #C5A572;
+  box-shadow: 0 20px 40px -18px rgba(58, 22, 26, .22);
+}
+.noct-cat-card__image {
+  position: relative;
+  aspect-ratio: 4/5;
+  background: radial-gradient(60% 55% at 50% 45%, rgba(197,165,114,.16), transparent 70%);
+  display: grid; place-items: center;
+  border-bottom: 1px solid #E0CDA8;
+  overflow: hidden;
+}
+.noct-cat-card__image::after {
+  content: "";
+  position: absolute; inset: 14px;
+  border: 1px solid rgba(197,165,114,.22);
+  pointer-events: none;
+}
+.noct-cat-card__image svg {
+  width: 60%;
+  filter: drop-shadow(0 14px 24px rgba(58, 22, 26, .25));
+  transition: transform .7s cubic-bezier(.2,.7,.2,1);
+}
+.noct-cat-card:hover .noct-cat-card__image svg { transform: translateY(-3px) scale(1.03); }
+
+.noct-cat-card__lot {
+  position: absolute;
+  top: 14px; left: 14px;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 9.5px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #8E7042;
+}
+.noct-cat-card__num {
+  position: absolute;
+  top: 12px; right: 16px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-style: italic;
+  font-size: 22px;
+  color: #5A1E22;
+  font-variation-settings: "opsz" 60, "SOFT" 50, "WONK" 1;
+  line-height: 1;
+}
+.noct-cat-card__chip {
+  position: absolute;
+  bottom: 14px; left: 14px;
+  background: #5A1E22;
+  color: #F5EFE0;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 2px;
+  border: 1px solid #C5A572;
+}
+
+.noct-cat-card__body { padding: 20px 22px; display: flex; flex-direction: column; gap: 8px; }
+.noct-cat-card__latin {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-style: italic;
+  font-size: 12.5px;
+  color: rgba(142,112,66,.95);
+  font-variation-settings: "opsz" 18;
+}
+.noct-cat-card__title {
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+  font-weight: 360;
+  font-size: 22px;
+  line-height: 1.1;
+  letter-spacing: -.015em;
+  color: #2A1216;
+  font-variation-settings: "opsz" 60, "SOFT" 20;
+  margin: 0;
+}
+.noct-cat-card__notes {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-style: italic;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #5A463A;
+  margin: 0;
+  font-variation-settings: "opsz" 16;
+}
+.noct-cat-card__foot {
+  margin-top: 8px;
+  padding-top: 14px;
+  border-top: 1px solid #E0CDA8;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.noct-cat-card__price {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-style: italic;
+  font-size: 21px;
+  color: #5A1E22;
+  letter-spacing: -.01em;
+  display: inline-flex; align-items: baseline; gap: 8px;
+  font-variation-settings: "opsz" 36, "SOFT" 50, "WONK" 1;
+}
+.noct-cat-card__crossed {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-style: normal;
+  font-size: 11px;
+  color: #8E7042;
+  text-decoration: line-through;
+  letter-spacing: .1em;
+  opacity: .8;
+}
+.noct-cat-card__acquire {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 10.5px !important;
+  letter-spacing: .26em !important;
+  text-transform: uppercase !important;
+  color: #2A1216 !important;
+  padding: 6px 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  position: static !important;
+  inset: auto !important;
+  margin: 0 !important;
+  transition: color .25s ease, letter-spacing .25s ease;
+}
+.noct-cat-card:hover .noct-cat-card__acquire {
+  color: #5A1E22 !important;
+  letter-spacing: .32em !important;
+}
+
+/* =========================================================================
+   FINAL NAV POLISH — reach 2 clean bars
+   Hide the top utility bar (announcement + lang/currency) and the middle
+   row's full search form. Result:
+     · Middle row = logo (Nocturne & Co.) + action icons (search/wishlist/cart)
+     · Main row   = "All Categories" trigger + nav menu
+   Search remains accessible via the search-icon button which already opens
+   the full-screen .search-box overlay (already styled in the nav block).
+   ========================================================================= */
+.header-top { display: none !important; }
+
+/* Inline search bar is the primary search affordance now — keep it visible
+   at every screen size. The .search-box overlay has been removed; its
+   toggle button is gone with it. */
+.header-middle .search-form,
+.header-middle .search-category {
+  display: flex !important;
+  flex: 1 1 auto !important;
+  min-width: 260px !important;
+  max-width: 640px !important;
+}
+.header-middle .form-location-wrapper {
+  display: flex !important;
+  flex: 1 1 auto !important;
+  min-width: 260px !important;
+}
+.header-middle .header-inner {
+  justify-content: space-between !important;
+}
+
+/* Push logo to flex-start, actions to flex-end */
+.header-middle .logo { flex: 0 0 auto; }
+.header-middle .header-right { flex: 0 0 auto; }
+.header-middle .header-two-activities { gap: 18px !important; }
+
+/* =========================================================================
+   CATEGORY STRIP — slim horizontal bar injected after the last header by
+   NocturneEnhance.ensureCategoryStrip(). Sticky underneath the navbar.
+   ========================================================================= */
+.noct-cat-strip {
+  background: #2A1216;
+  border-bottom: 1px solid #C5A572;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.noct-cat-strip::-webkit-scrollbar { display: none; }
+.noct-cat-strip__inner {
+  display: flex;
+  gap: 0;
+  padding: 0 24px;
+  align-items: stretch;
+  min-height: 44px;
+}
+.noct-cat-strip__link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 20px;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 10.5px;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: #EFE7D6;
+  white-space: nowrap;
+  border-right: 1px solid rgba(197,165,114,.18);
+  transition: background-color .25s ease, color .25s ease;
+  text-decoration: none;
+}
+.noct-cat-strip__link:first-child { border-left: 1px solid rgba(197,165,114,.18); }
+.noct-cat-strip__link:hover { background: rgba(197,165,114,.12); color: #DDBB7E; }
+.noct-cat-strip__link.is-active {
+  background: #C5A572;
+  color: #2A1216 !important;
+  font-weight: 500;
+}
+
+/* =========================================================================
+   PRODUCT DETAIL — /product/:id
+   ========================================================================= */
+.noct-product { padding: 36px 0 80px; background: #F5EFE0; }
+.noct-product__breadcrumb {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin: 0 0 28px;
+  padding: 0;
+  list-style: none;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #5A463A;
+}
+.noct-product__breadcrumb a { color: #5A463A; transition: color .25s; }
+.noct-product__breadcrumb a:hover { color: #5A1E22; }
+.noct-product__breadcrumb b { color: #5A1E22; font-weight: 500; }
+
+.noct-product__gallery {
+  background: #FBF6E8;
+  border: 1px solid #E0CDA8;
+  border-radius: 4px;
+  padding: 28px;
+  position: relative;
+}
+.noct-product__gallery-main {
+  position: relative;
+  aspect-ratio: 4/4.5;
+  background: radial-gradient(60% 50% at 50% 50%, rgba(197,165,114,.18), transparent 70%);
+  display: grid; place-items: center;
+  border-bottom: 1px solid #E0CDA8;
+  padding-bottom: 22px;
+}
+.noct-product__gallery-main::after {
+  content: "";
+  position: absolute; inset: 14px;
+  border: 1px solid rgba(197,165,114,.22);
+  pointer-events: none;
+}
+.noct-product__gallery-main svg {
+  width: 56%;
+  filter: drop-shadow(0 20px 36px rgba(58, 22, 26, .25));
+}
+.noct-product__lot {
+  position: absolute;
+  top: 18px; left: 18px;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 10.5px;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: #8E7042;
+  z-index: 2;
+}
+.noct-product__gallery-thumbs {
+  display: flex; gap: 12px;
+  margin-top: 22px;
+}
+.noct-product__gallery-thumb {
+  flex: 1;
+  aspect-ratio: 1;
+  background: #F5EFE0;
+  border: 1px solid #E0CDA8;
+  border-radius: 2px;
+  display: grid; place-items: center;
+  cursor: pointer;
+  transition: border-color .25s ease, transform .25s ease;
+  padding: 6px;
+}
+.noct-product__gallery-thumb svg { width: 70%; }
+.noct-product__gallery-thumb:hover { border-color: #C5A572; }
+.noct-product__gallery-thumb.is-active {
+  border-color: #5A1E22 !important;
+  background: #F0E5C9;
+}
+
+.noct-product__info {
+  background: #FBF6E8;
+  border: 1px solid #E0CDA8;
+  border-radius: 4px;
+  padding: 36px 32px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+.noct-product__category {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 11px;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: #8E7042;
+}
+.noct-product__category a { color: #5A1E22; }
+.noct-product__title {
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif !important;
+  font-weight: 360 !important;
+  font-size: clamp(36px, 4.4vw, 58px);
+  line-height: 1.02;
+  letter-spacing: -.022em;
+  color: #2A1216;
+  font-variation-settings: "opsz" 96, "SOFT" 30;
+  margin: 0;
+}
+.noct-product__sub {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-style: italic;
+  font-size: 18px;
+  color: #5A463A;
+  margin: 0;
+  font-variation-settings: "opsz" 24;
+}
+
+.noct-product__rating {
+  display: flex; align-items: center; gap: 12px;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 10.5px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: #5A463A;
+  border-top: 1px solid #E0CDA8;
+  border-bottom: 1px solid #E0CDA8;
+  padding: 14px 0;
+}
+.noct-product__rating > span:first-child {
+  color: #B58844;
+  font-size: 16px;
+  letter-spacing: 4px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.noct-product__price {
+  display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+}
+.noct-product__price-main {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-style: italic;
+  font-size: 42px;
+  color: #5A1E22;
+  font-variation-settings: "opsz" 72, "SOFT" 50, "WONK" 1;
+  letter-spacing: -.015em;
+}
+.noct-product__price-old {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  color: #8E7042;
+  text-decoration: line-through;
+}
+.noct-product__price-chip {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 9.5px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  background: #5A1E22;
+  color: #F5EFE0;
+  padding: 4px 9px;
+  border-radius: 2px;
+  border: 1px solid #C5A572;
+}
+
+.noct-product__desc {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: #2A1216;
+  margin: 0;
+  font-variation-settings: "opsz" 18;
+}
+
+.noct-product__facts {
+  list-style: none;
+  padding: 0; margin: 0;
+  border-top: 1px solid #E0CDA8;
+}
+.noct-product__facts li {
+  display: flex; justify-content: space-between;
+  padding: 11px 0;
+  border-bottom: 1px dashed #E0CDA8;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 15px;
+}
+.noct-product__facts li span {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 10.5px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: #8E7042;
+}
+.noct-product__facts li b {
+  color: #2A1216;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.noct-product__qty { display: flex; align-items: center; gap: 18px; }
+.noct-product__qty-label {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 11px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: #8E7042;
+}
+.noct-product__qty-control {
+  display: inline-flex; align-items: center;
+  border: 1px solid #C5A572;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.noct-product__qty-control button {
+  background: transparent;
+  border: 0;
+  width: 38px; height: 38px;
+  font-size: 17px;
+  color: #2A1216;
+  cursor: pointer;
+  transition: background-color .2s;
+}
+.noct-product__qty-control button:hover { background: #F0E5C9; }
+.noct-product__qty-control input {
+  width: 44px;
+  border: 0; border-left: 1px solid #C5A572; border-right: 1px solid #C5A572;
+  background: transparent;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  text-align: center;
+  color: #2A1216;
+  height: 38px;
+  padding: 0;
+}
+
+.noct-product__actions {
+  display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px;
+}
+.noct-product__acquire {
+  flex: 1; min-width: 180px;
+  background: #5A1E22 !important;
+  color: #FBF6E8 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  padding: 16px 26px !important;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 12px !important;
+  letter-spacing: .26em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  position: static !important;
+  inset: auto !important;
+  margin: 0 !important;
+  transition: background-color .25s ease !important;
+}
+.noct-product__acquire:hover {
+  background: #2A1216 !important;
+  letter-spacing: .3em !important;
+}
+.noct-product__wishlist {
+  background: transparent;
+  color: #2A1216;
+  border: 1px solid #C5A572;
+  border-radius: 999px;
+  padding: 14px 24px;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 11px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 8px;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+.noct-product__wishlist:hover {
+  background: #2A1216;
+  color: #F5EFE0;
+  border-color: #2A1216;
+}
+.noct-product__wishlist i { font-size: 16px; }
+
+.noct-product__post {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #8E7042;
+  margin: 4px 0 0;
+}
+
+/* Related products section */
+.noct-product__related { padding-top: 90px; }
+.noct-product__related-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 20px; flex-wrap: wrap;
+  margin-bottom: 36px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #E0CDA8;
+}
+.noct-product__related-head h2 {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-weight: 360 !important;
+  font-size: clamp(32px, 4vw, 52px);
+  letter-spacing: -.02em;
+  color: #2A1216;
+  margin: 0;
+}
+.noct-product__related-head h2 em {
+  font-style: italic;
+  color: #5A1E22;
+  font-variation-settings: "opsz" 96, "SOFT" 60, "WONK" 1;
+}
+.noct-product__related-link {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 11px;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: #5A1E22;
+  text-decoration: none;
+  transition: letter-spacing .25s ease;
+}
+.noct-product__related-link:hover { letter-spacing: .3em; }
+
+/* Make the category card title look like a heading, not a generic link */
+.noct-cat-card__title-link { text-decoration: none; color: inherit; display: block; }
+.noct-cat-card__title-link:hover .noct-cat-card__title { color: #5A1E22; }
+
+/* Pagination */
+.noct-cat-pagination {
+  display: flex; gap: 6px;
+  margin-top: 40px;
+  justify-content: center;
+}
+.noct-cat-pagination button {
+  background: #FBF6E8;
+  border: 1px solid #E0CDA8;
+  color: #2A1216;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  letter-spacing: .12em;
+  padding: 10px 16px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+.noct-cat-pagination button:hover {
+  border-color: #C5A572;
+  background: #F0E5C9;
+}
+.noct-cat-pagination button.is-active {
+  background: #5A1E22;
+  color: #F5EFE0;
+  border-color: #5A1E22;
+}
+
+/* =========================================================================
+   ADDITIONAL UTILITY-COLOR OVERRIDES
+   The template uses Bootstrap-style utility classes (.bg-warning-600,
+   .bg-tertiary-600, .bg-danger-600, .bg-info-600) for "New" tags, "Sale"
+   tags, etc. These don't go through --main; they ship with their own
+   hardcoded HSL values. Re-skin each to fit the Nocturne palette.
+   ========================================================================= */
+
+/* Warning (orange) → warm amber-brass */
+.bg-warning-50, .bg-warning-100 { background-color: #F4E3C2 !important; color: #5A3A1E !important; }
+.bg-warning-200, .bg-warning-300 { background-color: #DFC58A !important; }
+.bg-warning-400, .bg-warning-500, .bg-warning-600 {
+  background-color: #B58844 !important; color: #FBF6E8 !important;
+}
+.bg-warning-700, .bg-warning-800, .bg-warning-900 {
+  background-color: #8E6022 !important; color: #FBF6E8 !important;
+}
+.text-warning-600, .text-warning-700 { color: #B58844 !important; }
+
+/* Tertiary (purple/lavender) → moss green */
+.bg-tertiary-50, .bg-tertiary-100 { background-color: #DEE3D0 !important; color: #3D4A2B !important; }
+.bg-tertiary-200, .bg-tertiary-300 { background-color: #B8C49E !important; }
+.bg-tertiary-400, .bg-tertiary-500, .bg-tertiary-600 {
+  background-color: #5F7A47 !important; color: #FBF6E8 !important;
+}
+.bg-tertiary-700, .bg-tertiary-800, .bg-tertiary-900 {
+  background-color: #46582F !important; color: #FBF6E8 !important;
+}
+.text-tertiary-600, .text-tertiary-700 { color: #5F7A47 !important; }
+
+/* Danger (red) → deeper burgundy — keep some urgency for "Sale" */
+.bg-danger-50, .bg-danger-100 { background-color: #EFD9D6 !important; color: #4A1416 !important; }
+.bg-danger-200, .bg-danger-300 { background-color: #C58A8E !important; }
+.bg-danger-400, .bg-danger-500, .bg-danger-600 {
+  background-color: #8B2A2F !important; color: #FBF6E8 !important;
+}
+.bg-danger-700, .bg-danger-800, .bg-danger-900 {
+  background-color: #5A1E22 !important; color: #FBF6E8 !important;
+}
+.text-danger-600, .text-danger-700 { color: #8B2A2F !important; }
+
+/* Info (blue) → warm deep moss / mineral */
+.bg-info-50, .bg-info-100 { background-color: #D7DEDB !important; color: #1F3A36 !important; }
+.bg-info-200, .bg-info-300 { background-color: #95ADA8 !important; }
+.bg-info-400, .bg-info-500, .bg-info-600 {
+  background-color: #4A6963 !important; color: #FBF6E8 !important;
+}
+.bg-info-700, .bg-info-800, .bg-info-900 {
+  background-color: #2D4441 !important; color: #FBF6E8 !important;
+}
+.text-info-600, .text-info-700 { color: #4A6963 !important; }
+
+/* "New" / "Hot" / "Sale" notification badges in nav and product cards */
+.badge-notification {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 9.5px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  padding: 3px 8px !important;
+  border-radius: 2px !important;
+  position: relative;
+}
+
+/* Product card badges ("Sale 50%", "Best Sale", "Hot", etc.) */
+.product-card__badge {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 10px !important;
+  letter-spacing: .18em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  padding: 5px 10px !important;
+  border-radius: 0 !important;
+  z-index: 2;
+}
+
+/* =========================================================================
+   BREADCRUMB
+   The template uses .breadcrumb.bg-main-two-50 which becomes a very pale
+   burgundy tint (≈ #F9DFE1). Repaint it as a soft parchment band.
+   ========================================================================= */
+.breadcrumb {
+  background: #F0E5C9 !important;
+  border-top: 1px solid #E0CDA8 !important;
+  border-bottom: 1px solid #E0CDA8 !important;
+  padding: 28px 0 !important;
+  position: relative;
+}
+.breadcrumb::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='6' height='6'><circle cx='1' cy='1' r='.4' fill='%23C5A572' opacity='.35'/></svg>");
+  background-size: 6px 6px;
+  pointer-events: none;
+}
+.breadcrumb > * { position: relative; z-index: 1; }
+.breadcrumb h6 {
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif !important;
+  font-style: italic !important;
+  font-weight: 360 !important;
+  font-size: 30px !important;
+  letter-spacing: -.018em !important;
+  color: #2A1216 !important;
+  margin: 0 !important;
+}
+.breadcrumb ul.flex-align {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+}
+.breadcrumb ul.flex-align a,
+.breadcrumb ul.flex-align li { color: #5A1E22 !important; }
+.breadcrumb ul.flex-align .ph-caret-right { color: #8E7042 !important; }
+
+/* =========================================================================
+   LIST / GRID VIEW TOGGLES (the orange "Sort" toggle in the Shop page)
+   ========================================================================= */
+.list-grid-btn,
+.list-grid-btn.active,
+.product-grid-active,
+.list-view-active,
+.btn.bg-main-50,
+.btn.active.bg-main-600 {
+  background: transparent !important;
+  color: #5A1E22 !important;
+  border: 1px solid #C5A572 !important;
+  border-radius: 2px !important;
+  padding: 6px 9px !important;
+}
+.list-grid-btn.active,
+.btn.active.bg-main-600 {
+  background: #5A1E22 !important;
+  color: #FBF6E8 !important;
+  border-color: #5A1E22 !important;
+}
+
+/* =========================================================================
+   FAILSAFE: any element that was bright orange due to color-two
+   --main-h:24 still being read at a higher specificity. Direct hex catches:
+   ========================================================================= */
+[style*="rgb(255, 125, 0)"],
+[style*="#FF7D00"], [style*="#ff7d00"],
+[style*="#F97316"], [style*="#f97316"] {
+  background-color: #B58844 !important;
+  color: #FBF6E8 !important;
+}
+
+/* =========================================================================
+   UNIVERSAL SURFACE / BORDER MAP — affects every page
+   The template paints big chunks of background via .bg-color-one/two/three,
+   .bg-gray-50/100, .bg-white. Map all of them onto the Nocturne parchment
+   ramp so no section ever shows the original cool-white.
+   ========================================================================= */
+.bg-color-one   { background-color: #F5EFE0 !important; }
+.bg-color-two   { background-color: #FBF6E8 !important; }
+.bg-color-three { background-color: #EFE0C2 !important; }
+.bg-gray-50     { background-color: #FBF6E8 !important; }
+.bg-gray-100    { background-color: #F5EFE0 !important; }
+.bg-gray-200    { background-color: #EFE0C2 !important; }
+
+/* Border-gray-* → warm brass-tan hairlines */
+.border-gray-50, .border-gray-100, .border-gray-200, .border-gray-300 {
+  border-color: #E0CDA8 !important;
+}
+.border-gray-800, .border-gray-900 { border-color: #5A1E22 !important; }
+.border-main-600 { border-color: hsl(var(--main-h), var(--main-s), var(--main-l)) !important; }
+.border-main-two-600 { border-color: #5A1E22 !important; }
+.border-dashed { border-style: dashed !important; }
+
+/* Text-gray ramp → sepia tones for warmth on the parchment */
+.text-gray-900 { color: #2A1216 !important; }
+.text-gray-800 { color: #3B2A24 !important; }
+.text-gray-700, .text-gray-600 { color: #5A463A !important; }
+.text-gray-400, .text-heading { color: #2A1216 !important; }
+
+/* Hover utilities used heavily in product cards */
+.hover-bg-main-600:hover { background-color: hsl(var(--main-h), var(--main-s), 42%) !important; color: #FBF6E8 !important; }
+.hover-border-main-600:hover { border-color: hsl(var(--main-h), var(--main-s), 45%) !important; }
+.hover-text-main-600:hover { color: hsl(var(--main-h), var(--main-s), 38%) !important; }
+.hover-text-white:hover { color: #FBF6E8 !important; }
+
+/* =========================================================================
+   PRODUCT CARDS — universal refinement (Shop, Wishlist, Category, Related)
+   ========================================================================= */
+.product-card {
+  background: #FBF6E8 !important;
+  border: 1px solid #E0CDA8 !important;
+  border-radius: 4px !important;
+  overflow: hidden;
+  padding: 14px !important;
+}
+.product-card .product-card__thumb {
+  background: #F5EFE0 !important;
+  border-radius: 2px !important;
+  overflow: hidden;
+  display: block;
+}
+.product-card .product-card__thumb img {
+  mix-blend-mode: multiply;
+}
+.product-card .product-card__content { padding-top: 14px !important; }
+.product-card .product-card__title,
+.product-card h6,
+.product-card h5 {
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif !important;
+  font-size: 17px !important;
+  font-weight: 360 !important;
+  letter-spacing: -.012em !important;
+  color: #2A1216 !important;
+  line-height: 1.25 !important;
+}
+.product-card .product-card__price {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-style: italic !important;
+  font-size: 19px !important;
+  color: #5A1E22 !important;
+  letter-spacing: -.01em !important;
+}
+.product-card .text-decoration-line-through {
+  color: #8E7042 !important;
+  opacity: .7;
+  font-size: 13px !important;
+}
+/* Star ratings */
+.product-card .stars,
+.product-card [class*="rating"] {
+  color: #B58844 !important;
+}
+
+/* =========================================================================
+   SHOP PAGE
+   ========================================================================= */
+.shop { background: #F5EFE0; padding: 60px 0 !important; }
+.shop-sidebar__box {
+  background: #FBF6E8 !important;
+  border: 1px solid #E0CDA8 !important;
+  border-radius: 4px !important;
+  padding: 24px !important;
+  margin-bottom: 24px !important;
+}
+.shop-sidebar__box h6,
+.shop-sidebar__box .sidebar-title {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11px !important;
+  letter-spacing: .26em !important;
+  text-transform: uppercase !important;
+  color: #8E7042 !important;
+  padding-bottom: 14px !important;
+  margin-bottom: 18px !important;
+  border-bottom: 1px solid #E0CDA8 !important;
+}
+.shop-sidebar__box ul li {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-size: 15px !important;
+  padding: 7px 0 !important;
+  transition: color .25s ease, padding-left .25s ease;
+}
+.shop-sidebar__box ul li:hover {
+  color: #5A1E22 !important;
+  padding-left: 6px !important;
+}
+.shop-sidebar__box ul li a { color: #2A1216 !important; }
+
+/* Price range slider */
+.custom--range { padding: 14px 0 !important; }
+.custom--range [class*="track"] { background: #E0CDA8 !important; height: 4px !important; }
+.custom--range [class*="track-1"] { background: #5A1E22 !important; }
+.custom--range [class*="thumb"] {
+  background: #FBF6E8 !important;
+  border: 2px solid #5A1E22 !important;
+  width: 18px !important; height: 18px !important;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 6px rgba(58,22,26,.3);
+  outline: none !important;
+}
+
+/* Shop sort toolbar */
+.shop .list-grid-btns { gap: 6px; }
+.sidebar-btn,
+.shop-sidebar__close {
+  background: transparent !important;
+  border: 1px solid #C5A572 !important;
+  color: #5A1E22 !important;
+  border-radius: 2px !important;
+}
+.sidebar-btn:hover { background: #F0E5C9 !important; }
+
+/* Select2 dropdown styling used in shop/filter */
+.select2-container--default .select2-selection--single {
+  background: #FBF6E8 !important;
+  border: 1px solid #C5A572 !important;
+  height: 44px !important;
+  border-radius: 2px !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 44px !important;
+  color: #2A1216 !important;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-size: 14px !important;
+  padding-left: 14px !important;
+}
+.select2-dropdown {
+  background: #FBF6E8 !important;
+  border: 1px solid #C5A572 !important;
+}
+.select2-results__option--highlighted {
+  background: #5A1E22 !important;
+  color: #FBF6E8 !important;
+}
+
+/* =========================================================================
+   CART PAGE
+   ========================================================================= */
+.cart { padding: 60px 0 !important; background: #F5EFE0; }
+.table-product,
+.cart-table { background: #FBF6E8 !important; border: 1px solid #E0CDA8 !important; border-radius: 4px !important; overflow: hidden; }
+.cart-table thead,
+.table-product thead {
+  background: #EFE0C2 !important;
+}
+.cart-table thead th,
+.table-product thead th {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11px !important;
+  letter-spacing: .24em !important;
+  text-transform: uppercase !important;
+  color: #5A1E22 !important;
+  padding: 18px 16px !important;
+  border-bottom: 1px solid #E0CDA8 !important;
+}
+.cart-table tbody td,
+.table-product tbody td {
+  padding: 22px 16px !important;
+  border-bottom: 1px solid #F0E5C9 !important;
+  vertical-align: middle;
+  background: #FBF6E8 !important;
+  color: #2A1216 !important;
+}
+.table-product__thumb img {
+  border-radius: 2px;
+  border: 1px solid #E0CDA8;
+  mix-blend-mode: multiply;
+  background: #F5EFE0;
+}
+.table-product__content h6 {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-size: 16px !important;
+  color: #2A1216 !important;
+}
+.remove-tr-btn {
+  background: transparent !important;
+  color: #8B2A2F !important;
+  border: 1px solid transparent !important;
+  border-radius: 50%;
+  width: 36px; height: 36px;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: all .25s ease;
+}
+.remove-tr-btn:hover {
+  background: #8B2A2F !important;
+  color: #F5EFE0 !important;
+}
+
+/* Quantity controls */
+.qty-btn,
+.quantity__plus,
+.quantity__minus,
+[class*="quantity"] button {
+  background: transparent !important;
+  border: 1px solid #C5A572 !important;
+  color: #2A1216 !important;
+  width: 32px; height: 32px;
+  border-radius: 2px !important;
+  transition: all .25s ease;
+}
+.qty-btn:hover,
+.quantity__plus:hover,
+.quantity__minus:hover {
+  background: #5A1E22 !important;
+  color: #FBF6E8 !important;
+  border-color: #5A1E22 !important;
+}
+.quantity input,
+.qty-input {
+  background: transparent !important;
+  border: 1px solid #C5A572 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 13px !important;
+  color: #2A1216 !important;
+  text-align: center;
+}
+
+/* Cart sidebar / order summary */
+.cart-sidebar,
+.checkout-sidebar {
+  background: #FBF6E8 !important;
+  border: 1px solid #E0CDA8 !important;
+  border-radius: 4px !important;
+  padding: 28px !important;
+}
+.cart-sidebar h6,
+.checkout-sidebar h6 {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-style: italic !important;
+  font-size: 26px !important;
+  color: #2A1216 !important;
+  padding-bottom: 16px !important;
+  margin-bottom: 18px !important;
+  border-bottom: 1px solid #E0CDA8 !important;
+  font-variation-settings: "opsz" 36, "SOFT" 50, "WONK" 1;
+}
+.cart-sidebar ul li,
+.checkout-sidebar ul li {
+  display: flex; justify-content: space-between;
+  padding: 8px 0;
+  font-size: 15px;
+  color: #2A1216;
+}
+.cart-sidebar ul li:not(:last-child) {
+  border-bottom: 1px dashed #E0CDA8;
+}
+.cart-sidebar ul li span:last-child,
+.checkout-sidebar ul li span:last-child {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-style: italic !important;
+  color: #5A1E22 !important;
+}
+
+/* Coupon input */
+.coupon-input,
+[placeholder*="coupon" i],
+[placeholder*="discount" i] {
+  background: transparent !important;
+  border: 1px solid #C5A572 !important;
+  border-radius: 999px !important;
+  padding: 12px 18px !important;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-style: italic;
+  color: #2A1216 !important;
+  font-size: 15px !important;
+}
+
+/* =========================================================================
+   CHECKOUT PAGE
+   ========================================================================= */
+.checkout { padding: 60px 0 !important; background: #F5EFE0; }
+.checkout h6, .checkout h5, .checkout h4 {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-style: italic !important;
+  letter-spacing: -.015em !important;
+  color: #2A1216 !important;
+}
+
+/* Form fields used in both Checkout and Account */
+.common-input,
+input.form-control,
+textarea.form-control,
+select.form-select {
+  background: #FBF6E8 !important;
+  border: 1px solid #C5A572 !important;
+  border-radius: 2px !important;
+  padding: 12px 14px !important;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-size: 15px !important;
+  color: #2A1216 !important;
+  height: auto !important;
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+.common-input:focus,
+input.form-control:focus,
+textarea.form-control:focus,
+select.form-select:focus {
+  border-color: #5A1E22 !important;
+  box-shadow: 0 0 0 3px rgba(90, 30, 34, .12) !important;
+  outline: none !important;
+}
+.common-input::placeholder,
+input.form-control::placeholder,
+textarea.form-control::placeholder { color: #8E7042 !important; font-style: italic; opacity: .85; }
+
+label.form-label,
+label.common-label {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: #5A1E22 !important;
+  margin-bottom: 8px !important;
+}
+
+/* Payment methods */
+.payment-item {
+  background: #FBF6E8 !important;
+  border: 1px solid #E0CDA8 !important;
+  border-radius: 4px !important;
+  padding: 18px 20px !important;
+  margin-bottom: 12px !important;
+  transition: border-color .3s ease, background-color .3s ease;
+}
+.payment-item:has(input:checked),
+.payment-item.active {
+  border-color: #5A1E22 !important;
+  background: #F0E5C9 !important;
+}
+.payment-item__content {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-size: 15px !important;
+  color: #2A1216 !important;
+}
+.form-check-input {
+  border: 1.5px solid #C5A572 !important;
+  background-color: #FBF6E8 !important;
+}
+.form-check-input:checked {
+  background-color: #5A1E22 !important;
+  border-color: #5A1E22 !important;
+}
+.form-check-label {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  color: #2A1216 !important;
+}
+
+/* Checkout step indicator (if any) */
+[class*="step-indicator"] [class*="active"] {
+  color: #5A1E22 !important;
+}
+
+/* =========================================================================
+   PRODUCT DETAILS
+   ========================================================================= */
+.product-details { padding: 60px 0 !important; background: #F5EFE0; }
+.product-details__images-slider,
+.product-details__thumb { background: #FBF6E8 !important; border: 1px solid #E0CDA8 !important; border-radius: 4px !important; overflow: hidden; }
+.product-details__thumb img,
+.product-details__images-slider img { mix-blend-mode: multiply; }
+
+.product-details__thumb-slider .slick-slide {
+  margin-right: 8px;
+}
+.product-details__thumb-slider img {
+  border: 1px solid #E0CDA8;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: border-color .25s ease;
+}
+.product-details__thumb-slider .slick-current img,
+.product-details__thumb-slider .slick-active img:first-of-type {
+  border-color: #5A1E22 !important;
+}
+
+.product-details__content h2,
+.product-details__content h3,
+.product-details__content h4 {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-weight: 360 !important;
+  color: #2A1216 !important;
+  letter-spacing: -.02em !important;
+}
+.product-details__content h2 {
+  font-size: clamp(32px, 4vw, 52px) !important;
+  font-variation-settings: "opsz" 96, "SOFT" 30 !important;
+  line-height: 1.05 !important;
+}
+.product-details__content .product-details__price,
+.product-details__content [class*="price"] {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-style: italic !important;
+  font-size: 32px !important;
+  color: #5A1E22 !important;
+}
+
+.product-details__sidebar {
+  background: #FBF6E8 !important;
+  border: 1px solid #E0CDA8 !important;
+  border-radius: 4px !important;
+  padding: 28px !important;
+}
+
+/* Tabs on product details */
+.nav-tabs,
+.common-tab {
+  border-bottom: 1px solid #E0CDA8 !important;
+  gap: 8px;
+}
+.nav-tabs .nav-link,
+.common-tab .nav-link {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 2px solid transparent !important;
+  color: #5A463A !important;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11.5px !important;
+  letter-spacing: .26em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  padding: 16px 20px !important;
+  border-radius: 0 !important;
+  transition: color .25s, border-color .25s;
+}
+.nav-tabs .nav-link:hover,
+.common-tab .nav-link:hover { color: #5A1E22 !important; }
+.nav-tabs .nav-link.active,
+.common-tab .nav-link.active {
+  color: #5A1E22 !important;
+  border-bottom-color: #5A1E22 !important;
+  background: transparent !important;
+}
+.tab-pane { padding: 28px 0 !important; }
+.tab-pane,
+.tab-content {
+  color: #2A1216;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* Add-to-cart big button on product details */
+.product-details .btn-main,
+.product-details button[class*="btn-main"] {
+  background: #5A1E22 !important;
+  color: #FBF6E8 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  padding: 16px 32px !important;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 12px !important;
+  letter-spacing: .28em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+}
+.product-details .btn-main:hover {
+  background: #2A1216 !important;
+}
+
+.btn-white {
+  background: #FBF6E8 !important;
+  color: #2A1216 !important;
+  border: 1px solid #C5A572 !important;
+  border-radius: 999px !important;
+  padding: 14px 28px !important;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11.5px !important;
+  letter-spacing: .26em !important;
+  text-transform: uppercase !important;
+}
+.btn-white:hover {
+  background: #2A1216 !important;
+  color: #FBF6E8 !important;
+}
+
+/* =========================================================================
+   ACCOUNT PAGE
+   ========================================================================= */
+.account { padding: 60px 0 !important; background: #F5EFE0; }
+.account .nav-pills .nav-link,
+.account-tabs .nav-link {
+  background: transparent !important;
+  color: #5A463A !important;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11.5px !important;
+  letter-spacing: .24em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  text-align: left;
+  padding: 14px 18px !important;
+  border-radius: 2px !important;
+  border-left: 2px solid transparent !important;
+  margin-bottom: 4px;
+  transition: all .25s ease;
+}
+.account .nav-pills .nav-link.active,
+.account-tabs .nav-link.active {
+  background: #F0E5C9 !important;
+  color: #5A1E22 !important;
+  border-left-color: #5A1E22 !important;
+}
+.account .nav-pills .nav-link:hover {
+  background: rgba(240, 229, 201, .5) !important;
+  color: #5A1E22 !important;
+}
+
+/* Account dashboard cards */
+.account .card,
+.account [class*="dashboard"] {
+  background: #FBF6E8 !important;
+  border: 1px solid #E0CDA8 !important;
+  border-radius: 4px !important;
+  padding: 24px !important;
+}
+
+/* =========================================================================
+   GLOBAL CONTAINER LAYOUT REFINEMENTS
+   ========================================================================= */
+section { background-color: transparent; }
+.container, .container-lg { padding-left: 24px !important; padding-right: 24px !important; }
+
+/* Tame any element overflow that the old template had */
+img { max-width: 100%; height: auto; }
+.row { margin-left: -12px; margin-right: -12px; }
+.row > * { padding-left: 12px; padding-right: 12px; }
+
+/* Section-level reveals already animate via .noct-reveal, but make sure
+   the .py-80 / .pt-120 utility padding the template uses still applies */
+.py-80 { padding-top: 80px !important; padding-bottom: 80px !important; }
+.pt-120, .pb-120 { /* leave intact */ }
+
+/* Empty-state messaging (cart empty, wishlist empty, etc.) */
+.empty-cart, .empty-wishlist, .no-product-found {
+  background: #FBF6E8 !important;
+  border: 1px dashed #C5A572 !important;
+  border-radius: 4px !important;
+  padding: 60px 40px !important;
+  text-align: center;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-style: italic !important;
+  font-size: 20px !important;
+  color: #5A463A !important;
+}
+
+/* =========================================================================
+   SUB-PAGE OVERRIDES — Wishlist · Blog · BlogDetails · Contact · Vendor* ·
+   BecomeSeller · ProductDetailsTwo
+   ========================================================================= */
+
+/* ── WISHLIST ─────────────────────────────────────────────────────────── */
+.wishlist,
+.wish-list,
+section[class*="wishlist"] {
+  padding: 60px 0 !important;
+  background: #F5EFE0;
+}
+.wishlist-btn {
+  background: #FBF6E8 !important;
+  border: 1px solid #C5A572 !important;
+  color: #5A1E22 !important;
+  border-radius: 50% !important;
+  width: 40px; height: 40px;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: all .25s ease;
+}
+.wishlist-btn:hover,
+.wishlist-btn.active {
+  background: #5A1E22 !important;
+  color: #FBF6E8 !important;
+  border-color: #5A1E22 !important;
+}
+
+/* ── BLOG INDEX ───────────────────────────────────────────────────────── */
+.blog,
+.blog-details {
+  padding: 60px 0 !important;
+  background: #F5EFE0;
+}
+.blog-item-wrapper,
+.blog-item {
+  background: #FBF6E8 !important;
+  border: 1px solid #E0CDA8 !important;
+  border-radius: 4px !important;
+  overflow: hidden;
+  transition: transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s ease, border-color .3s ease;
+}
+.blog-item:hover {
+  transform: translateY(-4px);
+  border-color: #C5A572 !important;
+  box-shadow: 0 20px 40px -16px rgba(58, 22, 26, .22);
+}
+.blog-item img {
+  mix-blend-mode: normal;
+  transition: transform .8s cubic-bezier(.2,.7,.2,1);
+}
+.blog-item:hover img { transform: scale(1.03); }
+
+.blog-item__content {
+  padding: 24px !important;
+}
+.blog-item__content h4,
+.blog-item__content h5,
+.blog-item__content h6,
+.blog-item__content .blog-title {
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif !important;
+  font-style: normal !important;
+  font-weight: 360 !important;
+  font-size: 22px !important;
+  line-height: 1.25 !important;
+  letter-spacing: -.015em !important;
+  color: #2A1216 !important;
+  margin-bottom: 12px !important;
+}
+.blog-item__content a:hover h4,
+.blog-item__content a:hover h5,
+.blog-item__content a:hover h6 { color: #5A1E22 !important; }
+.blog-item__content .blog-meta,
+.blog-item__content .post-date,
+.blog-item__content time,
+.blog-item__content [class*="date"] {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 10.5px !important;
+  letter-spacing: .26em !important;
+  text-transform: uppercase !important;
+  color: #8E7042 !important;
+}
+.blog-item__content p {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  color: #5A463A !important;
+  font-variation-settings: "opsz" 16;
+}
+
+/* "Read more" / continue link */
+.blog-item__content .btn-link,
+.blog-item__content a[class*="read"],
+.blog-item__content .read-more {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11px !important;
+  letter-spacing: .26em !important;
+  text-transform: uppercase !important;
+  color: #5A1E22 !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.blog-item__content .btn-link::after,
+.blog-item__content .read-more::after {
+  content: "→";
+  transition: transform .3s ease;
+}
+.blog-item__content .btn-link:hover::after,
+.blog-item__content .read-more:hover::after {
+  transform: translateX(6px);
+}
+
+/* Blog sidebar */
+.blog-sidebar {
+  background: #FBF6E8 !important;
+  border: 1px solid #E0CDA8 !important;
+  border-radius: 4px !important;
+  padding: 24px !important;
+  margin-bottom: 20px !important;
+}
+.blog-sidebar h5,
+.blog-sidebar h6,
+.blog-sidebar .sidebar-title {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11px !important;
+  letter-spacing: .26em !important;
+  text-transform: uppercase !important;
+  color: #8E7042 !important;
+  padding-bottom: 14px !important;
+  margin-bottom: 16px !important;
+  border-bottom: 1px solid #E0CDA8 !important;
+}
+.blog-sidebar ul li {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-size: 15px !important;
+  padding: 7px 0 !important;
+}
+
+/* Blog details — article body */
+.blog-details article,
+.blog-details .single-post,
+.blog-details .post-content {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-size: 17px !important;
+  line-height: 1.75 !important;
+  color: #2A1216 !important;
+}
+.blog-details h1, .blog-details h2 {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-weight: 360 !important;
+  letter-spacing: -.022em !important;
+  color: #2A1216 !important;
+}
+.blog-details blockquote {
+  border-left: 3px solid #5A1E22;
+  padding: 20px 28px;
+  margin: 28px 0;
+  background: #F0E5C9;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-style: italic !important;
+  font-size: 20px;
+  color: #2A1216;
+  font-variation-settings: "opsz" 36, "SOFT" 50, "WONK" 1;
+}
+
+/* ── CONTACT ──────────────────────────────────────────────────────────── */
+.contact { padding: 60px 0 !important; background: #F5EFE0; }
+.contact-box,
+.contact [class*="contact-item"],
+.contact [class*="info-card"] {
+  background: #FBF6E8 !important;
+  border: 1px solid #E0CDA8 !important;
+  border-radius: 4px !important;
+  padding: 30px 26px !important;
+  transition: transform .3s ease, border-color .3s ease;
+}
+.contact-box:hover {
+  transform: translateY(-3px);
+  border-color: #C5A572 !important;
+}
+.contact-box [class*="icon"],
+.contact-box .ph,
+.contact-box i {
+  color: #5A1E22 !important;
+  font-size: 28px;
+}
+.contact-box h5, .contact-box h6,
+.contact-box .contact-title {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11px !important;
+  letter-spacing: .26em !important;
+  text-transform: uppercase !important;
+  color: #8E7042 !important;
+  margin: 14px 0 8px !important;
+}
+.contact-box p,
+.contact-box a {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-style: italic !important;
+  font-size: 17px !important;
+  color: #2A1216 !important;
+}
+.contact-box a:hover { color: #5A1E22 !important; }
+
+/* Maps — soften so they don't punch out cold */
+.contact iframe,
+.contact [class*="map"] {
+  border-radius: 4px !important;
+  border: 1px solid #E0CDA8 !important;
+  filter: sepia(.15) saturate(.85) hue-rotate(-10deg);
+}
+
+/* ── VENDOR PAGES (list + details, both variants) ─────────────────────── */
+.vendors-list,
+.vendor-two,
+.vendor-two-details {
+  padding: 60px 0 !important;
+  background: #F5EFE0;
+}
+
+.vendor-card,
+.vendor-card-wrapper,
+.vendors-two-item {
+  background: #FBF6E8 !important;
+  border: 1px solid #E0CDA8 !important;
+  border-radius: 4px !important;
+  overflow: hidden;
+  transition: transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s ease, border-color .3s ease;
+}
+.vendor-card:hover,
+.vendors-two-item:hover {
+  transform: translateY(-4px);
+  border-color: #C5A572 !important;
+  box-shadow: 0 20px 40px -16px rgba(58, 22, 26, .22);
+}
+
+.vendor-card__logo,
+.vendor-card__item .logo,
+.vendors-two-item__thumbs {
+  background: #F5EFE0 !important;
+  border: 1px solid #E0CDA8 !important;
+  border-radius: 2px !important;
+}
+.vendor-card__logo img,
+.vendors-two-item__thumbs img { mix-blend-mode: multiply; }
+
+.vendor-card__list,
+.vendor-card__item {
+  padding: 22px !important;
+}
+.vendor-card h5,
+.vendor-card h6,
+.vendors-two-item h5,
+.vendors-two-item h6,
+.vendors-two-item__top h5 {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-weight: 360 !important;
+  font-size: 22px !important;
+  letter-spacing: -.012em !important;
+  color: #2A1216 !important;
+}
+.vendor-card .vendor-meta,
+.vendor-card .vendor-location,
+.vendors-two-item__top span {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 10.5px !important;
+  letter-spacing: .24em !important;
+  text-transform: uppercase !important;
+  color: #8E7042 !important;
+}
+
+.vendors-two-item__content { padding: 22px !important; }
+.vendors-two-item__top {
+  padding: 18px 22px !important;
+  border-bottom: 1px solid #E0CDA8;
+}
+
+/* Vendor analytics / stat cards (if present) */
+[class*="analytics-card"],
+[class*="stat-card"],
+[class*="metric-card"] {
+  background: #FBF6E8 !important;
+  border: 1px solid #E0CDA8 !important;
+  border-radius: 4px !important;
+  padding: 22px !important;
+}
+[class*="stat-card"] .stat-value,
+[class*="metric-card"] .metric-value,
+[class*="analytics-card"] [class*="value"] {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-style: italic !important;
+  font-size: 38px !important;
+  color: #5A1E22 !important;
+  font-variation-settings: "opsz" 60, "SOFT" 50, "WONK" 1;
+}
+[class*="stat-card"] .stat-label,
+[class*="metric-card"] .metric-label,
+[class*="analytics-card"] [class*="label"] {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 10.5px !important;
+  letter-spacing: .26em !important;
+  text-transform: uppercase !important;
+  color: #8E7042 !important;
+}
+
+/* ── BECOME SELLER ────────────────────────────────────────────────────── */
+.become-seller,
+section[class*="seller"],
+section[class*="become"] {
+  padding: 60px 0 !important;
+  background: #F5EFE0;
+}
+.become-seller .why-card,
+section[class*="seller"] .step,
+section[class*="seller"] [class*="benefit"],
+section[class*="seller"] [class*="feature"] {
+  background: #FBF6E8 !important;
+  border: 1px solid #E0CDA8 !important;
+  border-radius: 4px !important;
+  padding: 26px !important;
+  transition: transform .3s ease, border-color .3s ease;
+}
+.become-seller .why-card:hover,
+section[class*="seller"] [class*="benefit"]:hover {
+  transform: translateY(-3px);
+  border-color: #C5A572 !important;
+}
+
+/* ── PRODUCT DETAILS TWO ──────────────────────────────────────────────── */
+/* Extra component classes used by the alternate product details page */
+.product-dContent,
+.product-dContent__box {
+  background: #FBF6E8 !important;
+  border: 1px solid #E0CDA8 !important;
+  border-radius: 4px !important;
+  padding: 32px !important;
+}
+.product-dContent__header {
+  padding-bottom: 20px !important;
+  margin-bottom: 24px !important;
+  border-bottom: 1px solid #E0CDA8 !important;
+}
+.product-dContent__header h3,
+.product-dContent__header h4 {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-weight: 360 !important;
+  letter-spacing: -.02em !important;
+  color: #2A1216 !important;
+}
+
+/* Black button variant — keep for contrast but in Nocturne ink */
+.btn-black {
+  background: #2A1216 !important;
+  color: #FBF6E8 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  padding: 14px 28px !important;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11.5px !important;
+  letter-spacing: .26em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  transition: background-color .25s ease, color .25s ease;
+}
+.btn-black:hover {
+  background: #5A1E22 !important;
+}
+
+/* nav-pills used in product-details-two (related tabs etc.) */
+.nav-pills .nav-link {
+  background: transparent !important;
+  color: #5A463A !important;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 11px !important;
+  letter-spacing: .24em !important;
+  text-transform: uppercase !important;
+  border-radius: 2px !important;
+  padding: 10px 18px !important;
+  transition: background-color .25s, color .25s;
+}
+.nav-pills .nav-link:hover {
+  background: #F0E5C9 !important;
+  color: #5A1E22 !important;
+}
+.nav-pills .nav-link.active {
+  background: #5A1E22 !important;
+  color: #FBF6E8 !important;
+}
+
+/* ── COMMON: dark/overlay/neutral backgrounds across all sub-pages ────── */
+.bg-neutral-600,
+.bg-neutral-700,
+.bg-neutral-800 {
+  background-color: #2A1216 !important;
+  color: #F5EFE0 !important;
+}
+.bg-neutral-600 a,
+.bg-neutral-600 h1, .bg-neutral-600 h2, .bg-neutral-600 h3,
+.bg-neutral-600 h4, .bg-neutral-600 h5, .bg-neutral-600 h6 {
+  color: #F5EFE0 !important;
+}
+.bg-neutral-600 a:hover { color: #DDBB7E !important; }
+
+.bg-overlay {
+  background: linear-gradient(180deg, rgba(42,18,22,.25) 0%, rgba(42,18,22,.7) 100%) !important;
+}
+
+.bg-img {
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+/* Pagination — used on Shop, Blog, Vendor list pages */
+.pagination,
+ul.pagination {
+  gap: 6px;
+}
+.pagination .page-item .page-link,
+.pagination li a,
+.pagination li button {
+  background: #FBF6E8 !important;
+  border: 1px solid #E0CDA8 !important;
+  color: #2A1216 !important;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 12px !important;
+  width: 40px; height: 40px;
+  display: inline-flex !important;
+  align-items: center; justify-content: center;
+  border-radius: 2px !important;
+  transition: all .25s ease;
+}
+.pagination .page-item.active .page-link,
+.pagination li.active a {
+  background: #5A1E22 !important;
+  border-color: #5A1E22 !important;
+  color: #FBF6E8 !important;
+}
+.pagination .page-item .page-link:hover {
+  background: #F0E5C9 !important;
+  border-color: #C5A572 !important;
+}
+
+/* Reviews / comments lists (on product details & blog details) */
+[class*="review-item"],
+[class*="comment-item"],
+.review-card,
+.comment-card {
+  background: #FBF6E8 !important;
+  border: 1px solid #E0CDA8 !important;
+  border-radius: 4px !important;
+  padding: 22px !important;
+  margin-bottom: 14px !important;
+}
+[class*="review-item"] h6,
+[class*="comment-item"] h6 {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-size: 17px !important;
+  color: #2A1216 !important;
+}
+[class*="review-item"] .review-meta,
+[class*="comment-item"] .comment-date {
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 10px !important;
+  letter-spacing: .24em !important;
+  text-transform: uppercase !important;
+  color: #8E7042 !important;
+}
+
+/* Tags / chip lists (product tags, blog tags) */
+.tags a,
+.tag-list a,
+[class*="tag-cloud"] a,
+.post-tags a {
+  display: inline-block;
+  background: #F0E5C9 !important;
+  border: 1px solid #E0CDA8 !important;
+  color: #5A1E22 !important;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif !important;
+  font-size: 10px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  padding: 6px 12px !important;
+  margin: 0 6px 6px 0;
+  border-radius: 2px !important;
+  transition: all .25s ease;
+}
+.tags a:hover,
+.tag-list a:hover {
+  background: #5A1E22 !important;
+  color: #F5EFE0 !important;
+  border-color: #5A1E22 !important;
+}
+
+/* Social icons (footer + vendor profiles) */
+.social-link,
+[class*="social"] a {
+  width: 40px; height: 40px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid #C5A572;
+  border-radius: 50%;
+  color: #2A1216 !important;
+  transition: all .3s ease;
+}
+.social-link:hover,
+[class*="social"] a:hover {
+  background: #5A1E22;
+  color: #F5EFE0 !important;
+  border-color: #5A1E22;
+  transform: translateY(-2px);
+}
+
+

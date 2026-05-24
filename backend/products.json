@@ -1,0 +1,459 @@
+[
+  {
+    "id": "p001",
+    "name": "Phone Holder Sakti",
+    "tag": "Other",
+    "price": "$29.90",
+    "rating": 5.0,
+    "reviews": "1.2k",
+    "image": "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=500"
+  },
+  {
+    "id": "p002",
+    "name": "Headsound Wireless",
+    "tag": "Music",
+    "price": "$12.00",
+    "rating": 5.0,
+    "reviews": "1.2k",
+    "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500"
+  },
+  {
+    "id": "p003",
+    "name": "Adudu Cleaner",
+    "tag": "Home",
+    "price": "$29.90",
+    "rating": 4.4,
+    "reviews": "1k",
+    "image": "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?w=500"
+  },
+  {
+    "id": "p004",
+    "name": "CCTV Maling",
+    "tag": "Home",
+    "price": "$50.00",
+    "rating": 4.8,
+    "reviews": "120",
+    "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=500"
+  },
+  {
+    "id": "p005",
+    "name": "Stuffsus Peker 32",
+    "tag": "Music",
+    "price": "$9.90",
+    "rating": 5.0,
+    "reviews": "1.2k",
+    "image": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500"
+  },
+  {
+    "id": "p006",
+    "name": "Stuffsus R175",
+    "tag": "Music",
+    "price": "$34.10",
+    "rating": 4.8,
+    "reviews": "2.4k",
+    "image": "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=500"
+  },
+  {
+    "id": "p007",
+    "name": "TWS Bujug Earbuds",
+    "tag": "Music",
+    "price": "$29.90",
+    "rating": 5.0,
+    "reviews": "1.2k",
+    "image": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500"
+  },
+  {
+    "id": "p008",
+    "name": "Smart Watch Lite",
+    "tag": "Wearable",
+    "price": "$89.00",
+    "rating": 4.7,
+    "reviews": "3.1k",
+    "image": "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500"
+  },
+  {
+    "id": "p009",
+    "name": "Pro Camera X",
+    "tag": "Camera",
+    "price": "$420.00",
+    "rating": 4.9,
+    "reviews": "560",
+    "image": "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=500"
+  },
+  {
+    "id": "p010",
+    "name": "Mechanical Keyboard",
+    "tag": "Office",
+    "price": "$78.00",
+    "rating": 4.6,
+    "reviews": "920",
+    "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500"
+  },
+  {
+    "id": "p011",
+    "name": "Studio Microphone",
+    "tag": "Music",
+    "price": "$135.00",
+    "rating": 4.7,
+    "reviews": "410",
+    "image": "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=500"
+  },
+  {
+    "id": "p012",
+    "name": "Travel Backpack",
+    "tag": "Travel",
+    "price": "$54.00",
+    "rating": 4.5,
+    "reviews": "1.8k",
+    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500"
+  },
+  {
+    "id": "p013",
+    "name": "Classic White Sneakers",
+    "tag": "Shoes",
+    "price": "$79.00",
+    "rating": 4.6,
+    "reviews": "2.7k",
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"
+  },
+  {
+    "id": "p014",
+    "name": "Air Court Sneakers",
+    "tag": "Shoes",
+    "price": "$95.00",
+    "rating": 4.8,
+    "reviews": "3.3k",
+    "image": "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=500"
+  },
+  {
+    "id": "p015",
+    "name": "Runner Pro",
+    "tag": "Shoes",
+    "price": "$110.00",
+    "rating": 4.7,
+    "reviews": "1.5k",
+    "image": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=500"
+  },
+  {
+    "id": "p016",
+    "name": "Leather Boots",
+    "tag": "Shoes",
+    "price": "$140.00",
+    "rating": 4.5,
+    "reviews": "620",
+    "image": "https://images.unsplash.com/photo-1520639888713-7851133b1ed0?w=500"
+  },
+  {
+    "id": "p017",
+    "name": "UltraBook Slim 14",
+    "tag": "Laptop",
+    "price": "$1,299.00",
+    "rating": 4.7,
+    "reviews": "830",
+    "image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500"
+  },
+  {
+    "id": "p018",
+    "name": "GamerHub Laptop",
+    "tag": "Laptop",
+    "price": "$1,849.00",
+    "rating": 4.8,
+    "reviews": "1.1k",
+    "image": "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=500"
+  },
+  {
+    "id": "p019",
+    "name": "Studio Headphones Pro",
+    "tag": "Music",
+    "price": "$199.00",
+    "rating": 4.9,
+    "reviews": "4.6k",
+    "image": "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500"
+  },
+  {
+    "id": "p020",
+    "name": "Pocket DSLR Mini",
+    "tag": "Camera",
+    "price": "$320.00",
+    "rating": 4.4,
+    "reviews": "240",
+    "image": "https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?w=500"
+  },
+  {
+    "id": "p021",
+    "name": "Polaroid Vintage",
+    "tag": "Camera",
+    "price": "$89.00",
+    "rating": 4.3,
+    "reviews": "1.1k",
+    "image": "https://images.unsplash.com/photo-1495707902641-75cac588d2e9?w=500"
+  },
+  {
+    "id": "p022",
+    "name": "Aviator Sunglasses",
+    "tag": "Accessory",
+    "price": "$45.00",
+    "rating": 4.6,
+    "reviews": "2.1k",
+    "image": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500"
+  },
+  {
+    "id": "p023",
+    "name": "Leather Wallet",
+    "tag": "Accessory",
+    "price": "$38.00",
+    "rating": 4.5,
+    "reviews": "1.4k",
+    "image": "https://images.unsplash.com/photo-1627123424574-724758594e93?w=500"
+  },
+  {
+    "id": "p024",
+    "name": "Coffee Tumbler",
+    "tag": "Home",
+    "price": "$22.00",
+    "rating": 4.7,
+    "reviews": "3.2k",
+    "image": "https://images.unsplash.com/photo-1572119865084-43c285814d63?w=500"
+  },
+  {
+    "id": "p025",
+    "name": "Crispy Potato Chips",
+    "tag": "Snacks",
+    "price": "$2.50",
+    "rating": 4.5,
+    "reviews": "12k",
+    "image": "https://images.unsplash.com/photo-1566478989037-eec170784d0b?w=500"
+  },
+  {
+    "id": "p026",
+    "name": "Salted Pretzels",
+    "tag": "Snacks",
+    "price": "$3.20",
+    "rating": 4.6,
+    "reviews": "5.4k",
+    "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=500"
+  },
+  {
+    "id": "p027",
+    "name": "Popcorn Family Pack",
+    "tag": "Snacks",
+    "price": "$4.00",
+    "rating": 4.7,
+    "reviews": "8.1k",
+    "image": "https://images.unsplash.com/photo-1578849278002-0e7d4a7c0f3f?w=500"
+  },
+  {
+    "id": "p028",
+    "name": "Chocolate Bar",
+    "tag": "Snacks",
+    "price": "$1.80",
+    "rating": 4.8,
+    "reviews": "20k",
+    "image": "https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=500"
+  },
+  {
+    "id": "p029",
+    "name": "Cookie Pack",
+    "tag": "Snacks",
+    "price": "$3.50",
+    "rating": 4.6,
+    "reviews": "7.2k",
+    "image": "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=500"
+  },
+  {
+    "id": "p030",
+    "name": "Energy Drink",
+    "tag": "Beverage",
+    "price": "$2.20",
+    "rating": 4.3,
+    "reviews": "4.8k",
+    "image": "https://images.unsplash.com/photo-1622543925917-763c34d1a86e?w=500"
+  },
+  {
+    "id": "p031",
+    "name": "Sparkling Water",
+    "tag": "Beverage",
+    "price": "$1.50",
+    "rating": 4.7,
+    "reviews": "3.6k",
+    "image": "https://images.unsplash.com/photo-1606168094336-48f8b0c3e9b6?w=500"
+  },
+  {
+    "id": "p032",
+    "name": "Iced Coffee Bottle",
+    "tag": "Beverage",
+    "price": "$3.80",
+    "rating": 4.5,
+    "reviews": "6.4k",
+    "image": "https://images.unsplash.com/photo-1517959105821-eaf2591984ca?w=500"
+  },
+  {
+    "id": "p033",
+    "name": "Tropical Juice",
+    "tag": "Beverage",
+    "price": "$2.90",
+    "rating": 4.4,
+    "reviews": "2.1k",
+    "image": "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=500"
+  },
+  {
+    "id": "p034",
+    "name": "Banana Bunch",
+    "tag": "Grocery",
+    "price": "$1.20",
+    "rating": 4.9,
+    "reviews": "18k",
+    "image": "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=500"
+  },
+  {
+    "id": "p035",
+    "name": "Red Apples",
+    "tag": "Grocery",
+    "price": "$2.00",
+    "rating": 4.8,
+    "reviews": "11k",
+    "image": "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=500"
+  },
+  {
+    "id": "p036",
+    "name": "Fresh Bread Loaf",
+    "tag": "Grocery",
+    "price": "$3.40",
+    "rating": 4.7,
+    "reviews": "5.9k",
+    "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500"
+  },
+
+  { "id": "p037", "name": "Mirrorless Pro Camera",   "tag": "Camera", "price": "$899.00",  "rating": 4.8, "reviews": "1.4k", "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500" },
+  { "id": "p038", "name": "Vintage Film Camera",     "tag": "Camera", "price": "$240.00",  "rating": 4.6, "reviews": "780",  "image": "https://images.unsplash.com/photo-1452780212940-6f5c0d14d848?w=500" },
+  { "id": "p039", "name": "Action Cam 4K",           "tag": "Camera", "price": "$199.00",  "rating": 4.5, "reviews": "2.3k", "image": "https://images.unsplash.com/photo-1471657121041-d8d80f8e1d27?w=500" },
+  { "id": "p040", "name": "Telephoto Lens 200mm",    "tag": "Camera", "price": "$510.00",  "rating": 4.9, "reviews": "320",  "image": "https://images.unsplash.com/photo-1500634245200-e5245c7574ef?w=500" },
+  { "id": "p041", "name": "Compact Travel Camera",   "tag": "Camera", "price": "$345.00",  "rating": 4.4, "reviews": "910",  "image": "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=500" },
+  { "id": "p042", "name": "Instant Print Camera",    "tag": "Camera", "price": "$120.00",  "rating": 4.5, "reviews": "1.6k", "image": "https://images.unsplash.com/photo-1606567595334-d39972c85dbe?w=500" },
+
+  { "id": "p043", "name": "Wireless Over-Ear",       "tag": "Music",  "price": "$159.00",  "rating": 4.6, "reviews": "2.2k", "image": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500" },
+  { "id": "p044", "name": "Sport Earbuds",           "tag": "Music",  "price": "$59.00",   "rating": 4.4, "reviews": "5.1k", "image": "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=500" },
+  { "id": "p045", "name": "Noise-Cancel Headphones", "tag": "Music",  "price": "$249.00",  "rating": 4.9, "reviews": "6.8k", "image": "https://images.unsplash.com/photo-1487215078519-e21cc028cb29?w=500" },
+  { "id": "p046", "name": "Gaming Headset",          "tag": "Music",  "price": "$129.00",  "rating": 4.7, "reviews": "3.0k", "image": "https://images.unsplash.com/photo-1591105327764-4d196a3a4b18?w=500" },
+
+  { "id": "p047", "name": "Running Sneakers Black",  "tag": "Shoes",  "price": "$98.00",   "rating": 4.7, "reviews": "2.4k", "image": "https://images.unsplash.com/photo-1556906781-9a412961c28c?w=500" },
+  { "id": "p048", "name": "High Top Canvas",         "tag": "Shoes",  "price": "$65.00",   "rating": 4.5, "reviews": "1.7k", "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=500" },
+  { "id": "p049", "name": "Trail Running Shoes",     "tag": "Shoes",  "price": "$120.00",  "rating": 4.6, "reviews": "880",  "image": "https://images.unsplash.com/photo-1539185441755-769473a23570?w=500" },
+  { "id": "p050", "name": "Loafers Brown",           "tag": "Shoes",  "price": "$130.00",  "rating": 4.4, "reviews": "640",  "image": "https://images.unsplash.com/photo-1533867617858-e7b97e060509?w=500" },
+  { "id": "p051", "name": "Casual Slip-Ons",         "tag": "Shoes",  "price": "$55.00",   "rating": 4.3, "reviews": "1.2k", "image": "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=500" },
+  { "id": "p052", "name": "Skate Shoes",             "tag": "Shoes",  "price": "$72.00",   "rating": 4.4, "reviews": "1.0k", "image": "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=500" },
+
+  { "id": "p053", "name": "Sport Smart Watch",       "tag": "Wearable", "price": "$129.00",  "rating": 4.6, "reviews": "2.8k", "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" },
+  { "id": "p054", "name": "Classic Analog Watch",    "tag": "Wearable", "price": "$210.00",  "rating": 4.7, "reviews": "1.9k", "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500" },
+  { "id": "p055", "name": "Digital Runner Watch",    "tag": "Wearable", "price": "$78.00",   "rating": 4.4, "reviews": "3.4k", "image": "https://images.unsplash.com/photo-1434056886845-dac89ffe9b56?w=500" },
+  { "id": "p056", "name": "Luxury Steel Watch",      "tag": "Wearable", "price": "$420.00",  "rating": 4.8, "reviews": "740",  "image": "https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=500" },
+  { "id": "p057", "name": "Minimal Leather Watch",   "tag": "Wearable", "price": "$95.00",   "rating": 4.5, "reviews": "2.0k", "image": "https://images.unsplash.com/photo-1495856458515-0637185db551?w=500" },
+  { "id": "p058", "name": "Fitness Tracker Band",    "tag": "Wearable", "price": "$49.00",   "rating": 4.3, "reviews": "5.6k", "image": "https://images.unsplash.com/photo-1575311373937-040b8e1fd1b6?w=500" },
+  { "id": "p059", "name": "Dive Watch",              "tag": "Wearable", "price": "$340.00",  "rating": 4.7, "reviews": "510",  "image": "https://images.unsplash.com/photo-1606859309061-8b5acd2c0ec3?w=500" },
+  { "id": "p060", "name": "Pocket Watch Vintage",    "tag": "Wearable", "price": "$160.00",  "rating": 4.5, "reviews": "320",  "image": "https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?w=500" },
+  { "id": "p061", "name": "Kids Smart Watch",        "tag": "Wearable", "price": "$59.00",   "rating": 4.2, "reviews": "1.1k", "image": "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500" },
+
+  { "id": "p062", "name": "Office Laptop 15",        "tag": "Laptop", "price": "$899.00",   "rating": 4.5, "reviews": "1.2k", "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500" },
+  { "id": "p063", "name": "Designer MacBook Style",  "tag": "Laptop", "price": "$1,499.00", "rating": 4.8, "reviews": "3.4k", "image": "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=500" },
+  { "id": "p064", "name": "Budget Notebook",         "tag": "Laptop", "price": "$499.00",   "rating": 4.2, "reviews": "910",  "image": "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=500" },
+  { "id": "p065", "name": "2-in-1 Convertible",      "tag": "Laptop", "price": "$1,149.00", "rating": 4.6, "reviews": "770",  "image": "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500" },
+  { "id": "p066", "name": "Workstation Laptop",      "tag": "Laptop", "price": "$2,299.00", "rating": 4.9, "reviews": "420",  "image": "https://images.unsplash.com/photo-1484788984921-03950022c9ef?w=500" },
+  { "id": "p067", "name": "Chromebook Lite",         "tag": "Laptop", "price": "$329.00",   "rating": 4.3, "reviews": "2.6k", "image": "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=500" },
+
+  { "id": "p068", "name": "Flagship Smartphone",     "tag": "Phone",  "price": "$999.00",   "rating": 4.8, "reviews": "8.4k", "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500" },
+  { "id": "p069", "name": "Mid-Range Phone",         "tag": "Phone",  "price": "$399.00",   "rating": 4.5, "reviews": "5.1k", "image": "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=500" },
+  { "id": "p070", "name": "Foldable Phone",          "tag": "Phone",  "price": "$1,799.00", "rating": 4.6, "reviews": "1.3k", "image": "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=500" },
+  { "id": "p071", "name": "Rugged Outdoor Phone",    "tag": "Phone",  "price": "$549.00",   "rating": 4.4, "reviews": "620",  "image": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=500" },
+  { "id": "p072", "name": "Budget Smartphone",       "tag": "Phone",  "price": "$199.00",   "rating": 4.2, "reviews": "6.7k", "image": "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500" },
+  { "id": "p073", "name": "Compact Mini Phone",      "tag": "Phone",  "price": "$649.00",   "rating": 4.6, "reviews": "2.0k", "image": "https://images.unsplash.com/photo-1605236453806-6ff36851218e?w=500" },
+  { "id": "p074", "name": "Gaming Phone",            "tag": "Phone",  "price": "$899.00",   "rating": 4.7, "reviews": "1.7k", "image": "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=500" },
+
+  { "id": "p075", "name": "Leather Tote Bag",        "tag": "Bag",    "price": "$120.00",   "rating": 4.6, "reviews": "1.4k", "image": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500" },
+  { "id": "p076", "name": "Canvas Messenger",        "tag": "Bag",    "price": "$68.00",    "rating": 4.4, "reviews": "920",  "image": "https://images.unsplash.com/photo-1547949003-9792a18a2601?w=500" },
+  { "id": "p077", "name": "Laptop Briefcase",        "tag": "Bag",    "price": "$140.00",   "rating": 4.5, "reviews": "510",  "image": "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=500" },
+  { "id": "p078", "name": "Hiking Backpack 40L",     "tag": "Bag",    "price": "$95.00",    "rating": 4.7, "reviews": "2.1k", "image": "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=500" },
+  { "id": "p079", "name": "Mini Crossbody",          "tag": "Bag",    "price": "$48.00",    "rating": 4.3, "reviews": "1.7k", "image": "https://images.unsplash.com/photo-1591561954557-26941169b49e?w=500" },
+  { "id": "p080", "name": "Duffel Sports Bag",       "tag": "Bag",    "price": "$72.00",    "rating": 4.5, "reviews": "1.0k", "image": "https://images.unsplash.com/photo-1581605405669-fcdf81165afa?w=500" },
+  { "id": "p081", "name": "Rolling Suitcase",        "tag": "Bag",    "price": "$210.00",   "rating": 4.6, "reviews": "830",  "image": "https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=500" },
+
+  { "id": "p082", "name": "Round Frame Sunglasses",  "tag": "Accessory", "price": "$55.00", "rating": 4.5, "reviews": "1.8k", "image": "https://images.unsplash.com/photo-1577803645773-f96470509666?w=500" },
+  { "id": "p083", "name": "Square Sunglasses",       "tag": "Accessory", "price": "$62.00", "rating": 4.4, "reviews": "2.0k", "image": "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500" },
+  { "id": "p084", "name": "Cat Eye Sunglasses",      "tag": "Accessory", "price": "$48.00", "rating": 4.6, "reviews": "1.4k", "image": "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=500" },
+  { "id": "p085", "name": "Sport Wrap Sunglasses",   "tag": "Accessory", "price": "$72.00", "rating": 4.5, "reviews": "990",  "image": "https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=500" },
+  { "id": "p086", "name": "Polarized Driving Shades","tag": "Accessory", "price": "$85.00", "rating": 4.7, "reviews": "1.6k", "image": "https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=500" },
+
+  { "id": "p087", "name": "Tortilla Chips",          "tag": "Snacks", "price": "$2.80",  "rating": 4.6, "reviews": "7.0k", "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=500" },
+  { "id": "p088", "name": "Corn Puffs Spicy",        "tag": "Snacks", "price": "$1.90",  "rating": 4.4, "reviews": "5.2k", "image": "https://images.unsplash.com/photo-1621447504864-d8686f12c84a?w=500" },
+  { "id": "p089", "name": "Almond Mix",              "tag": "Snacks", "price": "$5.20",  "rating": 4.8, "reviews": "3.6k", "image": "https://images.unsplash.com/photo-1574483347547-65bcce9ae26c?w=500" },
+
+  { "id": "p090", "name": "Cola Can 330ml",          "tag": "Beverage", "price": "$1.20", "rating": 4.5, "reviews": "9.8k", "image": "https://images.unsplash.com/photo-1554866585-cd94860890b7?w=500" },
+  { "id": "p091", "name": "Orange Soda",             "tag": "Beverage", "price": "$1.30", "rating": 4.3, "reviews": "4.5k", "image": "https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=500" },
+  { "id": "p092", "name": "Mineral Water Bottle",    "tag": "Beverage", "price": "$0.90", "rating": 4.6, "reviews": "12k",  "image": "https://images.unsplash.com/photo-1564419320461-6870880221ad?w=500" },
+  { "id": "p093", "name": "Hot Tea Mug",             "tag": "Beverage", "price": "$3.20", "rating": 4.7, "reviews": "2.4k", "image": "https://images.unsplash.com/photo-1597481499750-3e6b22637e12?w=500" },
+  { "id": "p094", "name": "Smoothie Cup",            "tag": "Beverage", "price": "$4.50", "rating": 4.5, "reviews": "1.8k", "image": "https://images.unsplash.com/photo-1505252585461-04db1eb84625?w=500" },
+
+  { "id": "p095", "name": "Chelsea Boots",           "tag": "Shoes", "price": "$155.00", "rating": 4.7, "reviews": "1.5k", "image": "https://images.unsplash.com/photo-1638247025967-b4e38f787b76?w=500" },
+  { "id": "p096", "name": "Combat Boots",            "tag": "Shoes", "price": "$170.00", "rating": 4.6, "reviews": "1.2k", "image": "https://images.unsplash.com/photo-1542728928-1413d1894ed1?w=500" },
+  { "id": "p097", "name": "Hiking Boots",            "tag": "Shoes", "price": "$190.00", "rating": 4.8, "reviews": "2.1k", "image": "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500" },
+  { "id": "p098", "name": "Cowboy Boots",            "tag": "Shoes", "price": "$220.00", "rating": 4.5, "reviews": "640",  "image": "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=500" },
+  { "id": "p099", "name": "Work Boots",              "tag": "Shoes", "price": "$160.00", "rating": 4.6, "reviews": "910",  "image": "https://images.unsplash.com/photo-1605812860427-4024433a70fd?w=500" },
+  { "id": "p100", "name": "Ankle Boots Black",       "tag": "Shoes", "price": "$135.00", "rating": 4.5, "reviews": "1.8k", "image": "https://images.unsplash.com/photo-1607522370275-f14206abe5d3?w=500" },
+  { "id": "p101", "name": "Suede Boots Tan",         "tag": "Shoes", "price": "$148.00", "rating": 4.6, "reviews": "720",  "image": "https://images.unsplash.com/photo-1520639888713-7851133b1ed0?w=500" },
+  { "id": "p102", "name": "Snow Boots",              "tag": "Shoes", "price": "$185.00", "rating": 4.7, "reviews": "560",  "image": "https://images.unsplash.com/photo-1610505736291-39d97d3ed6e6?w=500" },
+  { "id": "p103", "name": "Oxford Dress Shoes",      "tag": "Shoes", "price": "$175.00", "rating": 4.6, "reviews": "830",  "image": "https://images.unsplash.com/photo-1614253429340-98120bd6d753?w=500" },
+  { "id": "p104", "name": "Derby Shoes",             "tag": "Shoes", "price": "$165.00", "rating": 4.5, "reviews": "510",  "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500" },
+  { "id": "p105", "name": "Monk Strap Shoes",        "tag": "Shoes", "price": "$190.00", "rating": 4.7, "reviews": "420",  "image": "https://images.unsplash.com/photo-1533867617858-e7b97e060509?w=500" },
+  { "id": "p106", "name": "White Tennis Shoes",      "tag": "Shoes", "price": "$88.00",  "rating": 4.7, "reviews": "3.4k", "image": "https://images.unsplash.com/photo-1606107557084-7e1f4d0d8f76?w=500" },
+  { "id": "p107", "name": "Basketball Shoes",        "tag": "Shoes", "price": "$130.00", "rating": 4.8, "reviews": "2.7k", "image": "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=500" },
+  { "id": "p108", "name": "Soccer Cleats",           "tag": "Shoes", "price": "$95.00",  "rating": 4.6, "reviews": "1.1k", "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500" },
+  { "id": "p109", "name": "Low Top Sneakers",        "tag": "Shoes", "price": "$78.00",  "rating": 4.5, "reviews": "2.0k", "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=500" },
+  { "id": "p110", "name": "Retro Running Sneakers",  "tag": "Shoes", "price": "$92.00",  "rating": 4.6, "reviews": "1.6k", "image": "https://images.unsplash.com/photo-1551107696-a4b537c892d0?w=500" },
+  { "id": "p111", "name": "Slip-On Canvas",          "tag": "Shoes", "price": "$58.00",  "rating": 4.4, "reviews": "1.3k", "image": "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=500" },
+  { "id": "p112", "name": "Espadrilles",             "tag": "Shoes", "price": "$62.00",  "rating": 4.3, "reviews": "580",  "image": "https://images.unsplash.com/photo-1517438476312-10d79c077509?w=500" },
+  { "id": "p113", "name": "Boat Shoes",              "tag": "Shoes", "price": "$110.00", "rating": 4.4, "reviews": "490",  "image": "https://images.unsplash.com/photo-1614632537190-23e4146777db?w=500" },
+  { "id": "p114", "name": "Moccasins",               "tag": "Shoes", "price": "$95.00",  "rating": 4.5, "reviews": "390",  "image": "https://images.unsplash.com/photo-1582897085656-c636d006a246?w=500" },
+  { "id": "p115", "name": "Leather Sandals",         "tag": "Shoes", "price": "$58.00",  "rating": 4.5, "reviews": "780",  "image": "https://images.unsplash.com/photo-1603487742131-4160ec999306?w=500" },
+  { "id": "p116", "name": "Sport Sandals",           "tag": "Shoes", "price": "$48.00",  "rating": 4.3, "reviews": "1.4k", "image": "https://images.unsplash.com/photo-1564605575890-2671e1e0a049?w=500" },
+  { "id": "p117", "name": "Flip Flops",              "tag": "Shoes", "price": "$22.00",  "rating": 4.2, "reviews": "3.6k", "image": "https://images.unsplash.com/photo-1564613451049-49d8a59f0fc4?w=500" },
+  { "id": "p118", "name": "Block Heels",             "tag": "Shoes", "price": "$98.00",  "rating": 4.4, "reviews": "920",  "image": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500" },
+  { "id": "p119", "name": "Stiletto Heels",          "tag": "Shoes", "price": "$140.00", "rating": 4.5, "reviews": "1.0k", "image": "https://images.unsplash.com/photo-1581101767113-1677fc2beaa8?w=500" },
+  { "id": "p120", "name": "Slippers Indoor",         "tag": "Shoes", "price": "$28.00",  "rating": 4.6, "reviews": "2.2k", "image": "https://images.unsplash.com/photo-1622760806769-4c75e9d75c33?w=500" },
+
+  { "id": "p121", "name": "Cheese Puffs",             "tag": "Snacks",   "price": "$2.10", "rating": 4.5, "reviews": "6.2k", "image": "https://images.unsplash.com/photo-1600326145552-327ee16d9ddd?w=500" },
+  { "id": "p122", "name": "Nacho Chips",              "tag": "Snacks",   "price": "$2.40", "rating": 4.6, "reviews": "8.1k", "image": "https://images.unsplash.com/photo-1582169296194-e4d644c48063?w=500" },
+  { "id": "p123", "name": "BBQ Chips",                "tag": "Snacks",   "price": "$2.80", "rating": 4.7, "reviews": "5.5k", "image": "https://images.unsplash.com/photo-1613919113640-25732ec5e61f?w=500" },
+  { "id": "p124", "name": "Wavy Chips",               "tag": "Snacks",   "price": "$2.60", "rating": 4.6, "reviews": "4.9k", "image": "https://images.unsplash.com/photo-1621447504864-d8686f12c84a?w=500" },
+  { "id": "p125", "name": "Trail Mix Bag",            "tag": "Snacks",   "price": "$4.80", "rating": 4.7, "reviews": "3.2k", "image": "https://images.unsplash.com/photo-1605118474025-feaaf02f4f86?w=500" },
+
+  { "id": "p126", "name": "Premium Earbuds Pro",      "tag": "Earbuds",  "price": "$249.00", "rating": 4.9, "reviews": "12k",  "image": "https://images.unsplash.com/photo-1605464315542-bda3e2f4e605?w=500" },
+  { "id": "p127", "name": "Wireless Earbuds White",   "tag": "Earbuds",  "price": "$89.00",  "rating": 4.6, "reviews": "8.7k", "image": "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=500" },
+  { "id": "p128", "name": "Mini True Wireless",       "tag": "Earbuds",  "price": "$59.00",  "rating": 4.4, "reviews": "5.1k", "image": "https://images.unsplash.com/photo-1606741965509-717b9e5e8e95?w=500" },
+  { "id": "p129", "name": "Sport In-Ear",             "tag": "Earbuds",  "price": "$72.00",  "rating": 4.5, "reviews": "4.0k", "image": "https://images.unsplash.com/photo-1631176093617-63490a3d785a?w=500" },
+  { "id": "p130", "name": "Hi-Fi Wired Earbuds",      "tag": "Earbuds",  "price": "$45.00",  "rating": 4.3, "reviews": "2.8k", "image": "https://images.unsplash.com/photo-1545127398-14699f92334b?w=500" },
+  { "id": "p131", "name": "Gaming Earbuds RGB",       "tag": "Earbuds",  "price": "$135.00", "rating": 4.6, "reviews": "1.9k", "image": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500" },
+  { "id": "p132", "name": "Bone Conduction Buds",     "tag": "Earbuds",  "price": "$165.00", "rating": 4.4, "reviews": "640",  "image": "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=500" },
+  { "id": "p133", "name": "ANC Earbuds Black",        "tag": "Earbuds",  "price": "$199.00", "rating": 4.8, "reviews": "6.4k", "image": "https://images.unsplash.com/photo-1574920162043-b872873f19c8?w=500" },
+
+  { "id": "p134", "name": "iPhone Style Phone",       "tag": "Phone",    "price": "$1,099.00", "rating": 4.9, "reviews": "15k",  "image": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=500" },
+  { "id": "p135", "name": "Android Flagship Plus",    "tag": "Phone",    "price": "$1,199.00", "rating": 4.8, "reviews": "9.6k", "image": "https://images.unsplash.com/photo-1567581935884-3349723552ca?w=500" },
+  { "id": "p136", "name": "Slim Phone Black",         "tag": "Phone",    "price": "$549.00",   "rating": 4.6, "reviews": "4.2k", "image": "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=500" },
+  { "id": "p137", "name": "Phone with Stylus",        "tag": "Phone",    "price": "$849.00",   "rating": 4.7, "reviews": "3.1k", "image": "https://images.unsplash.com/photo-1546054454-aa26e2b734c7?w=500" },
+
+  { "id": "p138", "name": "Gaming Laptop RGB",        "tag": "Laptop",   "price": "$1,699.00", "rating": 4.8, "reviews": "2.4k", "image": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500" },
+  { "id": "p139", "name": "Slim Ultrabook 13",        "tag": "Laptop",   "price": "$1,099.00", "rating": 4.7, "reviews": "1.9k", "image": "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=500" },
+  { "id": "p140", "name": "Student Laptop White",     "tag": "Laptop",   "price": "$589.00",   "rating": 4.4, "reviews": "5.5k", "image": "https://images.unsplash.com/photo-1543966888-7c1dc482a810?w=500" },
+
+  { "id": "p141", "name": "Action Cam Mount Set",     "tag": "Camera",   "price": "$65.00",    "rating": 4.5, "reviews": "1.2k", "image": "https://images.unsplash.com/photo-1547599793-d1a7e8df56b9?w=500" },
+  { "id": "p142", "name": "Vlogger Cam Kit",          "tag": "Camera",   "price": "$680.00",   "rating": 4.7, "reviews": "830",  "image": "https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?w=500" },
+  { "id": "p143", "name": "Drone Camera 4K",          "tag": "Camera",   "price": "$899.00",   "rating": 4.8, "reviews": "1.6k", "image": "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=500" },
+
+  { "id": "p144", "name": "Mini Backpack Pink",       "tag": "Bag",      "price": "$58.00",    "rating": 4.4, "reviews": "1.7k", "image": "https://images.unsplash.com/photo-1577733966973-d680bffd2e80?w=500" },
+  { "id": "p145", "name": "Office Laptop Backpack",   "tag": "Bag",      "price": "$110.00",   "rating": 4.6, "reviews": "2.3k", "image": "https://images.unsplash.com/photo-1581605405669-fcdf81165afa?w=500" },
+
+  { "id": "p146", "name": "Round Pink Sunglasses",    "tag": "Accessory","price": "$48.00",    "rating": 4.5, "reviews": "1.6k", "image": "https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=500" },
+  { "id": "p147", "name": "Tortoise Sunglasses",      "tag": "Accessory","price": "$72.00",    "rating": 4.6, "reviews": "980",  "image": "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500" },
+  { "id": "p148", "name": "Gold Frame Sunglasses",    "tag": "Accessory","price": "$95.00",    "rating": 4.7, "reviews": "1.3k", "image": "https://images.unsplash.com/photo-1577803645773-f96470509666?w=500" },
+
+  { "id": "p149", "name": "Coca Style Soda",          "tag": "Beverage", "price": "$1.40",     "rating": 4.5, "reviews": "9.0k", "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500" },
+  { "id": "p150", "name": "Lemonade Bottle",          "tag": "Beverage", "price": "$2.20",     "rating": 4.4, "reviews": "2.6k", "image": "https://images.unsplash.com/photo-1523677011781-c91d1bbe2f9e?w=500" }
+]
