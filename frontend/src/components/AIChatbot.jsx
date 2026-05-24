@@ -5,7 +5,7 @@ import { aiAPI } from '../services/aiAPI';
 const AIChatbot = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([
-        { role: 'assistant', content: "Hi! 👋 I'm your AI shopping assistant. Ask me about products, deals, or recommendations!", products: [] }
+        { role: 'assistant', content: "Hey! 👋 I'm your shopping buddy. I can help you find deals, track prices, check stock, navigate the store, or recommend products. What's on your mind?", products: [] }
     ]);
     const [input, setInput] = useState('');
     const [loading, setLoading] = useState(false);
@@ -45,10 +45,12 @@ const AIChatbot = () => {
     };
 
     const quickActions = [
-        "What's trending?",
-        "Electronics under $100",
-        "Recommend a gift",
-        "Help with my order"
+        "What's on sale?",
+        "Show bestsellers",
+        "Bundle deals",
+        "Low stock alerts",
+        "Help me navigate",
+        "Track my order"
     ];
 
     return (
@@ -75,8 +77,8 @@ const AIChatbot = () => {
                                 <i className="ph-fill ph-robot" />
                             </div>
                             <div>
-                                <h6 className="text-white text-sm fw-bold mb-0">AI Assistant</h6>
-                                <span className="text-xs" style={{ color: '#4ade80' }}>● Online</span>
+                                <h6 className="text-white text-sm fw-bold mb-0">Shopping Buddy</h6>
+                                <span className="text-xs" style={{ color: '#4ade80' }}>● Always here to help</span>
                             </div>
                         </div>
                         <button onClick={() => setIsOpen(false)} className="chatbot__close">
