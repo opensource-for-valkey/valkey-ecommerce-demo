@@ -22,6 +22,7 @@ import FooterOne from "../components/FooterOne";
 import BottomFooter from "../components/BottomFooter";
 import ScrollToTop from "react-scroll-to-top";
 import ColorInit from "../helper/ColorInit";
+import AdBanner from "../components/AdBanner";
 const HomePageOne = () => {
 
   return (
@@ -52,6 +53,9 @@ const HomePageOne = () => {
       {/* FlashSalesOne */}
       <FlashSalesOne />
 
+      {/* Ad Banner - Between Flash Sales and Product List */}
+      <AdBanner placement="homepage-banner" />
+
       {/* ProductListOne */}
       <ProductListOne />
 
@@ -60,6 +64,9 @@ const HomePageOne = () => {
 
       {/* RecommendedOne */}
       <RecommendedOne />
+
+      {/* Ad Banner - Mid page */}
+      <AdBanner placement="homepage-mid" />
 
       {/* HotDealsOne */}
       <HotDealsOne />
