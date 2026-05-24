@@ -8,6 +8,7 @@ const catalogRoutes = require('./routes/catalog');
 const cartRoutes = require('./routes/cart');
 const trendingRoutes = require('./routes/trending');
 const adsRoutes = require('./routes/ads');
+const searchRoutes = require('./routes/search');
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use('/api', catalogRoutes);
 app.use('/api', cartRoutes);
 app.use('/api', trendingRoutes);
 app.use('/api', adsRoutes);
+app.use('/api', searchRoutes);
 
 app.get('/health', (_req, res) => res.json({ status: 'ok', timestamp: new Date().toISOString() }));
 

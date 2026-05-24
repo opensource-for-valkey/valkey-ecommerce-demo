@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import query from "jquery";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -51,9 +51,52 @@ const HeaderTwo = ({ category }) => {
 
   // Search control support
   const [activeSearch, setActiveSearch] = useState(false);
-  const handleSearchToggle = () => {
-    setActiveSearch(!activeSearch);
-  };
+  const handleSearchToggle = () => { setActiveSearch(!activeSearch); };
+
+  // Inline search state
+  const [inlineQ, setInlineQ] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSugg, setShowSugg] = useState(false);
+  const suggestTimer = useRef(null);
+
+  // Mobile overlay search state
+  const [overlayQ, setOverlayQ] = useState('');
+
+  function fetchSuggestions(q) {
+    if (!q.trim()) { setSuggestions([]); return; }
+    clearTimeout(suggestTimer.current);
+    suggestTimer.current = setTimeout(() => {
+      fetch(`/api/search/suggest?q=${encodeURIComponent(q)}&max=6`)
+        .then(r => r.ok ? r.json() : { suggestions: [] })
+        .then(d => setSuggestions(d.suggestions || []))
+        .catch(() => {});
+    }, 150);
+  }
+
+  function handleInlineChange(e) {
+    const val = e.target.value;
+    setInlineQ(val);
+    fetchSuggestions(val);
+    setShowSugg(true);
+  }
+
+  function handleInlineSubmit(e) {
+    e.preventDefault();
+    setShowSugg(false);
+    if (inlineQ.trim()) navigate(`/search?q=${encodeURIComponent(inlineQ.trim())}`);
+  }
+
+  function handleSuggClick(s) {
+    setInlineQ(s);
+    setShowSugg(false);
+    navigate(`/search?q=${encodeURIComponent(s)}`);
+  }
+
+  function handleOverlaySubmit(e) {
+    e.preventDefault();
+    setActiveSearch(false);
+    if (overlayQ.trim()) navigate(`/search?q=${encodeURIComponent(overlayQ.trim())}`);
+  }
 
   // category control support
   const [activeCategory, setActiveCategory] = useState(false);
@@ -81,7 +124,7 @@ const HeaderTwo = ({ category }) => {
       />
       {/* ==================== Search Box Start Here ==================== */}
 
-      <form action='#' className={`search-box ${activeSearch && "active"}`}>
+      <form onSubmit={handleOverlaySubmit} className={`search-box ${activeSearch && "active"}`}>
         <button
           onClick={handleSearchToggle}
           type='button'
@@ -93,6 +136,8 @@ const HeaderTwo = ({ category }) => {
           <div className='position-relative'>
             <input
               type='text'
+              value={overlayQ}
+              onChange={e => setOverlayQ(e.target.value)}
               className='form-control py-16 px-24 text-xl rounded-pill pe-64'
               placeholder='Search for a product or brand'
             />
@@ -598,33 +643,38 @@ const HeaderTwo = ({ category }) => {
                 {/* Dropdown Select End */}
               </div>
               <form
-                action='#'
+                onSubmit={handleInlineSubmit}
                 className='flex-align flex-wrap form-location-wrapper'
               >
-                <div className='search-category style-two d-flex h-48 search-form d-sm-flex d-none'>
-                  <select
-                    defaultValue={1}
-                    className='js-example-basic-single border border-gray-200 border-end-0 rounded-0 border-0'
-                    name='state'
-                  >
-                    <option value={1}>All Categories</option>
-                    <option value={1}>Grocery</option>
-                    <option value={1}>Breakfast &amp; Dairy</option>
-                    <option value={1}>Vegetables</option>
-                    <option value={1}>Milks and Dairies</option>
-                    <option value={1}>Pet Foods &amp; Toy</option>
-                    <option value={1}>Breads &amp; Bakery</option>
-                    <option value={1}>Fresh Seafood</option>
-                    <option value={1}>Fronzen Foods</option>
-                    <option value={1}>Noodles &amp; Rice</option>
-                    <option value={1}>Ice Cream</option>
-                  </select>
+                <div className='search-category style-two d-flex h-48 search-form d-sm-flex d-none position-relative'>
                   <div className='search-form__wrapper position-relative'>
                     <input
                       type='text'
+                      value={inlineQ}
+                      onChange={handleInlineChange}
+                      onFocus={() => setShowSugg(true)}
+                      onBlur={() => setTimeout(() => setShowSugg(false), 200)}
                       className='search-form__input common-input py-13 ps-16 pe-18 rounded-0 border-0'
                       placeholder='Search for a product or brand'
+                      autoComplete='off'
                     />
+                    {/* Autocomplete dropdown */}
+                    {showSugg && suggestions.length > 0 && (
+                      <ul className='position-absolute bg-white border border-gray-100 rounded-8 shadow-lg z-3 w-100 py-8'
+                        style={{ top: '100%', left: 0, minWidth: 260, listStyle: 'none', margin: 0, padding: 0 }}>
+                        {suggestions.map((s, i) => (
+                          <li key={i}>
+                            <button
+                              type='button'
+                              onMouseDown={() => handleSuggClick(s)}
+                              className='d-flex align-items-center gap-8 px-16 py-8 w-100 text-start bg-transparent border-0 text-gray-700 hover-bg-gray-50 text-sm'>
+                              <i className='ph ph-magnifying-glass text-gray-400 flex-shrink-0' />
+                              {s}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                   <button
                     type='submit'
