@@ -48,7 +48,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=200&auto=format&fit=crop&q=60",
     rating: 4.9,
     reviews: 320,
-    tags: ["macbook", "laptop", "apple", "thin", "m3", "college", "office", "coding"],
+    tags: ["macbook", "laptop", "apple", "thin", "m3", "college", "office", "coding", "women", "her", "men", "him", "gift"],
   },
   {
     id: 3,
@@ -69,7 +69,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200&auto=format&fit=crop&q=60",
     rating: 4.7,
     reviews: 215,
-    tags: ["nike", "running", "shoes", "fitness", "sneakers", "sports", "pegasus"],
+    tags: ["nike", "running", "shoes", "fitness", "sneakers", "sports", "pegasus", "men", "him", "gift"],
   },
   {
     id: 5,
@@ -79,7 +79,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1587563871167-1ee9c731aefb?w=200&auto=format&fit=crop&q=60",
     rating: 4.8,
     reviews: 412,
-    tags: ["adidas", "ultraboost", "running", "shoes", "comfort", "sneakers"],
+    tags: ["adidas", "ultraboost", "running", "shoes", "comfort", "sneakers", "women", "her", "gift"],
   },
   {
     id: 6,
@@ -100,7 +100,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=200&auto=format&fit=crop&q=60",
     rating: 4.8,
     reviews: 180,
-    tags: ["apple", "watch", "smart", "fitness", "gps", "wearable", "series9"],
+    tags: ["apple", "watch", "smart", "fitness", "gps", "wearable", "series9", "women", "her", "men", "him", "gift"],
   },
   {
     id: 8,
@@ -110,7 +110,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200&auto=format&fit=crop&q=60",
     rating: 4.6,
     reviews: 154,
-    tags: ["samsung", "watch", "smart", "galaxy", "wearable", "android"],
+    tags: ["samsung", "watch", "smart", "galaxy", "wearable", "android", "women", "her", "men", "him", "gift"],
   },
   {
     id: 9,
@@ -120,7 +120,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=200&auto=format&fit=crop&q=60",
     rating: 4.2,
     reviews: 512,
-    tags: ["noise", "colorfit", "smart", "watch", "budget", "wearable"],
+    tags: ["noise", "colorfit", "smart", "watch", "budget", "wearable", "women", "her", "gift"],
   },
   // Accessories & Gear
   {
@@ -192,7 +192,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=200&auto=format&fit=crop&q=60",
     rating: 4.8,
     reviews: 950,
-    tags: ["kindle", "ereader", "books", "paperwhite", "gift", "gear", "reading"],
+    tags: ["kindle", "ereader", "books", "paperwhite", "gift", "gear", "reading", "women", "her", "men", "him"],
   },
   // Audio
   {
@@ -203,7 +203,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200&auto=format&fit=crop&q=60",
     rating: 4.9,
     reviews: 840,
-    tags: ["sony", "wh1000xm5", "audio", "headphones", "anc", "noise", "cancelling", "wireless"],
+    tags: ["sony", "wh1000xm5", "audio", "headphones", "anc", "noise", "cancelling", "wireless", "women", "her", "men", "him", "gift"],
   },
   {
     id: 18,
@@ -213,7 +213,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=200&auto=format&fit=crop&q=60",
     rating: 4.8,
     reviews: 312,
-    tags: ["bose", "quietcomfort", "ultra", "audio", "headphones", "anc", "wireless"],
+    tags: ["bose", "quietcomfort", "ultra", "audio", "headphones", "anc", "wireless", "women", "her", "men", "him", "gift"],
   },
   {
     id: 19,
@@ -224,6 +224,193 @@ const products = [
     rating: 4.5,
     reviews: 188,
     tags: ["oneplus", "buds", "pro", "earphone", "wireless", "audio", "anc"],
+  },
+  // Expanded Laptops
+  {
+    id: 20,
+    name: "Dell XPS 15 OLED Laptop",
+    category: "laptop",
+    price: 145000,
+    image: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=200&auto=format&fit=crop&q=60",
+    rating: 4.8,
+    reviews: 190,
+    tags: ["dell", "xps", "laptop", "oled", "premium", "developer", "coding"],
+  },
+  {
+    id: 21,
+    name: "HP Spectre x360 Convertible 14",
+    category: "laptop",
+    price: 119900,
+    image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=200&auto=format&fit=crop&q=60",
+    rating: 4.7,
+    reviews: 94,
+    tags: ["hp", "spectre", "laptop", "convertible", "touchscreen", "stylus", "coding"],
+  },
+  {
+    id: 22,
+    name: "Acer Swift Go 14 Thin & Light",
+    category: "laptop",
+    price: 54990,
+    image: "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=200&auto=format&fit=crop&q=60",
+    rating: 4.4,
+    reviews: 65,
+    tags: ["acer", "swift", "laptop", "thin", "budget", "college", "coding"],
+  },
+  // Expanded Shoes
+  {
+    id: 23,
+    name: "Adidas Samba Classic Sneakers",
+    category: "shoes",
+    price: 8500,
+    image: "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=200&auto=format&fit=crop&q=60",
+    rating: 4.6,
+    reviews: 840,
+    tags: ["adidas", "samba", "classic", "sneakers", "shoes", "streetwear"],
+  },
+  {
+    id: 24,
+    name: "Nike Air Force 1 '07",
+    category: "shoes",
+    price: 9500,
+    image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=200&auto=format&fit=crop&q=60",
+    rating: 4.8,
+    reviews: 1205,
+    tags: ["nike", "airforce", "shoes", "sneakers", "classic", "streetwear"],
+  },
+  {
+    id: 25,
+    name: "New Balance 574 Retro Runner",
+    category: "shoes",
+    price: 7999,
+    image: "https://images.unsplash.com/photo-1539185441755-769473a23570?w=200&auto=format&fit=crop&q=60",
+    rating: 4.6,
+    reviews: 322,
+    tags: ["newbalance", "574", "shoes", "sneakers", "running", "comfort"],
+  },
+  // Expanded Watches
+  {
+    id: 26,
+    name: "Garmin Venu 3 GPS Smartwatch",
+    category: "watch",
+    price: 44900,
+    image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=200&auto=format&fit=crop&q=60",
+    rating: 4.7,
+    reviews: 105,
+    tags: ["garmin", "venu", "watch", "smart", "fitness", "gps", "running", "women", "her", "men", "him", "gift"],
+  },
+  {
+    id: 27,
+    name: "Fitbit Charge 6 Fitness Tracker",
+    category: "watch",
+    price: 14999,
+    image: "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=200&auto=format&fit=crop&q=60",
+    rating: 4.4,
+    reviews: 215,
+    tags: ["fitbit", "tracker", "smart", "watch", "fitness", "band", "women", "her", "men", "him", "gift"],
+  },
+  // Expanded Accessories
+  {
+    id: 28,
+    name: "Keychron K2 Mechanical Keyboard",
+    category: "accessories",
+    price: 7999,
+    image: "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=200&auto=format&fit=crop&q=60",
+    rating: 4.8,
+    reviews: 340,
+    tags: ["keychron", "keyboard", "mechanical", "wireless", "rgb", "coding", "accessories"],
+  },
+  {
+    id: 29,
+    name: "Corsair K70 RGB Rapidfire",
+    category: "accessories",
+    price: 13500,
+    image: "https://images.unsplash.com/photo-1595225476474-87563907a212?w=200&auto=format&fit=crop&q=60",
+    rating: 4.7,
+    reviews: 412,
+    tags: ["corsair", "keyboard", "mechanical", "gaming", "wired", "rgb", "accessories"],
+  },
+  // Expanded Science & Toy gifts
+  {
+    id: 30,
+    name: "Thames & Kosmos Physics Workshop Kit",
+    category: "toys",
+    price: 3999,
+    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=200&auto=format&fit=crop&q=60",
+    rating: 4.7,
+    reviews: 95,
+    tags: ["toys", "science", "physics", "nephew", "gift", "stem", "education", "workshop", "kid"],
+  },
+  {
+    id: 31,
+    name: "Snap Circuits Pro SC-500 Electronics Set",
+    category: "toys",
+    price: 6500,
+    image: "https://images.unsplash.com/photo-1563770660941-20978e870e26?w=200&auto=format&fit=crop&q=60",
+    rating: 4.9,
+    reviews: 218,
+    tags: ["toys", "electronics", "science", "nephew", "gift", "stem", "circuits", "kid", "education"],
+  },
+  {
+    id: 32,
+    name: "Ravensburger GraviTrax Pro Marble Run Kit",
+    category: "toys",
+    price: 8999,
+    image: "https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=200&auto=format&fit=crop&q=60",
+    rating: 4.8,
+    reviews: 142,
+    tags: ["toys", "physics", "nephew", "gift", "gravitrax", "marble", "building", "kid"],
+  },
+  // Expanded Gear & Astronomy
+  {
+    id: 33,
+    name: "Celestron Astromaster 130EQ Newton Telescope",
+    category: "gear",
+    price: 18999,
+    image: "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=200&auto=format&fit=crop&q=60",
+    rating: 4.8,
+    reviews: 175,
+    tags: ["telescope", "space", "astronomy", "science", "gift", "gear", "nephew", "celestron"],
+  },
+  {
+    id: 34,
+    name: "DJI Neo Mini Camera Drone",
+    category: "gear",
+    price: 29999,
+    image: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=200&auto=format&fit=crop&q=60",
+    rating: 4.6,
+    reviews: 84,
+    tags: ["dji", "drone", "camera", "gear", "gift", "nephew", "flying"],
+  },
+  // Expanded Audio
+  {
+    id: 35,
+    name: "Sony WF-1000XM5 Wireless Earbuds",
+    category: "audio",
+    price: 19990,
+    image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=200&auto=format&fit=crop&q=60",
+    rating: 4.7,
+    reviews: 412,
+    tags: ["sony", "wf1000xm5", "audio", "earbuds", "wireless", "anc", "noise", "women", "her", "men", "him", "gift"],
+  },
+  {
+    id: 36,
+    name: "Sennheiser HD 600 Open-Back Headphones",
+    category: "audio",
+    price: 27900,
+    image: "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=200&auto=format&fit=crop&q=60",
+    rating: 4.9,
+    reviews: 580,
+    tags: ["sennheiser", "hd600", "audio", "headphones", "audiophile", "studio", "openback"],
+  },
+  {
+    id: 37,
+    name: "JBL Flip 6 Waterproof Speaker",
+    category: "audio",
+    price: 9999,
+    image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=200&auto=format&fit=crop&q=60",
+    rating: 4.7,
+    reviews: 1310,
+    tags: ["jbl", "speaker", "bluetooth", "waterproof", "flip6", "audio", "outdoor", "women", "her", "men", "him", "gift"],
   }
 ];
 
@@ -265,8 +452,8 @@ function parseQueryLocalFallback(query) {
     category = "accessories";
   } else if (normalized.includes("headphone") || normalized.includes("audio") || normalized.includes("earphone") || normalized.includes("sound")) {
     category = "audio";
-  } else if (normalized.includes("toy") || normalized.includes("gift") || normalized.includes("science") || normalized.includes("nephew") || normalized.includes("kid")) {
-    // Treat gift/science queries as toys/gear
+  } else if (normalized.includes("toy") || normalized.includes("kid") || normalized.includes("child") || normalized.includes("nephew") || normalized.includes("niece") || (normalized.includes("gift") && (normalized.includes("boy") || normalized.includes("girl") || normalized.includes("son") || normalized.includes("daughter")))) {
+    // Force "toys" only for children/kids gifts or explicit toys
     if (normalized.includes("telescope")) {
       category = "gear";
     } else {
@@ -282,6 +469,11 @@ function parseQueryLocalFallback(query) {
   if (normalized.includes("running")) keywords.push("running");
   if (normalized.includes("smart")) keywords.push("smart");
   if (normalized.includes("wireless")) keywords.push("wireless");
+  if (normalized.includes("women") || normalized.includes("wife") || normalized.includes("her") || normalized.includes("girl")) {
+    keywords.push("women");
+  } else if (normalized.includes("men") || normalized.includes("husband") || normalized.includes("him") || normalized.includes("boy")) {
+    keywords.push("men");
+  }
   if (normalized.includes("science") || normalized.includes("nephew") || normalized.includes("chemistry") || normalized.includes("microscope")) {
     keywords.push("science");
   }
@@ -376,38 +568,89 @@ async function parseQueryWithAI(query, history = []) {
 }
 
 /**
- * Filter products based on parsed intent
+ * Filter and score products based on parsed intent
+ * Incorporates:
+ * 1. Hard Constraints (Category, Price Caps)
+ * 2. Relevance Scoring (Title, Category, Tags matches)
+ * 3. Freshness Shuffling (Dynamic ordering within same score tiers)
+ * 4. Diverse Shuffled Category Fallback (For broad searches: returns balanced random items from each category to avoid repetition)
  */
 const searchProductsWithIntent = (parsed) => {
   const { searchTerm, category, maxPrice } = parsed;
-  const terms = searchTerm.toLowerCase().split(/\s+/).filter(Boolean);
+  
+  // Clean terms: remove common conversational noise words
+  const stopWords = ["gift", "suggestion", "suggestions", "recommend", "show", "me", "want", "for", "men", "women", "a", "an", "the", "some", "need", "any", "anything"];
+  const terms = searchTerm
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(Boolean)
+    .filter(term => !stopWords.includes(term));
 
-  return products.filter((product) => {
-    // 1. Category filter
+  // 1. First-pass filter: Hard constraints (Category and Price Ceiling)
+  let filtered = products.filter((product) => {
+    // Category constraint (if specified strictly)
     if (category && product.category.toLowerCase() !== category.toLowerCase()) {
       return false;
     }
-
-    // 2. Price filter
+    // Price constraint
     if (maxPrice && product.price > maxPrice) {
       return false;
     }
-
-    // 3. Keyword matching (only if terms exist)
-    if (terms.length > 0) {
-      const searchableText = [
-        product.name,
-        product.category,
-        ...(product.tags || []),
-      ]
-        .join(" ")
-        .toLowerCase();
-
-      return terms.every((term) => searchableText.includes(term));
-    }
-
     return true;
   });
+
+  // 2. Score relevance
+  if (terms.length > 0) {
+    const scored = filtered.map((product) => {
+      let score = 0;
+      const title = product.name.toLowerCase();
+      const tags = (product.tags || []).map(t => t.toLowerCase());
+      const prodCat = product.category.toLowerCase();
+
+      terms.forEach((term) => {
+        // Category exact match
+        if (prodCat === term) score += 15;
+        else if (prodCat.includes(term)) score += 5;
+
+        // Title matches
+        if (title.includes(term)) score += 8;
+
+        // Tags matches
+        tags.forEach((tag) => {
+          if (tag === term) score += 6;
+          else if (tag.includes(term)) score += 2;
+        });
+      });
+
+      return { product, score };
+    });
+
+    // If we have products with matching scores > 0, return them sorted by score descending
+    const matches = scored.filter(item => item.score > 0);
+    if (matches.length > 0) {
+      // Group products and introduce a minor shuffle within same score tier to keep results fresh and organic!
+      return matches
+        .sort((a, b) => b.score - a.score || Math.random() - 0.5)
+        .map(item => item.product);
+    }
+  }
+
+  // 3. Diverse Fallback (Broad Searches): Return a shuffled, balanced mix across general categories!
+  // To avoid showing the exact same items every time, we group products by category and pick a diverse subset.
+  const categoriesList = ["laptop", "shoes", "watch", "accessories", "audio", "toys", "gear"];
+  const selectedProducts = [];
+
+  categoriesList.forEach((cat) => {
+    const catProducts = filtered.filter(p => p.category === cat);
+    if (catProducts.length > 0) {
+      // Pick 2 random products from each matching category to ensure diverse representation
+      const shuffledCat = [...catProducts].sort(() => Math.random() - 0.5);
+      selectedProducts.push(...shuffledCat.slice(0, 2));
+    }
+  });
+
+  // Shuffle the final selection so the layout feels dynamic and alive on every search!
+  return selectedProducts.sort(() => Math.random() - 0.5);
 };
 
 const normalizeQuery = (query) => query.trim().toLowerCase();

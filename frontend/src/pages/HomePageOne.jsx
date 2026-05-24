@@ -33,6 +33,7 @@ const HomePageOne = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [chatHistory, setChatHistory] = useState([]);
+  const [isTelemetryOpen, setIsTelemetryOpen] = useState(false);
 
   // Handles session reset (flushes Valkey context history for this specific session)
   const handleResetSession = async () => {
@@ -82,154 +83,182 @@ const HomePageOne = () => {
         <div className="py-80 bg-neutral-50" style={{ padding: "60px 0", background: "#f8fafc", minHeight: "600px" }}>
           <div className="container container-lg">
             
-            {/* Visual Performance Caching Banner */}
+            {/* Slim, Collapsible Valkey Telemetry Accordion Banner (Closed by default) */}
             {searchMetrics && (
               <div 
-                className="mb-24 p-24 rounded-24 border text-start animate__animated animate__fadeIn"
+                className="mb-24 rounded-16 border animate__animated animate__fadeIn"
                 style={{
                   marginBottom: '24px',
-                  padding: '24px',
-                  borderRadius: '20px',
-                  background: searchMetrics.source === 'valkey-cache' ? 'linear-gradient(135deg, #f0fdf4 0%, #bbf7d0 100%)' : 'linear-gradient(135deg, #fffbeb 0%, #fde68a 100%)',
-                  borderColor: searchMetrics.source === 'valkey-cache' ? '#86efac' : '#fcd34d',
-                  boxShadow: '0 10px 25px rgba(0,0,0,0.03)'
+                  borderRadius: '14px',
+                  overflow: 'hidden',
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.02)',
+                  background: '#fff',
+                  borderColor: '#e5e7eb'
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', marginBottom: '16px' }}>
+                {/* Clickable Header Accordion Bar */}
+                <div 
+                  onClick={() => setIsTelemetryOpen(!isTelemetryOpen)}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '14px 20px',
+                    background: searchMetrics.source === 'valkey-cache' ? '#f0fdf4' : '#fffbeb',
+                    cursor: 'pointer',
+                    userSelect: 'none',
+                    transition: 'background 0.2s ease',
+                    borderBottom: isTelemetryOpen ? '1px solid #e5e7eb' : 'none'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = searchMetrics.source === 'valkey-cache' ? '#e6fced' : '#fff7db';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = searchMetrics.source === 'valkey-cache' ? '#f0fdf4' : '#fffbeb';
+                  }}
+                >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
                     {searchMetrics.source === 'valkey-cache' ? (
-                      <span style={{ background: '#16a34a', color: '#fff', padding: '6px 14px', borderRadius: '30px', fontWeight: 'bold', fontSize: '12px', letterSpacing: '0.05em' }}>
-                        ⚡ POWERED BY VALKEY CACHE
+                      <span style={{ background: '#16a34a', color: '#fff', padding: '4px 10px', borderRadius: '20px', fontWeight: '800', fontSize: '10px', letterSpacing: '0.05em' }}>
+                        ⚡ POWERED BY VALKEY CACHE (HIT)
                       </span>
                     ) : (
-                      <span style={{ background: '#d97706', color: '#fff', padding: '6px 14px', borderRadius: '30px', fontWeight: 'bold', fontSize: '12px', letterSpacing: '0.05em' }}>
+                      <span style={{ background: '#d97706', color: '#fff', padding: '4px 10px', borderRadius: '20px', fontWeight: '800', fontSize: '10px', letterSpacing: '0.05em' }}>
                         ❌ UNCACHED DATABASE MISS
                       </span>
                     )}
-                    <h3 style={{ fontSize: '18px', fontWeight: 700, margin: 0, color: '#1f2937' }}>
-                      Search Results for "{searchQuery}"
-                    </h3>
+                    <span style={{ fontSize: '13px', fontWeight: 600, color: '#374151' }}>
+                      Latency: <strong style={{ color: searchMetrics.source === 'valkey-cache' ? '#15803d' : '#b45309' }}>{searchMetrics.responseTime}</strong> — Click to view AI intent parsing & session memory logs
+                    </span>
                   </div>
-                  <span style={{ fontSize: '22px', fontWeight: 900, color: searchMetrics.source === 'valkey-cache' ? '#15803d' : '#b45309' }}>
-                    Latency: {searchMetrics.responseTime}
-                  </span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span style={{ fontSize: '12px', fontWeight: 700, color: '#6b7280' }}>
+                      {isTelemetryOpen ? 'Hide Logs' : 'View Logs'}
+                    </span>
+                    <i 
+                      className="ph ph-caret-down" 
+                      style={{ 
+                        transform: isTelemetryOpen ? 'rotate(180deg)' : 'none', 
+                        transition: 'transform 0.3s ease', 
+                        fontSize: '16px',
+                        color: '#6b7280'
+                      }} 
+                    />
+                  </div>
                 </div>
-                
-                {searchMetrics.aiIntent && (
-                  <div style={{ padding: '16px', borderRadius: '14px', background: 'rgba(255,255,255,0.75)', border: '1px solid rgba(0,0,0,0.03)' }}>
-                    <div style={{ fontWeight: 700, color: '#1f2937', marginBottom: '4px', fontSize: '13px' }}>🤖 AI Intent Extraction:</div>
-                    <div style={{ fontSize: '13px', color: '#4b5563', lineHeight: '1.5' }}>
-                      {searchMetrics.aiIntent.aiExplanation}
+
+                {/* Collapsible Content Area */}
+                {isTelemetryOpen && (
+                  <div 
+                    className="p-24 bg-white animate__animated animate__fadeIn"
+                    style={{ 
+                      textAlign: 'left',
+                      padding: '24px',
+                      background: '#fff'
+                    }}
+                  >
+                    {/* Inner Telemetry & Memory constraints */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', marginBottom: '24px' }}>
+                      
+                      {/* Left Column: Active Search Constraints in Valkey State Memory */}
+                      <div style={{ borderRight: window.innerWidth > 768 ? '1px solid #f3f4f6' : 'none', paddingRight: window.innerWidth > 768 ? '24px' : '0' }}>
+                        <div style={{ fontWeight: 700, color: '#1f2937', marginBottom: '16px', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <i className="ph ph-cpu" style={{ color: '#299E60', fontSize: '18px' }} /> 
+                          Active Agent Memory Constraints (Valkey RAM)
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                          
+                          {/* Category Badge */}
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 14px', background: '#f8fafc', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+                            <span style={{ fontSize: '12px', fontWeight: 600, color: '#475569', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                              <i className="ph ph-tag" /> Active Category
+                            </span>
+                            <span style={{ fontSize: '11px', fontWeight: 700, color: '#0f172a', background: '#f1f5f9', padding: '4px 12px', borderRadius: '20px', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
+                              {searchMetrics.aiIntent.category || 'All Categories'}
+                            </span>
+                          </div>
+
+                          {/* Search Term Focus Badge */}
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 14px', background: '#f8fafc', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+                            <span style={{ fontSize: '12px', fontWeight: 600, color: '#475569', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                              <i className="ph ph-magnifying-glass" /> Core Search Focus
+                            </span>
+                            <span style={{ fontSize: '11px', fontWeight: 700, color: '#1d4ed8', background: '#dbeafe', padding: '4px 12px', borderRadius: '20px' }}>
+                              "{searchMetrics.aiIntent.searchTerm}"
+                            </span>
+                          </div>
+
+                          {/* Price Limit Badge */}
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 14px', background: '#f8fafc', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+                            <span style={{ fontSize: '12px', fontWeight: 600, color: '#475569', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                              <i className="ph ph-currency-inr" /> Price Cap (Max Limit)
+                            </span>
+                            <span style={{ 
+                              fontSize: '11px', 
+                              fontWeight: 700, 
+                              color: searchMetrics.aiIntent.maxPrice ? '#15803d' : '#6b7280', 
+                              background: searchMetrics.aiIntent.maxPrice ? '#dcfce7' : '#f1f5f9', 
+                              padding: '4px 12px', 
+                              borderRadius: '20px' 
+                            }}>
+                              {searchMetrics.aiIntent.maxPrice ? `₹${searchMetrics.aiIntent.maxPrice.toLocaleString("en-IN")}` : 'No Limit'}
+                            </span>
+                          </div>
+
+                        </div>
+                      </div>
+
+                      {/* Right Column: Conversational Refinement Timeline / Steps */}
+                      <div style={{ paddingLeft: window.innerWidth > 768 ? '8px' : '0', paddingTop: window.innerWidth > 768 ? '0' : '16px', borderTop: window.innerWidth > 768 ? 'none' : '1px solid #f3f4f6' }}>
+                        <div style={{ fontWeight: 700, color: '#1f2937', marginBottom: '16px', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <i className="ph ph-git-commit" style={{ color: '#299E60', fontSize: '18px' }} /> 
+                          Agentic Query Refinement History
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', position: 'relative', paddingLeft: '20px', borderLeft: '2px solid #e2e8f0', marginLeft: '10px', minHeight: '60px' }}>
+                          
+                          {chatHistory && chatHistory.filter(msg => msg.role === 'user').map((msg, index) => (
+                            <div key={index} style={{ position: 'relative', textAlign: 'left' }}>
+                              {/* Chronological bullet marker */}
+                              <div 
+                                style={{ 
+                                  position: 'absolute', 
+                                  left: '-26px', 
+                                  top: '4px', 
+                                  width: '10px', 
+                                  height: '10px', 
+                                  borderRadius: '50%', 
+                                  background: '#299E60',
+                                  border: '2px solid #fff' 
+                                }} 
+                              />
+                              <span style={{ fontSize: '10px', color: '#9ca3af', fontWeight: 700, display: 'block', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '2px' }}>
+                                Step {index + 1}: Refine Search
+                              </span>
+                              <span style={{ fontSize: '13px', color: '#374151', fontWeight: 500 }}>
+                                {msg.text}
+                              </span>
+                            </div>
+                          ))}
+
+                        </div>
+                      </div>
+
                     </div>
+
+                    {/* AI Intent Extraction Explanation Bubble */}
+                    {searchMetrics.aiIntent && (
+                      <div style={{ padding: '16px', borderRadius: '14px', background: '#f8fafc', border: '1px solid #e2e8f0', marginBottom: '24px' }}>
+                        <div style={{ fontWeight: 700, color: '#1f2937', marginBottom: '4px', fontSize: '13px' }}>🤖 AI Intent Extraction:</div>
+                        <div style={{ fontSize: '13px', color: '#4b5563', lineHeight: '1.5' }}>
+                          {searchMetrics.aiIntent.aiExplanation}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
             )}
 
-            {/* Valkey Search Agent State Board (Active Memory constraints & timeline) */}
-            {searchMetrics && searchMetrics.aiIntent && (
-              <div 
-                className="mb-24 p-24 rounded-24 bg-white border animate__animated animate__fadeIn"
-                style={{
-                  marginBottom: '24px',
-                  padding: '24px',
-                  borderRadius: '20px',
-                  background: '#fff',
-                  border: '1px solid #e5e7eb',
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
-                  textAlign: 'left'
-                }}
-              >
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
-                  
-                  {/* Left Column: Active Search Constraints in Valkey State Memory */}
-                  <div style={{ borderRight: window.innerWidth > 768 ? '1px solid #f3f4f6' : 'none', paddingRight: window.innerWidth > 768 ? '24px' : '0' }}>
-                    <div style={{ fontWeight: 700, color: '#1f2937', marginBottom: '16px', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <i className="ph ph-cpu" style={{ color: '#299E60', fontSize: '18px' }} /> 
-                      Active Agent Memory Constraints (Valkey RAM)
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                      
-                      {/* Category Badge */}
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 14px', background: '#f8fafc', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
-                        <span style={{ fontSize: '12px', fontWeight: 600, color: '#475569', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          <i className="ph ph-tag" /> Active Category
-                        </span>
-                        <span style={{ fontSize: '11px', fontWeight: 700, color: '#0f172a', background: '#f1f5f9', padding: '4px 12px', borderRadius: '20px', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
-                          {searchMetrics.aiIntent.category || 'All Categories'}
-                        </span>
-                      </div>
-
-                      {/* Search Term Focus Badge */}
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 14px', background: '#f8fafc', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
-                        <span style={{ fontSize: '12px', fontWeight: 600, color: '#475569', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          <i className="ph ph-magnifying-glass" /> Core Search Focus
-                        </span>
-                        <span style={{ fontSize: '11px', fontWeight: 700, color: '#1d4ed8', background: '#dbeafe', padding: '4px 12px', borderRadius: '20px' }}>
-                          "{searchMetrics.aiIntent.searchTerm}"
-                        </span>
-                      </div>
-
-                      {/* Price Limit Badge */}
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 14px', background: '#f8fafc', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
-                        <span style={{ fontSize: '12px', fontWeight: 600, color: '#475569', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          <i className="ph ph-currency-inr" /> Price Cap (Max Limit)
-                        </span>
-                        <span style={{ 
-                          fontSize: '11px', 
-                          fontWeight: 700, 
-                          color: searchMetrics.aiIntent.maxPrice ? '#15803d' : '#6b7280', 
-                          background: searchMetrics.aiIntent.maxPrice ? '#dcfce7' : '#f1f5f9', 
-                          padding: '4px 12px', 
-                          borderRadius: '20px' 
-                        }}>
-                          {searchMetrics.aiIntent.maxPrice ? `₹${searchMetrics.aiIntent.maxPrice.toLocaleString("en-IN")}` : 'No Limit'}
-                        </span>
-                      </div>
-
-                    </div>
-                  </div>
-
-                  {/* Right Column: Conversational Refinement Timeline / Steps */}
-                  <div style={{ paddingLeft: window.innerWidth > 768 ? '8px' : '0', paddingTop: window.innerWidth > 768 ? '0' : '16px', borderTop: window.innerWidth > 768 ? 'none' : '1px solid #f3f4f6' }}>
-                    <div style={{ fontWeight: 700, color: '#1f2937', marginBottom: '16px', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <i className="ph ph-git-commit" style={{ color: '#299E60', fontSize: '18px' }} /> 
-                      Agentic Query Refinement History
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', position: 'relative', paddingLeft: '20px', borderLeft: '2px solid #e2e8f0', marginLeft: '10px', minHeight: '60px' }}>
-                      
-                      {chatHistory && chatHistory.filter(msg => msg.role === 'user').map((msg, index) => (
-                        <div key={index} style={{ position: 'relative', textAlign: 'left' }}>
-                          {/* Chronological bullet marker */}
-                          <div 
-                            style={{ 
-                              position: 'absolute', 
-                              left: '-26px', 
-                              top: '4px', 
-                              width: '10px', 
-                              height: '10px', 
-                              borderRadius: '50%', 
-                              background: '#299E60',
-                              border: '2px solid #fff' 
-                            }} 
-                          />
-                          <span style={{ fontSize: '10px', color: '#9ca3af', fontWeight: 700, display: 'block', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '2px' }}>
-                            Step {index + 1}: Refine Search
-                          </span>
-                          <span style={{ fontSize: '13px', color: '#374151', fontWeight: 500 }}>
-                            {msg.text}
-                          </span>
-                        </div>
-                      ))}
-
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            )}
-
-            {/* Grid Control Header */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
               <span style={{ color: '#6b7280', fontSize: '14px' }}>
                 We found <strong style={{ color: '#1f2937' }}>{searchResults.length} items</strong> matching your search
