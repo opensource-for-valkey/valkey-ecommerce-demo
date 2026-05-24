@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  valkey:
+    image: valkey/valkey-bundle:9-alpine
+    container_name: valkey_db
+    ports:
+      - "6379:6379"
+    restart: always
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: fastapi_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - VALKEY_HOST=valkey
+      - VALKEY_PORT=6379
+    depends_on:
+      - valkey
+    restart: always

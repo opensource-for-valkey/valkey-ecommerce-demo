@@ -95,9 +95,8 @@ const HeaderTwo = ({ category }) => {
       {/* ==================== Search Box End Here ==================== */}
       {/* ==================== Mobile Menu Start Here ==================== */}
       <div
-        className={`mobile-menu scroll-sm d-lg-none d-block ${
-          menuActive && "active"
-        }`}
+        className={`mobile-menu scroll-sm d-lg-none d-block ${menuActive && "active"
+          }`}
       >
         <button
           onClick={() => {
@@ -118,17 +117,15 @@ const HeaderTwo = ({ category }) => {
             <ul className='nav-menu flex-align nav-menu--mobile'>
               <li
                 onClick={() => handleMenuClick(0)}
-                className={`on-hover-item nav-menu__item has-submenu ${
-                  activeIndex === 0 ? "d-block" : ""
-                }`}
+                className={`on-hover-item nav-menu__item has-submenu ${activeIndex === 0 ? "d-block" : ""
+                  }`}
               >
                 <Link to='#' className='nav-menu__link'>
                   Home
                 </Link>
                 <ul
-                  className={`on-hover-dropdown common-dropdown nav-submenu scroll-sm ${
-                    activeIndex === 0 ? "open" : ""
-                  }`}
+                  className={`on-hover-dropdown common-dropdown nav-submenu scroll-sm ${activeIndex === 0 ? "open" : ""
+                    }`}
                 >
                   <li className='common-dropdown__item nav-submenu__item'>
                     <Link
@@ -164,17 +161,15 @@ const HeaderTwo = ({ category }) => {
               </li>
               <li
                 onClick={() => handleMenuClick(1)}
-                className={`on-hover-item nav-menu__item has-submenu ${
-                  activeIndex === 1 ? "d-block" : ""
-                }`}
+                className={`on-hover-item nav-menu__item has-submenu ${activeIndex === 1 ? "d-block" : ""
+                  }`}
               >
                 <Link to='#' className='nav-menu__link'>
                   Shop
                 </Link>
                 <ul
-                  className={`on-hover-dropdown common-dropdown nav-submenu scroll-sm ${
-                    activeIndex === 1 ? "open" : ""
-                  }`}
+                  className={`on-hover-dropdown common-dropdown nav-submenu scroll-sm ${activeIndex === 1 ? "open" : ""
+                    }`}
                 >
                   <li className='common-dropdown__item nav-submenu__item'>
                     <Link
@@ -210,9 +205,8 @@ const HeaderTwo = ({ category }) => {
               </li>
               <li
                 onClick={() => handleMenuClick(2)}
-                className={`on-hover-item nav-menu__item has-submenu ${
-                  activeIndex === 2 ? "d-block" : ""
-                }`}
+                className={`on-hover-item nav-menu__item has-submenu ${activeIndex === 2 ? "d-block" : ""
+                  }`}
               >
                 <span className='badge-notification bg-warning-600 text-white text-sm py-2 px-8 rounded-4'>
                   New
@@ -221,9 +215,8 @@ const HeaderTwo = ({ category }) => {
                   Pages
                 </Link>
                 <ul
-                  className={`on-hover-dropdown common-dropdown nav-submenu scroll-sm ${
-                    activeIndex === 2 ? "open" : ""
-                  }`}
+                  className={`on-hover-dropdown common-dropdown nav-submenu scroll-sm ${activeIndex === 2 ? "open" : ""
+                    }`}
                 >
                   <li className='common-dropdown__item nav-submenu__item'>
                     <Link
@@ -275,9 +268,8 @@ const HeaderTwo = ({ category }) => {
               </li>
               <li
                 onClick={() => handleMenuClick(3)}
-                className={`on-hover-item nav-menu__item has-submenu ${
-                  activeIndex === 3 ? "d-block" : ""
-                }`}
+                className={`on-hover-item nav-menu__item has-submenu ${activeIndex === 3 ? "d-block" : ""
+                  }`}
               >
                 <span className='badge-notification bg-tertiary-600 text-white text-sm py-2 px-8 rounded-4'>
                   New
@@ -286,9 +278,8 @@ const HeaderTwo = ({ category }) => {
                   Vendors
                 </Link>
                 <ul
-                  className={`on-hover-dropdown common-dropdown nav-submenu scroll-sm ${
-                    activeIndex === 3 ? "open" : ""
-                  }`}
+                  className={`on-hover-dropdown common-dropdown nav-submenu scroll-sm ${activeIndex === 3 ? "open" : ""
+                    }`}
                 >
                   <li className='common-dropdown__item nav-submenu__item'>
                     <Link
@@ -330,17 +321,15 @@ const HeaderTwo = ({ category }) => {
               </li>
               <li
                 onClick={() => handleMenuClick(4)}
-                className={`on-hover-item nav-menu__item has-submenu ${
-                  activeIndex === 4 ? "d-block" : ""
-                }`}
+                className={`on-hover-item nav-menu__item has-submenu ${activeIndex === 4 ? "d-block" : ""
+                  }`}
               >
                 <Link to='#' className='nav-menu__link'>
                   Blog
                 </Link>
                 <ul
-                  className={`on-hover-dropdown common-dropdown nav-submenu scroll-sm ${
-                    activeIndex === 4 ? "open" : ""
-                  }`}
+                  className={`on-hover-dropdown common-dropdown nav-submenu scroll-sm ${activeIndex === 4 ? "open" : ""
+                    }`}
                 >
                   <li className='common-dropdown__item nav-submenu__item'>
                     <Link
@@ -696,18 +685,16 @@ const HeaderTwo = ({ category }) => {
       {/* ======================= Middle Header Two End ========================= */}
       {/* ==================== Header Two Start Here ==================== */}
       <header
-        className={`header bg-white border-bottom border-gray-100 ${
-          scroll && "fixed-header"
-        }`}
+        className={`header bg-white border-bottom border-gray-100 ${scroll && "fixed-header"
+          }`}
       >
         <div className='container container-lg'>
           <nav className='header-inner d-flex justify-content-between gap-8'>
             <div className='flex-align menu-category-wrapper'>
               {/* Category Dropdown Start */}
               <div
-                className={`category-two ${
-                  category === false ? "d-block" : "d-none"
-                } `}
+                className={`category-two ${category === false ? "d-block" : "d-none"
+                  } `}
               >
                 <button
                   onClick={handleCategoryToggle}
@@ -723,9 +710,8 @@ const HeaderTwo = ({ category }) => {
                   </span>
                 </button>
                 <div
-                  className={`responsive-dropdown cat common-dropdown d-lg-none d-block nav-submenu p-0 submenus-submenu-wrapper shadow-none border border-gray-100 ${
-                    activeCategory && "active"
-                  }`}
+                  className={`responsive-dropdown cat common-dropdown d-lg-none d-block nav-submenu p-0 submenus-submenu-wrapper shadow-none border border-gray-100 ${activeCategory && "active"
+                    }`}
                 >
                   <button
                     onClick={() => {
@@ -745,9 +731,8 @@ const HeaderTwo = ({ category }) => {
                   <ul className='scroll-sm p-0 py-8 overflow-y-auto'>
                     <li
                       onClick={() => handleCatClick(0)}
-                      className={`has-submenus-submenu ${
-                        activeIndexCat === 0 ? "active" : ""
-                      }`}
+                      className={`has-submenus-submenu ${activeIndexCat === 0 ? "active" : ""
+                        }`}
                     >
                       <Link
                         onClick={() => setActiveIndexCat(null)}
@@ -760,9 +745,8 @@ const HeaderTwo = ({ category }) => {
                         </span>
                       </Link>
                       <div
-                        className={`submenus-submenu py-16 ${
-                          activeIndexCat === 0 ? "open" : ""
-                        }`}
+                        className={`submenus-submenu py-16 ${activeIndexCat === 0 ? "open" : ""
+                          }`}
                       >
                         <h6 className='text-lg px-16 submenus-submenu__title'>
                           Cell Phone
@@ -791,9 +775,8 @@ const HeaderTwo = ({ category }) => {
                     </li>
                     <li
                       onClick={() => handleCatClick(1)}
-                      className={`has-submenus-submenu ${
-                        activeIndexCat === 1 ? "active" : ""
-                      }`}
+                      className={`has-submenus-submenu ${activeIndexCat === 1 ? "active" : ""
+                        }`}
                     >
                       <Link
                         to='#'
@@ -805,9 +788,8 @@ const HeaderTwo = ({ category }) => {
                         </span>
                       </Link>
                       <div
-                        className={`submenus-submenu py-16 ${
-                          activeIndexCat === 1 ? "open" : ""
-                        }`}
+                        className={`submenus-submenu py-16 ${activeIndexCat === 1 ? "open" : ""
+                          }`}
                       >
                         <h6 className='text-lg px-16 submenus-submenu__title'>
                           Wear
@@ -836,9 +818,8 @@ const HeaderTwo = ({ category }) => {
                     </li>
                     <li
                       onClick={() => handleCatClick(2)}
-                      className={`has-submenus-submenu ${
-                        activeIndexCat === 2 ? "active" : ""
-                      }`}
+                      className={`has-submenus-submenu ${activeIndexCat === 2 ? "active" : ""
+                        }`}
                     >
                       <Link
                         to='#'
@@ -850,9 +831,8 @@ const HeaderTwo = ({ category }) => {
                         </span>
                       </Link>
                       <div
-                        className={`submenus-submenu py-16 ${
-                          activeIndexCat === 2 ? "open" : ""
-                        }`}
+                        className={`submenus-submenu py-16 ${activeIndexCat === 2 ? "open" : ""
+                          }`}
                       >
                         <h6 className='text-lg px-16 submenus-submenu__title'>
                           Computer
@@ -881,9 +861,8 @@ const HeaderTwo = ({ category }) => {
                     </li>
                     <li
                       onClick={() => handleCatClick(3)}
-                      className={`has-submenus-submenu ${
-                        activeIndexCat === 3 ? "active" : ""
-                      }`}
+                      className={`has-submenus-submenu ${activeIndexCat === 3 ? "active" : ""
+                        }`}
                     >
                       <Link
                         to='#'
@@ -895,9 +874,8 @@ const HeaderTwo = ({ category }) => {
                         </span>
                       </Link>
                       <div
-                        className={`submenus-submenu py-16 ${
-                          activeIndexCat === 3 ? "open" : ""
-                        }`}
+                        className={`submenus-submenu py-16 ${activeIndexCat === 3 ? "open" : ""
+                          }`}
                       >
                         <h6 className='text-lg px-16 submenus-submenu__title'>
                           Headphone
@@ -926,9 +904,8 @@ const HeaderTwo = ({ category }) => {
                     </li>
                     <li
                       onClick={() => handleCatClick(4)}
-                      className={`has-submenus-submenu ${
-                        activeIndexCat === 4 ? "active" : ""
-                      }`}
+                      className={`has-submenus-submenu ${activeIndexCat === 4 ? "active" : ""
+                        }`}
                     >
                       <Link
                         to='#'
@@ -940,9 +917,8 @@ const HeaderTwo = ({ category }) => {
                         </span>
                       </Link>
                       <div
-                        className={`submenus-submenu py-16 ${
-                          activeIndexCat === 4 ? "open" : ""
-                        }`}
+                        className={`submenus-submenu py-16 ${activeIndexCat === 4 ? "open" : ""
+                          }`}
                       >
                         <h6 className='text-lg px-16 submenus-submenu__title'>
                           Smart Screen
@@ -971,9 +947,8 @@ const HeaderTwo = ({ category }) => {
                     </li>
                     <li
                       onClick={() => handleCatClick(5)}
-                      className={`has-submenus-submenu ${
-                        activeIndexCat === 5 ? "active" : ""
-                      }`}
+                      className={`has-submenus-submenu ${activeIndexCat === 5 ? "active" : ""
+                        }`}
                     >
                       <Link
                         to='#'
@@ -985,9 +960,8 @@ const HeaderTwo = ({ category }) => {
                         </span>
                       </Link>
                       <div
-                        className={`submenus-submenu py-16 ${
-                          activeIndexCat === 5 ? "open" : ""
-                        }`}
+                        className={`submenus-submenu py-16 ${activeIndexCat === 5 ? "open" : ""
+                          }`}
                       >
                         <h6 className='text-lg px-16 submenus-submenu__title'>
                           Smart Home
@@ -1016,9 +990,8 @@ const HeaderTwo = ({ category }) => {
                     </li>
                     <li
                       onClick={() => handleCatClick(6)}
-                      className={`has-submenus-submenu ${
-                        activeIndexCat === 6 ? "active" : ""
-                      }`}
+                      className={`has-submenus-submenu ${activeIndexCat === 6 ? "active" : ""
+                        }`}
                     >
                       <Link
                         to='#'
@@ -1030,9 +1003,8 @@ const HeaderTwo = ({ category }) => {
                         </span>
                       </Link>
                       <div
-                        className={`submenus-submenu py-16 ${
-                          activeIndexCat === 6 ? "open" : ""
-                        }`}
+                        className={`submenus-submenu py-16 ${activeIndexCat === 6 ? "open" : ""
+                          }`}
                       >
                         <h6 className='text-lg px-16 submenus-submenu__title'>
                           Digital Accessories
@@ -1061,9 +1033,8 @@ const HeaderTwo = ({ category }) => {
                     </li>
                     <li
                       onClick={() => handleCatClick(7)}
-                      className={`has-submenus-submenu ${
-                        activeIndexCat === 7 ? "active" : ""
-                      }`}
+                      className={`has-submenus-submenu ${activeIndexCat === 7 ? "active" : ""
+                        }`}
                     >
                       <Link
                         to='#'
@@ -1075,9 +1046,8 @@ const HeaderTwo = ({ category }) => {
                         </span>
                       </Link>
                       <div
-                        className={`submenus-submenu py-16 ${
-                          activeIndexCat === 7 ? "open" : ""
-                        }`}
+                        className={`submenus-submenu py-16 ${activeIndexCat === 7 ? "open" : ""
+                          }`}
                       >
                         <h6 className='text-lg px-16 submenus-submenu__title'>
                           {" "}
@@ -1107,9 +1077,8 @@ const HeaderTwo = ({ category }) => {
                     </li>
                     <li
                       onClick={() => handleCatClick(8)}
-                      className={`has-submenus-submenu ${
-                        activeIndexCat === 8 ? "active" : ""
-                      }`}
+                      className={`has-submenus-submenu ${activeIndexCat === 8 ? "active" : ""
+                        }`}
                     >
                       <Link
                         to='#'
@@ -1121,9 +1090,8 @@ const HeaderTwo = ({ category }) => {
                         </span>
                       </Link>
                       <div
-                        className={`submenus-submenu py-16 ${
-                          activeIndexCat === 8 ? "open" : ""
-                        }`}
+                        className={`submenus-submenu py-16 ${activeIndexCat === 8 ? "open" : ""
+                          }`}
                       >
                         <h6 className='text-lg px-16 submenus-submenu__title'>
                           Car Products
@@ -1152,9 +1120,8 @@ const HeaderTwo = ({ category }) => {
                     </li>
                     <li
                       onClick={() => handleCatClick(9)}
-                      className={`has-submenus-submenu ${
-                        activeIndexCat === 9 ? "active" : ""
-                      }`}
+                      className={`has-submenus-submenu ${activeIndexCat === 9 ? "active" : ""
+                        }`}
                     >
                       <Link
                         to='#'
@@ -1166,9 +1133,8 @@ const HeaderTwo = ({ category }) => {
                         </span>
                       </Link>
                       <div
-                        className={`submenus-submenu py-16 ${
-                          activeIndexCat === 9 ? "open" : ""
-                        }`}
+                        className={`submenus-submenu py-16 ${activeIndexCat === 9 ? "open" : ""
+                          }`}
                       >
                         <h6 className='text-lg px-16 submenus-submenu__title'>
                           Ecological Products
@@ -1197,9 +1163,8 @@ const HeaderTwo = ({ category }) => {
                     </li>
                     <li
                       onClick={() => handleCatClick(10)}
-                      className={`has-submenus-submenu ${
-                        activeIndexCat === 10 ? "active" : ""
-                      }`}
+                      className={`has-submenus-submenu ${activeIndexCat === 10 ? "active" : ""
+                        }`}
                     >
                       <Link
                         to='#'
@@ -1211,9 +1176,8 @@ const HeaderTwo = ({ category }) => {
                         </span>
                       </Link>
                       <div
-                        className={`submenus-submenu py-16 ${
-                          activeIndexCat === 10 ? "open" : ""
-                        }`}
+                        className={`submenus-submenu py-16 ${activeIndexCat === 10 ? "open" : ""
+                          }`}
                       >
                         <h6 className='text-lg px-16 submenus-submenu__title'>
                           Flat
@@ -1242,9 +1206,8 @@ const HeaderTwo = ({ category }) => {
                     </li>
                     <li
                       onClick={() => handleCatClick(11)}
-                      className={`has-submenus-submenu ${
-                        activeIndexCat === 11 ? "active" : ""
-                      }`}
+                      className={`has-submenus-submenu ${activeIndexCat === 11 ? "active" : ""
+                        }`}
                     >
                       <Link
                         to='#'
@@ -1256,9 +1219,8 @@ const HeaderTwo = ({ category }) => {
                         </span>
                       </Link>
                       <div
-                        className={`submenus-submenu py-16 ${
-                          activeIndexCat === 11 ? "open" : ""
-                        }`}
+                        className={`submenus-submenu py-16 ${activeIndexCat === 11 ? "open" : ""
+                          }`}
                       >
                         <h6 className='text-lg px-16 submenus-submenu__title'>
                           Commercial Terminal
@@ -1287,9 +1249,8 @@ const HeaderTwo = ({ category }) => {
                     </li>
                     <li
                       onClick={() => handleCatClick(12)}
-                      className={`has-submenus-submenu ${
-                        activeIndexCat === 12 ? "active" : ""
-                      }`}
+                      className={`has-submenus-submenu ${activeIndexCat === 12 ? "active" : ""
+                        }`}
                     >
                       <Link
                         to='#'
@@ -1301,9 +1262,8 @@ const HeaderTwo = ({ category }) => {
                         </span>
                       </Link>
                       <div
-                        className={`submenus-submenu py-16 ${
-                          activeIndexCat === 12 ? "open" : ""
-                        }`}
+                        className={`submenus-submenu py-16 ${activeIndexCat === 12 ? "open" : ""
+                          }`}
                       >
                         <h6 className='text-lg px-16 submenus-submenu__title'>
                           Headphone
@@ -1332,9 +1292,8 @@ const HeaderTwo = ({ category }) => {
                     </li>
                     <li
                       onClick={() => handleCatClick(13)}
-                      className={`has-submenus-submenu ${
-                        activeIndexCat === 13 ? "active" : ""
-                      }`}
+                      className={`has-submenus-submenu ${activeIndexCat === 13 ? "active" : ""
+                        }`}
                     >
                       <Link
                         to='#'
@@ -1346,9 +1305,8 @@ const HeaderTwo = ({ category }) => {
                         </span>
                       </Link>
                       <div
-                        className={`submenus-submenu py-16 ${
-                          activeIndexCat === 13 ? "open" : ""
-                        }`}
+                        className={`submenus-submenu py-16 ${activeIndexCat === 13 ? "open" : ""
+                          }`}
                       >
                         <h6 className='text-lg px-16 submenus-submenu__title'>
                           Smart Screen
@@ -1379,9 +1337,8 @@ const HeaderTwo = ({ category }) => {
                 </div>
               </div>
               <div
-                className={`category main  on-hover-item bg-main-600 text-white ${
-                  category === true ? "d-block" : "d-none"
-                }`}
+                className={`category main  on-hover-item bg-main-600 text-white ${category === true ? "d-block" : "d-none"
+                  }`}
               >
                 <button
                   type='button'
