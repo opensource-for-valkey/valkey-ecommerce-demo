@@ -1,7 +1,6 @@
 
 import Aos from "aos";
 import { useEffect } from "react";
-import ScrollToTop from "react-scroll-to-top";
 
 const Animation = () => {
   useEffect(() => {
@@ -13,11 +12,7 @@ const Animation = () => {
     });
     Aos.refresh();
   }, []);
-  return (
-    <>
-      <ScrollToTop smooth color="#E8092E" />
-    </>
-  );
+  return null;
 };
 
 export default Animation;

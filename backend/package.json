@@ -1,0 +1,27 @@
+{
+  "name": "valkey-ecommerce-backend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Basic Node.js + SQLite backend for the Valkey e-commerce demo (hackathon starter).",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "seed": "node src/seed.js",
+    "seed:embeddings": "node src/seedEmbeddings.js",
+    "reset": "rm -f data/app.db && npm run seed"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "^4.2.0",
+    "bcryptjs": "^3.0.3",
+    "better-sqlite3": "^11.3.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
+    "express": "^4.19.2",
+    "groq-sdk": "^1.2.0",
+    "iovalkey": "^0.3.3",
+    "uuid": "^11.0.3",
+    "zod": "^4.4.3"
+  }
+}

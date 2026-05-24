@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react";
 import query from "jquery";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import SearchSuggestions from "./common/SearchSuggestions";
+import { useCart } from "../store/cart";
 
 const HeaderOne = () => {
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Auth + cart wiring for the badges.
+  const cartCount = useCart((s) => s.count);
+
   const [scroll, setScroll] = useState(false);
   useEffect(() => {
     window.onscroll = () => {
@@ -51,6 +59,19 @@ const HeaderOne = () => {
     setActiveSearch(!activeSearch);
   };
 
+  const handleSearchSubmit = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    const q = searchQuery.trim();
+    navigate(q ? `/shop?q=${encodeURIComponent(q)}` : "/shop");
+    setActiveSearch(false);
+  };
+
+  const pickSuggestion = (name) => {
+    setSearchQuery(name);
+    navigate(`/shop?q=${encodeURIComponent(name)}`);
+    setActiveSearch(false);
+  };
+
   // category control support
   const [activeCategory, setActiveCategory] = useState(false);
   const handleCategoryToggle = () => {
@@ -68,7 +89,10 @@ const HeaderOne = () => {
         className={`side-overlay ${(menuActive || activeCategory) && "show"}`}
       />
       {/* ==================== Search Box Start Here ==================== */}
-      <form action='#' className={`search-box ${activeSearch && "active"}`}>
+      <form
+        onSubmit={handleSearchSubmit}
+        className={`search-box ${activeSearch && "active"}`}
+      >
         <button
           onClick={handleSearchToggle}
           type='button'
@@ -80,8 +104,11 @@ const HeaderOne = () => {
           <div className='position-relative'>
             <input
               type='text'
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className='form-control py-16 px-24 text-xl rounded-pill pe-64'
               placeholder='Search for a product or brand'
+              autoFocus={activeSearch}
             />
             <button
               type='submit'
@@ -89,6 +116,12 @@ const HeaderOne = () => {
             >
               <i className='ph ph-magnifying-glass' />
             </button>
+            {activeSearch && (
+              <SearchSuggestions
+                query={searchQuery}
+                onPick={pickSuggestion}
+              />
+            )}
           </div>
         </div>
       </form>
@@ -675,7 +708,7 @@ const HeaderOne = () => {
             {/* Logo End  */}
             {/* form location Start */}
             <form
-              action='#'
+              onSubmit={handleSearchSubmit}
               className='flex-align flex-wrap form-location-wrapper'
             >
               <div className='search-category d-flex h-48 select-border-end-0 radius-end-0 search-form d-sm-flex d-none'>
@@ -699,6 +732,8 @@ const HeaderOne = () => {
                 <div className='search-form__wrapper position-relative'>
                   <input
                     type='text'
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                     className='search-form__input common-input py-13 ps-16 pe-18 rounded-end-pill pe-44'
                     placeholder='Search for a product or brand'
                   />
@@ -708,6 +743,10 @@ const HeaderOne = () => {
                   >
                     <i className='ph ph-magnifying-glass' />
                   </button>
+                  <SearchSuggestions
+                    query={searchQuery}
+                    onPick={pickSuggestion}
+                  />
                 </div>
               </div>
               <div className='location-box bg-white flex-align gap-8 py-6 px-16 rounded-pill border border-gray-100'>
@@ -746,6 +785,7 @@ const HeaderOne = () => {
               <div className='flex-align flex-wrap gap-12'>
                 <button
                   type='button'
+                  onClick={handleSearchToggle}
                   className='search-icon flex-align d-lg-none d-flex gap-4 item-hover'
                 >
                   <span className='text-2xl text-gray-700 d-flex position-relative item-hover__text'>
@@ -763,12 +803,14 @@ const HeaderOne = () => {
                     Wishlist
                   </span>
                 </Link>
-                <Link to='/cart' className='flex-align gap-4 item-hover'>
+                <Link to='/cart' className='flex-align gap-4 item-hover' data-ai-target='header-cart'>
                   <span className='text-2xl text-gray-700 d-flex position-relative me-6 mt-6 item-hover__text'>
                     <i className='ph ph-shopping-cart-simple' />
-                    <span className='w-16 h-16 flex-center rounded-circle bg-main-600 text-white text-xs position-absolute top-n6 end-n4'>
-                      2
-                    </span>
+                    {cartCount > 0 && (
+                      <span className='w-16 h-16 flex-center rounded-circle bg-main-600 text-white text-xs position-absolute top-n6 end-n4'>
+                        {cartCount}
+                      </span>
+                    )}
                   </span>
                   <span className='text-md text-gray-500 item-hover__text d-none d-lg-flex'>
                     Cart
@@ -1483,9 +1525,11 @@ const HeaderOne = () => {
                   <Link to='/cart' className='flex-align gap-4 item-hover'>
                     <span className='text-2xl text-gray-700 d-flex position-relative me-6 mt-6 item-hover__text'>
                       <i className='ph ph-shopping-cart-simple' />
-                      <span className='w-16 h-16 flex-center rounded-circle bg-main-600 text-white text-xs position-absolute top-n6 end-n4'>
-                        2
-                      </span>
+                      {cartCount > 0 && (
+                        <span className='w-16 h-16 flex-center rounded-circle bg-main-600 text-white text-xs position-absolute top-n6 end-n4'>
+                          {cartCount}
+                        </span>
+                      )}
                     </span>
                     <span className='text-md text-gray-500 item-hover__text d-none d-lg-flex'>
                       Cart

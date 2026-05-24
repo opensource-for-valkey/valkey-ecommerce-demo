@@ -19,11 +19,23 @@ import VendorTwoPage from "./pages/VendorTwoPage";
 import VendorTwoDetailsPage from "./pages/VendorTwoDetailsPage";
 import BecomeSellerPage from "./pages/BecomeSellerPage";
 import WishlistPage from "./pages/WishlistPage";
+import { useStream } from "./store/stream";
+import ChatPanel from "./components/common/ChatPanel";
+import AICursor from "./components/common/AICursor";
+import CursorBridge from "./components/common/CursorBridge";
+
 function App() {
+  // Open the SSE channel once we know who the user is. Mounted at the root so
+  // a single connection is shared across pages and survives route changes.
+  useStream();
+
   return (
     <BrowserRouter>
       <RouteScrollToTop />
       <PhosphorIconInit />
+      <ChatPanel />
+      <AICursor />
+      <CursorBridge />
 
       <Routes>
         <Route exact path='/' element={<HomePageOne />} />

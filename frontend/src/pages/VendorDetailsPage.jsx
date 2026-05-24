@@ -1,7 +1,6 @@
 import React from "react";
 import Preloader from "../helper/Preloader";
 import ColorInit from "../helper/ColorInit";
-import ScrollToTop from "react-scroll-to-top";
 import HeaderOne from "../components/HeaderOne";
 import BreadcrumbThree from "../components/BreadcrumbThree";
 import VendorsListTwo from "../components/VendorsListTwo";
@@ -17,9 +16,6 @@ const VendorDetailsPage = () => {
 
       {/* ColorInit */}
       <ColorInit color={false} />
-
-      {/* ScrollToTop */}
-      <ScrollToTop smooth color='#299E60' />
 
       {/* HeaderOne */}
       <HeaderOne />

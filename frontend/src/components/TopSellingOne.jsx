@@ -119,7 +119,7 @@ const TopSellingOne = () => {
                                                     Sold
                                                 </span>
                                                 <img
-                                                    src="assets/images/thumbs/product-two-img7.png"
+                                                    src="https://picsum.photos/seed/product-two-img7/400/400"
                                                     alt=""
                                                     className="w-auto max-w-unset"
                                                 />
@@ -198,7 +198,7 @@ const TopSellingOne = () => {
                                                     Sale 50%{" "}
                                                 </span>
                                                 <img
-                                                    src="assets/images/thumbs/product-two-img8.png"
+                                                    src="https://picsum.photos/seed/product-two-img8/400/400"
                                                     alt=""
                                                     className="w-auto max-w-unset"
                                                 />
@@ -277,7 +277,7 @@ const TopSellingOne = () => {
                                                     New
                                                 </span>
                                                 <img
-                                                    src="assets/images/thumbs/product-two-img9.png"
+                                                    src="https://picsum.photos/seed/product-two-img9/400/400"
                                                     alt=""
                                                     className="w-auto max-w-unset"
                                                 />
@@ -356,7 +356,7 @@ const TopSellingOne = () => {
                                                     Best seller
                                                 </span>
                                                 <img
-                                                    src="assets/images/thumbs/product-two-img10.png"
+                                                    src="https://picsum.photos/seed/product-two-img10/400/400"
                                                     alt=""
                                                     className="w-auto max-w-unset"
                                                 />
@@ -435,7 +435,7 @@ const TopSellingOne = () => {
                                                     Best Seller{" "}
                                                 </span>
                                                 <img
-                                                    src="assets/images/thumbs/product-two-img8.png"
+                                                    src="https://picsum.photos/seed/product-two-img8/400/400"
                                                     alt=""
                                                     className="w-auto max-w-unset"
                                                 />

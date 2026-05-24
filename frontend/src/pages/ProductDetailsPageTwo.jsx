@@ -9,9 +9,6 @@ import ShippingOne from "../components/ShippingOne";
 import NewsletterOne from "../components/NewsletterOne";
 import FooterTwo from "../components/FooterTwo";
 import BottomFooter from "../components/BottomFooter";
-import ScrollToTop from "react-scroll-to-top";
-
-
 const ProductDetailsPageTwo = () => {
 
 
@@ -20,9 +17,6 @@ const ProductDetailsPageTwo = () => {
     <>
       {/* ColorInit */}
       <ColorInit color={true} />
-
-      {/* ScrollToTop */}
-      <ScrollToTop smooth color="#FA6400" />
 
       {/* Preloader */}
       <Preloader />

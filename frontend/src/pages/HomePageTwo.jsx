@@ -20,8 +20,6 @@ import NewsletterTwo from "../components/NewsletterTwo";
 import FooterTwo from "../components/FooterTwo";
 import BottomFooter from "../components/BottomFooter";
 import ColorInit from "../helper/ColorInit";
-import ScrollToTop from "react-scroll-to-top";
-
 const HomePageTwo = () => {
 
 
@@ -30,9 +28,6 @@ const HomePageTwo = () => {
     <>
       {/* ColorInit */}
       <ColorInit color={true} />
-
-      {/* ScrollToTop */}
-      <ScrollToTop smooth color="#FA6400" />
 
       {/* Preloader */}
       <Preloader />
