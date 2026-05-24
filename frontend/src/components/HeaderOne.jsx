@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import query from "jquery";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
 
 const HeaderOne = () => {
+  const { user, logout } = useAuth();
+  const { cart } = useCart();
+  const navigate = useNavigate();
   const [scroll, setScroll] = useState(false);
   useEffect(() => {
     window.onscroll = () => {
@@ -60,6 +65,14 @@ const HeaderOne = () => {
   const handleCatClick = (index) => {
     setActiveIndexCat(activeIndexCat === index ? null : index);
   };
+
+  const [navCategories, setNavCategories] = useState([]);
+  useEffect(() => {
+    fetch('/api/categories')
+      .then(r => r.json())
+      .then(setNavCategories)
+      .catch(console.error);
+  }, []);
 
   return (
     <>
@@ -643,19 +656,41 @@ const HeaderOne = () => {
                   </li>
                 </ul>
               </li>
-              <li className='border-right-item'>
-                <Link
-                  to='/account'
-                  className='text-white text-sm py-8 flex-align gap-6'
-                >
-                  <span className='icon text-md d-flex'>
-                    {" "}
-                    <i className='ph ph-user-circle' />{" "}
-                  </span>
-                  <span className='hover-text-decoration-underline'>
-                    My Account
-                  </span>
-                </Link>
+              <li className='border-right-item on-hover-item has-submenu'>
+                {user ? (
+                  <>
+                    <Link to='/account' className='text-white text-sm py-8 flex-align gap-6 selected-text'>
+                      <span className='icon text-md d-flex'>
+                        <i className='ph ph-user-circle' />
+                      </span>
+                      <span className='hover-text-decoration-underline'>
+                        {user.firstName} {user.lastName}
+                      </span>
+                    </Link>
+                    <ul className='on-hover-dropdown common-dropdown common-dropdown--sm max-h-200 scroll-sm px-0 py-8'>
+                      <li>
+                        <Link to='/account' className='hover-bg-gray-100 text-gray-500 text-xs py-6 px-16 flex-align gap-8 rounded-0'>
+                          <i className='ph ph-user text-sm' /> My Profile
+                        </Link>
+                      </li>
+                      <li>
+                        <button
+                          onClick={async () => { await logout(); navigate('/'); }}
+                          className='hover-bg-gray-100 text-gray-500 text-xs py-6 px-16 flex-align gap-8 rounded-0 w-100 border-0 bg-transparent text-start'
+                        >
+                          <i className='ph ph-sign-out text-sm' /> Sign Out
+                        </button>
+                      </li>
+                    </ul>
+                  </>
+                ) : (
+                  <Link to='/account' className='text-white text-sm py-8 flex-align gap-6'>
+                    <span className='icon text-md d-flex'>
+                      <i className='ph ph-user-circle' />
+                    </span>
+                    <span className='hover-text-decoration-underline'>My Account</span>
+                  </Link>
+                )}
               </li>
             </ul>
           </div>
@@ -767,7 +802,7 @@ const HeaderOne = () => {
                   <span className='text-2xl text-gray-700 d-flex position-relative me-6 mt-6 item-hover__text'>
                     <i className='ph ph-shopping-cart-simple' />
                     <span className='w-16 h-16 flex-center rounded-circle bg-main-600 text-white text-xs position-absolute top-n6 end-n4'>
-                      2
+                      {cart.itemCount || 0}
                     </span>
                   </span>
                   <span className='text-md text-gray-500 item-hover__text d-none d-lg-flex'>
@@ -829,343 +864,37 @@ const HeaderOne = () => {
                   </div>
                   {/* Logo End */}
                   <ul className='scroll-sm p-0 py-8 w-300 max-h-400 overflow-y-auto'>
-                    <li
-                      onClick={() => handleCatClick(0)}
-                      className={`has-submenus-submenu ${
-                        activeIndexCat === 0 ? "active" : ""
-                      }`}
-                    >
-                      <Link
-                        onClick={() => setActiveIndexCat(null)}
-                        to='#'
-                        className='text-gray-500 text-15 py-12 px-16 flex-align gap-8 rounded-0'
+                    {navCategories.map((cat, idx) => (
+                      <li
+                        key={cat.id}
+                        onClick={() => handleCatClick(idx)}
+                        className={`has-submenus-submenu ${activeIndexCat === idx ? "active" : ""}`}
                       >
-                        <span className='text-xl d-flex'>
-                          <i className='ph ph-carrot' />
-                        </span>
-                        <span>Vegetables &amp; Fruit</span>
-                        <span className='icon text-md d-flex ms-auto'>
-                          <i className='ph ph-caret-right' />
-                        </span>
-                      </Link>
-                      <div
-                        className={`submenus-submenu py-16 ${
-                          activeIndexCat === 0 ? "open" : ""
-                        }`}
-                      >
-                        <h6 className='text-lg px-16 submenus-submenu__title'>
-                          Vegetables &amp; Fruit
-                        </h6>
-                        <ul className='submenus-submenu__list max-h-300 overflow-y-auto scroll-sm'>
-                          <li>
-                            <Link to='/shop'>Potato &amp; Tomato 000</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'>Cucumber &amp; Capsicum</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'>Leafy Vegetables</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'>Root Vegetables</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'>Beans &amp; Okra</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'>Cabbage &amp; Cauliflower</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'>Gourd &amp; Drumstick</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'>Specialty</Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li
-                      onClick={() => handleCatClick(1)}
-                      className={`has-submenus-submenu ${
-                        activeIndexCat === 1 ? "active" : ""
-                      }`}
-                    >
-                      <Link
-                        to='#'
-                        className='text-gray-500 text-15 py-12 px-16 flex-align gap-8 rounded-0'
-                      >
-                        <span className='text-xl d-flex'>
-                          <i className='ph ph-brandy' />
-                        </span>
-                        <span>Beverages</span>
-                        <span className='icon text-md d-flex ms-auto'>
-                          <i className='ph ph-caret-right' />
-                        </span>
-                      </Link>
-                      <div
-                        className={`submenus-submenu py-16 ${
-                          activeIndexCat === 1 ? "open" : ""
-                        }`}
-                      >
-                        <h6 className='text-lg px-16 submenus-submenu__title'>
-                          Beverages
-                        </h6>
-                        <ul className='submenus-submenu__list max-h-300 overflow-y-auto scroll-sm'>
-                          <li>
-                            <Link to='/shop'>Soda &amp; Cocktail Mix </Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Sports &amp; Energy Drinks</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Non Alcoholic Drinks</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Packaged Water </Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Spring Water</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Flavoured Water </Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li
-                      onClick={() => handleCatClick(2)}
-                      className={`has-submenus-submenu ${
-                        activeIndexCat === 2 ? "active" : ""
-                      }`}
-                    >
-                      <Link
-                        to='#'
-                        className='text-gray-500 text-15 py-12 px-16 flex-align gap-8 rounded-0'
-                      >
-                        <span className='text-xl d-flex'>
-                          <i className='ph ph-brandy' />
-                        </span>
-                        <span>Meats &amp; Seafood</span>
-                        <span className='icon text-md d-flex ms-auto'>
-                          <i className='ph ph-caret-right' />
-                        </span>
-                      </Link>
-                      <div
-                        className={`submenus-submenu py-16 ${
-                          activeIndexCat === 2 ? "open" : ""
-                        }`}
-                      >
-                        <h6 className='text-lg px-16 submenus-submenu__title'>
-                          Meats &amp; Seafood
-                        </h6>
-                        <ul className='submenus-submenu__list max-h-300 overflow-y-auto scroll-sm'>
-                          <li>
-                            <Link to='/shop'> Fresh Meat </Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Frozen Meat</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Marinated Meat</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Fresh &amp; Frozen Meat</Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li
-                      onClick={() => handleCatClick(3)}
-                      className={`has-submenus-submenu ${
-                        activeIndexCat === 3 ? "active" : ""
-                      }`}
-                    >
-                      <Link
-                        to='#'
-                        className='text-gray-500 text-15 py-12 px-16 flex-align gap-8 rounded-0'
-                      >
-                        <span className='text-xl d-flex'>
-                          <i className='ph ph-brandy' />
-                        </span>
-                        <span>Breakfast &amp; Dairy</span>
-                        <span className='icon text-md d-flex ms-auto'>
-                          <i className='ph ph-caret-right' />
-                        </span>
-                      </Link>
-                      <div
-                        className={`submenus-submenu py-16 ${
-                          activeIndexCat === 3 ? "open" : ""
-                        }`}
-                      >
-                        <h6 className='text-lg px-16 submenus-submenu__title'>
-                          Breakfast &amp; Dairy
-                        </h6>
-                        <ul className='submenus-submenu__list max-h-300 overflow-y-auto scroll-sm'>
-                          <li>
-                            <Link to='/shop'> Oats &amp; Porridge</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Kids Cereal</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Muesli</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Flakes</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Granola &amp; Cereal Bars</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Instant Noodles</Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li
-                      onClick={() => handleCatClick(4)}
-                      className={`has-submenus-submenu ${
-                        activeIndexCat === 4 ? "active" : ""
-                      }`}
-                    >
-                      <Link
-                        to='#'
-                        className='text-gray-500 text-15 py-12 px-16 flex-align gap-8 rounded-0'
-                      >
-                        <span className='text-xl d-flex'>
-                          <i className='ph ph-brandy' />
-                        </span>
-                        <span>Frozen Foods</span>
-                        <span className='icon text-md d-flex ms-auto'>
-                          <i className='ph ph-caret-right' />
-                        </span>
-                      </Link>
-                      <div
-                        className={`submenus-submenu py-16 ${
-                          activeIndexCat === 4 ? "open" : ""
-                        }`}
-                      >
-                        <h6 className='text-lg px-16 submenus-submenu__title'>
-                          Frozen Foods
-                        </h6>
-                        <ul className='submenus-submenu__list max-h-300 overflow-y-auto scroll-sm'>
-                          <li>
-                            <Link to='/shop'> Instant Noodles </Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Hakka Noodles</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Cup Noodles</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Vermicelli</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Instant Pasta</Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li
-                      onClick={() => handleCatClick(5)}
-                      className={`has-submenus-submenu ${
-                        activeIndexCat === 5 ? "active" : ""
-                      }`}
-                    >
-                      <Link
-                        to='#'
-                        className='text-gray-500 text-15 py-12 px-16 flex-align gap-8 rounded-0'
-                      >
-                        <span className='text-xl d-flex'>
-                          <i className='ph ph-brandy' />
-                        </span>
-                        <span>Biscuits &amp; Snacks</span>
-                        <span className='icon text-md d-flex ms-auto'>
-                          <i className='ph ph-caret-right' />
-                        </span>
-                      </Link>
-                      <div
-                        className={`submenus-submenu py-16 ${
-                          activeIndexCat === 5 ? "open" : ""
-                        }`}
-                      >
-                        <h6 className='text-lg px-16 submenus-submenu__title'>
-                          Biscuits &amp; Snacks
-                        </h6>
-                        <ul className='submenus-submenu__list max-h-300 overflow-y-auto scroll-sm'>
-                          <li>
-                            <Link to='/shop'> Salted Biscuits </Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Marie, Health, Digestive</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'>
-                              {" "}
-                              Cream Biscuits &amp; Wafers{" "}
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Glucose &amp; Milk biscuits</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Cookies</Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li
-                      onClick={() => handleCatClick(6)}
-                      className={`has-submenus-submenu ${
-                        activeIndexCat === 6 ? "active" : ""
-                      }`}
-                    >
-                      <Link
-                        to='#'
-                        className='text-gray-500 text-15 py-12 px-16 flex-align gap-8 rounded-0'
-                      >
-                        <span className='text-xl d-flex'>
-                          <i className='ph ph-brandy' />
-                        </span>
-                        <span>Grocery &amp; Staples</span>
-                        <span className='icon text-md d-flex ms-auto'>
-                          <i className='ph ph-caret-right' />
-                        </span>
-                      </Link>
-                      <div
-                        className={`submenus-submenu py-16 ${
-                          activeIndexCat === 6 ? "open" : ""
-                        }`}
-                      >
-                        <h6 className='text-lg px-16 submenus-submenu__title'>
-                          Grocery &amp; Staples
-                        </h6>
-                        <ul className='submenus-submenu__list max-h-300 overflow-y-auto scroll-sm'>
-                          <li>
-                            <Link to='/shop'> Lemon, Ginger &amp; Garlic </Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Indian &amp; Exotic Herbs</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Orangic Vegetables</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'>Orangic Fruits </Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Orangic Dry Fruits</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Orangic Dals &amp; pulses</Link>
-                          </li>
-                          <li>
-                            <Link to='/shop'> Orangic Millet &amp; Flours</Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
+                        <Link
+                          onClick={() => setActiveIndexCat(null)}
+                          to='#'
+                          className='text-gray-500 text-15 py-12 px-16 flex-align gap-8 rounded-0'
+                        >
+                          <span className='text-xl d-flex'>
+                            <i className={`ph ph-${cat.icon || 'tag'}`} />
+                          </span>
+                          <span>{cat.name}</span>
+                          <span className='icon text-md d-flex ms-auto'>
+                            <i className='ph ph-caret-right' />
+                          </span>
+                        </Link>
+                        {cat.children?.length > 0 && (
+                          <div className={`submenus-submenu py-16 ${activeIndexCat === idx ? "open" : ""}`}>
+                            <h6 className='text-lg px-16 submenus-submenu__title'>{cat.name}</h6>
+                            <ul className='submenus-submenu__list max-h-300 overflow-y-auto scroll-sm'>
+                              {cat.children.map(child => (
+                                <li key={child.id}><Link to='/shop'>{child.name}</Link></li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>

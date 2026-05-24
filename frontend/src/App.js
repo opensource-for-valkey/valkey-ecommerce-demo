@@ -19,6 +19,7 @@ import VendorTwoPage from "./pages/VendorTwoPage";
 import VendorTwoDetailsPage from "./pages/VendorTwoDetailsPage";
 import BecomeSellerPage from "./pages/BecomeSellerPage";
 import WishlistPage from "./pages/WishlistPage";
+import SearchPage from "./pages/SearchPage";
 function App() {
   return (
     <BrowserRouter>
@@ -26,7 +27,8 @@ function App() {
       <PhosphorIconInit />
 
       <Routes>
-        <Route exact path='/' element={<HomePageOne />} />
+        <Route exact path='/' element={<HomePageTwo />} />
+        <Route exact path='/index-one' element={<HomePageOne />} />
         <Route exact path='/index-two' element={<HomePageTwo />} />
         <Route exact path='/index-three' element={<HomePageThree />} />
         <Route exact path='/shop' element={<ShopPage />} />
@@ -40,6 +42,7 @@ function App() {
           path='/product-details-two'
           element={<ProductDetailsPageTwo />}
         />
+        <Route exact path='/search' element={<SearchPage />} />
         <Route exact path='/cart' element={<CartPage />} />
         <Route exact path='/checkout' element={<CheckoutPage />} />
         <Route exact path='/become-seller' element={<BecomeSellerPage />} />
