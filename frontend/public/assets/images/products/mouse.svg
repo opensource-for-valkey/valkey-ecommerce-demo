@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Valkey ergonomic mouse">
+  <rect width="640" height="480" fill="#f7faf8"/>
+  <path d="M250 130h70c72 0 130 58 130 130v20c0 66-54 120-120 120h-90c-44 0-80-36-80-80v-70c0-66 24-120 90-120Z" fill="#ffffff" stroke="#1f2933" stroke-width="10"/>
+  <path d="M312 134v105" stroke="#1f2933" stroke-width="8" stroke-linecap="round"/>
+  <rect x="286" y="166" width="52" height="58" rx="24" fill="#d9efe5" stroke="#1f2933" stroke-width="6"/>
+  <path d="M198 315c42 28 150 36 218-12" fill="none" stroke="#2f855a" stroke-width="10" stroke-linecap="round"/>
+  <text x="320" y="430" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="32" font-weight="700" fill="#1f2933">Ergonomic Mouse</text>
+</svg>

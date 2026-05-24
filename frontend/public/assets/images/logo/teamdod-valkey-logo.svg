@@ -1,0 +1,9 @@
+<svg width="236" height="44" viewBox="0 0 236 44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+  <title id="title">Team DoD Valkey Commerce</title>
+  <rect width="236" height="44" rx="8" fill="#111827"/>
+  <path d="M24 10L38 18V34L24 26V10Z" fill="#FF6B24"/>
+  <path d="M40 18L54 10V26L40 34V18Z" fill="#22C55E"/>
+  <path d="M26 8L40 0L54 8L40 16L26 8Z" transform="translate(-2 10)" fill="#F8FAFC"/>
+  <text x="70" y="24" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">Valkey Commerce</text>
+  <text x="70" y="36" fill="#F97316" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="700" letter-spacing="1.3">TEAM DOD</text>
+</svg>

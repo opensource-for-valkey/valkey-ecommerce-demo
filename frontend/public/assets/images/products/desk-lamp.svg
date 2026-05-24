@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Valkey desk lamp">
+  <rect width="640" height="480" fill="#f7faf8"/>
+  <path d="M240 340h160" stroke="#1f2933" stroke-width="14" stroke-linecap="round"/>
+  <path d="M320 335V220l70-78" fill="none" stroke="#1f2933" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M380 126l100 48-34 70-116-56Z" fill="#ffffff" stroke="#1f2933" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M435 244c-24 34-67 56-116 56" fill="none" stroke="#2f855a" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="320" cy="220" r="18" fill="#d9efe5" stroke="#1f2933" stroke-width="6"/>
+  <text x="320" y="420" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="32" font-weight="700" fill="#1f2933">Desk Lamp</text>
+</svg>

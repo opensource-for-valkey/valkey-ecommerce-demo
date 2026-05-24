@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Valkey USB-C hub">
+  <rect width="640" height="480" fill="#f7faf8"/>
+  <rect x="165" y="150" width="310" height="190" rx="26" fill="#ffffff" stroke="#1f2933" stroke-width="10"/>
+  <g fill="#d9efe5" stroke="#1f2933" stroke-width="6">
+    <rect x="205" y="195" width="58" height="38" rx="8"/><rect x="291" y="195" width="58" height="38" rx="8"/><rect x="377" y="195" width="58" height="38" rx="8"/>
+    <rect x="226" y="270" width="188" height="34" rx="17"/>
+  </g>
+  <path d="M475 240h70c20 0 36 16 36 36v16" fill="none" stroke="#2f855a" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="544" cy="292" r="16" fill="#2f855a"/>
+  <text x="320" y="410" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="32" font-weight="700" fill="#1f2933">USB-C Hub</text>
+</svg>

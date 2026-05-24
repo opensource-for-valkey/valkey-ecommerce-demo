@@ -1,164 +1,182 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import ValkeyChallengeNav from "./ValkeyChallengeNav";
+import { useCart } from "../context/CartContext";
+import {
+  getCurrentAccount,
+  getSessionToken,
+  loginAccount,
+  logoutAccount,
+  registerAccount,
+} from "../services/valkeyApi";
 
 const Account = () => {
-    return (
-        <section className="account py-80">
-            <div className="container container-lg">
-                <form action="#">
-                    <div className="row gy-4">
-                        {/* Login Card Start */}
-                        <div className="col-xl-6 pe-xl-5">
-                            <div className="border border-gray-100 hover-border-main-600 transition-1 rounded-16 px-24 py-40 h-100">
-                                <h6 className="text-xl mb-32">Login</h6>
-                                <div className="mb-24">
-                                    <label
-                                        htmlFor="username"
-                                        className="text-neutral-900 text-lg mb-8 fw-medium"
-                                    >
-                                        Username or email address <span className="text-danger">*</span>{" "}
-                                    </label>
-                                    <input
-                                        type="text"
-                                        className="common-input"
-                                        id="username"
-                                        placeholder="First Name"
-                                    />
-                                </div>
-                                <div className="mb-24">
-                                    <label
-                                        htmlFor="password"
-                                        className="text-neutral-900 text-lg mb-8 fw-medium"
-                                    >
-                                        Password
-                                    </label>
-                                    <div className="position-relative">
-                                        <input
-                                            type="password"
-                                            className="common-input"
-                                            id="password"
-                                            placeholder="Enter Password"
-                                            defaultValue="password"
-                                        />
-                                        <span
-                                            className="toggle-password position-absolute top-50 inset-inline-end-0 me-16 translate-middle-y cursor-pointer ph ph-eye-slash"
-                                            id="#password"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="mb-24 mt-48">
-                                    <div className="flex-align gap-48 flex-wrap">
-                                        <button type="submit" className="btn btn-main py-18 px-40">
-                                            Log in
-                                        </button>
-                                        <div className="form-check common-check">
-                                            <input
-                                                className="form-check-input"
-                                                type="checkbox"
-                                                defaultValue=""
-                                                id="remember"
-                                            />
-                                            <label
-                                                className="form-check-label flex-grow-1"
-                                                htmlFor="remember"
-                                            >
-                                                Remember me
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="mt-48">
-                                    <Link
-                                        to="#"
-                                        className="text-danger-600 text-sm fw-semibold hover-text-decoration-underline"
-                                    >
-                                        Forgot your password?
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-                        {/* Login Card End */}
-                        {/* Register Card Start */}
-                        <div className="col-xl-6">
-                            <div className="border border-gray-100 hover-border-main-600 transition-1 rounded-16 px-24 py-40">
-                                <h6 className="text-xl mb-32">Register</h6>
-                                <div className="mb-24">
-                                    <label
-                                        htmlFor="usernameTwo"
-                                        className="text-neutral-900 text-lg mb-8 fw-medium"
-                                    >
-                                        Username <span className="text-danger">*</span>{" "}
-                                    </label>
-                                    <input
-                                        type="text"
-                                        className="common-input"
-                                        id="usernameTwo"
-                                        placeholder="Write a username"
-                                    />
-                                </div>
-                                <div className="mb-24">
-                                    <label
-                                        htmlFor="emailTwo"
-                                        className="text-neutral-900 text-lg mb-8 fw-medium"
-                                    >
-                                        Email address
-                                        <span className="text-danger">*</span>{" "}
-                                    </label>
-                                    <input
-                                        type="email"
-                                        className="common-input"
-                                        id="emailTwo"
-                                        placeholder="Enter Email Address"
-                                    />
-                                </div>
-                                <div className="mb-24">
-                                    <label
-                                        htmlFor="enter-password"
-                                        className="text-neutral-900 text-lg mb-8 fw-medium"
-                                    >
-                                        Password
-                                        <span className="text-danger">*</span>
-                                    </label>
-                                    <div className="position-relative">
-                                        <input
-                                            type="password"
-                                            className="common-input"
-                                            id="enter-password"
-                                            placeholder="Enter Password"
-                                            defaultValue="password"
-                                        />
-                                        <span
-                                            className="toggle-password position-absolute top-50 inset-inline-end-0 me-16 translate-middle-y cursor-pointer ph ph-eye-slash"
-                                            id="#enter-password"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="my-48">
-                                    <p className="text-gray-500">
-                                        Your personal data will be used to process your order, support
-                                        your experience throughout this website, and for other purposes
-                                        described in our
-                                        <Link to="#" className="text-main-600 text-decoration-underline">
-                                            {" "}
-                                            privacy policy
-                                        </Link>
-                                        .
-                                    </p>
-                                </div>
-                                <div className="mt-48">
-                                    <button type="submit" className="btn btn-main py-18 px-40">
-                                        Register
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        {/* Register Card End */}
-                    </div>
-                </form>
+  const { refreshCart } = useCart();
+  const [user, setUser] = useState(null);
+  const [loginForm, setLoginForm] = useState({ email: "team-dod@example.com", password: "ValkeyDemo123" });
+  const [registerForm, setRegisterForm] = useState({
+    firstName: "Team",
+    lastName: "DoD",
+    email: `team-dod-${Date.now()}@example.com`,
+    password: "ValkeyDemo123",
+    phone: "+91-4012345678",
+  });
+  const [message, setMessage] = useState("");
+  const [working, setWorking] = useState(false);
+
+  useEffect(() => {
+    if (!getSessionToken()) {
+      return;
+    }
+
+    getCurrentAccount()
+      .then((data) => setUser(data.user))
+      .catch(() => setUser(null));
+  }, []);
+
+  function updateLogin(field, value) {
+    setLoginForm((current) => ({ ...current, [field]: value }));
+  }
+
+  function updateRegister(field, value) {
+    setRegisterForm((current) => ({ ...current, [field]: value }));
+  }
+
+  async function submitLogin(event) {
+    event.preventDefault();
+    setWorking(true);
+    setMessage("");
+    try {
+      const data = await loginAccount(loginForm);
+      setUser(data.user);
+      await refreshCart();
+      setMessage("Logged in. Guest cart items were merged into this Valkey-backed account cart.");
+    } catch (error) {
+      setMessage(error.message);
+    } finally {
+      setWorking(false);
+    }
+  }
+
+  async function submitRegister(event) {
+    event.preventDefault();
+    setWorking(true);
+    setMessage("");
+    try {
+      const data = await registerAccount(registerForm);
+      setUser(data.user);
+      await refreshCart();
+      setMessage("Account created with a Valkey JSON user document and expiring session token.");
+    } catch (error) {
+      setMessage(error.message);
+    } finally {
+      setWorking(false);
+    }
+  }
+
+  async function submitLogout() {
+    setWorking(true);
+    setMessage("");
+    try {
+      await logoutAccount();
+      setUser(null);
+      await refreshCart();
+      setMessage("Logged out. The session key was deleted from Valkey.");
+    } catch (error) {
+      setMessage(error.message);
+    } finally {
+      setWorking(false);
+    }
+  }
+
+  return (
+    <>
+      <ValkeyChallengeNav />
+      <section className="account py-80">
+        <div className="container container-lg">
+          {message && <div className="alert alert-info rounded-8">{message}</div>}
+          {user && (
+            <div className="border border-gray-100 rounded-8 px-24 py-24 mb-32 flex-between gap-16 flex-wrap">
+              <div>
+                <span className="text-sm text-main-600 fw-semibold">Challenge 1</span>
+                <h6 className="mb-4">{user.firstName} {user.lastName}</h6>
+                <span className="text-gray-600">{user.email}</span>
+              </div>
+              <button className="btn bg-gray-50 text-heading py-12 px-18 rounded-8 hover-bg-main-600 hover-text-white flex-align gap-8" type="button" onClick={() => void submitLogout()} disabled={working}>
+                <i className="ph ph-sign-out" />
+                Log out
+              </button>
             </div>
-        </section>
+          )}
 
-    )
-}
+          <div className="row gy-4">
+            <div className="col-xl-6 pe-xl-5">
+              <form onSubmit={submitLogin} className="border border-gray-100 hover-border-main-600 transition-1 rounded-8 px-24 py-40 h-100">
+                <h6 className="text-xl mb-32">Login</h6>
+                <div className="mb-24">
+                  <label htmlFor="login-email" className="text-neutral-900 text-lg mb-8 fw-medium">
+                    Email address <span className="text-danger">*</span>
+                  </label>
+                  <input type="email" className="common-input" id="login-email" value={loginForm.email} onChange={(event) => updateLogin("email", event.target.value)} />
+                </div>
+                <div className="mb-24">
+                  <label htmlFor="login-password" className="text-neutral-900 text-lg mb-8 fw-medium">
+                    Password <span className="text-danger">*</span>
+                  </label>
+                  <input type="password" className="common-input" id="login-password" value={loginForm.password} onChange={(event) => updateLogin("password", event.target.value)} />
+                </div>
+                <button type="submit" className="btn btn-main py-16 px-32 flex-align gap-8" disabled={working}>
+                  <i className="ph ph-sign-in" />
+                  Log in
+                </button>
+              </form>
+            </div>
 
-export default Account
+            <div className="col-xl-6">
+              <form onSubmit={submitRegister} className="border border-gray-100 hover-border-main-600 transition-1 rounded-8 px-24 py-40">
+                <h6 className="text-xl mb-32">Register</h6>
+                <div className="row gy-3">
+                  <div className="col-sm-6">
+                    <label htmlFor="register-first-name" className="text-neutral-900 text-lg mb-8 fw-medium">
+                      First name <span className="text-danger">*</span>
+                    </label>
+                    <input className="common-input" id="register-first-name" value={registerForm.firstName} onChange={(event) => updateRegister("firstName", event.target.value)} />
+                  </div>
+                  <div className="col-sm-6">
+                    <label htmlFor="register-last-name" className="text-neutral-900 text-lg mb-8 fw-medium">
+                      Last name <span className="text-danger">*</span>
+                    </label>
+                    <input className="common-input" id="register-last-name" value={registerForm.lastName} onChange={(event) => updateRegister("lastName", event.target.value)} />
+                  </div>
+                  <div className="col-12">
+                    <label htmlFor="register-email" className="text-neutral-900 text-lg mb-8 fw-medium">
+                      Email address <span className="text-danger">*</span>
+                    </label>
+                    <input type="email" className="common-input" id="register-email" value={registerForm.email} onChange={(event) => updateRegister("email", event.target.value)} />
+                  </div>
+                  <div className="col-sm-6">
+                    <label htmlFor="register-password" className="text-neutral-900 text-lg mb-8 fw-medium">
+                      Password <span className="text-danger">*</span>
+                    </label>
+                    <input type="password" className="common-input" id="register-password" value={registerForm.password} onChange={(event) => updateRegister("password", event.target.value)} />
+                  </div>
+                  <div className="col-sm-6">
+                    <label htmlFor="register-phone" className="text-neutral-900 text-lg mb-8 fw-medium">
+                      Phone
+                    </label>
+                    <input className="common-input" id="register-phone" value={registerForm.phone} onChange={(event) => updateRegister("phone", event.target.value)} />
+                  </div>
+                </div>
+                <button type="submit" className="btn btn-main py-16 px-32 mt-32 flex-align gap-8" disabled={working}>
+                  <i className="ph ph-user-plus" />
+                  Register
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default Account;

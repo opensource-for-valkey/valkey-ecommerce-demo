@@ -1,321 +1,216 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import ValkeyChallengeNav from "./ValkeyChallengeNav";
+import { useCart } from "../context/CartContext";
+import { authorizePayment, confirmCheckout, getOrders, startCheckout } from "../services/valkeyApi";
+
+const currency = new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 });
 
 const Checkout = () => {
-    const [selectedPayment, setSelectedPayment] = useState("payment1");
+  const { items, totals, coupon, clearCart } = useCart();
+  const [shippingAddress, setShippingAddress] = useState({
+    firstName: "Team",
+    lastName: "DoD",
+    street: "Valkey Hackathon Demo",
+    city: "Hyderabad",
+    country: "IN",
+    postcode: "500081",
+    email: "team-dod@example.com",
+  });
+  const [simulateDecline, setSimulateDecline] = useState(false);
+  const [working, setWorking] = useState(false);
+  const [order, setOrder] = useState(null);
+  const [orders, setOrders] = useState([]);
+  const [message, setMessage] = useState("");
+  const [traceId, setTraceId] = useState("");
 
-    const handlePaymentChange = (event) => {
-        setSelectedPayment(event.target.id);
-    };
-    return (
-        <section className="checkout py-80">
-            <div className="container container-lg">
-                <div className="border border-gray-100 rounded-8 px-30 py-20 mb-40">
-                    <span className="">
-                        Have a coupon?{" "}
-                        <Link
-                            to="/cart"
-                            className="fw-semibold text-gray-900 hover-text-decoration-underline hover-text-main-600"
-                        >
-                            Click here to enter your code
-                        </Link>{" "}
-                    </span>
+  useEffect(() => {
+    getOrders()
+      .then((data) => setOrders(data.orders || []))
+      .catch(() => setOrders([]));
+  }, []);
+
+  const checkoutItems = useMemo(
+    () => items.map((item) => ({ productId: item.productId, quantity: item.quantity })),
+    [items]
+  );
+
+  function updateAddress(field, value) {
+    setShippingAddress((current) => ({ ...current, [field]: value }));
+  }
+
+  async function placeOrder(event) {
+    event.preventDefault();
+    if (items.length === 0) {
+      setMessage("Cart is empty. Add products before checkout.");
+      return;
+    }
+
+    setWorking(true);
+    setMessage("");
+    setTraceId("");
+    try {
+      const started = await startCheckout({ items: checkoutItems, shippingAddress });
+      setOrder(started.order);
+      setTraceId(started.traceId || "");
+
+      const paid = await authorizePayment({
+        orderId: started.order.id,
+        outcome: simulateDecline ? "decline" : "success",
+      });
+      setOrder(paid.order);
+      setTraceId(paid.traceId || started.traceId || "");
+
+      if (paid.order.status !== "payment_authorized") {
+        setMessage("Payment declined. Inventory remains reserved until cancel or reservation expiry.");
+        return;
+      }
+
+      const confirmed = await confirmCheckout({ orderId: paid.order.id });
+      setOrder(confirmed.order);
+      setTraceId(confirmed.traceId || paid.traceId || started.traceId || "");
+      setMessage("Order confirmed and inventory committed.");
+      await clearCart();
+      const orderList = await getOrders();
+      setOrders(orderList.orders || []);
+    } catch (error) {
+      setTraceId(error.traceId || "");
+      setMessage(error.message);
+    } finally {
+      setWorking(false);
+    }
+  }
+
+  return (
+    <>
+      <ValkeyChallengeNav />
+      <section className="checkout py-60">
+        <div className="container container-lg">
+          {message && <div className="alert alert-info rounded-8">{message}{traceId ? ` Trace ${traceId}` : ""}</div>}
+          <div className="row gy-4">
+            <div className="col-xl-8 col-lg-7">
+              <form onSubmit={placeOrder} className="border border-gray-100 rounded-8 p-24">
+                <div className="flex-between flex-wrap gap-16 mb-24">
+                  <div>
+                    <span className="text-sm text-main-600 fw-semibold">Challenge 10</span>
+                    <h6 className="mb-0 mt-4">Reserve, authorize, confirm</h6>
+                  </div>
+                  <label className="form-check form-switch d-flex align-items-center gap-8 mb-0">
+                    <input className="form-check-input" type="checkbox" checked={simulateDecline} onChange={(event) => setSimulateDecline(event.target.checked)} />
+                    <span className="text-sm fw-semibold">Simulate declined payment</span>
+                  </label>
                 </div>
-                <div className="row">
-                    <div className="col-xl-9 col-lg-8">
-                        <form action="#" className="pe-xl-5">
-                            <div className="row gy-3">
-                                <div className="col-sm-6 col-xs-6">
-                                    <input
-                                        type="text"
-                                        className="common-input border-gray-100"
-                                        placeholder="First Name"
-                                    />
-                                </div>
-                                <div className="col-sm-6 col-xs-6">
-                                    <input
-                                        type="text"
-                                        className="common-input border-gray-100"
-                                        placeholder="Last Name"
-                                    />
-                                </div>
-                                <div className="col-12">
-                                    <input
-                                        type="text"
-                                        className="common-input border-gray-100"
-                                        placeholder="Business Name"
-                                    />
-                                </div>
-                                <div className="col-12">
-                                    <input
-                                        type="text"
-                                        className="common-input border-gray-100"
-                                        placeholder="United states (US)"
-                                    />
-                                </div>
-                                <div className="col-12">
-                                    <input
-                                        type="text"
-                                        className="common-input border-gray-100"
-                                        placeholder="House number and street name"
-                                    />
-                                </div>
-                                <div className="col-12">
-                                    <input
-                                        type="text"
-                                        className="common-input border-gray-100"
-                                        placeholder="Apartment, suite, unit, etc. (Optional)"
-                                    />
-                                </div>
-                                <div className="col-12">
-                                    <input
-                                        type="text"
-                                        className="common-input border-gray-100"
-                                        placeholder="City"
-                                    />
-                                </div>
-                                <div className="col-12">
-                                    <input
-                                        type="text"
-                                        className="common-input border-gray-100"
-                                        placeholder="Sans Fransisco"
-                                    />
-                                </div>
-                                <div className="col-12">
-                                    <input
-                                        type="text"
-                                        className="common-input border-gray-100"
-                                        placeholder="Post Code"
-                                    />
-                                </div>
-                                <div className="col-12">
-                                    <input
-                                        type="number"
-                                        className="common-input border-gray-100"
-                                        placeholder="Phone"
-                                    />
-                                </div>
-                                <div className="col-12">
-                                    <input
-                                        type="email"
-                                        className="common-input border-gray-100"
-                                        placeholder="Email Address"
-                                    />
-                                </div>
-                                <div className="col-12">
-                                    <div className="my-40">
-                                        <h6 className="text-lg mb-24">Additional Information</h6>
-                                        <input
-                                            type="text"
-                                            className="common-input border-gray-100"
-                                            placeholder="Notes about your order, e.g. special notes for delivery."
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+
+                <div className="row gy-3">
+                  {[
+                    ["firstName", "First Name"],
+                    ["lastName", "Last Name"],
+                    ["street", "Street"],
+                    ["city", "City"],
+                    ["country", "Country"],
+                    ["postcode", "Post Code"],
+                    ["email", "Email Address"],
+                  ].map(([field, label]) => (
+                    <div className={field === "street" || field === "email" ? "col-12" : "col-sm-6"} key={field}>
+                      <label className="text-sm fw-semibold mb-8">{label}</label>
+                      <input className="common-input border-gray-100" value={shippingAddress[field]} onChange={(event) => updateAddress(field, event.target.value)} />
                     </div>
-                    <div className="col-xl-3 col-lg-4">
-                        <div className="checkout-sidebar">
-                            <div className="bg-color-three rounded-8 p-24 text-center">
-                                <span className="text-gray-900 text-xl fw-semibold">
-                                    Your Orders
-                                </span>
-                            </div>
-                            <div className="border border-gray-100 rounded-8 px-24 py-40 mt-24">
-                                <div className="mb-32 pb-32 border-bottom border-gray-100 flex-between gap-8">
-                                    <span className="text-gray-900 fw-medium text-xl font-heading-two">
-                                        Product
-                                    </span>
-                                    <span className="text-gray-900 fw-medium text-xl font-heading-two">
-                                        Subtotal
-                                    </span>
-                                </div>
-                                <div className="flex-between gap-24 mb-32">
-                                    <div className="flex-align gap-12">
-                                        <span className="text-gray-900 fw-normal text-md font-heading-two w-144">
-                                            HP Chromebook With Intel Celeron
-                                        </span>
-                                        <span className="text-gray-900 fw-normal text-md font-heading-two">
-                                            <i className="ph-bold ph-x" />
-                                        </span>
-                                        <span className="text-gray-900 fw-semibold text-md font-heading-two">
-                                            1
-                                        </span>
-                                    </div>
-                                    <span className="text-gray-900 fw-bold text-md font-heading-two">
-                                        $250.00
-                                    </span>
-                                </div>
-                                <div className="flex-between gap-24 mb-32">
-                                    <div className="flex-align gap-12">
-                                        <span className="text-gray-900 fw-normal text-md font-heading-two w-144">
-                                            HP Chromebook With Intel Celeron
-                                        </span>
-                                        <span className="text-gray-900 fw-normal text-md font-heading-two">
-                                            <i className="ph-bold ph-x" />
-                                        </span>
-                                        <span className="text-gray-900 fw-semibold text-md font-heading-two">
-                                            1
-                                        </span>
-                                    </div>
-                                    <span className="text-gray-900 fw-bold text-md font-heading-two">
-                                        $250.00
-                                    </span>
-                                </div>
-                                <div className="flex-between gap-24 mb-32">
-                                    <div className="flex-align gap-12">
-                                        <span className="text-gray-900 fw-normal text-md font-heading-two w-144">
-                                            HP Chromebook With Intel Celeron
-                                        </span>
-                                        <span className="text-gray-900 fw-normal text-md font-heading-two">
-                                            <i className="ph-bold ph-x" />
-                                        </span>
-                                        <span className="text-gray-900 fw-semibold text-md font-heading-two">
-                                            1
-                                        </span>
-                                    </div>
-                                    <span className="text-gray-900 fw-bold text-md font-heading-two">
-                                        $250.00
-                                    </span>
-                                </div>
-                                <div className="flex-between gap-24 mb-32">
-                                    <div className="flex-align gap-12">
-                                        <span className="text-gray-900 fw-normal text-md font-heading-two w-144">
-                                            HP Chromebook With Intel Celeron
-                                        </span>
-                                        <span className="text-gray-900 fw-normal text-md font-heading-two">
-                                            <i className="ph-bold ph-x" />
-                                        </span>
-                                        <span className="text-gray-900 fw-semibold text-md font-heading-two">
-                                            1
-                                        </span>
-                                    </div>
-                                    <span className="text-gray-900 fw-bold text-md font-heading-two">
-                                        $250.00
-                                    </span>
-                                </div>
-                                <div className="border-top border-gray-100 pt-30  mt-30">
-                                    <div className="mb-32 flex-between gap-8">
-                                        <span className="text-gray-900 font-heading-two text-xl fw-semibold">
-                                            Subtotal
-                                        </span>
-                                        <span className="text-gray-900 font-heading-two text-md fw-bold">
-                                            $859.00
-                                        </span>
-                                    </div>
-                                    <div className="mb-0 flex-between gap-8">
-                                        <span className="text-gray-900 font-heading-two text-xl fw-semibold">
-                                            Total
-                                        </span>
-                                        <span className="text-gray-900 font-heading-two text-md fw-bold">
-                                            $859.00
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="mt-32">
-                                <div className="payment-item">
-                                    <div className="form-check common-check common-radio py-16 mb-0">
-                                        <input
-                                            className="form-check-input"
-                                            type="radio"
-                                            name="payment"
-                                            id="payment1"
-                                            checked={selectedPayment === 'payment1'}
-                                            onChange={handlePaymentChange}
-                                        />
-                                        <label
-                                            className="form-check-label fw-semibold text-neutral-600"
-                                            htmlFor="payment1"
-                                        >
-                                            Direct Bank transfer
-                                        </label>
-                                    </div>
-                                    {selectedPayment === 'payment1' && (
-                                        <div className="payment-item__content px-16 py-24 rounded-8 bg-main-50 position-relative d-block">
-                                            <p className="text-gray-800">
-                                                Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
-                                            </p>
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="payment-item">
-                                    <div className="form-check common-check common-radio py-16 mb-0">
-                                        <input
-                                            className="form-check-input"
-                                            type="radio"
-                                            name="payment"
-                                            id="payment2"
-                                            checked={selectedPayment === 'payment2'}
-                                            onChange={handlePaymentChange}
-                                        />
-                                        <label
-                                            className="form-check-label fw-semibold text-neutral-600"
-                                            htmlFor="payment2"
-                                        >
-                                            Check payments
-                                        </label>
-                                    </div>
-                                    {selectedPayment === 'payment2' && (
-                                        <div className="payment-item__content px-16 py-24 rounded-8 bg-main-50 position-relative d-block">
-                                            <p className="text-gray-800">
-                                                Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
-                                            </p>
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="payment-item">
-                                    <div className="form-check common-check common-radio py-16 mb-0">
-                                        <input
-                                            className="form-check-input"
-                                            type="radio"
-                                            name="payment"
-                                            id="payment3"
-                                            checked={selectedPayment === 'payment3'}
-                                            onChange={handlePaymentChange}
-                                        />
-                                        <label
-                                            className="form-check-label fw-semibold text-neutral-600"
-                                            htmlFor="payment3"
-                                        >
-                                            Cash on delivery
-                                        </label>
-                                    </div>
-                                    {selectedPayment === 'payment3' && (
-                                        <div className="payment-item__content px-16 py-24 rounded-8 bg-main-50 position-relative d-block">
-                                            <p className="text-gray-800">
-                                                Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
-                                            </p>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                            <div className="mt-32 pt-32 border-top border-gray-100">
-                                <p className="text-gray-500">
-                                    Your personal data will be used to process your order, support
-                                    your experience throughout this website, and for other purposes
-                                    described in our{" "}
-                                    <Link to="#" className="text-main-600 text-decoration-underline">
-                                        {" "}
-                                        privacy policy
-                                    </Link>{" "}
-                                    .
-                                </p>
-                            </div>
-                            <Link
-                                to="/checkout"
-                                className="btn btn-main mt-40 py-18 w-100 rounded-8 mt-56"
-                            >
-                                Place Order
-                            </Link>
-                        </div>
-                    </div>
+                  ))}
                 </div>
+
+                <button className="btn btn-main mt-32 py-16 px-24 rounded-8 flex-align gap-8" type="submit" disabled={working || items.length === 0}>
+                  <i className="ph ph-credit-card" />
+                  {working ? "Processing" : "Place Order"}
+                </button>
+              </form>
+
+              {order && (
+                <div className="border border-gray-100 rounded-8 p-24 mt-24">
+                  <h6 className="mb-16">Current Order</h6>
+                  <div className="row gy-3">
+                    <div className="col-md-4">
+                      <span className="text-sm text-gray-500 d-block">Order</span>
+                      <strong className="text-sm">{order.id}</strong>
+                    </div>
+                    <div className="col-md-4">
+                      <span className="text-sm text-gray-500 d-block">Status</span>
+                      <strong>{order.status}</strong>
+                    </div>
+                    <div className="col-md-4">
+                      <span className="text-sm text-gray-500 d-block">Total</span>
+                      <strong>{currency.format(order.total)}</strong>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-        </section>
 
-    )
-}
+            <div className="col-xl-4 col-lg-5">
+              <div className="checkout-sidebar">
+                <div className="bg-color-three rounded-8 p-24 text-center">
+                  <span className="text-gray-900 text-xl fw-semibold">Your Order</span>
+                </div>
+                <div className="border border-gray-100 rounded-8 px-24 py-32 mt-24">
+                  {items.length === 0 ? (
+                    <div className="text-center py-24">
+                      <span className="d-block text-gray-600 mb-16">No cart items ready for checkout.</span>
+                      <Link to="/semantic-search" className="btn btn-main py-12 px-18 rounded-8">
+                        Add products
+                      </Link>
+                    </div>
+                  ) : (
+                    <>
+                      {items.map((item) => (
+                        <div className="flex-between gap-24 mb-20" key={item.productId}>
+                          <div className="flex-align gap-12">
+                            <span className="text-gray-900 fw-normal text-md font-heading-two w-144">{item.product.name}</span>
+                            <i className="ph-bold ph-x" />
+                            <span className="text-gray-900 fw-semibold text-md font-heading-two">{item.quantity}</span>
+                          </div>
+                          <span className="text-gray-900 fw-bold text-md font-heading-two">{currency.format(item.product.price.amount * item.quantity)}</span>
+                        </div>
+                      ))}
+                      <div className="border-top border-gray-100 pt-24 mt-24">
+                        <div className="mb-20 flex-between gap-8">
+                          <span className="text-gray-900 font-heading-two text-xl fw-semibold">Subtotal</span>
+                          <span className="text-gray-900 font-heading-two text-md fw-bold">{currency.format(totals.subtotal)}</span>
+                        </div>
+                          <div className="mb-20 flex-between gap-8">
+                            <span className="text-gray-900 font-heading-two text-xl fw-semibold">Discount</span>
+                            <span className="text-gray-900 font-heading-two text-md fw-bold">{currency.format(totals.discount || 0)}</span>
+                          </div>
+                          {coupon && (
+                            <div className="mb-20 flex-between gap-8">
+                              <span className="text-gray-900 font-heading-two text-md fw-semibold">Coupon</span>
+                              <span className="text-main-600 font-heading-two text-md fw-bold">{coupon.code}</span>
+                            </div>
+                          )}
+                          <div className="mb-0 flex-between gap-8">
+                            <span className="text-gray-900 font-heading-two text-xl fw-semibold">Total</span>
+                            <span className="text-gray-900 font-heading-two text-md fw-bold">{currency.format(totals.total)}</span>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
 
-export default Checkout
+                <div className="border border-gray-100 rounded-8 px-24 py-32 mt-24">
+                  <h6 className="mb-16">Recent Orders</h6>
+                  {orders.length === 0 && <span className="text-gray-500">No orders for this browser user yet.</span>}
+                  {orders.slice(0, 4).map((existingOrder) => (
+                    <div className="border-bottom border-gray-100 py-12" key={existingOrder.id}>
+                      <div className="text-sm fw-semibold text-heading">{existingOrder.status}</div>
+                      <div className="text-xs text-gray-600">{existingOrder.id}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default Checkout;
