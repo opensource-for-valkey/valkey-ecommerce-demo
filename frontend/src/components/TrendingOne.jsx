@@ -148,7 +148,7 @@ const TrendingOne = () => {
                                                 Best Seller{" "}
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img1.png"
+                                                src="https://picsum.photos/seed/product-two-img1/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -217,7 +217,7 @@ const TrendingOne = () => {
                                                 New
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img2.png"
+                                                src="https://picsum.photos/seed/product-two-img2/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -286,7 +286,7 @@ const TrendingOne = () => {
                                                 Sale 50%
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img3.png"
+                                                src="https://picsum.photos/seed/product-two-img3/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -355,7 +355,7 @@ const TrendingOne = () => {
                                                 Sold
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img4.png"
+                                                src="https://picsum.photos/seed/product-two-img4/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -424,7 +424,7 @@ const TrendingOne = () => {
                                                 Best Seller{" "}
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img5.png"
+                                                src="https://picsum.photos/seed/product-two-img5/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -493,7 +493,7 @@ const TrendingOne = () => {
                                                 New
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img6.png"
+                                                src="https://picsum.photos/seed/product-two-img6/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -572,7 +572,7 @@ const TrendingOne = () => {
                                                 Best Seller{" "}
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img1.png"
+                                                src="https://picsum.photos/seed/product-two-img1/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -641,7 +641,7 @@ const TrendingOne = () => {
                                                 New
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img2.png"
+                                                src="https://picsum.photos/seed/product-two-img2/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -710,7 +710,7 @@ const TrendingOne = () => {
                                                 Sale 50%
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img3.png"
+                                                src="https://picsum.photos/seed/product-two-img3/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -779,7 +779,7 @@ const TrendingOne = () => {
                                                 Sold
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img4.png"
+                                                src="https://picsum.photos/seed/product-two-img4/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -848,7 +848,7 @@ const TrendingOne = () => {
                                                 Best Seller{" "}
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img5.png"
+                                                src="https://picsum.photos/seed/product-two-img5/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -917,7 +917,7 @@ const TrendingOne = () => {
                                                 New
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img6.png"
+                                                src="https://picsum.photos/seed/product-two-img6/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -996,7 +996,7 @@ const TrendingOne = () => {
                                                 Best Seller{" "}
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img1.png"
+                                                src="https://picsum.photos/seed/product-two-img1/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -1065,7 +1065,7 @@ const TrendingOne = () => {
                                                 New
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img2.png"
+                                                src="https://picsum.photos/seed/product-two-img2/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -1134,7 +1134,7 @@ const TrendingOne = () => {
                                                 Sale 50%
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img3.png"
+                                                src="https://picsum.photos/seed/product-two-img3/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -1203,7 +1203,7 @@ const TrendingOne = () => {
                                                 Sold
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img4.png"
+                                                src="https://picsum.photos/seed/product-two-img4/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -1272,7 +1272,7 @@ const TrendingOne = () => {
                                                 Best Seller{" "}
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img5.png"
+                                                src="https://picsum.photos/seed/product-two-img5/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -1341,7 +1341,7 @@ const TrendingOne = () => {
                                                 New
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img6.png"
+                                                src="https://picsum.photos/seed/product-two-img6/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -1420,7 +1420,7 @@ const TrendingOne = () => {
                                                 Best Seller{" "}
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img1.png"
+                                                src="https://picsum.photos/seed/product-two-img1/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -1489,7 +1489,7 @@ const TrendingOne = () => {
                                                 New
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img2.png"
+                                                src="https://picsum.photos/seed/product-two-img2/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -1558,7 +1558,7 @@ const TrendingOne = () => {
                                                 Sale 50%
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img3.png"
+                                                src="https://picsum.photos/seed/product-two-img3/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -1627,7 +1627,7 @@ const TrendingOne = () => {
                                                 Sold
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img4.png"
+                                                src="https://picsum.photos/seed/product-two-img4/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -1696,7 +1696,7 @@ const TrendingOne = () => {
                                                 Best Seller{" "}
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img5.png"
+                                                src="https://picsum.photos/seed/product-two-img5/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -1765,7 +1765,7 @@ const TrendingOne = () => {
                                                 New
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img6.png"
+                                                src="https://picsum.photos/seed/product-two-img6/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -1844,7 +1844,7 @@ const TrendingOne = () => {
                                                 Best Seller{" "}
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img1.png"
+                                                src="https://picsum.photos/seed/product-two-img1/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -1913,7 +1913,7 @@ const TrendingOne = () => {
                                                 New
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img2.png"
+                                                src="https://picsum.photos/seed/product-two-img2/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -1982,7 +1982,7 @@ const TrendingOne = () => {
                                                 Sale 50%
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img3.png"
+                                                src="https://picsum.photos/seed/product-two-img3/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -2051,7 +2051,7 @@ const TrendingOne = () => {
                                                 Sold
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img4.png"
+                                                src="https://picsum.photos/seed/product-two-img4/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -2120,7 +2120,7 @@ const TrendingOne = () => {
                                                 Best Seller{" "}
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img5.png"
+                                                src="https://picsum.photos/seed/product-two-img5/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -2189,7 +2189,7 @@ const TrendingOne = () => {
                                                 New
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img6.png"
+                                                src="https://picsum.photos/seed/product-two-img6/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -2268,7 +2268,7 @@ const TrendingOne = () => {
                                                 Best Seller{" "}
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img1.png"
+                                                src="https://picsum.photos/seed/product-two-img1/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -2337,7 +2337,7 @@ const TrendingOne = () => {
                                                 New
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img2.png"
+                                                src="https://picsum.photos/seed/product-two-img2/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -2406,7 +2406,7 @@ const TrendingOne = () => {
                                                 Sale 50%
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img3.png"
+                                                src="https://picsum.photos/seed/product-two-img3/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -2475,7 +2475,7 @@ const TrendingOne = () => {
                                                 Sold
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img4.png"
+                                                src="https://picsum.photos/seed/product-two-img4/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -2544,7 +2544,7 @@ const TrendingOne = () => {
                                                 Best Seller{" "}
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img5.png"
+                                                src="https://picsum.photos/seed/product-two-img5/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -2613,7 +2613,7 @@ const TrendingOne = () => {
                                                 New
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img6.png"
+                                                src="https://picsum.photos/seed/product-two-img6/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -2692,7 +2692,7 @@ const TrendingOne = () => {
                                                 Best Seller{" "}
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img1.png"
+                                                src="https://picsum.photos/seed/product-two-img1/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -2761,7 +2761,7 @@ const TrendingOne = () => {
                                                 New
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img2.png"
+                                                src="https://picsum.photos/seed/product-two-img2/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -2830,7 +2830,7 @@ const TrendingOne = () => {
                                                 Sale 50%
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img3.png"
+                                                src="https://picsum.photos/seed/product-two-img3/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -2899,7 +2899,7 @@ const TrendingOne = () => {
                                                 Sold
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img4.png"
+                                                src="https://picsum.photos/seed/product-two-img4/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -2968,7 +2968,7 @@ const TrendingOne = () => {
                                                 Best Seller{" "}
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img5.png"
+                                                src="https://picsum.photos/seed/product-two-img5/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />
@@ -3037,7 +3037,7 @@ const TrendingOne = () => {
                                                 New
                                             </span>
                                             <img
-                                                src="assets/images/thumbs/product-two-img6.png"
+                                                src="https://picsum.photos/seed/product-two-img6/400/400"
                                                 alt=""
                                                 className="w-auto max-w-unset"
                                             />

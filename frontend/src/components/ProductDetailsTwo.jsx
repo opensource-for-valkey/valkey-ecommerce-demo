@@ -14,11 +14,11 @@ const ProductDetailsTwo = () => {
         return () => clearInterval(interval);
     }, []);
     const productImages = [
-        "assets/images/thumbs/product-details-two-thumb1.png",
-        "assets/images/thumbs/product-details-two-thumb2.png",
-        "assets/images/thumbs/product-details-two-thumb3.png",
-        "assets/images/thumbs/product-details-two-thumb1.png",
-        "assets/images/thumbs/product-details-two-thumb2.png",
+        "https://picsum.photos/seed/product-details-two-thumb1/400/400",
+        "https://picsum.photos/seed/product-details-two-thumb2/400/400",
+        "https://picsum.photos/seed/product-details-two-thumb3/400/400",
+        "https://picsum.photos/seed/product-details-two-thumb1/400/400",
+        "https://picsum.photos/seed/product-details-two-thumb2/400/400",
     ];
 
 

@@ -45,7 +45,7 @@ const WishListSection = () => {
                             className='table-product__thumb border border-gray-100 rounded-8 flex-center '
                           >
                             <img
-                              src='assets/images/thumbs/product-two-img1.png'
+                              src='https://picsum.photos/seed/product-two-img1/400/400'
                               alt=''
                             />
                           </Link>
@@ -128,7 +128,7 @@ const WishListSection = () => {
                             className='table-product__thumb border border-gray-100 rounded-8 flex-center '
                           >
                             <img
-                              src='assets/images/thumbs/product-two-img3.png'
+                              src='https://picsum.photos/seed/product-two-img3/400/400'
                               alt=''
                             />
                           </Link>
@@ -211,7 +211,7 @@ const WishListSection = () => {
                             className='table-product__thumb border border-gray-100 rounded-8 flex-center '
                           >
                             <img
-                              src='assets/images/thumbs/product-two-img14.png'
+                              src='https://picsum.photos/seed/product-two-img14/400/400'
                               alt=''
                             />
                           </Link>
@@ -294,7 +294,7 @@ const WishListSection = () => {
                             className='table-product__thumb border border-gray-100 rounded-8 flex-center '
                           >
                             <img
-                              src='assets/images/thumbs/product-two-img2.png'
+                              src='https://picsum.photos/seed/product-two-img2/400/400'
                               alt=''
                             />
                           </Link>

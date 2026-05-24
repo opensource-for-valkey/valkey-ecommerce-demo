@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import query from "jquery";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import SearchSuggestions from "./common/SearchSuggestions";
+import { useCart } from "../store/cart";
 const HeaderTwo = ({ category }) => {
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+  const cartCount = useCart((s) => s.count);
   const [scroll, setScroll] = useState(false);
   useEffect(() => {
     window.onscroll = () => {
@@ -50,6 +55,19 @@ const HeaderTwo = ({ category }) => {
     setActiveSearch(!activeSearch);
   };
 
+  const handleSearchSubmit = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    const q = searchQuery.trim();
+    navigate(q ? `/shop?q=${encodeURIComponent(q)}` : "/shop");
+    setActiveSearch(false);
+  };
+
+  const pickSuggestion = (name) => {
+    setSearchQuery(name);
+    navigate(`/shop?q=${encodeURIComponent(name)}`);
+    setActiveSearch(false);
+  };
+
   // category control support
   const [activeCategory, setActiveCategory] = useState(false);
   const handleCategoryToggle = () => {
@@ -68,7 +86,10 @@ const HeaderTwo = ({ category }) => {
       />
       {/* ==================== Search Box Start Here ==================== */}
 
-      <form action='#' className={`search-box ${activeSearch && "active"}`}>
+      <form
+        onSubmit={handleSearchSubmit}
+        className={`search-box ${activeSearch && "active"}`}
+      >
         <button
           onClick={handleSearchToggle}
           type='button'
@@ -80,15 +101,25 @@ const HeaderTwo = ({ category }) => {
           <div className='position-relative'>
             <input
               type='text'
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className='form-control py-16 px-24 text-xl rounded-pill pe-64'
               placeholder='Search for a product or brand'
+              autoFocus={activeSearch}
             />
             <button
               type='submit'
-              className='w-48 h-48 bg-main-600 rounded-circle flex-center text-xl text-white position-absolute top-50 translate-middle-y inset-inline-end-0 me-8'
+              className='w-48 h-48 bg-main-two-600 rounded-circle flex-center text-xl text-white position-absolute top-50 translate-middle-y inset-inline-end-0 me-8'
             >
               <i className='ph ph-magnifying-glass' />
             </button>
+            {activeSearch && (
+              <SearchSuggestions
+                query={searchQuery}
+                onPick={pickSuggestion}
+                theme='two'
+              />
+            )}
           </div>
         </div>
       </form>
@@ -585,7 +616,7 @@ const HeaderTwo = ({ category }) => {
                 {/* Dropdown Select End */}
               </div>
               <form
-                action='#'
+                onSubmit={handleSearchSubmit}
                 className='flex-align flex-wrap form-location-wrapper'
               >
                 <div className='search-category style-two d-flex h-48 search-form d-sm-flex d-none'>
@@ -609,8 +640,15 @@ const HeaderTwo = ({ category }) => {
                   <div className='search-form__wrapper position-relative'>
                     <input
                       type='text'
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
                       className='search-form__input common-input py-13 ps-16 pe-18 rounded-0 border-0'
                       placeholder='Search for a product or brand'
+                    />
+                    <SearchSuggestions
+                      query={searchQuery}
+                      onPick={pickSuggestion}
+                      theme='two'
                     />
                   </div>
                   <button
@@ -628,6 +666,7 @@ const HeaderTwo = ({ category }) => {
               <div className='header-two-activities flex-align flex-wrap gap-32'>
                 <button
                   type='button'
+                  onClick={handleSearchToggle}
                   className='flex-align search-icon d-lg-none d-flex gap-4 item-hover-two'
                 >
                   <span className='text-2xl text-white d-flex position-relative item-hover__text'>
@@ -676,12 +715,15 @@ const HeaderTwo = ({ category }) => {
                 <Link
                   to='/cart'
                   className='flex-align flex-column gap-8 item-hover-two'
+                  data-ai-target='header-cart'
                 >
                   <span className='text-2xl text-white d-flex position-relative me-6 mt-6 item-hover__text'>
                     <i className='ph ph-shopping-cart-simple' />
-                    <span className='w-16 h-16 flex-center rounded-circle bg-main-two-600 text-white text-xs position-absolute top-n6 end-n4'>
-                      2
-                    </span>
+                    {cartCount > 0 && (
+                      <span className='w-16 h-16 flex-center rounded-circle bg-main-two-600 text-white text-xs position-absolute top-n6 end-n4'>
+                        {cartCount}
+                      </span>
+                    )}
                   </span>
                   <span className='text-md text-white item-hover__text d-none d-lg-flex'>
                     Cart
@@ -2211,9 +2253,11 @@ const HeaderTwo = ({ category }) => {
                   >
                     <span className='text-2xl text-white d-flex position-relative me-6 mt-6 item-hover__text'>
                       <i className='ph ph-shopping-cart-simple' />
-                      <span className='w-16 h-16 flex-center rounded-circle bg-main-two-600 text-white text-xs position-absolute top-n6 end-n4'>
-                        2
-                      </span>
+                      {cartCount > 0 && (
+                        <span className='w-16 h-16 flex-center rounded-circle bg-main-two-600 text-white text-xs position-absolute top-n6 end-n4'>
+                          {cartCount}
+                        </span>
+                      )}
                     </span>
                     <span className='text-md text-white item-hover__text d-none d-lg-flex'>
                       Cart

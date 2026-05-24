@@ -7,7 +7,6 @@ import FooterTwo from "../components/FooterTwo";
 import BottomFooter from "../components/BottomFooter";
 import ShippingOne from "../components/ShippingOne";
 import Account from "../components/Account";
-import ScrollToTop from "react-scroll-to-top";
 import ColorInit from "../helper/ColorInit";
 
 
@@ -19,9 +18,6 @@ const AccountPage = () => {
     <>
       {/* ColorInit */}
       <ColorInit color={true} />
-
-      {/* ScrollToTop */}
-      <ScrollToTop smooth color="#FA6400" />
 
       {/* Preloader */}
       <Preloader />

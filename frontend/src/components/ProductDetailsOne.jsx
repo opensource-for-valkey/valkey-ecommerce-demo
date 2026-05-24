@@ -1,9 +1,31 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useEffect, useMemo, useState } from 'react'
+import { Link, useSearchParams } from 'react-router-dom';
 import Slider from 'react-slick';
 import { getCountdown } from '../helper/Countdown';
+import api from '../api/client';
+import useFetch from '../api/useFetch';
+import { formatPrice, productThumbnail } from '../api/format';
 
 const ProductDetailsOne = () => {
+    const [searchParams] = useSearchParams();
+    const productId = searchParams.get('id');
+
+    const { data: fetchedProduct, loading: productLoading, error: productError } = useFetch(
+        (opts) => (productId ? api.getProduct(productId, opts) : Promise.resolve(null)),
+        [productId]
+    );
+
+    // If no ?id= is provided, fall back to the most recently created product
+    // so deep-linking from older parts of the app keeps working.
+    const { data: fallbackList } = useFetch(
+        (opts) =>
+            !productId
+                ? api.listProducts({ limit: 1, sort: 'newest' }, opts)
+                : Promise.resolve(null),
+        [productId]
+    );
+    const product = fetchedProduct || fallbackList?.results?.[0] || null;
+
     const [timeLeft, setTimeLeft] = useState(getCountdown());
 
     useEffect(() => {
@@ -13,12 +35,18 @@ const ProductDetailsOne = () => {
 
         return () => clearInterval(interval);
     }, []);
-    const productImages = [
-        "assets/images/thumbs/product-details-thumb1.png",
-        "assets/images/thumbs/product-details-thumb2.png",
-        "assets/images/thumbs/product-details-thumb3.png",
-        "assets/images/thumbs/product-details-thumb2.png",
-    ];
+
+    // Build a 4-image thumb list. Real products usually only have one image, so
+    // we duplicate the primary thumbnail to keep the existing slider layout.
+    const productImages = useMemo(() => {
+        const primary = product ? productThumbnail(product, 1) : 'https://picsum.photos/seed/product-details-thumb1/400/400';
+        return [
+            primary,
+            'https://picsum.photos/seed/product-details-thumb2/400/400',
+            'https://picsum.photos/seed/product-details-thumb3/400/400',
+            'https://picsum.photos/seed/product-details-thumb2/400/400',
+        ];
+    }, [product]);
 
     // increment & decrement
     const [quantity, setQuantity] = useState(1);
@@ -28,6 +56,10 @@ const ProductDetailsOne = () => {
 
     const [mainImage, setMainImage] = useState(productImages[0]);
 
+    useEffect(() => {
+        setMainImage(productImages[0]);
+    }, [productImages]);
+
     const settingsThumbs = {
         dots: false,
         infinite: true,
@@ -36,6 +68,35 @@ const ProductDetailsOne = () => {
         slidesToScroll: 1,
         focusOnSelect: true,
     };
+
+    if (productError) {
+        return (
+            <section className="product-details py-80">
+                <div className="container container-lg text-center text-danger-600">
+                    Couldn't load product. {productError.message}
+                </div>
+            </section>
+        );
+    }
+
+    if (productLoading || !product) {
+        return (
+            <section className="product-details py-80">
+                <div className="container container-lg text-center text-gray-500">
+                    Loading product…
+                </div>
+            </section>
+        );
+    }
+
+    const inventoryAvailable = Math.max(
+        0,
+        (product.inventory?.quantity ?? 0) - (product.inventory?.reserved ?? 0)
+    );
+    const inventoryPct = Math.min(
+        100,
+        Math.round(((product.inventory?.reserved ?? 0) / Math.max(1, product.inventory?.quantity ?? 1)) * 100)
+    );
     return (
         <section className="product-details py-80">
             <div className="container container-lg">
@@ -69,7 +130,7 @@ const ProductDetailsOne = () => {
                             </div>
                             <div className="col-xl-6">
                                 <div className="product-details__content">
-                                    <h5 className="mb-12">Lay's Potato Chips Onion Flavored</h5>
+                                    <h5 className="mb-12">{product.name}</h5>
                                     <div className="flex-align flex-wrap gap-12">
                                         <div className="flex-align gap-12 flex-wrap">
                                             <div className="flex-align gap-8">
@@ -90,28 +151,30 @@ const ProductDetailsOne = () => {
                                                 </span>
                                             </div>
                                             <span className="text-sm fw-medium text-neutral-600">
-                                                4.7 Star Rating
+                                                {(product.ratings?.average ?? 0).toFixed(1)} Star Rating
                                             </span>
                                             <span className="text-sm fw-medium text-gray-500">
-                                                (21,671)
+                                                ({(product.ratings?.count ?? 0).toLocaleString()})
                                             </span>
                                         </div>
                                         <span className="text-sm fw-medium text-gray-500">|</span>
                                         <span className="text-gray-900">
                                             {" "}
-                                            <span className="text-gray-400">SKU:</span>EB4DRP{" "}
+                                            <span className="text-gray-400">SKU:</span>{product.sku}{" "}
                                         </span>
                                     </div>
                                     <span className="mt-32 pt-32 text-gray-700 border-top border-gray-100 d-block" />
                                     <p className="text-gray-700">
-                                        Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus
-                                        malesuada tincidunt. Class aptent taciti sociosqu ad litora
-                                        torquent
+                                        {product.description}
                                     </p>
                                     <div className="mt-32 flex-align flex-wrap gap-32">
                                         <div className="flex-align gap-8">
-                                            <h4 className="mb-0">$25.00</h4>
-                                            <span className="text-md text-gray-500">$38.00</span>
+                                            <h4 className="mb-0">{formatPrice(product.price?.amount, product.price?.currency)}</h4>
+                                            {product.price?.compareAt && (
+                                                <span className="text-md text-gray-500 text-decoration-line-through">
+                                                    {formatPrice(product.price.compareAt, product.price.currency)}
+                                                </span>
+                                            )}
                                         </div>
                                         <Link to="#" className="btn btn-main rounded-pill">
                                             Order on What'sApp
@@ -155,17 +218,17 @@ const ProductDetailsOne = () => {
                                             className="progress w-100 bg-gray-100 rounded-pill h-8"
                                             role="progressbar"
                                             aria-label="Basic example"
-                                            aria-valuenow={32}
+                                            aria-valuenow={inventoryPct}
                                             aria-valuemin={0}
                                             aria-valuemax={100}
                                         >
                                             <div
                                                 className="progress-bar bg-main-two-600 rounded-pill"
-                                                style={{ width: "32%" }}
+                                                style={{ width: `${inventoryPct}%` }}
                                             />
                                         </div>
                                         <span className="text-sm text-gray-700 mt-8">
-                                            Available only:45
+                                            Available only: {inventoryAvailable}
                                         </span>
                                     </div>
                                     <span className="text-gray-900 d-block mb-8">Quantity:</span>

@@ -462,7 +462,7 @@ const VendorsListTwo = () => {
                     to='/product-details'
                     className='product-card__thumb flex-center'
                   >
-                    <img src='assets/images/thumbs/product-img7.png' alt='' />
+                    <img src='https://picsum.photos/seed/product-img7/400/400' alt='' />
                   </Link>
                   <div className='product-card__content p-sm-2 w-100'>
                     <h6 className='title text-lg fw-semibold mt-12 mb-8'>
@@ -518,7 +518,7 @@ const VendorsListTwo = () => {
                     to='/product-details'
                     className='product-card__thumb flex-center'
                   >
-                    <img src='assets/images/thumbs/product-img8.png' alt='' />
+                    <img src='https://picsum.photos/seed/product-img8/400/400' alt='' />
                   </Link>
                   <div className='product-card__content p-sm-2 w-100'>
                     <h6 className='title text-lg fw-semibold mt-12 mb-8'>
@@ -574,7 +574,7 @@ const VendorsListTwo = () => {
                     to='/product-details'
                     className='product-card__thumb flex-center'
                   >
-                    <img src='assets/images/thumbs/product-img9.png' alt='' />
+                    <img src='https://picsum.photos/seed/product-img9/400/400' alt='' />
                   </Link>
                   <div className='product-card__content p-sm-2 w-100'>
                     <h6 className='title text-lg fw-semibold mt-12 mb-8'>
@@ -630,7 +630,7 @@ const VendorsListTwo = () => {
                     to='/product-details'
                     className='product-card__thumb flex-center'
                   >
-                    <img src='assets/images/thumbs/product-img10.png' alt='' />
+                    <img src='https://picsum.photos/seed/product-img10/400/400' alt='' />
                   </Link>
                   <div className='product-card__content p-sm-2 w-100'>
                     <h6 className='title text-lg fw-semibold mt-12 mb-8'>
@@ -683,7 +683,7 @@ const VendorsListTwo = () => {
                     to='/product-details'
                     className='product-card__thumb flex-center'
                   >
-                    <img src='assets/images/thumbs/product-img11.png' alt='' />
+                    <img src='https://picsum.photos/seed/product-img11/400/400' alt='' />
                   </Link>
                   <div className='product-card__content p-sm-2 w-100'>
                     <h6 className='title text-lg fw-semibold mt-12 mb-8'>
@@ -736,7 +736,7 @@ const VendorsListTwo = () => {
                     to='/product-details'
                     className='product-card__thumb flex-center'
                   >
-                    <img src='assets/images/thumbs/product-img13.png' alt='' />
+                    <img src='https://picsum.photos/seed/product-img13/400/400' alt='' />
                   </Link>
                   <div className='product-card__content p-sm-2 w-100'>
                     <h6 className='title text-lg fw-semibold mt-12 mb-8'>
@@ -792,7 +792,7 @@ const VendorsListTwo = () => {
                     to='/product-details'
                     className='product-card__thumb flex-center'
                   >
-                    <img src='assets/images/thumbs/product-img14.png' alt='' />
+                    <img src='https://picsum.photos/seed/product-img14/400/400' alt='' />
                   </Link>
                   <div className='product-card__content p-sm-2 w-100'>
                     <h6 className='title text-lg fw-semibold mt-12 mb-8'>
@@ -848,7 +848,7 @@ const VendorsListTwo = () => {
                     to='/product-details'
                     className='product-card__thumb flex-center'
                   >
-                    <img src='assets/images/thumbs/product-img15.png' alt='' />
+                    <img src='https://picsum.photos/seed/product-img15/400/400' alt='' />
                   </Link>
                   <div className='product-card__content p-sm-2 w-100'>
                     <h6 className='title text-lg fw-semibold mt-12 mb-8'>
@@ -904,7 +904,7 @@ const VendorsListTwo = () => {
                     to='/product-details'
                     className='product-card__thumb flex-center'
                   >
-                    <img src='assets/images/thumbs/product-img16.png' alt='' />
+                    <img src='https://picsum.photos/seed/product-img16/400/400' alt='' />
                   </Link>
                   <div className='product-card__content p-sm-2 w-100'>
                     <h6 className='title text-lg fw-semibold mt-12 mb-8'>
@@ -960,7 +960,7 @@ const VendorsListTwo = () => {
                     to='/product-details'
                     className='product-card__thumb flex-center'
                   >
-                    <img src='assets/images/thumbs/product-img17.png' alt='' />
+                    <img src='https://picsum.photos/seed/product-img17/400/400' alt='' />
                   </Link>
                   <div className='product-card__content p-sm-2 w-100'>
                     <h6 className='title text-lg fw-semibold mt-12 mb-8'>
@@ -1013,7 +1013,7 @@ const VendorsListTwo = () => {
                     to='/product-details'
                     className='product-card__thumb flex-center'
                   >
-                    <img src='assets/images/thumbs/product-img7.png' alt='' />
+                    <img src='https://picsum.photos/seed/product-img7/400/400' alt='' />
                   </Link>
                   <div className='product-card__content p-sm-2 w-100'>
                     <h6 className='title text-lg fw-semibold mt-12 mb-8'>
@@ -1069,7 +1069,7 @@ const VendorsListTwo = () => {
                     to='/product-details'
                     className='product-card__thumb flex-center'
                   >
-                    <img src='assets/images/thumbs/product-img8.png' alt='' />
+                    <img src='https://picsum.photos/seed/product-img8/400/400' alt='' />
                   </Link>
                   <div className='product-card__content p-sm-2 w-100'>
                     <h6 className='title text-lg fw-semibold mt-12 mb-8'>
@@ -1125,7 +1125,7 @@ const VendorsListTwo = () => {
                     to='/product-details'
                     className='product-card__thumb flex-center'
                   >
-                    <img src='assets/images/thumbs/product-img9.png' alt='' />
+                    <img src='https://picsum.photos/seed/product-img9/400/400' alt='' />
                   </Link>
                   <div className='product-card__content p-sm-2 w-100'>
                     <h6 className='title text-lg fw-semibold mt-12 mb-8'>
@@ -1181,7 +1181,7 @@ const VendorsListTwo = () => {
                     to='/product-details'
                     className='product-card__thumb flex-center'
                   >
-                    <img src='assets/images/thumbs/product-img10.png' alt='' />
+                    <img src='https://picsum.photos/seed/product-img10/400/400' alt='' />
                   </Link>
                   <div className='product-card__content p-sm-2 w-100'>
                     <h6 className='title text-lg fw-semibold mt-12 mb-8'>
@@ -1234,7 +1234,7 @@ const VendorsListTwo = () => {
                     to='/product-details'
                     className='product-card__thumb flex-center'
                   >
-                    <img src='assets/images/thumbs/product-img11.png' alt='' />
+                    <img src='https://picsum.photos/seed/product-img11/400/400' alt='' />
                   </Link>
                   <div className='product-card__content p-sm-2 w-100'>
                     <h6 className='title text-lg fw-semibold mt-12 mb-8'>
@@ -1287,7 +1287,7 @@ const VendorsListTwo = () => {
                     to='/product-details'
                     className='product-card__thumb flex-center'
                   >
-                    <img src='assets/images/thumbs/product-img13.png' alt='' />
+                    <img src='https://picsum.photos/seed/product-img13/400/400' alt='' />
                   </Link>
                   <div className='product-card__content p-sm-2 w-100'>
                     <h6 className='title text-lg fw-semibold mt-12 mb-8'>
@@ -1343,7 +1343,7 @@ const VendorsListTwo = () => {
                     to='/product-details'
                     className='product-card__thumb flex-center'
                   >
-                    <img src='assets/images/thumbs/product-img14.png' alt='' />
+                    <img src='https://picsum.photos/seed/product-img14/400/400' alt='' />
                   </Link>
                   <div className='product-card__content p-sm-2 w-100'>
                     <h6 className='title text-lg fw-semibold mt-12 mb-8'>
@@ -1399,7 +1399,7 @@ const VendorsListTwo = () => {
                     to='/product-details'
                     className='product-card__thumb flex-center'
                   >
-                    <img src='assets/images/thumbs/product-img15.png' alt='' />
+                    <img src='https://picsum.photos/seed/product-img15/400/400' alt='' />
                   </Link>
                   <div className='product-card__content p-sm-2 w-100'>
                     <h6 className='title text-lg fw-semibold mt-12 mb-8'>
@@ -1455,7 +1455,7 @@ const VendorsListTwo = () => {
                     to='/product-details'
                     className='product-card__thumb flex-center'
                   >
-                    <img src='assets/images/thumbs/product-img16.png' alt='' />
+                    <img src='https://picsum.photos/seed/product-img16/400/400' alt='' />
                   </Link>
                   <div className='product-card__content p-sm-2 w-100'>
                     <h6 className='title text-lg fw-semibold mt-12 mb-8'>
@@ -1511,7 +1511,7 @@ const VendorsListTwo = () => {
                     to='/product-details'
                     className='product-card__thumb flex-center'
                   >
-                    <img src='assets/images/thumbs/product-img17.png' alt='' />
+                    <img src='https://picsum.photos/seed/product-img17/400/400' alt='' />
                   </Link>
                   <div className='product-card__content p-sm-2 w-100'>
                     <h6 className='title text-lg fw-semibold mt-12 mb-8'>
