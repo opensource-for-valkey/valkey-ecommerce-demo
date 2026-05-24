@@ -3,6 +3,7 @@ const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const orderRoutes = require('./routes/orders');
 const adsRoutes = require('./routes/ads');
+const aiRoutes = require('./routes/ai');
 const { connectValkey } = require('./config/valkey');
 
 const app = express();
@@ -22,6 +23,7 @@ connectValkey();
 app.use('/api/auth', authRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/ads', adsRoutes);
+app.use('/api/ai', aiRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
