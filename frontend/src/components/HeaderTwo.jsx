@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import query from "jquery";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 const HeaderTwo = ({ category }) => {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const [scroll, setScroll] = useState(false);
   useEffect(() => {
     window.onscroll = () => {
@@ -634,17 +637,42 @@ const HeaderTwo = ({ category }) => {
                     <i className='ph ph-magnifying-glass' />
                   </span>
                 </button>
-                <Link
-                  to='/account'
-                  className='flex-align flex-column gap-8 item-hover-two'
-                >
-                  <span className='text-2xl text-white d-flex position-relative item-hover__text'>
-                    <i className='ph ph-user' />
-                  </span>
-                  <span className='text-md text-white item-hover__text d-none d-lg-flex'>
-                    Profile
-                  </span>
-                </Link>
+                {user ? (
+                  <div className='on-hover-item has-submenu'>
+                    <Link to='/account' className='flex-align flex-column gap-8 item-hover-two'>
+                      <span className='text-2xl text-white d-flex position-relative item-hover__text'>
+                        <i className='ph ph-user-circle' />
+                      </span>
+                      <span className='text-md text-white item-hover__text d-none d-lg-flex'>
+                        {user.firstName}
+                      </span>
+                    </Link>
+                    <ul className='on-hover-dropdown common-dropdown common-dropdown--sm max-h-200 scroll-sm px-0 py-8'>
+                      <li>
+                        <Link to='/account' className='hover-bg-gray-100 text-gray-500 text-xs py-6 px-16 flex-align gap-8 rounded-0'>
+                          <i className='ph ph-user text-sm' /> My Profile
+                        </Link>
+                      </li>
+                      <li>
+                        <button
+                          onClick={async () => { await logout(); navigate('/'); }}
+                          className='hover-bg-gray-100 text-gray-500 text-xs py-6 px-16 flex-align gap-8 rounded-0 w-100 border-0 bg-transparent text-start'
+                        >
+                          <i className='ph ph-sign-out text-sm' /> Sign Out
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                ) : (
+                  <Link to='/account' className='flex-align flex-column gap-8 item-hover-two'>
+                    <span className='text-2xl text-white d-flex position-relative item-hover__text'>
+                      <i className='ph ph-user' />
+                    </span>
+                    <span className='text-md text-white item-hover__text d-none d-lg-flex'>
+                      Profile
+                    </span>
+                  </Link>
+                )}
                 <Link
                   to='/wishlist'
                   className='flex-align flex-column gap-8 item-hover-two'
@@ -2171,10 +2199,10 @@ const HeaderTwo = ({ category }) => {
                     className='flex-align flex-column gap-8 item-hover-two'
                   >
                     <span className='text-2xl text-white d-flex position-relative item-hover__text'>
-                      <i className='ph ph-user' />
+                      <i className={user ? 'ph ph-user-circle' : 'ph ph-user'} />
                     </span>
                     <span className='text-md text-white item-hover__text d-none d-lg-flex'>
-                      Profile
+                      {user ? user.firstName : 'Profile'}
                     </span>
                   </Link>
                   <Link

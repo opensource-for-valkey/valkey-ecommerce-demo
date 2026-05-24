@@ -1,0 +1,25 @@
+services:
+  valkey:
+    image: valkey/valkey-bundle:9-alpine
+    container_name: valkey
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    volumes:
+      - valkey_data:/data
+
+  valkey-admin:
+    image: valkey/valkey-admin:latest
+    container_name: valkey-admin
+    ports:
+      - "8080:8080"
+    environment:
+      DEPLOYMENT_MODE: Web
+      VALKEY_HOST: valkey
+      VALKEY_PORT: 6379
+    depends_on:
+      - valkey
+    restart: unless-stopped
+
+volumes:
+  valkey_data:

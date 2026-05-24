@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import query from "jquery";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const HeaderOne = () => {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const [scroll, setScroll] = useState(false);
   useEffect(() => {
     window.onscroll = () => {
@@ -643,19 +646,41 @@ const HeaderOne = () => {
                   </li>
                 </ul>
               </li>
-              <li className='border-right-item'>
-                <Link
-                  to='/account'
-                  className='text-white text-sm py-8 flex-align gap-6'
-                >
-                  <span className='icon text-md d-flex'>
-                    {" "}
-                    <i className='ph ph-user-circle' />{" "}
-                  </span>
-                  <span className='hover-text-decoration-underline'>
-                    My Account
-                  </span>
-                </Link>
+              <li className='border-right-item on-hover-item has-submenu'>
+                {user ? (
+                  <>
+                    <Link to='/account' className='text-white text-sm py-8 flex-align gap-6 selected-text'>
+                      <span className='icon text-md d-flex'>
+                        <i className='ph ph-user-circle' />
+                      </span>
+                      <span className='hover-text-decoration-underline'>
+                        {user.firstName} {user.lastName}
+                      </span>
+                    </Link>
+                    <ul className='on-hover-dropdown common-dropdown common-dropdown--sm max-h-200 scroll-sm px-0 py-8'>
+                      <li>
+                        <Link to='/account' className='hover-bg-gray-100 text-gray-500 text-xs py-6 px-16 flex-align gap-8 rounded-0'>
+                          <i className='ph ph-user text-sm' /> My Profile
+                        </Link>
+                      </li>
+                      <li>
+                        <button
+                          onClick={async () => { await logout(); navigate('/'); }}
+                          className='hover-bg-gray-100 text-gray-500 text-xs py-6 px-16 flex-align gap-8 rounded-0 w-100 border-0 bg-transparent text-start'
+                        >
+                          <i className='ph ph-sign-out text-sm' /> Sign Out
+                        </button>
+                      </li>
+                    </ul>
+                  </>
+                ) : (
+                  <Link to='/account' className='text-white text-sm py-8 flex-align gap-6'>
+                    <span className='icon text-md d-flex'>
+                      <i className='ph ph-user-circle' />
+                    </span>
+                    <span className='hover-text-decoration-underline'>My Account</span>
+                  </Link>
+                )}
               </li>
             </ul>
           </div>
