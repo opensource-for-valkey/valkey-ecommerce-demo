@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import query from "jquery";
 import { Link, NavLink } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
 const HeaderTwo = ({ category }) => {
+  const { user } = useAuth();
+  const { getCartCount } = useCart();
   const [scroll, setScroll] = useState(false);
   useEffect(() => {
     window.onscroll = () => {
@@ -642,7 +646,7 @@ const HeaderTwo = ({ category }) => {
                     <i className='ph ph-user' />
                   </span>
                   <span className='text-md text-white item-hover__text d-none d-lg-flex'>
-                    Profile
+                    {user ? user.username : 'Profile'}
                   </span>
                 </Link>
                 <Link
@@ -680,7 +684,7 @@ const HeaderTwo = ({ category }) => {
                   <span className='text-2xl text-white d-flex position-relative me-6 mt-6 item-hover__text'>
                     <i className='ph ph-shopping-cart-simple' />
                     <span className='w-16 h-16 flex-center rounded-circle bg-main-two-600 text-white text-xs position-absolute top-n6 end-n4'>
-                      2
+                      {getCartCount()}
                     </span>
                   </span>
                   <span className='text-md text-white item-hover__text d-none d-lg-flex'>
@@ -2174,7 +2178,7 @@ const HeaderTwo = ({ category }) => {
                       <i className='ph ph-user' />
                     </span>
                     <span className='text-md text-white item-hover__text d-none d-lg-flex'>
-                      Profile
+                      {user ? user.username : 'Profile'}
                     </span>
                   </Link>
                   <Link
@@ -2212,7 +2216,7 @@ const HeaderTwo = ({ category }) => {
                     <span className='text-2xl text-white d-flex position-relative me-6 mt-6 item-hover__text'>
                       <i className='ph ph-shopping-cart-simple' />
                       <span className='w-16 h-16 flex-center rounded-circle bg-main-two-600 text-white text-xs position-absolute top-n6 end-n4'>
-                        2
+                        {getCartCount()}
                       </span>
                     </span>
                     <span className='text-md text-white item-hover__text d-none d-lg-flex'>

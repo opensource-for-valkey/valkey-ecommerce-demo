@@ -4,3 +4,10 @@
 @import "slick-carousel/slick/slick-theme.css";
 @import 'select2/dist/css/select2.min.css';
 @import "/public/assets/sass/main.scss";
+
+
+// Cart toast animation
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

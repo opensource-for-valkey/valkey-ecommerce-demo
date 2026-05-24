@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import { getCountdown } from '../helper/Countdown';
+import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 
 const ProductDetailsOne = () => {
+    const { addToCart } = useCart();
+    const { user } = useAuth();
+    const navigate = useNavigate();
     const [timeLeft, setTimeLeft] = useState(getCountdown());
 
     useEffect(() => {
@@ -190,13 +195,27 @@ const ProductDetailsOne = () => {
                                                     <i className="ph ph-plus" />
                                                 </button>
                                             </div>
-                                            <Link
-                                                to="#"
+                                            <button
+                                                type="button"
                                                 className="btn btn-main rounded-pill flex-align d-inline-flex gap-8 px-48"
+                                                onClick={() => {
+                                                    if (!user) {
+                                                        navigate('/account');
+                                                        return;
+                                                    }
+                                                    addToCart({
+                                                        productId: 'prod-chromebook-001',
+                                                        name: 'HP Chromebook With Intel Celeron',
+                                                        price: 250.00,
+                                                        quantity: quantity,
+                                                        image: 'assets/images/thumbs/product-details-thumb1.png'
+                                                    });
+                                                    navigate('/cart');
+                                                }}
                                             >
                                                 {" "}
                                                 <i className="ph ph-shopping-cart" /> Add To Cart
-                                            </Link>
+                                            </button>
                                         </div>
                                         <div className="flex-align gap-12">
                                             <Link
