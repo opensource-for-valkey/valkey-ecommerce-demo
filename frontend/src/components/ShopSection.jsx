@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ReactSlider from 'react-slider'
+import AdSidebar from './AdSidebar'
+import AdInline from './AdInline'
 
 const ShopSection = () => {
 
@@ -607,7 +609,7 @@ const ShopSection = () => {
                                 </ul>
                             </div>
                             <div className="shop-sidebar__box rounded-8">
-                                <img src="assets/images/thumbs/advertise-img1.png" alt="" />
+                                <AdSidebar />
                             </div>
                         </div>
                     </div>
@@ -1942,6 +1944,10 @@ const ShopSection = () => {
                                     </Link>
                                 </div>
                             </div>
+                        </div>
+                        {/* Inline Ad before pagination */}
+                        <div className="my-32">
+                            <AdInline />
                         </div>
                         {/* Pagination Start */}
                         <ul className="pagination flex-center flex-wrap gap-16">

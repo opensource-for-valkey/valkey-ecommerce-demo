@@ -1,28 +1,92 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
+import AccountDashboard from './AccountDashboard'
 
 const Account = () => {
+    const { user, login, register } = useAuth();
+    const navigate = useNavigate();
+
+    // Login form state
+    const [loginUsername, setLoginUsername] = useState('');
+    const [loginPassword, setLoginPassword] = useState('');
+    const [loginError, setLoginError] = useState('');
+    const [loginLoading, setLoginLoading] = useState(false);
+
+    // Register form state
+    const [regUsername, setRegUsername] = useState('');
+    const [regEmail, setRegEmail] = useState('');
+    const [regPassword, setRegPassword] = useState('');
+    const [regError, setRegError] = useState('');
+    const [regSuccess, setRegSuccess] = useState('');
+    const [regLoading, setRegLoading] = useState(false);
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        setLoginError('');
+        setLoginLoading(true);
+
+        try {
+            await login(loginUsername, loginPassword);
+            navigate('/account');
+        } catch (err) {
+            setLoginError(err.message);
+        } finally {
+            setLoginLoading(false);
+        }
+    };
+
+    const handleRegister = async (e) => {
+        e.preventDefault();
+        setRegError('');
+        setRegSuccess('');
+        setRegLoading(true);
+
+        try {
+            await register(regUsername, regEmail, regPassword);
+            setRegSuccess('Registration successful!');
+            setTimeout(() => navigate('/account'), 500);
+        } catch (err) {
+            setRegError(err.message);
+        } finally {
+            setRegLoading(false);
+        }
+    };
+
+    // If user is logged in, show the full dashboard
+    if (user) {
+        return <AccountDashboard />;
+    }
+
     return (
         <section className="account py-80">
             <div className="container container-lg">
-                <form action="#">
-                    <div className="row gy-4">
-                        {/* Login Card Start */}
-                        <div className="col-xl-6 pe-xl-5">
-                            <div className="border border-gray-100 hover-border-main-600 transition-1 rounded-16 px-24 py-40 h-100">
-                                <h6 className="text-xl mb-32">Login</h6>
+                <div className="row gy-4">
+                    {/* Login Card Start */}
+                    <div className="col-xl-6 pe-xl-5">
+                        <div className="border border-gray-100 hover-border-main-600 transition-1 rounded-16 px-24 py-40 h-100">
+                            <h6 className="text-xl mb-32">Login</h6>
+                            {loginError && (
+                                <div className="alert alert-danger mb-24" role="alert">
+                                    {loginError}
+                                </div>
+                            )}
+                            <form onSubmit={handleLogin}>
                                 <div className="mb-24">
                                     <label
                                         htmlFor="username"
                                         className="text-neutral-900 text-lg mb-8 fw-medium"
                                     >
-                                        Username or email address <span className="text-danger">*</span>{" "}
+                                        Username or email address <span className="text-danger">*</span>
                                     </label>
                                     <input
                                         type="text"
                                         className="common-input"
                                         id="username"
-                                        placeholder="First Name"
+                                        placeholder="Enter username or email"
+                                        value={loginUsername}
+                                        onChange={(e) => setLoginUsername(e.target.value)}
+                                        required
                                     />
                                 </div>
                                 <div className="mb-24">
@@ -38,24 +102,25 @@ const Account = () => {
                                             className="common-input"
                                             id="password"
                                             placeholder="Enter Password"
-                                            defaultValue="password"
-                                        />
-                                        <span
-                                            className="toggle-password position-absolute top-50 inset-inline-end-0 me-16 translate-middle-y cursor-pointer ph ph-eye-slash"
-                                            id="#password"
+                                            value={loginPassword}
+                                            onChange={(e) => setLoginPassword(e.target.value)}
+                                            required
                                         />
                                     </div>
                                 </div>
                                 <div className="mb-24 mt-48">
                                     <div className="flex-align gap-48 flex-wrap">
-                                        <button type="submit" className="btn btn-main py-18 px-40">
-                                            Log in
+                                        <button
+                                            type="submit"
+                                            className="btn btn-main py-18 px-40"
+                                            disabled={loginLoading}
+                                        >
+                                            {loginLoading ? 'Logging in...' : 'Log in'}
                                         </button>
                                         <div className="form-check common-check">
                                             <input
                                                 className="form-check-input"
                                                 type="checkbox"
-                                                defaultValue=""
                                                 id="remember"
                                             />
                                             <label
@@ -75,25 +140,40 @@ const Account = () => {
                                         Forgot your password?
                                     </Link>
                                 </div>
-                            </div>
+                            </form>
                         </div>
-                        {/* Login Card End */}
-                        {/* Register Card Start */}
-                        <div className="col-xl-6">
-                            <div className="border border-gray-100 hover-border-main-600 transition-1 rounded-16 px-24 py-40">
-                                <h6 className="text-xl mb-32">Register</h6>
+                    </div>
+                    {/* Login Card End */}
+                    {/* Register Card Start */}
+                    <div className="col-xl-6">
+                        <div className="border border-gray-100 hover-border-main-600 transition-1 rounded-16 px-24 py-40">
+                            <h6 className="text-xl mb-32">Register</h6>
+                            {regError && (
+                                <div className="alert alert-danger mb-24" role="alert">
+                                    {regError}
+                                </div>
+                            )}
+                            {regSuccess && (
+                                <div className="alert alert-success mb-24" role="alert">
+                                    {regSuccess}
+                                </div>
+                            )}
+                            <form onSubmit={handleRegister}>
                                 <div className="mb-24">
                                     <label
                                         htmlFor="usernameTwo"
                                         className="text-neutral-900 text-lg mb-8 fw-medium"
                                     >
-                                        Username <span className="text-danger">*</span>{" "}
+                                        Username <span className="text-danger">*</span>
                                     </label>
                                     <input
                                         type="text"
                                         className="common-input"
                                         id="usernameTwo"
                                         placeholder="Write a username"
+                                        value={regUsername}
+                                        onChange={(e) => setRegUsername(e.target.value)}
+                                        required
                                     />
                                 </div>
                                 <div className="mb-24">
@@ -102,13 +182,16 @@ const Account = () => {
                                         className="text-neutral-900 text-lg mb-8 fw-medium"
                                     >
                                         Email address
-                                        <span className="text-danger">*</span>{" "}
+                                        <span className="text-danger">*</span>
                                     </label>
                                     <input
                                         type="email"
                                         className="common-input"
                                         id="emailTwo"
                                         placeholder="Enter Email Address"
+                                        value={regEmail}
+                                        onChange={(e) => setRegEmail(e.target.value)}
+                                        required
                                     />
                                 </div>
                                 <div className="mb-24">
@@ -124,12 +207,11 @@ const Account = () => {
                                             type="password"
                                             className="common-input"
                                             id="enter-password"
-                                            placeholder="Enter Password"
-                                            defaultValue="password"
-                                        />
-                                        <span
-                                            className="toggle-password position-absolute top-50 inset-inline-end-0 me-16 translate-middle-y cursor-pointer ph ph-eye-slash"
-                                            id="#enter-password"
+                                            placeholder="Enter Password (min 6 characters)"
+                                            value={regPassword}
+                                            onChange={(e) => setRegPassword(e.target.value)}
+                                            minLength={6}
+                                            required
                                         />
                                     </div>
                                 </div>
@@ -139,25 +221,26 @@ const Account = () => {
                                         your experience throughout this website, and for other purposes
                                         described in our
                                         <Link to="#" className="text-main-600 text-decoration-underline">
-                                            {" "}
-                                            privacy policy
-                                        </Link>
-                                        .
+                                            {" "}privacy policy
+                                        </Link>.
                                     </p>
                                 </div>
                                 <div className="mt-48">
-                                    <button type="submit" className="btn btn-main py-18 px-40">
-                                        Register
+                                    <button
+                                        type="submit"
+                                        className="btn btn-main py-18 px-40"
+                                        disabled={regLoading}
+                                    >
+                                        {regLoading ? 'Registering...' : 'Register'}
                                     </button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
-                        {/* Register Card End */}
                     </div>
-                </form>
+                    {/* Register Card End */}
+                </div>
             </div>
         </section>
-
     )
 }
 
