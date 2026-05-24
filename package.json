@@ -1,0 +1,25 @@
+{
+  "name": "val-hyd-commerce-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Production-ready Valkey-powered ecommerce demo with React frontend and Express API.",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace backend\" \"npm start --workspace frontend\"",
+    "dev:api": "npm run dev --workspace backend",
+    "dev:web": "npm start --workspace frontend",
+    "build": "npm run build --workspace frontend",
+    "start": "npm start --workspace backend",
+    "test": "npm test --workspace backend && npm test --workspace frontend",
+    "smoke": "npm run smoke --workspace backend"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.18.0"
+  }
+}

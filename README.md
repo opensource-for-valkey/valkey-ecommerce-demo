@@ -1,162 +1,122 @@
-# Valkey E-Commerce Demo
+# VAL-HYD Commerce Platform
 
-An e-commerce platform starter built with React, designed to showcase [Valkey](https://valkey.io/) capabilities across multiple subsystems. Created for the **Build Beyond Limits** hackathon powered by Valkey, hosted by React Hyderabad.
+A production-ready ecommerce demo powered by Valkey. The project now includes a modern React storefront, a modular Express API, Valkey-backed caching and commerce services, authentication, cart persistence, checkout, wishlist, recommendations, admin analytics, Docker support, and operational documentation.
 
-## Overview
+## What Changed
 
-This project provides a fully-featured e-commerce frontend that teams can extend with Valkey-powered backend services including authentication, search, caching, real-time recommendations, and more.
+The original repository was a static Create React App storefront template with no backend, no API, no auth flow, no database layer, and no executable Valkey integration. It has been upgraded into a full-stack platform:
+
+- React 18 storefront with responsive product listing, product details, cart, checkout, account, wishlist, admin dashboard, loading states, empty states, toasts, SEO metadata, and error boundary.
+- Premium 32-product catalog across smartphones, computing, audio, gaming, fashion, footwear, accessories, home, fitness, and beauty with 96 local high-resolution product renders.
+- Express API with versioned REST routes under `/api/v1`.
+- Valkey integration for product response cache, product detail cache, cart storage, wishlist storage, sessions, rate limiting, hot product tracking, recently viewed products, and order storage.
+- Secure auth with bcrypt password hashing, JWT sessions, Valkey session revocation, and role-based admin access.
+- Docker Compose stack with Valkey bundle, API, and nginx-hosted frontend.
+- Clean production dependency audit with `npm audit --omit=dev`.
 
 ## Tech Stack
 
-**Frontend:**
-- React 18 (Create React App)
-- React Router v6
-- Bootstrap 5 + SCSS
-- Phosphor Icons, React Slick, AOS animations
+- Frontend: React 18, Vite, React Router 6, modular commerce pages/components, custom responsive CSS, Phosphor icons.
+- Backend: Node.js, Express, Zod validation, Helmet, CORS, Morgan logging, bcryptjs, JWT.
+- Valkey: `valkey/valkey-bundle:9-alpine`.
+- Tooling: npm workspaces, Jest/React Testing Library, Node test runner, Supertest, Docker.
 
-**Backend (to be implemented by teams):**
-- [Valkey Bundle](https://github.com/valkey-io/valkey-bundle) (all modules included)
-
-## Prerequisites
-
-- [Node.js](https://nodejs.org/) (v16 or higher recommended)
-- npm (comes with Node.js)
-- [Docker](https://www.docker.com/) (for running Valkey)
-
-## Getting Started
-
-### 1. Clone the repository
+## Quick Start
 
 ```bash
-git clone https://github.com/opensource-for-valkey/valkey-ecommerce-demo.git
-cd valkey-ecommerce-demo
-```
-
-### 2. Start Valkey
-
-Pull and run the Valkey bundle image which includes all modules:
-
-```bash
-docker pull valkey/valkey-bundle:9-alpine
-docker run -d --name valkey -p 6379:6379 valkey/valkey-bundle:9-alpine
-```
-
-### 3. Install frontend dependencies
-
-```bash
-cd frontend
 npm install
-```
-
-### 4. Run the frontend
-
-```bash
-npm start
-```
-
-The app will be available at [http://localhost:3000](http://localhost:3000).
-
-## Running Tests
-
-The frontend uses Jest and React Testing Library (included with Create React App).
-
-```bash
-cd frontend
-
-# Run tests in watch mode (interactive)
-npm test
-
-# Run tests once (CI mode)
-CI=true npm test
-
-# Run tests with coverage report
-CI=true npm test -- --coverage
-```
-
-## Building for Production
-
-```bash
-cd frontend
-npm run build
-```
-
-This creates an optimized production build in the `frontend/build` folder.
-
-## Project Structure
-
-```
-valkey-ecommerce-demo/
-├── frontend/                  # React application
-│   ├── public/
-│   │   └── assets/           # Static CSS, JS, images
-│   ├── src/
-│   │   ├── components/       # Reusable UI components (header, footer, cards, etc.)
-│   │   ├── helper/           # Utility components (animations, preloader, scroll)
-│   │   ├── pages/            # Page-level components
-│   │   │   ├── HomePageOne.jsx
-│   │   │   ├── ShopPage.jsx
-│   │   │   ├── CartPage.jsx
-│   │   │   ├── CheckoutPage.jsx
-│   │   │   ├── ProductDetailsPageOne.jsx
-│   │   │   ├── AccountPage.jsx
-│   │   │   ├── WishlistPage.jsx
-│   │   │   ├── VendorPage.jsx
-│   │   │   ├── BlogPage.jsx
-│   │   │   └── ...
-│   │   ├── App.js            # Root component with routing
-│   │   └── index.js          # Entry point
-│   └── package.json
-├── documentation/            # Project documentation site
-└── README.md
-```
-
-## Hackathon Challenge Areas
-
-Teams will implement backend subsystems using Valkey:
-
-| Subsystem | Description |
-|-----------|-------------|
-| User Authentication | Login, registration, session management |
-| Catalog | Product catalog with DocumentDB |
-| Shopping Cart | Cart management with coupon support |
-| Trending Products | Track and display trending items |
-| Ads | Advertisement placement and targeting |
-| Full-Text Search | Product search with Valkey Search |
-| Vector Similarity Search | Semantic product search |
-| Analytics | Metrics with Prometheus |
-| Observability | Logging and tracing with OpenSearch |
-| Checkout | Order processing with inventory tracking |
-| Delivery | Delivery tracking with geolocation |
-| Rate Limiting | API rate limiting |
-| Real-time Recommendations | Personalized product suggestions |
-| Agentic Search | AI-powered search experience |
-
-## Connecting to Valkey
-
-Use the [valkey-bundle](https://github.com/valkey-io/valkey-bundle) Docker image to access all Valkey modules:
-
-```bash
-docker pull valkey/valkey-bundle:9-alpine
 docker run -d --name valkey -p 6379:6379 valkey/valkey-bundle:9-alpine
+npm run dev
 ```
 
-Connect from your backend service:
+The default app URLs are:
+
+- Frontend: `http://localhost:3000`
+- API: `http://localhost:4000/api/v1`
+- Health check: `http://localhost:4000/api/v1/health`
+
+If port `3000` is already in use:
+
+```bash
+cd frontend
+$env:VITE_API_URL="http://localhost:4000/api/v1"
+npm start -- --port 3001
 ```
-Host: localhost
-Port: 6379
+
+## Demo Admin
+
+```text
+Email: admin@valkeycommerce.dev
+Password: Admin123!
 ```
+
+Set stronger credentials in `.env` for real deployments.
+
+## Environment
+
+Copy `.env.example` to `.env` at the repository root:
+
+```bash
+cp .env.example .env
+```
+
+Key settings:
+
+- `PORT`: API port.
+- `FRONTEND_URL`: comma-separated allowed browser origins.
+- `JWT_SECRET`: required strong secret for production.
+- `VALKEY_URL`: Valkey connection URL.
+- `VALKEY_REQUIRED`: set `true` in production.
+
+The API uses an in-memory fallback when Valkey is unavailable in development, but Docker and production should run with Valkey.
 
 ## Useful Commands
 
-| Command | Description |
-|---------|-------------|
-| `npm start` | Start development server |
-| `npm test` | Run tests in watch mode |
-| `CI=true npm test` | Run tests once |
-| `CI=true npm test -- --coverage` | Run tests with coverage |
-| `npm run build` | Create production build |
-| `docker exec -it valkey valkey-cli` | Open Valkey CLI |
+```bash
+npm run dev                 # Start API and frontend
+npm run dev:api             # Start only Express API
+npm run dev:web             # Start only React app
+npm run build               # Build frontend
+npm test                    # Run backend and frontend tests
+npm run smoke --workspace backend
+npm audit --omit=dev
+```
 
-## License
+## Docker
 
-This project is open source and available for educational and hackathon purposes.
+```bash
+docker compose up --build
+```
+
+Services:
+
+- `valkey`: Valkey bundle on port `6379`.
+- `api`: Express API on port `4000`.
+- `frontend`: nginx static frontend on port `3000`.
+
+## Documentation
+
+- [Architecture](docs/ARCHITECTURE.md)
+- [API Reference](docs/API.md)
+- [Deployment Guide](docs/DEPLOYMENT.md)
+
+## Verification
+
+Current verification completed:
+
+- `npm test`
+- `npm run build --workspace frontend`
+- `npm run smoke --workspace backend` against a real Valkey container
+- Browser QA on desktop and mobile viewports
+- Production dependency audit: `npm audit --omit=dev`
+
+## Roadmap
+
+Recommended next production steps:
+
+- Replace in-memory seed data with PostgreSQL, MongoDB, or Valkey JSON/Search depending on workload.
+- Add payment provider integration, webhook verification, and idempotency keys.
+- Add email provider integration for order confirmation and password reset.
+- Add refresh tokens, password reset, account verification, and stricter session device controls.
+- Add OpenTelemetry traces, metrics export, and structured JSON logs.
+- Add end-to-end tests for checkout and admin workflows.
