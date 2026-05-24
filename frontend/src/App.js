@@ -1,5 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import RouteScrollToTop from "./helper/RouteScrollToTop";
+import CartInterceptor from "./helper/CartInterceptor";
+import AIChatbot from "./components/AIChatbot";
 import HomePageOne from "./pages/HomePageOne";
 import HomePageTwo from "./pages/HomePageTwo";
 import HomePageThree from "./pages/HomePageThree";
@@ -24,6 +26,8 @@ function App() {
     <BrowserRouter>
       <RouteScrollToTop />
       <PhosphorIconInit />
+      <CartInterceptor />
+      <AIChatbot />
 
       <Routes>
         <Route exact path='/' element={<HomePageOne />} />
