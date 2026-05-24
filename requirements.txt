@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+redis
+python-dotenv
+groq
+sentence-transformers
+numpy
+google-adk
+litellm
+librosa
+soundfile
+speechbrain
+pydub
+imageio-ffmpeg
