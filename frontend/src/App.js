@@ -19,6 +19,9 @@ import VendorTwoPage from "./pages/VendorTwoPage";
 import VendorTwoDetailsPage from "./pages/VendorTwoDetailsPage";
 import BecomeSellerPage from "./pages/BecomeSellerPage";
 import WishlistPage from "./pages/WishlistPage";
+import AdminPage from "./pages/AdminPage";
+import AgentBot from "./components/AgentBot";
+
 function App() {
   return (
     <BrowserRouter>
@@ -48,6 +51,7 @@ function App() {
         <Route exact path='/blog' element={<BlogPage />} />
         <Route exact path='/blog-details' element={<BlogDetailsPage />} />
         <Route exact path='/contact' element={<ContactPage />} />
+        <Route exact path='/admin' element={<AdminPage />} />
         <Route exact path='/vendor' element={<VendorPage />} />
         <Route exact path='/vendor-details' element={<VendorDetailsPage />} />
         <Route exact path='/vendor-two' element={<VendorTwoPage />} />
@@ -57,6 +61,7 @@ function App() {
           element={<VendorTwoDetailsPage />}
         />
       </Routes>
+      <AgentBot />
     </BrowserRouter>
   );
 }

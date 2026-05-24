@@ -1,10 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Slider from 'react-slick';
 import { getCountdown } from '../helper/Countdown';
 
 const ProductDetailsOne = () => {
     const [timeLeft, setTimeLeft] = useState(getCountdown());
+    const [product, setProduct] = useState(null);
+    const location = useLocation();
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const id = params.get('id');
+        if (id) {
+            fetch(`http://localhost:5000/api/products/${id}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data && data.name) {
+                        setProduct(data);
+                    }
+                })
+                .catch(err => console.error(err));
+        }
+    }, [location.search]);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -69,7 +86,7 @@ const ProductDetailsOne = () => {
                             </div>
                             <div className="col-xl-6">
                                 <div className="product-details__content">
-                                    <h5 className="mb-12">Lay's Potato Chips Onion Flavored</h5>
+                                    <h5 className="mb-12">{product ? product.name : "Lay's Potato Chips Onion Flavored"}</h5>
                                     <div className="flex-align flex-wrap gap-12">
                                         <div className="flex-align gap-12 flex-wrap">
                                             <div className="flex-align gap-8">
@@ -104,14 +121,14 @@ const ProductDetailsOne = () => {
                                     </div>
                                     <span className="mt-32 pt-32 text-gray-700 border-top border-gray-100 d-block" />
                                     <p className="text-gray-700">
-                                        Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus
+                                        {product ? product.description : `Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus
                                         malesuada tincidunt. Class aptent taciti sociosqu ad litora
-                                        torquent
+                                        torquent`}
                                     </p>
                                     <div className="mt-32 flex-align flex-wrap gap-32">
                                         <div className="flex-align gap-8">
-                                            <h4 className="mb-0">$25.00</h4>
-                                            <span className="text-md text-gray-500">$38.00</span>
+                                            <h4 className="mb-0">${product ? (product.price && product.price.current) || "0.00" : "25.00"}</h4>
+                                            <span className="text-md text-gray-500">${product ? (product.price && product.price.regular) || "0.00" : "38.00"}</span>
                                         </div>
                                         <Link to="#" className="btn btn-main rounded-pill">
                                             Order on What'sApp
@@ -402,7 +419,7 @@ const ProductDetailsOne = () => {
                                             flavor guaranteed to bring a smile on your face.{" "}
                                         </p>
                                         <p>
-                                            Morbi ut sapien vitae odio accumsan gravida. Morbi vitae erat
+                                            {product ? product.description : `Morbi ut sapien vitae odio accumsan gravida. Morbi vitae erat
                                             auctor, eleifend nunc a, lobortis neque. Praesent aliquam
                                             dignissim viverra. Maecenas lacus odio, feugiat eu nunc sit
                                             amet, maximus sagittis dolor. Vivamus nisi sapien, elementum
@@ -411,7 +428,7 @@ const ProductDetailsOne = () => {
                                             diam ut arcu pharetra dignissim ut sed leo. Vivamus faucibus,
                                             ipsum in vestibulum vulputate, lorem orci convallis quam, sit
                                             amet consequat nulla felis pharetra lacus. Duis semper erat
-                                            mauris, sed egestas purus commodo vel.
+                                            mauris, sed egestas purus commodo vel.`}
                                         </p>
                                         <ul className="list-inside mt-32 ms-16">
                                             <li className="text-gray-400 mb-4">
@@ -450,7 +467,7 @@ const ProductDetailsOne = () => {
                                                     Product Name:
                                                     <span className="text-gray-500">
                                                         {" "}
-                                                        Potato Chips Classic{" "}
+                                                        {product ? product.name : "Potato Chips Classic"}{" "}
                                                     </span>
                                                 </span>
                                             </li>

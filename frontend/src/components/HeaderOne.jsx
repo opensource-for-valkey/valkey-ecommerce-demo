@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import query from "jquery";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const HeaderOne = () => {
+  const navigate = useNavigate();
   const [scroll, setScroll] = useState(false);
   useEffect(() => {
     window.onscroll = () => {
@@ -61,6 +62,24 @@ const HeaderOne = () => {
     setActiveIndexCat(activeIndexCat === index ? null : index);
   };
 
+  // Search Autocomplete State
+  const [searchTerm, setSearchTerm] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+
+  useEffect(() => {
+    if (searchTerm.length >= 2) {
+      const delayFn = setTimeout(() => {
+        fetch(`http://localhost:5000/api/search/suggest?q=${encodeURIComponent(searchTerm)}`)
+          .then(res => res.json())
+          .then(data => setSuggestions(data))
+          .catch(console.error);
+      }, 300);
+      return () => clearTimeout(delayFn);
+    } else {
+      setSuggestions([]);
+    }
+  }, [searchTerm]);
+
   return (
     <>
       <div className='overlay' />
@@ -68,7 +87,18 @@ const HeaderOne = () => {
         className={`side-overlay ${(menuActive || activeCategory) && "show"}`}
       />
       {/* ==================== Search Box Start Here ==================== */}
-      <form action='#' className={`search-box ${activeSearch && "active"}`}>
+      <form 
+        action='#' 
+        className={`search-box ${activeSearch && "active"}`}
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (searchTerm) {
+            navigate(`/shop?q=${encodeURIComponent(searchTerm)}`);
+            setSuggestions([]);
+            setActiveSearch(false);
+          }
+        }}
+      >
         <button
           onClick={handleSearchToggle}
           type='button'
@@ -82,6 +112,8 @@ const HeaderOne = () => {
               type='text'
               className='form-control py-16 px-24 text-xl rounded-pill pe-64'
               placeholder='Search for a product or brand'
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
             <button
               type='submit'
@@ -89,6 +121,29 @@ const HeaderOne = () => {
             >
               <i className='ph ph-magnifying-glass' />
             </button>
+            {suggestions.length > 0 && (
+              <ul className='position-absolute w-100 bg-white border border-gray-100 rounded-8 mt-4 shadow-sm' style={{ top: '100%', zIndex: 1000, listStyle: 'none', padding: 0, overflow: 'hidden' }}>
+                {suggestions.map((sug, idx) => (
+                  <li key={idx} className="border-bottom border-gray-100">
+                    <Link 
+                      to={`/product-details-two?id=${encodeURIComponent(sug.id)}`}
+                      className='d-flex align-items-center py-8 px-16 text-gray-700 hover-bg-gray-100 transition-1'
+                      onClick={() => {
+                        setSearchTerm(sug.term);
+                        setSuggestions([]);
+                        setActiveSearch(false);
+                      }}
+                    >
+                      {sug.image && <img src={sug.image} alt={sug.term} className="w-48 h-48 object-fit-cover rounded-4 me-12" />}
+                      <div className="flex-grow-1">
+                        <span className="d-block text-sm fw-medium text-heading mb-4">{sug.term}</span>
+                        <span className="d-block text-xs fw-bold text-main-600">₹{sug.price.toLocaleString('en-IN')}</span>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       </form>
@@ -123,7 +178,7 @@ const HeaderOne = () => {
                   activeIndex === 0 ? "d-block" : ""
                 }`}
               >
-                <Link to='#' className='nav-menu__link'>
+                <Link to='/' className='nav-menu__link'>
                   Home
                 </Link>
                 <ul
@@ -170,7 +225,7 @@ const HeaderOne = () => {
                   activeIndex === 1 ? "d-block" : ""
                 }`}
               >
-                <Link to='#' className='nav-menu__link'>
+                <Link to='/shop' className='nav-menu__link'>
                   Shop
                 </Link>
                 <ul
@@ -221,7 +276,7 @@ const HeaderOne = () => {
                 <span className='badge-notification bg-warning-600 text-white text-sm py-2 px-8 rounded-4'>
                   New
                 </span>
-                <Link to='#' className='nav-menu__link'>
+                <Link to='/cart' className='nav-menu__link'>
                   Pages
                 </Link>
                 <ul
@@ -290,7 +345,7 @@ const HeaderOne = () => {
                 <span className='badge-notification bg-tertiary-600 text-white text-sm py-2 px-8 rounded-4'>
                   New
                 </span>
-                <Link to='#' className='nav-menu__link'>
+                <Link to='/vendor' className='nav-menu__link'>
                   Vendors
                 </Link>
                 <ul
@@ -344,7 +399,7 @@ const HeaderOne = () => {
                   activeIndex === 4 ? "d-block" : ""
                 }`}
               >
-                <Link to='#' className='nav-menu__link'>
+                <Link to='/blog' className='nav-menu__link'>
                   Blog
                 </Link>
                 <ul
@@ -677,6 +732,13 @@ const HeaderOne = () => {
             <form
               action='#'
               className='flex-align flex-wrap form-location-wrapper'
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (searchTerm) {
+                  navigate(`/shop?q=${encodeURIComponent(searchTerm)}`);
+                  setSuggestions([]);
+                }
+              }}
             >
               <div className='search-category d-flex h-48 select-border-end-0 radius-end-0 search-form d-sm-flex d-none'>
                 <select
@@ -701,6 +763,8 @@ const HeaderOne = () => {
                     type='text'
                     className='search-form__input common-input py-13 ps-16 pe-18 rounded-end-pill pe-44'
                     placeholder='Search for a product or brand'
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
                   />
                   <button
                     type='submit'
@@ -708,6 +772,28 @@ const HeaderOne = () => {
                   >
                     <i className='ph ph-magnifying-glass' />
                   </button>
+                  {suggestions.length > 0 && (
+                    <ul className='position-absolute w-100 bg-white border border-gray-100 rounded-8 mt-4 shadow-sm z-index-10' style={{ top: '100%', zIndex: 1000, listStyle: 'none', padding: 0, overflow: 'hidden' }}>
+                      {suggestions.map((sug, idx) => (
+                        <li key={idx} className="border-bottom border-gray-100">
+                          <Link 
+                            to={`/product-details-two?id=${encodeURIComponent(sug.id)}`}
+                            className='d-flex align-items-center py-8 px-16 text-gray-700 hover-bg-gray-100 transition-1'
+                            onClick={() => {
+                              setSearchTerm(sug.term);
+                              setSuggestions([]);
+                            }}
+                          >
+                            {sug.image && <img src={sug.image} alt={sug.term} className="w-48 h-48 object-fit-cover rounded-4 me-12" />}
+                            <div className="flex-grow-1">
+                              <span className="d-block text-sm fw-medium text-heading mb-4">{sug.term}</span>
+                              <span className="d-block text-xs fw-bold text-main-600">₹{sug.price.toLocaleString('en-IN')}</span>
+                            </div>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               </div>
               <div className='location-box bg-white flex-align gap-8 py-6 px-16 rounded-pill border border-gray-100'>
@@ -1175,7 +1261,7 @@ const HeaderOne = () => {
                 {/* Nav Menu Start */}
                 <ul className='nav-menu flex-align '>
                   <li className='on-hover-item nav-menu__item has-submenu'>
-                    <Link to='#' className='nav-menu__link'>
+                    <Link to='/' className='nav-menu__link'>
                       Home
                     </Link>
                     <ul className='on-hover-dropdown common-dropdown nav-submenu scroll-sm'>
@@ -1219,7 +1305,7 @@ const HeaderOne = () => {
                     </ul>
                   </li>
                   <li className='on-hover-item nav-menu__item has-submenu'>
-                    <Link to='#' className='nav-menu__link'>
+                    <Link to='/shop' className='nav-menu__link'>
                       Shop
                     </Link>
                     <ul className='on-hover-dropdown common-dropdown nav-submenu scroll-sm'>
@@ -1268,7 +1354,7 @@ const HeaderOne = () => {
                     <span className='badge-notification bg-warning-600 text-white text-sm py-2 px-8 rounded-4'>
                       New
                     </span>
-                    <Link to='#' className='nav-menu__link'>
+                    <Link to='/cart' className='nav-menu__link'>
                       Pages
                     </Link>
                     <ul className='on-hover-dropdown common-dropdown nav-submenu scroll-sm'>
@@ -1342,7 +1428,7 @@ const HeaderOne = () => {
                     <span className='badge-notification bg-tertiary-600 text-white text-sm py-2 px-8 rounded-4'>
                       New
                     </span>
-                    <Link to='#' className='nav-menu__link'>
+                    <Link to='/vendor' className='nav-menu__link'>
                       Vendors
                     </Link>
                     <ul className='on-hover-dropdown common-dropdown nav-submenu scroll-sm'>
@@ -1398,7 +1484,7 @@ const HeaderOne = () => {
                     </ul>
                   </li>
                   <li className='on-hover-item nav-menu__item has-submenu'>
-                    <Link to='#' className='nav-menu__link'>
+                    <Link to='/blog' className='nav-menu__link'>
                       Blog
                     </Link>
                     <ul className='on-hover-dropdown common-dropdown nav-submenu scroll-sm'>
