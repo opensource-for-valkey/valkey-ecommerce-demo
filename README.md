@@ -16,6 +16,7 @@ This project provides a fully-featured e-commerce frontend that teams can extend
 
 **Backend (to be implemented by teams):**
 - [Valkey Bundle](https://github.com/valkey-io/valkey-bundle) (all modules included)
+- BullMQ checkout integration in [`backend/checkout`](./backend/checkout)
 
 ## Prerequisites
 
@@ -55,6 +56,19 @@ npm start
 ```
 
 The app will be available at [http://localhost:3000](http://localhost:3000).
+
+### Optional: Run the BullMQ checkout backend
+
+The checkout backend demonstrates one focused Valkey integration: BullMQ queues backed by Valkey for inventory reservation, payment authorization, order confirmation, reservation release, and delivery dispatch.
+
+```bash
+cd backend/checkout
+npm ci
+npm run seed
+npm run dev
+```
+
+The API runs at [http://localhost:4000](http://localhost:4000). See [`backend/checkout/README.md`](./backend/checkout/README.md) for endpoints and validation commands.
 
 ## Running Tests
 
@@ -106,6 +120,8 @@ valkey-ecommerce-demo/
 │   │   ├── App.js            # Root component with routing
 │   │   └── index.js          # Entry point
 │   └── package.json
+├── backend/
+│   └── checkout/              # BullMQ + Valkey checkout integration
 ├── documentation/            # Project documentation site
 └── README.md
 ```
@@ -156,6 +172,15 @@ Port: 6379
 | `CI=true npm test -- --coverage` | Run tests with coverage |
 | `npm run build` | Create production build |
 | `docker exec -it valkey valkey-cli` | Open Valkey CLI |
+
+Backend checkout commands:
+
+| Command | Description |
+|---------|-------------|
+| `cd backend/checkout && npm run seed` | Seed Valkey JSON product fixtures |
+| `cd backend/checkout && npm run dev` | Start the checkout API and BullMQ workers |
+| `cd backend/checkout && npm test` | Run checkout unit and integration tests against Valkey |
+| `cd backend/checkout && npm run build` | Type-check and compile the checkout backend |
 
 ## License
 
