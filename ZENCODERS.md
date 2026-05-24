@@ -201,7 +201,10 @@ Open http://localhost:3000 → Register → Shop → Add to Cart → Checkout �
 
 | Member | Role |
 |--------|------|
-| Nooka Nikshith | Full-Stack Developer |
+| Nooka Nikshith | Full-Stack Developer & Team Lead |
+| Namburi Rishika | Frontend Developer |
+| Pacha Likhitha Sai | Backend Developer |
+| Rajkamal Pathgani | Database & DevOps |
 
 **University:** Malla Reddy University  
 **Email:** 2311cs020483@mallareddyuniversity.ac.in  
