@@ -53,8 +53,11 @@ export const CartProvider = ({ children }) => {
         }
     };
 
-    // Add or increment an item in the Valkey cart
+    // +++++
     const addToCart = async (product, quantity = 1) => {
+
+        console.log("ADD TO CART CLICKED");
+
         const itemBody = {
             userId: userId,
             productId: product.id || `product:guest_${product.name.replace(/\s+/g, '_').toLowerCase()}`,
@@ -63,6 +66,8 @@ export const CartProvider = ({ children }) => {
             quantity: quantity,
             imageUrl: product.imageUrl || product.image || 'assets/images/thumbs/product-two-img1.png'
         };
+
+        console.log("Sending item:", itemBody);
 
         try {
             const response = await fetch('http://localhost:8001/api/cart/items', {
@@ -73,18 +78,28 @@ export const CartProvider = ({ children }) => {
                 body: JSON.stringify(itemBody),
             });
 
+            console.log("Response status:", response.status);
+
+            const data = await response.json();
+
+            console.log("Backend response:", data);
+
             if (response.ok) {
-                await fetchCart(); // Refresh local React state from the Valkey ground truth
-                // Dispatch a custom event to notify other components (e.g. ValkeyViewer) that DB has updated
+                await fetchCart();
+
                 window.dispatchEvent(new Event('valkey-db-updated'));
+
                 return true;
             }
+
         } catch (error) {
             console.error('Error adding item to Valkey cart:', error);
         }
+
         return false;
     };
 
+    // +++
     // Update quantity of a specific item in the Valkey cart
     const updateQuantity = async (productId, quantity) => {
         if (quantity < 1) return;
@@ -154,57 +169,136 @@ export const CartProvider = ({ children }) => {
     useEffect(() => {
         fetchCart();
 
+        // // const handleGlobalAddToCart = async (e) => {
+        //     const btn = e.target.closest('.product-card__cart');
+        //     // Check if it's an "Add to Cart" action and not on the cart page itself
+        //     if (btn && window.location.pathname !== '/cart') {
+        //         e.preventDefault();
+
+        //         const productCard = btn.closest('.product-card') || btn.closest('.table-product') || btn.closest('div[class*="product-card"]');
+        //         if (productCard) {
+        //             // 1. Extract product name
+        //             const titleEl = productCard.querySelector('.title a, .product-card__content .title, .title, h6');
+        //             const name = titleEl ? titleEl.textContent.trim() : 'Organic Premium Product';
+
+        //             // 2. Extract image URL
+        //             const imgEl = productCard.querySelector('.product-card__thumb img, img');
+        //             const imageUrl = imgEl ? imgEl.getAttribute('src') : 'assets/images/thumbs/product-two-img1.png';
+
+        //             // 3. Extract price (handling formats like $125.00)
+        //             const priceEl = productCard.querySelector('.product-card__price .text-heading, .product-card__price span:not(.text-decoration-line-through), td span[class*="fw-semibold"]');
+        //             let price = 14.99;
+        //             if (priceEl) {
+        //                 const priceText = priceEl.textContent;
+        //                 const match = priceText.match(/\d+(\.\d+)?/);
+        //                 if (match) {
+        //                     price = parseFloat(match[0]);
+        //                 }
+        //             } else {
+        //                 // Fallback: search anywhere in card for dollar price
+        //                 const textContent = productCard.textContent;
+        //                 const match = textContent.match(/\$\s*(\d+(\.\d+)?)/);
+        //                 if (match) {
+        //                     price = parseFloat(match[1]);
+        //                 }
+        //             }
+
+        //             // Generate a clean UUIDv7-style prefixed ID for the product
+        //             const productId = `product:${name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`;
+
+        //             console.log('Intercepted Add to Cart:', { productId, name, price, imageUrl });
+
+        //             // Add to Valkey cart
+        //             const success = await addToCart({
+        //                 id: productId,
+        //                 name: name,
+        //                 price: price,
+        //                 imageUrl: imageUrl
+        //             }, 1);
+
+        //             if (success) {
+        //                 // Redirect to dynamic cart view
+        //                 window.location.href = '/cart';
+        //             }
+        //         }
+        //     }
+        // };
         const handleGlobalAddToCart = async (e) => {
-            const btn = e.target.closest('.product-card__cart');
-            // Check if it's an "Add to Cart" action and not on the cart page itself
-            if (btn && window.location.pathname !== '/cart') {
+
+            const btn = e.target.closest('button, a');
+
+            if (!btn) return;
+
+            const btnText = btn.innerText?.toLowerCase() || '';
+
+            if (
+                btnText.includes('add to cart') ||
+                btn.className.includes('product-card__cart')
+            ) {
+
                 e.preventDefault();
 
-                const productCard = btn.closest('.product-card') || btn.closest('.table-product') || btn.closest('div[class*="product-card"]');
-                if (productCard) {
-                    // 1. Extract product name
-                    const titleEl = productCard.querySelector('.title a, .product-card__content .title, .title, h6');
-                    const name = titleEl ? titleEl.textContent.trim() : 'Organic Premium Product';
+                console.log("ADD TO CART BUTTON DETECTED");
 
-                    // 2. Extract image URL
-                    const imgEl = productCard.querySelector('.product-card__thumb img, img');
-                    const imageUrl = imgEl ? imgEl.getAttribute('src') : 'assets/images/thumbs/product-two-img1.png';
+                const productCard =
+                    btn.closest('.product-card') ||
+                    btn.closest('[class*="product"]');
 
-                    // 3. Extract price (handling formats like $125.00)
-                    const priceEl = productCard.querySelector('.product-card__price .text-heading, .product-card__price span:not(.text-decoration-line-through), td span[class*="fw-semibold"]');
-                    let price = 14.99;
-                    if (priceEl) {
-                        const priceText = priceEl.textContent;
-                        const match = priceText.match(/\d+(\.\d+)?/);
-                        if (match) {
-                            price = parseFloat(match[0]);
-                        }
-                    } else {
-                        // Fallback: search anywhere in card for dollar price
-                        const textContent = productCard.textContent;
-                        const match = textContent.match(/\$\s*(\d+(\.\d+)?)/);
-                        if (match) {
-                            price = parseFloat(match[1]);
-                        }
-                    }
+                if (!productCard) {
+                    console.log("PRODUCT CARD NOT FOUND");
+                    return;
+                }
 
-                    // Generate a clean UUIDv7-style prefixed ID for the product
-                    const productId = `product:${name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`;
+                // PRODUCT NAME
+                const titleEl =
+                    productCard.querySelector('.title') ||
+                    productCard.querySelector('h6') ||
+                    productCard.querySelector('h5') ||
+                    productCard.querySelector('a');
 
-                    console.log('Intercepted Add to Cart:', { productId, name, price, imageUrl });
+                const name = titleEl
+                    ? titleEl.textContent.trim()
+                    : 'Demo Product';
 
-                    // Add to Valkey cart
-                    const success = await addToCart({
-                        id: productId,
-                        name: name,
-                        price: price,
-                        imageUrl: imageUrl
-                    }, 1);
+                // PRICE
+                let price = 99;
 
-                    if (success) {
-                        // Redirect to dynamic cart view
-                        window.location.href = '/cart';
-                    }
+                const priceText = productCard.innerText;
+                const priceMatch = priceText.match(/\$?\s?(\d+(\.\d+)?)/);
+
+                if (priceMatch) {
+                    price = parseFloat(priceMatch[1]);
+                }
+
+                // IMAGE
+                const imgEl = productCard.querySelector('img');
+
+                const imageUrl = imgEl
+                    ? imgEl.src
+                    : '';
+
+                const productId =
+                    'product-' +
+                    name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+
+                console.log("PRODUCT FOUND:", {
+                    productId,
+                    name,
+                    price,
+                    imageUrl
+                });
+
+                const success = await addToCart({
+                    id: productId,
+                    name,
+                    price,
+                    imageUrl
+                }, 1);
+
+                console.log("ADD TO CART RESULT:", success);
+
+                if (success) {
+                    alert("Product added to Valkey DB!");
                 }
             }
         };

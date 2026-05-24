@@ -9,7 +9,7 @@ const ValkeyViewer = () => {
     const fetchValkeyData = async () => {
         try {
             setLoading(true);
-            const res = await fetch('http://localhost:8000/api/valkey/keys');
+            const res = await fetch('http://localhost:8001/api/valkey/keys');
             if (res.ok) {
                 const data = await res.json();
                 setDbData(data);
@@ -29,7 +29,7 @@ const ValkeyViewer = () => {
 
         // Listen for internal state changes to refresh instantly
         window.addEventListener('valkey-db-updated', fetchValkeyData);
-        
+
         // Polling fallback to keep it live
         const interval = setInterval(fetchValkeyData, 4000);
 
@@ -45,7 +45,7 @@ const ValkeyViewer = () => {
                 // Fetch the guest cart key to clear it specifically
                 const guestId = localStorage.getItem('valkey_guest_user_id');
                 if (guestId) {
-                    await fetch(`http://localhost:8000/api/cart?userId=${encodeURIComponent(guestId)}`, {
+                    await fetch(`http://localhost:8001/api/cart?userId=${encodeURIComponent(guestId)}`, {
                         method: 'DELETE'
                     });
                     setSelectedKey(null);
@@ -181,7 +181,7 @@ const ValkeyViewer = () => {
                             }}>
                                 Active Keys ({dbData?.active_keys || 0})
                             </div>
-                            
+
                             {(!dbData || Object.keys(dbData.keys).length === 0) ? (
                                 <div style={{ color: '#64748B', fontSize: '12px', padding: '10px 4px' }}>
                                     No active keys in Valkey. Add items to your cart!
