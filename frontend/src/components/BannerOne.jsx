@@ -81,7 +81,7 @@ const BannerOne = () => {
                                         </Link>
                                     </div>
                                     <div className="banner-item__thumb">
-                                        <img src="assets/images/thumbs/banner-img1.png" alt="" />
+                                        <img src="https://cdn.shopify.com/s/files/1/0840/8370/3830/files/1603897299-image27.jpg?v=1758247173" alt="Valkey Store" />
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@ const BannerOne = () => {
                                         </Link>
                                     </div>
                                     <div className="banner-item__thumb">
-                                        <img src="assets/images/thumbs/banner-img3.png" alt="" />
+                                        <img src="https://cdn.shopify.com/s/files/1/0840/8370/3830/files/1603897299-image27.jpg?v=1758247173" alt="Valkey Store" />
                                     </div>
                                 </div>
                             </div>
