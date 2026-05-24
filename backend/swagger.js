@@ -119,6 +119,42 @@ const options = {
             joinedAt: { type: 'string', format: 'date-time' },
           },
         },
+        Cart: {
+          type: 'object',
+          properties: {
+            items: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  productId: { type: 'string' },
+                  name: { type: 'string' },
+                  brand: { type: 'string' },
+                  price: { type: 'integer' },
+                  quantity: { type: 'integer' },
+                  subtotal: { type: 'integer' },
+                  image: { type: 'string', nullable: true },
+                  categoryId: { type: 'string' },
+                },
+              },
+            },
+            itemCount: { type: 'integer' },
+            subtotal: { type: 'integer' },
+            discount: { type: 'integer' },
+            total: { type: 'integer' },
+            coupon: {
+              nullable: true,
+              type: 'object',
+              properties: {
+                code: { type: 'string' },
+                type: { type: 'string', enum: ['percentage', 'fixed'] },
+                value: { type: 'number' },
+                discount: { type: 'integer' },
+                description: { type: 'string' },
+              },
+            },
+          },
+        },
       },
     },
   },

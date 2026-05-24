@@ -357,6 +357,12 @@ router.post('/cart/coupon', optionalAuth, async (req, res) => {
     await valkey.set(`cart_coupon:${cartKey}`, upperCode);
     await valkey.expire(`cart_coupon:${cartKey}`, CART_TTL);
 
+    // Record usage so the duplicate-use and limit checks work
+    if (req.userId) {
+      await valkey.sadd(`coupon_used:${upperCode}`, req.userId);
+    }
+    await valkey.call('JSON.NUMINCRBY', `coupon:${upperCode}`, '$.usedCount', 1);
+
     res.json(await buildCartResponse(cartKey, upperCode));
   } catch (err) {
     console.error(err);

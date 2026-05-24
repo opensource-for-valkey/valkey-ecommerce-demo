@@ -6,6 +6,7 @@ import PromotionalTwo from "../components/PromotionalTwo";
 import DealsOne from "../components/DealsOne";
 import TopSellingOne from "../components/TopSellingOne";
 import TrendingOne from "../components/TrendingOne";
+import AdBanner from "../components/AdBanner";
 import DiscountOne from "../components/DiscountOne";
 import FeaturedOne from "../components/FeaturedOne";
 import BigDealOne from "../components/BigDealOne";
@@ -54,6 +55,9 @@ const HomePageTwo = () => {
 
       {/* TrendingOne */}
       <TrendingOne />
+
+      {/* AdBanner — served from Valkey, targeted by bid */}
+      <AdBanner context="global" limit={2} />
 
       {/* DiscountOne */}
       <DiscountOne />

@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
+import { trackView } from '../helper/trackEvent';
+import AdBanner from './AdBanner';
 
 const PLACEHOLDER_IMGS = [
   'assets/images/thumbs/product-two-img1.png',
@@ -27,6 +30,8 @@ function flattenTree(nodes, depth = 0) {
 const LIMIT = 6;
 
 const ShopSection = () => {
+  const { cart, addItem, updateItem, removeItem } = useCart();
+  const [addingId, setAddingId] = useState(null);
   const [grid, setGrid] = useState(false);
   const [sidebarActive, setSidebarActive] = useState(false);
 
@@ -61,8 +66,10 @@ const ShopSection = () => {
     fetch(`/api/products?${params}`)
       .then((r) => r.json())
       .then((data) => {
-        setProducts(data.data || []);
+        const prods = data.data || [];
+        setProducts(prods);
         setTotal(data.total || 0);
+        trackView(prods);
       })
       .catch(console.error)
       .finally(() => setLoading(false));
@@ -234,6 +241,14 @@ const ShopSection = () => {
 
           {/* Content */}
           <div className="col-lg-9">
+            {/* Category-targeted ads */}
+            <AdBanner
+              context={selectedCategory ? 'category' : 'global'}
+              value={selectedCategory || null}
+              limit={2}
+              noContainer
+            />
+
             {/* Top bar */}
             <div className="flex-between gap-16 flex-wrap mb-40">
               <span className="text-gray-900">
@@ -347,13 +362,42 @@ const ShopSection = () => {
                             In stock: {product.inventory?.quantity - (product.inventory?.reserved || 0)}
                           </span>
                         </div>
-                        <Link
-                          to="/cart"
-                          className="product-card__cart btn bg-gray-50 text-heading hover-bg-main-600 hover-text-white py-11 px-24 rounded-8 flex-center gap-8 fw-medium"
-                          tabIndex={0}
-                        >
-                          Add To Cart <i className="ph ph-shopping-cart" />
-                        </Link>
+                        {(() => {
+                          const cartItem = cart.items.find(i => i.productId === product.id);
+                          const qty = cartItem?.quantity || 0;
+                          if (qty > 0) {
+                            return (
+                              <div className="flex-align gap-8 w-100">
+                                <button
+                                  type="button"
+                                  onClick={() => qty === 1 ? removeItem(product.id) : updateItem(product.id, qty - 1)}
+                                  className="w-36 h-36 flex-center border border-gray-200 rounded-8 hover-bg-main-600 hover-text-white hover-border-main-600 text-xl fw-bold flex-shrink-0"
+                                >−</button>
+                                <span className="text-md fw-bold text-heading flex-grow-1 text-center">{qty}</span>
+                                <button
+                                  type="button"
+                                  onClick={() => updateItem(product.id, qty + 1)}
+                                  className="w-36 h-36 flex-center border border-gray-200 rounded-8 hover-bg-main-600 hover-text-white hover-border-main-600 text-xl fw-bold flex-shrink-0"
+                                >+</button>
+                              </div>
+                            );
+                          }
+                          return (
+                            <button
+                              type="button"
+                              disabled={addingId === product.id}
+                              onClick={async () => {
+                                setAddingId(product.id);
+                                await addItem(product.id);
+                                setAddingId(null);
+                              }}
+                              className="product-card__cart btn bg-gray-50 text-heading hover-bg-main-600 hover-text-white py-11 px-24 rounded-8 flex-center gap-8 fw-medium w-100"
+                            >
+                              {addingId === product.id ? 'Adding…' : 'Add To Cart'}
+                              <i className="ph ph-shopping-cart" />
+                            </button>
+                          );
+                        })()}
                       </div>
                     </div>
                   );

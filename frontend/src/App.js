@@ -26,7 +26,8 @@ function App() {
       <PhosphorIconInit />
 
       <Routes>
-        <Route exact path='/' element={<HomePageOne />} />
+        <Route exact path='/' element={<HomePageTwo />} />
+        <Route exact path='/index-one' element={<HomePageOne />} />
         <Route exact path='/index-two' element={<HomePageTwo />} />
         <Route exact path='/index-three' element={<HomePageThree />} />
         <Route exact path='/shop' element={<ShopPage />} />

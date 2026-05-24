@@ -67,14 +67,21 @@ export function CartProvider({ children }) {
     prevUserRef.current = user;
   }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  async function addItem(productId, quantity = 1) {
+  async function addItem(productId, quantity = 1, categoryId = null) {
     const res = await fetch('/api/cart/items', {
       method: 'POST',
       headers: buildHeaders(),
       body: JSON.stringify({ productId, quantity }),
     });
     const data = await res.json();
-    if (res.ok) setCart(data);
+    if (res.ok) {
+      setCart(data);
+      fetch('/api/events/add-to-cart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId, categoryId }),
+      }).catch(() => {});
+    }
     return { ok: res.ok, data };
   }
 
