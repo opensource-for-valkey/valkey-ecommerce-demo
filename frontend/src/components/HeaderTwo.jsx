@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from "react";
 import query from "jquery";
 import { Link, NavLink } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext";
+import SemanticSearchBar from "./AI/SemanticSearchBar";
+
 const HeaderTwo = ({ category }) => {
+  const { currentUser, logout } = useAuth();
+  const { cart } = useCart();
+  const { wishlist } = useWishlist();
   const [scroll, setScroll] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   useEffect(() => {
     window.onscroll = () => {
       if (window.pageYOffset < 150) {
@@ -111,7 +120,7 @@ const HeaderTwo = ({ category }) => {
         </button>
         <div className='mobile-menu__inner'>
           <Link to='/' className='mobile-menu__logo'>
-            <img src='assets/images/logo/logo.png' alt='Logo' />
+            <img src='/assets/images/logo/logo.png' alt='Logo' />
           </Link>
           <div className='mobile-menu__menu'>
             {/* Nav Menu Start */}
@@ -381,8 +390,24 @@ const HeaderTwo = ({ category }) => {
           <nav className='header-inner flex-between'>
             {/* Logo Start */}
             <div className='logo'>
-              <Link to='/' className='link'>
-                <img src='assets/images/logo/logo-two.png' alt='Logo' />
+              <Link to='/' className='link text-white d-flex align-items-center'>
+                <svg width="150" height="38" viewBox="0 0 150 38" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ verticalAlign: 'middle' }}>
+                  <path d="M14 2L3 21H15L11 36L27 14H16L22 2H14Z" fill="url(#logoGrad)" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+                  <text x="34" y="25" fill="currentColor" fontFamily="'Outfit', 'Inter', sans-serif" fontSize="18" fontWeight="800" letterSpacing="0.8">
+                    VALKEY
+                  </text>
+                  <text x="110" y="25" fill="#10B981" fontFamily="'Outfit', 'Inter', sans-serif" fontSize="18" fontWeight="400">
+                    MART
+                  </text>
+                  <circle cx="128" cy="20" r="3" fill="#10B981" />
+                  <defs>
+                    <linearGradient id="logoGrad" x1="3" y1="2" x2="27" y2="36" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stopColor="#10B981" />
+                      <stop offset="50%" stopColor="#3B82F6" />
+                      <stop offset="100%" stopColor="#8B5CF6" />
+                    </linearGradient>
+                  </defs>
+                </svg>
               </Link>
             </div>
             {/* Logo End  */}
@@ -407,7 +432,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleLanguageChange("English")}
                         >
                           <img
-                            src='assets/images/thumbs/flag1.png'
+                            src='/assets/images/thumbs/flag1.png'
                             alt='English'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -421,7 +446,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleLanguageChange("Japan")}
                         >
                           <img
-                            src='assets/images/thumbs/flag2.png'
+                            src='/assets/images/thumbs/flag2.png'
                             alt='Japan'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -435,7 +460,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleLanguageChange("French")}
                         >
                           <img
-                            src='assets/images/thumbs/flag3.png'
+                            src='/assets/images/thumbs/flag3.png'
                             alt='French'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -449,7 +474,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleLanguageChange("Germany")}
                         >
                           <img
-                            src='assets/images/thumbs/flag4.png'
+                            src='/assets/images/thumbs/flag4.png'
                             alt='Germany'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -463,7 +488,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleLanguageChange("Bangladesh")}
                         >
                           <img
-                            src='assets/images/thumbs/flag6.png'
+                            src='/assets/images/thumbs/flag6.png'
                             alt='Bangladesh'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -477,7 +502,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleLanguageChange("South Korea")}
                         >
                           <img
-                            src='assets/images/thumbs/flag5.png'
+                            src='/assets/images/thumbs/flag5.png'
                             alt='South Korea'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -502,7 +527,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleCurrencyChange("USD")}
                         >
                           <img
-                            src='assets/images/thumbs/flag1.png'
+                            src='/assets/images/thumbs/flag1.png'
                             alt='USD'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -516,7 +541,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleCurrencyChange("Yen")}
                         >
                           <img
-                            src='assets/images/thumbs/flag2.png'
+                            src='/assets/images/thumbs/flag2.png'
                             alt='Yen'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -530,7 +555,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleCurrencyChange("Franc")}
                         >
                           <img
-                            src='assets/images/thumbs/flag3.png'
+                            src='/assets/images/thumbs/flag3.png'
                             alt='Franc'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -544,7 +569,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleCurrencyChange("EURO")}
                         >
                           <img
-                            src='assets/images/thumbs/flag4.png'
+                            src='/assets/images/thumbs/flag4.png'
                             alt='EURO'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -558,7 +583,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleCurrencyChange("BDT")}
                         >
                           <img
-                            src='assets/images/thumbs/flag6.png'
+                            src='/assets/images/thumbs/flag6.png'
                             alt='BDT'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -572,7 +597,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleCurrencyChange("WON")}
                         >
                           <img
-                            src='assets/images/thumbs/flag5.png'
+                            src='/assets/images/thumbs/flag5.png'
                             alt='WON'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -584,43 +609,9 @@ const HeaderTwo = ({ category }) => {
                 </ul>
                 {/* Dropdown Select End */}
               </div>
-              <form
-                action='#'
-                className='flex-align flex-wrap form-location-wrapper'
-              >
-                <div className='search-category style-two d-flex h-48 search-form d-sm-flex d-none'>
-                  <select
-                    defaultValue={1}
-                    className='js-example-basic-single border border-gray-200 border-end-0 rounded-0 border-0'
-                    name='state'
-                  >
-                    <option value={1}>All Categories</option>
-                    <option value={1}>Grocery</option>
-                    <option value={1}>Breakfast &amp; Dairy</option>
-                    <option value={1}>Vegetables</option>
-                    <option value={1}>Milks and Dairies</option>
-                    <option value={1}>Pet Foods &amp; Toy</option>
-                    <option value={1}>Breads &amp; Bakery</option>
-                    <option value={1}>Fresh Seafood</option>
-                    <option value={1}>Fronzen Foods</option>
-                    <option value={1}>Noodles &amp; Rice</option>
-                    <option value={1}>Ice Cream</option>
-                  </select>
-                  <div className='search-form__wrapper position-relative'>
-                    <input
-                      type='text'
-                      className='search-form__input common-input py-13 ps-16 pe-18 rounded-0 border-0'
-                      placeholder='Search for a product or brand'
-                    />
-                  </div>
-                  <button
-                    type='submit'
-                    className='bg-main-two-600 flex-center text-xl text-white flex-shrink-0 w-48 hover-bg-main-two-700 d-lg-flex d-none'
-                  >
-                    <i className='ph ph-magnifying-glass' />
-                  </button>
-                </div>
-              </form>
+              <div className="flex-grow-1 mx-24 d-none d-lg-block">
+                <SemanticSearchBar />
+              </div>
             </div>
             {/* form Category start */}
             {/* Header Middle Right start */}
@@ -634,17 +625,74 @@ const HeaderTwo = ({ category }) => {
                     <i className='ph ph-magnifying-glass' />
                   </span>
                 </button>
-                <Link
-                  to='/account'
-                  className='flex-align flex-column gap-8 item-hover-two'
+                <div 
+                  className='position-relative'
+                  onMouseEnter={() => setDropdownOpen(true)}
+                  onMouseLeave={() => setDropdownOpen(false)}
                 >
-                  <span className='text-2xl text-white d-flex position-relative item-hover__text'>
-                    <i className='ph ph-user' />
-                  </span>
-                  <span className='text-md text-white item-hover__text d-none d-lg-flex'>
-                    Profile
-                  </span>
-                </Link>
+                  <Link
+                    to={currentUser ? '/account' : '/login'}
+                    className='flex-align flex-column gap-8 item-hover-two'
+                  >
+                    <span className='text-2xl text-white d-flex position-relative item-hover__text'>
+                      <i className='ph ph-user' />
+                    </span>
+                    <span className='text-md text-white item-hover__text d-none d-lg-flex'>
+                      {currentUser ? currentUser.firstName : 'Profile'}
+                    </span>
+                  </Link>
+                  {dropdownOpen && (
+                    <div 
+                      className="position-absolute bg-white rounded-12 shadow-lg p-16 border border-gray-100" 
+                      style={{ 
+                        top: '100%', 
+                        right: 0, 
+                        width: '200px', 
+                        zIndex: 9999, 
+                        marginTop: '12px',
+                        animation: 'fadeIn 0.2s ease-in-out'
+                      }}
+                    >
+                      {currentUser ? (
+                        <>
+                          <div className="border-bottom border-gray-100 pb-12 mb-12">
+                            <span className="text-xs text-gray-400 d-block text-start">Logged in as</span>
+                            <span className="text-sm fw-bold text-neutral-800 text-line-1 text-start d-block">{currentUser.firstName} {currentUser.lastName}</span>
+                          </div>
+                          <Link to="/account" className="text-sm text-gray-600 hover-text-main-600 d-flex align-items-center gap-8 py-8 px-4 rounded-8 hover-bg-neutral-50 transition-1" onClick={() => setDropdownOpen(false)}>
+                            <i className="ph ph-user text-md" /> My Profile
+                          </Link>
+                          <Link to="/wishlist" className="text-sm text-gray-600 hover-text-main-600 d-flex align-items-center gap-8 py-8 px-4 rounded-8 hover-bg-neutral-50 transition-1" onClick={() => setDropdownOpen(false)}>
+                            <i className="ph ph-heart text-md" /> Wishlist
+                          </Link>
+                          <Link to="/analytics" className="text-sm text-gray-600 hover-text-main-600 d-flex align-items-center gap-8 py-8 px-4 rounded-8 hover-bg-neutral-50 transition-1" onClick={() => setDropdownOpen(false)}>
+                            <i className="ph ph-chart-line text-md" /> Live Analytics
+                          </Link>
+                          <div className="border-top border-gray-100 pt-12 mt-12">
+                            <button 
+                              onClick={() => {
+                                logout();
+                                setDropdownOpen(false);
+                              }}
+                              className="btn btn-outline-danger btn-sm w-100 rounded-8 py-8 flex-center gap-4 fw-semibold text-xs"
+                            >
+                              <i className="ph ph-sign-out" /> Sign Out
+                            </button>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <Link to="/login" className="btn btn-main btn-sm w-100 rounded-8 py-8 mb-8 fw-semibold text-xs text-white bg-main-two-600 hover-bg-main-two-700 flex-center" onClick={() => setDropdownOpen(false)}>
+                            Sign In
+                          </Link>
+                          <Link to="/register" className="btn btn-outline-neutral btn-sm w-100 rounded-8 py-8 fw-semibold text-xs flex-center hover-bg-neutral-50" onClick={() => setDropdownOpen(false)}>
+                            Create Account
+                          </Link>
+                        </>
+                      )}
+                    </div>
+                  )}
+                </div>
                 <Link
                   to='/wishlist'
                   className='flex-align flex-column gap-8 item-hover-two'
@@ -652,7 +700,7 @@ const HeaderTwo = ({ category }) => {
                   <span className='text-2xl text-white d-flex position-relative me-6 mt-6 item-hover__text'>
                     <i className='ph ph-heart' />
                     <span className='w-16 h-16 flex-center rounded-circle bg-main-two-600 text-white text-xs position-absolute top-n6 end-n4'>
-                      2
+                      {wishlist?.length || 0}
                     </span>
                   </span>
                   <span className='text-md text-white item-hover__text d-none d-lg-flex'>
@@ -680,7 +728,7 @@ const HeaderTwo = ({ category }) => {
                   <span className='text-2xl text-white d-flex position-relative me-6 mt-6 item-hover__text'>
                     <i className='ph ph-shopping-cart-simple' />
                     <span className='w-16 h-16 flex-center rounded-circle bg-main-two-600 text-white text-xs position-absolute top-n6 end-n4'>
-                      2
+                      {cart?.items?.length || 0}
                     </span>
                   </span>
                   <span className='text-md text-white item-hover__text d-none d-lg-flex'>
@@ -739,7 +787,7 @@ const HeaderTwo = ({ category }) => {
                   </button>
                   <div className='logo px-16 d-lg-none d-block'>
                     <Link to='/' className='link'>
-                      <img src='assets/images/logo/logo.png' alt='Logo' />
+                      <img src='/assets/images/logo/logo.png' alt='Logo' />
                     </Link>
                   </div>
                   <ul className='scroll-sm p-0 py-8 overflow-y-auto'>
@@ -1404,7 +1452,7 @@ const HeaderTwo = ({ category }) => {
                   </button>
                   <div className='logo px-16 d-lg-none d-block'>
                     <Link to='/' className='link'>
-                      <img src='assets/images/logo/logo.png' alt='Logo' />
+                      <img src='/assets/images/logo/logo.png' alt='Logo' />
                     </Link>
                   </div>
                   <ul className='scroll-sm p-0 py-8 w-300 max-h-400 overflow-y-auto'>
@@ -1978,7 +2026,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleLanguageChange("English")}
                         >
                           <img
-                            src='assets/images/thumbs/flag1.png'
+                            src='/assets/images/thumbs/flag1.png'
                             alt='English'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -1992,7 +2040,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleLanguageChange("Japan")}
                         >
                           <img
-                            src='assets/images/thumbs/flag2.png'
+                            src='/assets/images/thumbs/flag2.png'
                             alt='Japan'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -2006,7 +2054,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleLanguageChange("French")}
                         >
                           <img
-                            src='assets/images/thumbs/flag3.png'
+                            src='/assets/images/thumbs/flag3.png'
                             alt='French'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -2020,7 +2068,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleLanguageChange("Germany")}
                         >
                           <img
-                            src='assets/images/thumbs/flag4.png'
+                            src='/assets/images/thumbs/flag4.png'
                             alt='Germany'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -2034,7 +2082,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleLanguageChange("Bangladesh")}
                         >
                           <img
-                            src='assets/images/thumbs/flag6.png'
+                            src='/assets/images/thumbs/flag6.png'
                             alt='Bangladesh'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -2048,7 +2096,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleLanguageChange("South Korea")}
                         >
                           <img
-                            src='assets/images/thumbs/flag5.png'
+                            src='/assets/images/thumbs/flag5.png'
                             alt='South Korea'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -2073,7 +2121,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleCurrencyChange("USD")}
                         >
                           <img
-                            src='assets/images/thumbs/flag1.png'
+                            src='/assets/images/thumbs/flag1.png'
                             alt='USD'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -2087,7 +2135,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleCurrencyChange("Yen")}
                         >
                           <img
-                            src='assets/images/thumbs/flag2.png'
+                            src='/assets/images/thumbs/flag2.png'
                             alt='Yen'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -2101,7 +2149,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleCurrencyChange("Franc")}
                         >
                           <img
-                            src='assets/images/thumbs/flag3.png'
+                            src='/assets/images/thumbs/flag3.png'
                             alt='Franc'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -2115,7 +2163,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleCurrencyChange("EURO")}
                         >
                           <img
-                            src='assets/images/thumbs/flag4.png'
+                            src='/assets/images/thumbs/flag4.png'
                             alt='EURO'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -2129,7 +2177,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleCurrencyChange("BDT")}
                         >
                           <img
-                            src='assets/images/thumbs/flag6.png'
+                            src='/assets/images/thumbs/flag6.png'
                             alt='BDT'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />
@@ -2143,7 +2191,7 @@ const HeaderTwo = ({ category }) => {
                           onClick={() => handleCurrencyChange("WON")}
                         >
                           <img
-                            src='assets/images/thumbs/flag5.png'
+                            src='/assets/images/thumbs/flag5.png'
                             alt='WON'
                             className='w-16 h-12 rounded-4 border border-gray-100'
                           />

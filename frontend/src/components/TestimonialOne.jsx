@@ -56,41 +56,41 @@ const TestimonialOne = () => {
       role: "Business Owner",
       rating: 5,
       desc: "Customers expressed that shopping at Asiana Fashion was a delightful experience, highlighting the vibrant colors and unique designs that made them feel special atevents",
-      img: "assets/images/thumbs/testimonials-img1.png",
+      img: "/assets/images/thumbs/testimonials-img1.png",
     },
     {
       name: "SAMIYA AKTER",
       role: "Front End Developer",
       rating: 5,
       desc: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia",
-      img: "assets/images/thumbs/testimonials-img2.png",
+      img: "/assets/images/thumbs/testimonials-img2.png",
     },
     {
       name: "JOHN DOE",
       role: "Max Model",
       rating: 5,
       desc: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here",
-      img: "assets/images/thumbs/testimonials-img3.png",
+      img: "/assets/images/thumbs/testimonials-img3.png",
     },
     {
       name: "MICHEL SMITH",
       role: "Former Model",
       rating: 5,
       desc: "Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.",
-      img: "assets/images/thumbs/testimonials-img4.png",
+      img: "/assets/images/thumbs/testimonials-img4.png",
     },
     {
       name: "ALEX",
       role: "Back End Developer",
       rating: 5,
       desc: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text",
-      img: "assets/images/thumbs/testimonials-img2.png",
+      img: "/assets/images/thumbs/testimonials-img2.png",
     },
   ];
   return (
     <section
       className='testimonials py-120 bg-neutral-600 bg-img overflow-hidden'
-      style={{ backgroundImage: "url('assets/images/bg/pattern-two.png')" }}
+      style={{ backgroundImage: "url('/assets/images/bg/pattern-two.png')" }}
     >
       <div className='container container-lg'>
         <div className='row gy-4 align-items-center'>

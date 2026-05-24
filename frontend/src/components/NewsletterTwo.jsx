@@ -7,7 +7,7 @@ const NewsletterTwo = () => {
                 <div className="flex-between gap-20 flex-wrap">
                     <div className="flex-align gap-22">
                         <span className="d-flex">
-                            <img src="assets/images/icon/envelop.png" alt="" />
+                            <img src="/assets/images/icon/envelop.png" alt="" />
                         </span>
                         <div>
                             <h5 className="text-white mb-12 fw-medium">

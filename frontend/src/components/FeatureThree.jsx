@@ -98,7 +98,7 @@ const FeatureThree = () => {
                 <div className='feature-item__thumb bg-yellow-light max-w-260 max-h-260 rounded-circle w-100 h-100'>
                   <Link to='/shop' className='w-100 h-100 flex-center'>
                     <img
-                      src='assets/images/thumbs/features-three-img1.png'
+                      src='/assets/images/thumbs/features-three-img1.png'
                       alt=''
                     />
                   </Link>
@@ -116,7 +116,7 @@ const FeatureThree = () => {
                 <div className='feature-item__thumb bg-danger-light max-w-260 max-h-260 rounded-circle w-100 h-100'>
                   <Link to='/shop' className='w-100 h-100 flex-center'>
                     <img
-                      src='assets/images/thumbs/features-three-img2.png'
+                      src='/assets/images/thumbs/features-three-img2.png'
                       alt=''
                     />
                   </Link>
@@ -134,7 +134,7 @@ const FeatureThree = () => {
                 <div className='feature-item__thumb bg-purple-light max-w-260 max-h-260 rounded-circle w-100 h-100'>
                   <Link to='/shop' className='w-100 h-100 flex-center'>
                     <img
-                      src='assets/images/thumbs/features-three-img3.png'
+                      src='/assets/images/thumbs/features-three-img3.png'
                       alt=''
                     />
                   </Link>
@@ -152,7 +152,7 @@ const FeatureThree = () => {
                 <div className='feature-item__thumb bg-danger-light max-w-260 max-h-260 rounded-circle w-100 h-100'>
                   <Link to='/shop' className='w-100 h-100 flex-center'>
                     <img
-                      src='assets/images/thumbs/features-three-img4.png'
+                      src='/assets/images/thumbs/features-three-img4.png'
                       alt=''
                     />
                   </Link>
@@ -170,7 +170,7 @@ const FeatureThree = () => {
                 <div className='feature-item__thumb bg-warning-light max-w-260 max-h-260 rounded-circle w-100 h-100'>
                   <Link to='/shop' className='w-100 h-100 flex-center'>
                     <img
-                      src='assets/images/thumbs/features-three-img5.png'
+                      src='/assets/images/thumbs/features-three-img5.png'
                       alt=''
                     />
                   </Link>
@@ -188,7 +188,7 @@ const FeatureThree = () => {
                 <div className='feature-item__thumb bg-success-light max-w-260 max-h-260 rounded-circle w-100 h-100'>
                   <Link to='/shop' className='w-100 h-100 flex-center'>
                     <img
-                      src='assets/images/thumbs/features-three-img6.png'
+                      src='/assets/images/thumbs/features-three-img6.png'
                       alt=''
                     />
                   </Link>
@@ -206,7 +206,7 @@ const FeatureThree = () => {
                 <div className='feature-item__thumb max-w-260 max-h-260 rounded-circle w-100 h-100'>
                   <Link to='/shop' className='w-100 h-100 flex-center'>
                     <img
-                      src='assets/images/thumbs/features-three-img3.png'
+                      src='/assets/images/thumbs/features-three-img3.png'
                       alt=''
                     />
                   </Link>

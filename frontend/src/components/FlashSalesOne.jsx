@@ -87,12 +87,12 @@ const FlashSalesOne = () => {
                         <div>
                             <div className="flash-sales-item rounded-16 overflow-hidden z-1 position-relative flex-align flex-0 justify-content-between gap-8">
                                 <img
-                                    src="assets/images/bg/flash-sale-bg1.png"
+                                    src="/assets/images/bg/flash-sale-bg1.png"
                                     alt=""
                                     className="position-absolute inset-block-start-0 inset-inline-start-0 w-100 h-100 object-fit-cover z-n1 flash-sales-item__bg"
                                 />
                                 <div className="flash-sales-item__thumb d-sm-block d-none">
-                                    <img src="assets/images/thumbs/flash-sale-img1.png" alt="" />
+                                    <img src="/assets/images/thumbs/flash-sale-img1.png" alt="" />
                                 </div>
                                 <div className="flash-sales-item__content ms-sm-auto">
                                     <h6 className="text-32 mb-20">Fresh Vegetables</h6>
@@ -131,12 +131,12 @@ const FlashSalesOne = () => {
                         <div>
                             <div className="flash-sales-item rounded-16 overflow-hidden z-1 position-relative flex-align flex-0 justify-content-between gap-8">
                                 <img
-                                    src="assets/images/bg/flash-sale-bg2.png"
+                                    src="/assets/images/bg/flash-sale-bg2.png"
                                     alt=""
                                     className="position-absolute inset-block-start-0 inset-inline-start-0 w-100 h-100 object-fit-cover z-n1 flash-sales-item__bg"
                                 />
                                 <div className="flash-sales-item__thumb d-sm-block d-none">
-                                    <img src="assets/images/thumbs/flash-sale-img2.png" alt="" />
+                                    <img src="/assets/images/thumbs/flash-sale-img2.png" alt="" />
                                 </div>
                                 <div className="flash-sales-item__content ms-sm-auto">
                                     <h6 className="text-32 mb-20">Daily Snacks</h6>
@@ -175,12 +175,12 @@ const FlashSalesOne = () => {
                         <div>
                             <div className="flash-sales-item rounded-16 overflow-hidden z-1 position-relative flex-align flex-0 justify-content-between gap-8">
                                 <img
-                                    src="assets/images/bg/flash-sale-bg2.png"
+                                    src="/assets/images/bg/flash-sale-bg2.png"
                                     alt=""
                                     className="position-absolute inset-block-start-0 inset-inline-start-0 w-100 h-100 object-fit-cover z-n1 flash-sales-item__bg"
                                 />
                                 <div className="flash-sales-item__thumb d-sm-block d-none">
-                                    <img src="assets/images/thumbs/flash-sale-img2.png" alt="" />
+                                    <img src="/assets/images/thumbs/flash-sale-img2.png" alt="" />
                                 </div>
                                 <div className="flash-sales-item__content ms-sm-auto">
                                     <h6 className="text-32 mb-20">Daily Snacks</h6>

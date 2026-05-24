@@ -81,7 +81,7 @@ const BannerOne = () => {
                                         </Link>
                                     </div>
                                     <div className="banner-item__thumb">
-                                        <img src="assets/images/thumbs/banner-img1.png" alt="" />
+                                        <img src="/assets/images/thumbs/banner-img1.png" alt="" />
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@ const BannerOne = () => {
                                         </Link>
                                     </div>
                                     <div className="banner-item__thumb">
-                                        <img src="assets/images/thumbs/banner-img3.png" alt="" />
+                                        <img src="/assets/images/thumbs/banner-img3.png" alt="" />
                                     </div>
                                 </div>
                             </div>

@@ -98,47 +98,47 @@ const BrandTwo = () => {
                         <Slider {...settings}>
                             <div>
                                 <div className="top-brand__item flex-center rounded-8 border border-gray-100 hover-border-gray-200 transition-1 px-8">
-                                    <img src="assets/images/thumbs/top-brand-img1.png" alt="" />
+                                    <img src="/assets/images/thumbs/top-brand-img1.png" alt="" />
                                 </div>
                             </div>
                             <div>
                                 <div className="top-brand__item flex-center rounded-8 border border-gray-100 hover-border-gray-200 transition-1 px-8">
-                                    <img src="assets/images/thumbs/top-brand-img2.png" alt="" />
+                                    <img src="/assets/images/thumbs/top-brand-img2.png" alt="" />
                                 </div>
                             </div>
                             <div>
                                 <div className="top-brand__item flex-center rounded-8 border border-gray-100 hover-border-gray-200 transition-1 px-8">
-                                    <img src="assets/images/thumbs/top-brand-img3.png" alt="" />
+                                    <img src="/assets/images/thumbs/top-brand-img3.png" alt="" />
                                 </div>
                             </div>
                             <div>
                                 <div className="top-brand__item flex-center rounded-8 border border-gray-100 hover-border-gray-200 transition-1 px-8">
-                                    <img src="assets/images/thumbs/top-brand-img4.png" alt="" />
+                                    <img src="/assets/images/thumbs/top-brand-img4.png" alt="" />
                                 </div>
                             </div>
                             <div>
                                 <div className="top-brand__item flex-center rounded-8 border border-gray-100 hover-border-gray-200 transition-1 px-8">
-                                    <img src="assets/images/thumbs/top-brand-img5.png" alt="" />
+                                    <img src="/assets/images/thumbs/top-brand-img5.png" alt="" />
                                 </div>
                             </div>
                             <div>
                                 <div className="top-brand__item flex-center rounded-8 border border-gray-100 hover-border-gray-200 transition-1 px-8">
-                                    <img src="assets/images/thumbs/top-brand-img6.png" alt="" />
+                                    <img src="/assets/images/thumbs/top-brand-img6.png" alt="" />
                                 </div>
                             </div>
                             <div>
                                 <div className="top-brand__item flex-center rounded-8 border border-gray-100 hover-border-gray-200 transition-1 px-8">
-                                    <img src="assets/images/thumbs/top-brand-img7.png" alt="" />
+                                    <img src="/assets/images/thumbs/top-brand-img7.png" alt="" />
                                 </div>
                             </div>
                             <div>
                                 <div className="top-brand__item flex-center rounded-8 border border-gray-100 hover-border-gray-200 transition-1 px-8">
-                                    <img src="assets/images/thumbs/top-brand-img8.png" alt="" />
+                                    <img src="/assets/images/thumbs/top-brand-img8.png" alt="" />
                                 </div>
                             </div>
                             <div>
                                 <div className="top-brand__item flex-center rounded-8 border border-gray-100 hover-border-gray-200 transition-1 px-8">
-                                    <img src="assets/images/thumbs/top-brand-img5.png" alt="" />
+                                    <img src="/assets/images/thumbs/top-brand-img5.png" alt="" />
                                 </div>
                             </div>
                         </Slider>

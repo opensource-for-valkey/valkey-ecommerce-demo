@@ -33,7 +33,7 @@ const BestSellsOne = () => {
                                             to="/product-details"
                                             className="product-card__thumb flex-center"
                                         >
-                                            <img src="assets/images/thumbs/best-sell1.png" alt="" />
+                                            <img src="/assets/images/thumbs/best-sell1.png" alt="" />
                                         </Link>
                                         <div className="countdown" id="countdown6">
                                             <ul className="countdown-list style-three flex-align flex-wrap">
@@ -119,7 +119,7 @@ const BestSellsOne = () => {
                                             to="/product-details"
                                             className="product-card__thumb flex-center"
                                         >
-                                            <img src="assets/images/thumbs/best-sell2.png" alt="" />
+                                            <img src="/assets/images/thumbs/best-sell2.png" alt="" />
                                         </Link>
                                         <div className="countdown" id="countdown7">
                                             <ul className="countdown-list style-three flex-align flex-wrap">
@@ -205,7 +205,7 @@ const BestSellsOne = () => {
                                             to="/product-details"
                                             className="product-card__thumb flex-center"
                                         >
-                                            <img src="assets/images/thumbs/best-sell3.png" alt="" />
+                                            <img src="/assets/images/thumbs/best-sell3.png" alt="" />
                                         </Link>
                                         <div className="countdown" id="countdown8">
                                             <ul className="countdown-list style-three flex-align flex-wrap">
@@ -291,7 +291,7 @@ const BestSellsOne = () => {
                                             to="/product-details"
                                             className="product-card__thumb flex-center"
                                         >
-                                            <img src="assets/images/thumbs/best-sell4.png" alt="" />
+                                            <img src="/assets/images/thumbs/best-sell4.png" alt="" />
                                         </Link>
                                         <div className="countdown" id="countdown9">
                                             <ul className="countdown-list style-three flex-align flex-wrap">
@@ -373,12 +373,12 @@ const BestSellsOne = () => {
                         <div className="position-relative rounded-16 bg-light-purple overflow-hidden p-28 z-1 text-center">
                             <div className="">
                                 <img
-                                    src="assets/images/bg/special-snacks.png"
+                                    src="/assets/images/bg/special-snacks.png"
                                     alt=""
                                     className="position-absolute inset-block-start-0 inset-inline-start-0 z-n1 w-100 h-100 cover-img"
                                 />
                                 <div className="d-xxl-block d-none">
-                                    <img src="assets/images/thumbs/special-snacks-img.png" alt="" />
+                                    <img src="/assets/images/thumbs/special-snacks-img.png" alt="" />
                                 </div>
                             </div>
                             <div className="py-xl-4">

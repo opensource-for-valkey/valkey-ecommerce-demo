@@ -483,7 +483,7 @@ const VendorTwo = () => {
                 <div className='vendors-two-item__top bg-overlay style-two position-relative'>
                   <div className='vendors-two-item__thumbs h-210'>
                     <img
-                      src='assets/images/thumbs/vendors-two-img1.png'
+                      src='/assets/images/thumbs/vendors-two-img1.png'
                       alt=''
                       className='cover-img'
                     />
@@ -492,7 +492,7 @@ const VendorTwo = () => {
                     <div className='d-flex align-items-center justify-content-between'>
                       <span className='w-80 h-80 flex-center bg-white rounded-circle flex-shrink-0'>
                         <img
-                          src='assets/images/thumbs/vendors-two-icon1.png'
+                          src='/assets/images/thumbs/vendors-two-icon1.png'
                           alt=''
                         />
                       </span>
@@ -586,7 +586,7 @@ const VendorTwo = () => {
                 <div className='vendors-two-item__top bg-overlay style-two position-relative'>
                   <div className='vendors-two-item__thumbs h-210'>
                     <img
-                      src='assets/images/thumbs/vendors-two-img2.png'
+                      src='/assets/images/thumbs/vendors-two-img2.png'
                       alt=''
                       className='cover-img'
                     />
@@ -595,7 +595,7 @@ const VendorTwo = () => {
                     <div className='d-flex align-items-center justify-content-between'>
                       <span className='w-80 h-80 flex-center bg-white rounded-circle flex-shrink-0'>
                         <img
-                          src='assets/images/thumbs/vendors-two-icon2.png'
+                          src='/assets/images/thumbs/vendors-two-icon2.png'
                           alt=''
                         />
                       </span>
@@ -689,7 +689,7 @@ const VendorTwo = () => {
                 <div className='vendors-two-item__top bg-overlay style-two position-relative'>
                   <div className='vendors-two-item__thumbs h-210'>
                     <img
-                      src='assets/images/thumbs/vendors-two-img3.png'
+                      src='/assets/images/thumbs/vendors-two-img3.png'
                       alt=''
                       className='cover-img'
                     />
@@ -698,7 +698,7 @@ const VendorTwo = () => {
                     <div className='d-flex align-items-center justify-content-between'>
                       <span className='w-80 h-80 flex-center bg-white rounded-circle flex-shrink-0'>
                         <img
-                          src='assets/images/thumbs/vendors-two-icon3.png'
+                          src='/assets/images/thumbs/vendors-two-icon3.png'
                           alt=''
                         />
                       </span>
@@ -792,7 +792,7 @@ const VendorTwo = () => {
                 <div className='vendors-two-item__top bg-overlay style-two position-relative'>
                   <div className='vendors-two-item__thumbs h-210'>
                     <img
-                      src='assets/images/thumbs/vendors-two-img4.png'
+                      src='/assets/images/thumbs/vendors-two-img4.png'
                       alt=''
                       className='cover-img'
                     />
@@ -801,7 +801,7 @@ const VendorTwo = () => {
                     <div className='d-flex align-items-center justify-content-between'>
                       <span className='w-80 h-80 flex-center bg-white rounded-circle flex-shrink-0'>
                         <img
-                          src='assets/images/thumbs/vendors-two-icon1.png'
+                          src='/assets/images/thumbs/vendors-two-icon1.png'
                           alt=''
                         />
                       </span>
@@ -895,7 +895,7 @@ const VendorTwo = () => {
                 <div className='vendors-two-item__top bg-overlay style-two position-relative'>
                   <div className='vendors-two-item__thumbs h-210'>
                     <img
-                      src='assets/images/thumbs/vendors-two-img5.png'
+                      src='/assets/images/thumbs/vendors-two-img5.png'
                       alt=''
                       className='cover-img'
                     />
@@ -904,7 +904,7 @@ const VendorTwo = () => {
                     <div className='d-flex align-items-center justify-content-between'>
                       <span className='w-80 h-80 flex-center bg-white rounded-circle flex-shrink-0'>
                         <img
-                          src='assets/images/thumbs/vendors-two-icon5.png'
+                          src='/assets/images/thumbs/vendors-two-icon5.png'
                           alt=''
                         />
                       </span>
@@ -998,7 +998,7 @@ const VendorTwo = () => {
                 <div className='vendors-two-item__top bg-overlay style-two position-relative'>
                   <div className='vendors-two-item__thumbs h-210'>
                     <img
-                      src='assets/images/thumbs/vendors-two-img6.png'
+                      src='/assets/images/thumbs/vendors-two-img6.png'
                       alt=''
                       className='cover-img'
                     />
@@ -1007,7 +1007,7 @@ const VendorTwo = () => {
                     <div className='d-flex align-items-center justify-content-between'>
                       <span className='w-80 h-80 flex-center bg-white rounded-circle flex-shrink-0'>
                         <img
-                          src='assets/images/thumbs/vendors-two-icon6.png'
+                          src='/assets/images/thumbs/vendors-two-icon6.png'
                           alt=''
                         />
                       </span>
@@ -1101,7 +1101,7 @@ const VendorTwo = () => {
                 <div className='vendors-two-item__top bg-overlay style-two position-relative'>
                   <div className='vendors-two-item__thumbs h-210'>
                     <img
-                      src='assets/images/thumbs/vendors-two-img7.png'
+                      src='/assets/images/thumbs/vendors-two-img7.png'
                       alt=''
                       className='cover-img'
                     />
@@ -1110,7 +1110,7 @@ const VendorTwo = () => {
                     <div className='d-flex align-items-center justify-content-between'>
                       <span className='w-80 h-80 flex-center bg-white rounded-circle flex-shrink-0'>
                         <img
-                          src='assets/images/thumbs/vendors-two-icon7.png'
+                          src='/assets/images/thumbs/vendors-two-icon7.png'
                           alt=''
                         />
                       </span>
@@ -1204,7 +1204,7 @@ const VendorTwo = () => {
                 <div className='vendors-two-item__top bg-overlay style-two position-relative'>
                   <div className='vendors-two-item__thumbs h-210'>
                     <img
-                      src='assets/images/thumbs/vendors-two-img8.png'
+                      src='/assets/images/thumbs/vendors-two-img8.png'
                       alt=''
                       className='cover-img'
                     />
@@ -1213,7 +1213,7 @@ const VendorTwo = () => {
                     <div className='d-flex align-items-center justify-content-between'>
                       <span className='w-80 h-80 flex-center bg-white rounded-circle flex-shrink-0'>
                         <img
-                          src='assets/images/thumbs/vendors-two-icon8.png'
+                          src='/assets/images/thumbs/vendors-two-icon8.png'
                           alt=''
                         />
                       </span>
@@ -1307,7 +1307,7 @@ const VendorTwo = () => {
                 <div className='vendors-two-item__top bg-overlay style-two position-relative'>
                   <div className='vendors-two-item__thumbs h-210'>
                     <img
-                      src='assets/images/thumbs/vendors-two-img9.png'
+                      src='/assets/images/thumbs/vendors-two-img9.png'
                       alt=''
                       className='cover-img'
                     />
@@ -1316,7 +1316,7 @@ const VendorTwo = () => {
                     <div className='d-flex align-items-center justify-content-between'>
                       <span className='w-80 h-80 flex-center bg-white rounded-circle flex-shrink-0'>
                         <img
-                          src='assets/images/thumbs/vendors-two-icon2.png'
+                          src='/assets/images/thumbs/vendors-two-icon2.png'
                           alt=''
                         />
                       </span>

@@ -9,6 +9,8 @@ import ProductDetailsPageTwo from "./pages/ProductDetailsPageTwo";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import AccountPage from "./pages/AccountPage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 import BlogPage from "./pages/BlogPage";
 import BlogDetailsPage from "./pages/BlogDetailsPage";
 import ContactPage from "./pages/ContactPage";
@@ -19,6 +21,10 @@ import VendorTwoPage from "./pages/VendorTwoPage";
 import VendorTwoDetailsPage from "./pages/VendorTwoDetailsPage";
 import BecomeSellerPage from "./pages/BecomeSellerPage";
 import WishlistPage from "./pages/WishlistPage";
+import ValkeyConsole from "./components/ValkeyConsole";
+import LiveAnalyticsPage from "./pages/LiveAnalyticsPage";
+import ShoppingAssistant from "./components/AI/ShoppingAssistant";
+
 function App() {
   return (
     <BrowserRouter>
@@ -33,7 +39,7 @@ function App() {
         <Route
           exact
           path='/product-details'
-          element={<ProductDetailsPageOne />}
+          element={<ProductDetailsPageTwo />}
         />
         <Route
           exact
@@ -45,6 +51,8 @@ function App() {
         <Route exact path='/become-seller' element={<BecomeSellerPage />} />
         <Route exact path='/wishlist' element={<WishlistPage />} />
         <Route exact path='/account' element={<AccountPage />} />
+        <Route exact path='/login' element={<LoginPage />} />
+        <Route exact path='/register' element={<RegisterPage />} />
         <Route exact path='/blog' element={<BlogPage />} />
         <Route exact path='/blog-details' element={<BlogDetailsPage />} />
         <Route exact path='/contact' element={<ContactPage />} />
@@ -56,7 +64,14 @@ function App() {
           path='/vendor-two-details'
           element={<VendorTwoDetailsPage />}
         />
+        <Route exact path='/analytics' element={<LiveAnalyticsPage />} />
       </Routes>
+      
+      {/* Global Valkey Database HUD Console */}
+      <ValkeyConsole />
+      
+      {/* Global AI Shopping Assistant */}
+      <ShoppingAssistant />
     </BrowserRouter>
   );
 }

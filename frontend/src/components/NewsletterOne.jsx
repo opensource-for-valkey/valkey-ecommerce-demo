@@ -6,7 +6,7 @@ const NewsletterOne = () => {
             <div className="container container-lg">
                 <div className="newsletter-box position-relative rounded-16 flex-align gap-16 flex-wrap z-1">
                     <img
-                        src="assets/images/bg/newsletter-bg.png"
+                        src="/assets/images/bg/newsletter-bg.png"
                         alt=""
                         className="position-absolute inset-block-start-0 inset-inline-start-0 z-n1 w-100 h-100 opacity-6"
                     />
@@ -35,7 +35,7 @@ const NewsletterOne = () => {
                             </div>
                         </div>
                         <div className="col-xl-6 text-center d-xl-block d-none">
-                            <img src="assets/images/thumbs/newsletter-img.png" alt="" />
+                            <img src="/assets/images/thumbs/newsletter-img.png" alt="" />
                         </div>
                     </div>
                 </div>

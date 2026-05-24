@@ -9,7 +9,7 @@ const PromotionalTwo = () => {
                     <div className="col-lg-4 col-sm-6">
                         <div className="position-relative rounded-16 overflow-hidden z-1 p-32">
                             <img
-                                src="assets/images/bg/promo-bg-img1.png"
+                                src="/assets/images/bg/promo-bg-img1.png"
                                 alt=""
                                 className="position-absolute inset-block-start-0 inset-inline-start-0 w-100 h-100 object-fit-cover z-n1"
                             />
@@ -28,7 +28,7 @@ const PromotionalTwo = () => {
                                     </Link>
                                 </div>
                                 <div className="pe-xxl-4">
-                                    <img src="assets/images/thumbs/promo-img1.png" alt="" />
+                                    <img src="/assets/images/thumbs/promo-img1.png" alt="" />
                                 </div>
                             </div>
                         </div>
@@ -36,7 +36,7 @@ const PromotionalTwo = () => {
                     <div className="col-lg-4 col-sm-6">
                         <div className="position-relative rounded-16 overflow-hidden z-1 p-32">
                             <img
-                                src="assets/images/bg/promo-bg-img2.png"
+                                src="/assets/images/bg/promo-bg-img2.png"
                                 alt=""
                                 className="position-absolute inset-block-start-0 inset-inline-start-0 w-100 h-100 object-fit-cover z-n1"
                             />
@@ -55,7 +55,7 @@ const PromotionalTwo = () => {
                                     </Link>
                                 </div>
                                 <div className="pe-xxl-4">
-                                    <img src="assets/images/thumbs/promo-img2.png" alt="" />
+                                    <img src="/assets/images/thumbs/promo-img2.png" alt="" />
                                 </div>
                             </div>
                         </div>
@@ -63,7 +63,7 @@ const PromotionalTwo = () => {
                     <div className="col-lg-4 col-sm-6">
                         <div className="position-relative rounded-16 overflow-hidden z-1 p-32">
                             <img
-                                src="assets/images/bg/promo-bg-img3.png"
+                                src="/assets/images/bg/promo-bg-img3.png"
                                 alt=""
                                 className="position-absolute inset-block-start-0 inset-inline-start-0 w-100 h-100 object-fit-cover z-n1"
                             />
@@ -82,7 +82,7 @@ const PromotionalTwo = () => {
                                     </Link>
                                 </div>
                                 <div className="pe-xxl-4">
-                                    <img src="assets/images/thumbs/promo-img3.png" alt="" />
+                                    <img src="/assets/images/thumbs/promo-img3.png" alt="" />
                                 </div>
                             </div>
                         </div>

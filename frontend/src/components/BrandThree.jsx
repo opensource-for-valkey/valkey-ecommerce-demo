@@ -91,31 +91,31 @@ const BrandThree = () => {
           <div className='top-brand__slider'>
             <Slider {...settings}>
               <div>
-                <img src='assets/images/thumbs/brand-three-img1.png' alt='' />
+                <img src='/assets/images/thumbs/brand-three-img1.png' alt='' />
               </div>
               <div>
-                <img src='assets/images/thumbs/brand-three-img2.png' alt='' />
+                <img src='/assets/images/thumbs/brand-three-img2.png' alt='' />
               </div>
               <div>
-                <img src='assets/images/thumbs/brand-three-img3.png' alt='' />
+                <img src='/assets/images/thumbs/brand-three-img3.png' alt='' />
               </div>
               <div>
-                <img src='assets/images/thumbs/brand-three-img4.png' alt='' />
+                <img src='/assets/images/thumbs/brand-three-img4.png' alt='' />
               </div>
               <div>
-                <img src='assets/images/thumbs/brand-three-img5.png' alt='' />
+                <img src='/assets/images/thumbs/brand-three-img5.png' alt='' />
               </div>
               <div>
-                <img src='assets/images/thumbs/brand-three-img6.png' alt='' />
+                <img src='/assets/images/thumbs/brand-three-img6.png' alt='' />
               </div>
               <div>
-                <img src='assets/images/thumbs/brand-three-img7.png' alt='' />
+                <img src='/assets/images/thumbs/brand-three-img7.png' alt='' />
               </div>
               <div>
-                <img src='assets/images/thumbs/brand-three-img8.png' alt='' />
+                <img src='/assets/images/thumbs/brand-three-img8.png' alt='' />
               </div>
               <div>
-                <img src='assets/images/thumbs/brand-three-img5.png' alt='' />
+                <img src='/assets/images/thumbs/brand-three-img5.png' alt='' />
               </div>
             </Slider>
           </div>
