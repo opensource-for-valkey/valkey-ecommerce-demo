@@ -19,17 +19,23 @@ import VendorTwoPage from "./pages/VendorTwoPage";
 import VendorTwoDetailsPage from "./pages/VendorTwoDetailsPage";
 import BecomeSellerPage from "./pages/BecomeSellerPage";
 import WishlistPage from "./pages/WishlistPage";
+import AgentAssistant from "./components/AgentAssistant";
+import AgentSearchRedirect from "./pages/AgentSearchRedirect";
+import ValkeyDashboardPage from "./pages/ValkeyDashboardPage";
 function App() {
   return (
     <BrowserRouter>
       <RouteScrollToTop />
       <PhosphorIconInit />
+      <AgentAssistant />
 
       <Routes>
         <Route exact path='/' element={<HomePageOne />} />
         <Route exact path='/index-two' element={<HomePageTwo />} />
         <Route exact path='/index-three' element={<HomePageThree />} />
         <Route exact path='/shop' element={<ShopPage />} />
+        <Route exact path='/ai-search' element={<AgentSearchRedirect />} />
+        <Route exact path='/valkey-dashboard' element={<ValkeyDashboardPage />} />
         <Route
           exact
           path='/product-details'

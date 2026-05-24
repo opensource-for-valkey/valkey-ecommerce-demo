@@ -1,0 +1,60 @@
+// App-wide theme tokens (default: dark)
+:root,
+:root[data-theme='dark'] {
+  --theme-bg: #0f1419;
+  --theme-surface: #1a2332;
+  --theme-surface-elevated: #243044;
+  --theme-border: #2d3a4f;
+  --theme-text: #e8edf4;
+  --theme-text-muted: #94a3b8;
+  --theme-input-bg: #1a2332;
+  --theme-shadow: rgba(0, 0, 0, 0.45);
+}
+
+:root[data-theme='light'] {
+  --theme-bg: #f8fafc;
+  --theme-surface: #ffffff;
+  --theme-surface-elevated: #ffffff;
+  --theme-border: #e5e7eb;
+  --theme-text: #111827;
+  --theme-text-muted: #6b7280;
+  --theme-input-bg: #ffffff;
+  --theme-shadow: rgba(15, 23, 42, 0.12);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--theme-border);
+  background: var(--theme-surface);
+  color: var(--theme-text-muted);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+
+  &:hover {
+    color: var(--theme-text);
+    border-color: var(--main-600, #fa6400);
+  }
+
+  &__label {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  &--compact {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    justify-content: center;
+    border: none;
+    background: transparent;
+
+    &:hover {
+      background: var(--theme-surface-elevated, #f3f4f6);
+    }
+  }
+}

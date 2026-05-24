@@ -1,0 +1,244 @@
+.valkey-dashboard--themed {
+  background: var(--theme-bg, #f8fafc);
+  color: var(--theme-text, #111827);
+
+  h4,
+  h6,
+  p,
+  strong {
+    color: inherit;
+  }
+
+  .text-gray-500,
+  .text-gray-600 {
+    color: var(--theme-text-muted, #6b7280) !important;
+  }
+}
+
+.valkey-dashboard-header h4 {
+  margin: 0;
+}
+
+.valkey-live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  background: var(--theme-surface-elevated, #f3f4f6);
+  color: var(--theme-text-muted, #6b7280);
+  border: 1px solid var(--theme-border, transparent);
+
+  &--on {
+    background: rgba(250, 100, 0, 0.15);
+    color: #fa6400;
+  }
+}
+
+.valkey-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #9ca3af;
+
+  .valkey-live-pill--on & {
+    background: #22c55e;
+    animation: valkey-pulse 1.5s infinite;
+  }
+}
+
+@keyframes valkey-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.valkey-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.valkey-stat-card {
+  background: var(--theme-surface, #fff);
+  border: 1px solid var(--theme-border, #e5e7eb);
+  border-radius: 12px;
+  padding: 16px;
+
+  &--accent {
+    border-color: #fa6400;
+    background: linear-gradient(
+      135deg,
+      rgba(250, 100, 0, 0.12),
+      var(--theme-surface, #fff)
+    );
+  }
+}
+
+.valkey-stat-label {
+  font-size: 12px;
+  color: var(--theme-text-muted, #6b7280);
+  margin: 0 0 4px;
+}
+
+.valkey-stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--theme-text, #111827);
+}
+
+.valkey-layout {
+  align-items: flex-start;
+}
+
+.valkey-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+.valkey-panel {
+  background: var(--theme-surface, #fff);
+  border: 2px solid #fa6400;
+  border-radius: 16px;
+  padding: 20px;
+  height: auto;
+  min-width: 0;
+  overflow: hidden;
+
+  &--log {
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &--patterns {
+    margin-top: 0;
+  }
+}
+
+.valkey-patterns-section {
+  margin-top: 24px;
+  clear: both;
+}
+
+.valkey-key-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--theme-border, #f3f4f6);
+    font-size: 14px;
+  }
+}
+
+.valkey-pattern-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+
+  li {
+    margin: 0;
+    padding: 14px 16px;
+    background: var(--theme-bg, #fafafa);
+    border: 1px solid var(--theme-border, #f3f4f6);
+    border-radius: 12px;
+    min-width: 0;
+
+    code {
+      display: block;
+      font-size: 11px;
+      color: #c2410c;
+      margin-bottom: 6px;
+      word-break: break-all;
+      white-space: normal;
+      line-height: 1.4;
+    }
+
+    span {
+      display: block;
+      color: #6b7280;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+  }
+}
+
+.valkey-event-log {
+  max-height: 480px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.valkey-event-row {
+  display: grid;
+  grid-template-columns: 72px 1fr auto auto auto;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 12px;
+  background: var(--theme-bg, #fafafa);
+  border-radius: 8px;
+  font-size: 12px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
+
+.valkey-event-time {
+  color: #9ca3af;
+  font-variant-numeric: tabular-nums;
+}
+
+.valkey-event-type {
+  font-weight: 600;
+  color: #374151;
+
+  &--search_live {
+    color: #059669;
+  }
+
+  &--conversation_set,
+  &--conversation_get {
+    color: #2563eb;
+  }
+
+  &--cache_set,
+  &--cache_get_hit,
+  &--cache_get_miss {
+    color: #d97706;
+  }
+}
+
+.valkey-event-key {
+  color: #6b7280;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.valkey-event-ms {
+  color: #9ca3af;
+}
+
+.valkey-event-meta {
+  color: #059669;
+  font-weight: 500;
+}

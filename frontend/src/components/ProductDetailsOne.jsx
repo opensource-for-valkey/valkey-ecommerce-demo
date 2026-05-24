@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Slider from 'react-slick';
 import { getCountdown } from '../helper/Countdown';
 
 const ProductDetailsOne = () => {
+    const location = useLocation();
+    const agentProduct = location.state?.agentProduct;
+
     const [timeLeft, setTimeLeft] = useState(getCountdown());
 
     useEffect(() => {
@@ -69,7 +72,20 @@ const ProductDetailsOne = () => {
                             </div>
                             <div className="col-xl-6">
                                 <div className="product-details__content">
-                                    <h5 className="mb-12">Lay's Potato Chips Onion Flavored</h5>
+                                    {agentProduct && (
+                                        <div className="alert alert-warning py-8 px-16 mb-16 text-sm rounded-8">
+                                            <i className="ph ph-sparkle me-4" />
+                                            Recommended by AI assistant
+                                            {agentProduct.reason && (
+                                                <span className="d-block mt-4 text-gray-700">
+                                                    {agentProduct.reason}
+                                                </span>
+                                            )}
+                                        </div>
+                                    )}
+                                    <h5 className="mb-12">
+                                        {agentProduct?.name || "Lay's Potato Chips Onion Flavored"}
+                                    </h5>
                                     <div className="flex-align flex-wrap gap-12">
                                         <div className="flex-align gap-12 flex-wrap">
                                             <div className="flex-align gap-8">
@@ -90,7 +106,9 @@ const ProductDetailsOne = () => {
                                                 </span>
                                             </div>
                                             <span className="text-sm fw-medium text-neutral-600">
-                                                4.7 Star Rating
+                                                {agentProduct?.rating
+                                                    ? `${agentProduct.rating} Star Rating`
+                                                    : '4.7 Star Rating'}
                                             </span>
                                             <span className="text-sm fw-medium text-gray-500">
                                                 (21,671)
@@ -99,19 +117,28 @@ const ProductDetailsOne = () => {
                                         <span className="text-sm fw-medium text-gray-500">|</span>
                                         <span className="text-gray-900">
                                             {" "}
-                                            <span className="text-gray-400">SKU:</span>EB4DRP{" "}
+                                            <span className="text-gray-400">SKU:</span>
+                                            {agentProduct?.productId
+                                                ? agentProduct.productId.slice(-8).toUpperCase()
+                                                : 'EB4DRP'}{" "}
                                         </span>
                                     </div>
                                     <span className="mt-32 pt-32 text-gray-700 border-top border-gray-100 d-block" />
                                     <p className="text-gray-700">
-                                        Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus
-                                        malesuada tincidunt. Class aptent taciti sociosqu ad litora
-                                        torquent
+                                        {agentProduct
+                                            ? 'Product details from your agentic search session. Add to cart or explore related items below.'
+                                            : 'Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt. Class aptent taciti sociosqu ad litora torquent'}
                                     </p>
                                     <div className="mt-32 flex-align flex-wrap gap-32">
                                         <div className="flex-align gap-8">
-                                            <h4 className="mb-0">$25.00</h4>
-                                            <span className="text-md text-gray-500">$38.00</span>
+                                            <h4 className="mb-0">
+                                                {agentProduct?.price != null
+                                                    ? `₹${Number(agentProduct.price).toLocaleString('en-IN')}`
+                                                    : '$25.00'}
+                                            </h4>
+                                            {!agentProduct && (
+                                                <span className="text-md text-gray-500">$38.00</span>
+                                            )}
                                         </div>
                                         <Link to="#" className="btn btn-main rounded-pill">
                                             Order on What'sApp
