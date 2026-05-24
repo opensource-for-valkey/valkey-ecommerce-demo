@@ -102,7 +102,7 @@ const NewArrivalTwo = () => {
                                     to="/product-details"
                                     className="product-card__thumb flex-center"
                                 >
-                                    <img src="assets/images/thumbs/product-img7.png" alt="" />
+                                    <img src="/assets/images/thumbs/product-img7.png" alt="" />
                                 </Link>
                                 <div className="product-card__content p-sm-2">
                                     <h6 className="title text-lg fw-semibold mt-12 mb-8">
@@ -153,7 +153,7 @@ const NewArrivalTwo = () => {
                                     to="/product-details"
                                     className="product-card__thumb flex-center"
                                 >
-                                    <img src="assets/images/thumbs/product-img8.png" alt="" />
+                                    <img src="/assets/images/thumbs/product-img8.png" alt="" />
                                 </Link>
                                 <div className="product-card__content p-sm-2">
                                     <h6 className="title text-lg fw-semibold mt-12 mb-8">
@@ -204,7 +204,7 @@ const NewArrivalTwo = () => {
                                     to="/product-details"
                                     className="product-card__thumb flex-center"
                                 >
-                                    <img src="assets/images/thumbs/product-img9.png" alt="" />
+                                    <img src="/assets/images/thumbs/product-img9.png" alt="" />
                                 </Link>
                                 <div className="product-card__content p-sm-2">
                                     <h6 className="title text-lg fw-semibold mt-12 mb-8">
@@ -255,7 +255,7 @@ const NewArrivalTwo = () => {
                                     to="/product-details"
                                     className="product-card__thumb flex-center"
                                 >
-                                    <img src="assets/images/thumbs/product-img10.png" alt="" />
+                                    <img src="/assets/images/thumbs/product-img10.png" alt="" />
                                 </Link>
                                 <div className="product-card__content p-sm-2">
                                     <h6 className="title text-lg fw-semibold mt-12 mb-8">
@@ -303,7 +303,7 @@ const NewArrivalTwo = () => {
                                     to="/product-details"
                                     className="product-card__thumb flex-center"
                                 >
-                                    <img src="assets/images/thumbs/product-img11.png" alt="" />
+                                    <img src="/assets/images/thumbs/product-img11.png" alt="" />
                                 </Link>
                                 <div className="product-card__content p-sm-2">
                                     <h6 className="title text-lg fw-semibold mt-12 mb-8">
@@ -354,7 +354,7 @@ const NewArrivalTwo = () => {
                                     to="/product-details"
                                     className="product-card__thumb flex-center"
                                 >
-                                    <img src="assets/images/thumbs/product-img12.png" alt="" />
+                                    <img src="/assets/images/thumbs/product-img12.png" alt="" />
                                 </Link>
                                 <div className="product-card__content p-sm-2">
                                     <h6 className="title text-lg fw-semibold mt-12 mb-8">
@@ -405,7 +405,7 @@ const NewArrivalTwo = () => {
                                     to="/product-details"
                                     className="product-card__thumb flex-center"
                                 >
-                                    <img src="assets/images/thumbs/product-img10.png" alt="" />
+                                    <img src="/assets/images/thumbs/product-img10.png" alt="" />
                                 </Link>
                                 <div className="product-card__content p-sm-2">
                                     <h6 className="title text-lg fw-semibold mt-12 mb-8">

@@ -4,3 +4,41 @@
 @import "slick-carousel/slick/slick-theme.css";
 @import 'select2/dist/css/select2.min.css';
 @import "/public/assets/sass/main.scss";
+
+/* Premium UI/UX Polish Overrides */
+.common-input {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.common-input:focus {
+  border-color: var(--main-600) !important;
+  box-shadow: 0 0 0 4px rgba(105, 131, 255, 0.15) !important;
+}
+
+.btn {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.btn-main:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(105, 131, 255, 0.25) !important;
+}
+
+.btn-main:active {
+  transform: translateY(0);
+}
+
+.alert {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

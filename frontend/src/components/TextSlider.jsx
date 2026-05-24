@@ -11,7 +11,7 @@ const TextSlider = () => {
         >
           <div className='d-flex flex-nowrap flex-shrink-0 flx-align gap-32'>
             <span className='flex-shrink-0'>
-              <img src='assets/images/icon/star-color.png' alt='' />
+              <img src='/assets/images/icon/star-color.png' alt='' />
             </span>
             <h4 className='text-white flex-grow-1 mb-0 fw-medium'>
               T-Shirt Offer
@@ -19,7 +19,7 @@ const TextSlider = () => {
           </div>
           <div className='d-flex flex-nowrap flex-shrink-0 flx-align gap-32'>
             <span className='flex-shrink-0'>
-              <img src='assets/images/icon/star-color.png' alt='' />
+              <img src='/assets/images/icon/star-color.png' alt='' />
             </span>
             <h4 className='text-white flex-grow-1 mb-0 fw-medium'>
               Best Selling Offer
@@ -27,7 +27,7 @@ const TextSlider = () => {
           </div>
           <div className='d-flex flex-nowrap flex-shrink-0 flx-align gap-32'>
             <span className='flex-shrink-0'>
-              <img src='assets/images/icon/star-color.png' alt='' />
+              <img src='/assets/images/icon/star-color.png' alt='' />
             </span>
             <h4 className='text-white flex-grow-1 mb-0 fw-medium'>
               Limited Offer Sales
@@ -35,7 +35,7 @@ const TextSlider = () => {
           </div>
           <div className='d-flex flex-nowrap flex-shrink-0 flx-align gap-32'>
             <span className='flex-shrink-0'>
-              <img src='assets/images/icon/star-color.png' alt='' />
+              <img src='/assets/images/icon/star-color.png' alt='' />
             </span>
             <h4 className='text-white flex-grow-1 mb-0 fw-medium'>
               Spring Collection
@@ -43,7 +43,7 @@ const TextSlider = () => {
           </div>
           <div className='d-flex flex-nowrap flex-shrink-0 flx-align gap-32'>
             <span className='flex-shrink-0'>
-              <img src='assets/images/icon/star-color.png' alt='' />
+              <img src='/assets/images/icon/star-color.png' alt='' />
             </span>
             <h4 className='text-white flex-grow-1 mb-0 fw-medium'>
               Hot Deal Products
@@ -51,7 +51,7 @@ const TextSlider = () => {
           </div>
           <div className='d-flex flex-nowrap flex-shrink-0 flx-align gap-32'>
             <span className='flex-shrink-0'>
-              <img src='assets/images/icon/star-color.png' alt='' />
+              <img src='/assets/images/icon/star-color.png' alt='' />
             </span>
             <h4 className='text-white flex-grow-1 mb-0 fw-medium'>
               {" "}

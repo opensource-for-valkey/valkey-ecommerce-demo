@@ -10,7 +10,7 @@ const BlogDetails = () => {
                         <div className="blog-item-wrapper">
                             <div className="blog-item">
                                 <img
-                                    src="assets/images/thumbs/blog-img1.png"
+                                    src="/assets/images/thumbs/blog-img1.png"
                                     alt=""
                                     className="cover-img rounded-16"
                                 />
@@ -78,14 +78,14 @@ const BlogDetails = () => {
                             <div className="row gy-4">
                                 <div className="col-sm-6 col-xs-6">
                                     <img
-                                        src="assets/images/thumbs/blog-details-img1.png"
+                                        src="/assets/images/thumbs/blog-details-img1.png"
                                         alt=""
                                         className="rounded-16"
                                     />
                                 </div>
                                 <div className="col-sm-6 col-xs-6">
                                     <img
-                                        src="assets/images/thumbs/blog-details-img2.png"
+                                        src="/assets/images/thumbs/blog-details-img2.png"
                                         alt=""
                                         className="rounded-16"
                                     />
@@ -325,7 +325,7 @@ const BlogDetails = () => {
                                 <h6 className="mb-48">Comments</h6>
                                 <div className="d-flex align-items-start gap-16 mb-32 pb-32 border-bottom border-gray-100">
                                     <img
-                                        src="assets/images/thumbs/comment-img1.png"
+                                        src="/assets/images/thumbs/comment-img1.png"
                                         alt=""
                                         className="w-40 h-40 rounded-circle object-fit-cover flex-shrink-0"
                                     />
@@ -346,7 +346,7 @@ const BlogDetails = () => {
                                 </div>
                                 <div className="d-flex align-items-start gap-16 mb-32 pb-32 border-bottom border-gray-100">
                                     <img
-                                        src="assets/images/thumbs/comment-img2.png"
+                                        src="/assets/images/thumbs/comment-img2.png"
                                         alt=""
                                         className="w-40 h-40 rounded-circle object-fit-cover flex-shrink-0"
                                     />
@@ -369,7 +369,7 @@ const BlogDetails = () => {
                                 </div>
                                 <div className="d-flex align-items-start gap-16 mb-32 pb-32 border-bottom border-gray-100">
                                     <img
-                                        src="assets/images/thumbs/comment-img3.png"
+                                        src="/assets/images/thumbs/comment-img3.png"
                                         alt=""
                                         className="w-40 h-40 rounded-circle object-fit-cover flex-shrink-0"
                                     />
@@ -389,7 +389,7 @@ const BlogDetails = () => {
                                 </div>
                                 <div className="d-flex align-items-start gap-16 mb-32 pb-32 border-bottom border-gray-100">
                                     <img
-                                        src="assets/images/thumbs/comment-img4.png"
+                                        src="/assets/images/thumbs/comment-img4.png"
                                         alt=""
                                         className="w-40 h-40 rounded-circle object-fit-cover flex-shrink-0"
                                     />
@@ -410,7 +410,7 @@ const BlogDetails = () => {
                                 </div>
                                 <div className="d-flex align-items-start gap-16">
                                     <img
-                                        src="assets/images/thumbs/comment-img5.png"
+                                        src="/assets/images/thumbs/comment-img5.png"
                                         alt=""
                                         className="w-40 h-40 rounded-circle object-fit-cover flex-shrink-0"
                                     />
@@ -472,7 +472,7 @@ const BlogDetails = () => {
                                     className="w-100 h-100 rounded-4 overflow-hidden w-120 h-120 flex-shrink-0"
                                 >
                                     <img
-                                        src="assets/images/thumbs/recent-post1.png"
+                                        src="/assets/images/thumbs/recent-post1.png"
                                         alt=""
                                         className="cover-img"
                                     />
@@ -504,7 +504,7 @@ const BlogDetails = () => {
                                     className="w-100 h-100 rounded-4 overflow-hidden w-120 h-120 flex-shrink-0"
                                 >
                                     <img
-                                        src="assets/images/thumbs/recent-post2.png"
+                                        src="/assets/images/thumbs/recent-post2.png"
                                         alt=""
                                         className="cover-img"
                                     />
@@ -536,7 +536,7 @@ const BlogDetails = () => {
                                     className="w-100 h-100 rounded-4 overflow-hidden w-120 h-120 flex-shrink-0"
                                 >
                                     <img
-                                        src="assets/images/thumbs/recent-post3.png"
+                                        src="/assets/images/thumbs/recent-post3.png"
                                         alt=""
                                         className="cover-img"
                                     />
@@ -568,7 +568,7 @@ const BlogDetails = () => {
                                     className="w-100 h-100 rounded-4 overflow-hidden w-120 h-120 flex-shrink-0"
                                 >
                                     <img
-                                        src="assets/images/thumbs/recent-post4.png"
+                                        src="/assets/images/thumbs/recent-post4.png"
                                         alt=""
                                         className="cover-img"
                                     />

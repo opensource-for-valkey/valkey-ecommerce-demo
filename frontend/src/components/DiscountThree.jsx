@@ -11,7 +11,7 @@ const DiscountThree = () => {
               className='discount-three-item bg-img rounded-16 overflow-hidden'
               style={{
                 backgroundImage:
-                  "url(assets/images/thumbs/discount-three-img1.png)",
+                  "url(/assets/images/thumbs/discount-three-img1.png)",
               }}
             >
               <div className='text-start'>
@@ -39,7 +39,7 @@ const DiscountThree = () => {
               className='discount-three-item bg-img rounded-16 overflow-hidden'
               style={{
                 backgroundImage:
-                  "url(assets/images/thumbs/discount-three-img2.png)",
+                  "url(/assets/images/thumbs/discount-three-img2.png)",
               }}
             >
               <div className='text-start'>
@@ -67,7 +67,7 @@ const DiscountThree = () => {
               className='discount-three-item bg-img rounded-16 overflow-hidden'
               style={{
                 backgroundImage:
-                  "url(assets/images/thumbs/discount-three-img3.png)",
+                  "url(/assets/images/thumbs/discount-three-img3.png)",
               }}
             >
               <div className='text-start'>

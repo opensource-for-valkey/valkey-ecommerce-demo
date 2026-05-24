@@ -10,7 +10,7 @@ const PromotionalThree = () => {
             <div
               className='promo-three-item bg-img rounded-16 overflow-hidden'
               style={{
-                backgroundImage: `url('assets/images/thumbs/promo-three-img-1.png')`,
+                backgroundImage: `url('/assets/images/thumbs/promo-three-img-1.png')`,
               }}
             >
               <div className='text-start'>
@@ -37,9 +37,9 @@ const PromotionalThree = () => {
           <div className='col-sm-6'>
             <div
               className='promo-three-item bg-img rounded-16 overflow-hidden'
-              data-background-image='assets/images/thumbs/promo-three-img-2.png'
+              data-background-image='/assets/images/thumbs/promo-three-img-2.png'
               style={{
-                backgroundImage: `url('assets/images/thumbs/promo-three-img-2.png')`,
+                backgroundImage: `url('/assets/images/thumbs/promo-three-img-2.png')`,
               }}
             >
               <div className='text-start'>

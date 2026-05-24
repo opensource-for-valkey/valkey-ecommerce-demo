@@ -5,7 +5,7 @@ const StepsSection = () => {
     <section className='step py-80'>
       <div className='position-relative z-1'>
         <img
-          src='assets/images/shape/curve-line-shape.png'
+          src='/assets/images/shape/curve-line-shape.png'
           alt=''
           className='position-absolute top-0 inset-inline-end-0 z-n1 me-60 d-lg-block d-none'
         />
@@ -67,7 +67,7 @@ const StepsSection = () => {
             </div>
             <div className='col-lg-6'>
               <div className='text-center'>
-                <img src='assets/images/thumbs/steps.png' alt='' />
+                <img src='/assets/images/thumbs/steps.png' alt='' />
               </div>
             </div>
           </div>

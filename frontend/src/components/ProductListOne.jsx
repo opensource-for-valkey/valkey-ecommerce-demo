@@ -18,7 +18,7 @@ const ProductListOne = () => {
                                 to="/product-details"
                                 className="product-card__thumb flex-center"
                             >
-                                <img src="assets/images/thumbs/product-img1.png" alt="" />
+                                <img src="/assets/images/thumbs/product-img1.png" alt="" />
                             </Link>
                             <div className="product-card__content mt-12">
                                 <div className="product-card__price mb-16">
@@ -82,7 +82,7 @@ const ProductListOne = () => {
                                 to="/product-details"
                                 className="product-card__thumb flex-center"
                             >
-                                <img src="assets/images/thumbs/product-img2.png" alt="" />
+                                <img src="/assets/images/thumbs/product-img2.png" alt="" />
                             </Link>
                             <div className="product-card__content mt-12">
                                 <div className="product-card__price mb-16">
@@ -146,7 +146,7 @@ const ProductListOne = () => {
                                 to="/product-details"
                                 className="product-card__thumb flex-center"
                             >
-                                <img src="assets/images/thumbs/product-img3.png" alt="" />
+                                <img src="/assets/images/thumbs/product-img3.png" alt="" />
                             </Link>
                             <div className="product-card__content mt-12">
                                 <div className="product-card__price mb-16">
@@ -210,7 +210,7 @@ const ProductListOne = () => {
                                 to="/product-details"
                                 className="product-card__thumb flex-center"
                             >
-                                <img src="assets/images/thumbs/product-img1.png" alt="" />
+                                <img src="/assets/images/thumbs/product-img1.png" alt="" />
                             </Link>
                             <div className="product-card__content mt-12">
                                 <div className="product-card__price mb-16">
@@ -274,7 +274,7 @@ const ProductListOne = () => {
                                 to="/product-details"
                                 className="product-card__thumb flex-center"
                             >
-                                <img src="assets/images/thumbs/product-img5.png" alt="" />
+                                <img src="/assets/images/thumbs/product-img5.png" alt="" />
                             </Link>
                             <div className="product-card__content mt-12">
                                 <div className="product-card__price mb-16">
@@ -338,7 +338,7 @@ const ProductListOne = () => {
                                 to="/product-details"
                                 className="product-card__thumb flex-center"
                             >
-                                <img src="assets/images/thumbs/product-img6.png" alt="" />
+                                <img src="/assets/images/thumbs/product-img6.png" alt="" />
                             </Link>
                             <div className="product-card__content mt-12">
                                 <div className="product-card__price mb-16">

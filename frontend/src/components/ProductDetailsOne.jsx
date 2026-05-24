@@ -14,10 +14,10 @@ const ProductDetailsOne = () => {
         return () => clearInterval(interval);
     }, []);
     const productImages = [
-        "assets/images/thumbs/product-details-thumb1.png",
-        "assets/images/thumbs/product-details-thumb2.png",
-        "assets/images/thumbs/product-details-thumb3.png",
-        "assets/images/thumbs/product-details-thumb2.png",
+        "/assets/images/thumbs/product-details-thumb1.png",
+        "/assets/images/thumbs/product-details-thumb2.png",
+        "/assets/images/thumbs/product-details-thumb3.png",
+        "/assets/images/thumbs/product-details-thumb2.png",
     ];
 
     // increment & decrement
@@ -380,7 +380,7 @@ const ProductDetailsOne = () => {
                                 to="#"
                                 className="btn bg-color-one rounded-16 flex-align gap-8 text-main-600 hover-bg-main-600 hover-text-white"
                             >
-                                <img src="assets/images/icon/satisfaction-icon.png" alt="" />
+                                <img src="/assets/images/icon/satisfaction-icon.png" alt="" />
                                 100% Satisfaction Guaranteed
                             </Link>
                         </div>
@@ -605,7 +605,7 @@ const ProductDetailsOne = () => {
                                             <h6 className="mb-24">Product Description</h6>
                                             <div className="d-flex align-items-start gap-24 pb-44 border-bottom border-gray-100 mb-44">
                                                 <img
-                                                    src="assets/images/thumbs/comment-img1.png"
+                                                    src="/assets/images/thumbs/comment-img1.png"
                                                     alt=""
                                                     className="w-52 h-52 object-fit-cover rounded-circle flex-shrink-0"
                                                 />
@@ -658,7 +658,7 @@ const ProductDetailsOne = () => {
                                             </div>
                                             <div className="d-flex align-items-start gap-24">
                                                 <img
-                                                    src="assets/images/thumbs/comment-img1.png"
+                                                    src="/assets/images/thumbs/comment-img1.png"
                                                     alt=""
                                                     className="w-52 h-52 object-fit-cover rounded-circle flex-shrink-0"
                                                 />

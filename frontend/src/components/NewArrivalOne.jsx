@@ -102,7 +102,7 @@ const NewArrivalOne = () => {
                                     to="/product-details"
                                     className="product-card__thumb flex-center"
                                 >
-                                    <img src="assets/images/thumbs/product-img20.png" alt="" />
+                                    <img src="/assets/images/thumbs/product-img20.png" alt="" />
                                 </Link>
                                 <div className="product-card__content mt-12">
                                     <div className="flex-align gap-6">
@@ -150,7 +150,7 @@ const NewArrivalOne = () => {
                                     to="/product-details"
                                     className="product-card__thumb flex-center"
                                 >
-                                    <img src="assets/images/thumbs/product-img21.png" alt="" />
+                                    <img src="/assets/images/thumbs/product-img21.png" alt="" />
                                 </Link>
                                 <div className="product-card__content mt-12">
                                     <div className="flex-align gap-6">
@@ -198,7 +198,7 @@ const NewArrivalOne = () => {
                                     to="/product-details"
                                     className="product-card__thumb flex-center"
                                 >
-                                    <img src="assets/images/thumbs/product-img22.png" alt="" />
+                                    <img src="/assets/images/thumbs/product-img22.png" alt="" />
                                 </Link>
                                 <div className="product-card__content mt-12">
                                     <div className="flex-align gap-6">
@@ -246,7 +246,7 @@ const NewArrivalOne = () => {
                                     to="/product-details"
                                     className="product-card__thumb flex-center"
                                 >
-                                    <img src="assets/images/thumbs/product-img23.png" alt="" />
+                                    <img src="/assets/images/thumbs/product-img23.png" alt="" />
                                 </Link>
                                 <div className="product-card__content mt-12">
                                     <div className="flex-align gap-6">
@@ -294,7 +294,7 @@ const NewArrivalOne = () => {
                                     to="/product-details"
                                     className="product-card__thumb flex-center"
                                 >
-                                    <img src="assets/images/thumbs/product-img24.png" alt="" />
+                                    <img src="/assets/images/thumbs/product-img24.png" alt="" />
                                 </Link>
                                 <div className="product-card__content mt-12">
                                     <div className="flex-align gap-6">
@@ -342,7 +342,7 @@ const NewArrivalOne = () => {
                                     to="/product-details"
                                     className="product-card__thumb flex-center"
                                 >
-                                    <img src="assets/images/thumbs/product-img25.png" alt="" />
+                                    <img src="/assets/images/thumbs/product-img25.png" alt="" />
                                 </Link>
                                 <div className="product-card__content mt-12">
                                     <div className="flex-align gap-6">
@@ -390,7 +390,7 @@ const NewArrivalOne = () => {
                                     to="/product-details"
                                     className="product-card__thumb flex-center"
                                 >
-                                    <img src="assets/images/thumbs/product-img21.png" alt="" />
+                                    <img src="/assets/images/thumbs/product-img21.png" alt="" />
                                 </Link>
                                 <div className="product-card__content mt-12">
                                     <div className="flex-align gap-6">

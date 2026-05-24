@@ -31,12 +31,12 @@ const PopularProductsOne = () => {
                     </div>
                     <div className="popular-products-box rounded-16 overflow-hidden flex-between position-relative z-1 mb-24">
                         <img
-                            src="assets/images/bg/expensive-offer-bg.png"
+                            src="/assets/images/bg/expensive-offer-bg.png"
                             alt=""
                             className="position-absolute inset-block-start-0 inset-block-start-0 w-100 h-100 z-n1"
                         />
                         <div className="d-lg-block d-none ps-32">
-                            <img src="assets/images/thumbs/expensive-offer1.png" alt="" />
+                            <img src="/assets/images/thumbs/expensive-offer1.png" alt="" />
                         </div>
                         <div className="popular-products-box__content px-sm-4 d-block w-100 text-center py-20">
                             <div className="flex-align gap-16 justify-content-center">
@@ -65,7 +65,7 @@ const PopularProductsOne = () => {
                             </div>
                         </div>
                         <div className="d-lg-block d-none ">
-                            <img src="assets/images/thumbs/expensive-offer2.png" alt="" />
+                            <img src="/assets/images/thumbs/expensive-offer2.png" alt="" />
                         </div>
                     </div>
                     <div className="row gy-4">
@@ -77,7 +77,7 @@ const PopularProductsOne = () => {
                                     tabIndex={0}
                                 >
                                     <img
-                                        src="assets/images/thumbs/popular-img1.png"
+                                        src="/assets/images/thumbs/popular-img1.png"
                                         alt=""
                                         className="w-auto max-w-unset"
                                     />
@@ -122,7 +122,7 @@ const PopularProductsOne = () => {
                                     tabIndex={0}
                                 >
                                     <img
-                                        src="assets/images/thumbs/popular-img2.png"
+                                        src="/assets/images/thumbs/popular-img2.png"
                                         alt=""
                                         className="w-auto max-w-unset"
                                     />
@@ -167,7 +167,7 @@ const PopularProductsOne = () => {
                                     tabIndex={0}
                                 >
                                     <img
-                                        src="assets/images/thumbs/popular-img3.png"
+                                        src="/assets/images/thumbs/popular-img3.png"
                                         alt=""
                                         className="w-auto max-w-unset"
                                     />
@@ -212,7 +212,7 @@ const PopularProductsOne = () => {
                                     tabIndex={0}
                                 >
                                     <img
-                                        src="assets/images/thumbs/popular-img4.png"
+                                        src="/assets/images/thumbs/popular-img4.png"
                                         alt=""
                                         className="w-auto max-w-unset"
                                     />
@@ -257,7 +257,7 @@ const PopularProductsOne = () => {
                                     tabIndex={0}
                                 >
                                     <img
-                                        src="assets/images/thumbs/popular-img5.png"
+                                        src="/assets/images/thumbs/popular-img5.png"
                                         alt=""
                                         className="w-auto max-w-unset"
                                     />
@@ -302,7 +302,7 @@ const PopularProductsOne = () => {
                                     tabIndex={0}
                                 >
                                     <img
-                                        src="assets/images/thumbs/popular-img6.png"
+                                        src="/assets/images/thumbs/popular-img6.png"
                                         alt=""
                                         className="w-auto max-w-unset"
                                     />
@@ -347,7 +347,7 @@ const PopularProductsOne = () => {
                                     tabIndex={0}
                                 >
                                     <img
-                                        src="assets/images/thumbs/popular-img7.png"
+                                        src="/assets/images/thumbs/popular-img7.png"
                                         alt=""
                                         className="w-auto max-w-unset"
                                     />
@@ -392,7 +392,7 @@ const PopularProductsOne = () => {
                                     tabIndex={0}
                                 >
                                     <img
-                                        src="assets/images/thumbs/popular-img8.png"
+                                        src="/assets/images/thumbs/popular-img8.png"
                                         alt=""
                                         className="w-auto max-w-unset"
                                     />

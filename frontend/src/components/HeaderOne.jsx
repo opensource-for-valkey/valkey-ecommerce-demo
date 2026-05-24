@@ -111,7 +111,7 @@ const HeaderOne = () => {
         </button>
         <div className='mobile-menu__inner'>
           <Link to='/' className='mobile-menu__logo'>
-            <img src='assets/images/logo/logo.png' alt='Logo' />
+            <img src='/assets/images/logo/logo.png' alt='Logo' />
           </Link>
           <div className='mobile-menu__menu'>
             {/* Nav Menu Start */}
@@ -472,7 +472,7 @@ const HeaderOne = () => {
                       onClick={() => handleLanguageChange("English")}
                     >
                       <img
-                        src='assets/images/thumbs/flag1.png'
+                        src='/assets/images/thumbs/flag1.png'
                         alt=''
                         className='w-16 h-12 rounded-4 border border-gray-100'
                       />
@@ -486,7 +486,7 @@ const HeaderOne = () => {
                       onClick={() => handleLanguageChange("Japan")}
                     >
                       <img
-                        src='assets/images/thumbs/flag2.png'
+                        src='/assets/images/thumbs/flag2.png'
                         alt=''
                         className='w-16 h-12 rounded-4 border border-gray-100'
                       />
@@ -500,7 +500,7 @@ const HeaderOne = () => {
                       onClick={() => handleLanguageChange("French")}
                     >
                       <img
-                        src='assets/images/thumbs/flag3.png'
+                        src='/assets/images/thumbs/flag3.png'
                         alt=''
                         className='w-16 h-12 rounded-4 border border-gray-100'
                       />
@@ -514,7 +514,7 @@ const HeaderOne = () => {
                       onClick={() => handleLanguageChange("Germany")}
                     >
                       <img
-                        src='assets/images/thumbs/flag4.png'
+                        src='/assets/images/thumbs/flag4.png'
                         alt=''
                         className='w-16 h-12 rounded-4 border border-gray-100'
                       />
@@ -528,7 +528,7 @@ const HeaderOne = () => {
                       onClick={() => handleLanguageChange("Bangladesh")}
                     >
                       <img
-                        src='assets/images/thumbs/flag6.png'
+                        src='/assets/images/thumbs/flag6.png'
                         alt=''
                         className='w-16 h-12 rounded-4 border border-gray-100'
                       />
@@ -542,7 +542,7 @@ const HeaderOne = () => {
                       onClick={() => handleLanguageChange("South Korea")}
                     >
                       <img
-                        src='assets/images/thumbs/flag5.png'
+                        src='/assets/images/thumbs/flag5.png'
                         alt=''
                         className='w-16 h-12 rounded-4 border border-gray-100'
                       />
@@ -564,7 +564,7 @@ const HeaderOne = () => {
                       onClick={() => handleCurrencyChange("USD")}
                     >
                       <img
-                        src='assets/images/thumbs/flag1.png'
+                        src='/assets/images/thumbs/flag1.png'
                         alt=''
                         className='w-16 h-12 rounded-4 border border-gray-100'
                       />
@@ -578,7 +578,7 @@ const HeaderOne = () => {
                       onClick={() => handleCurrencyChange("Yen")}
                     >
                       <img
-                        src='assets/images/thumbs/flag2.png'
+                        src='/assets/images/thumbs/flag2.png'
                         alt=''
                         className='w-16 h-12 rounded-4 border border-gray-100'
                       />
@@ -592,7 +592,7 @@ const HeaderOne = () => {
                       onClick={() => handleCurrencyChange("Franc")}
                     >
                       <img
-                        src='assets/images/thumbs/flag3.png'
+                        src='/assets/images/thumbs/flag3.png'
                         alt=''
                         className='w-16 h-12 rounded-4 border border-gray-100'
                       />
@@ -606,7 +606,7 @@ const HeaderOne = () => {
                       onClick={() => handleCurrencyChange("EURO")}
                     >
                       <img
-                        src='assets/images/thumbs/flag4.png'
+                        src='/assets/images/thumbs/flag4.png'
                         alt=''
                         className='w-16 h-12 rounded-4 border border-gray-100'
                       />
@@ -620,7 +620,7 @@ const HeaderOne = () => {
                       onClick={() => handleCurrencyChange("BDT")}
                     >
                       <img
-                        src='assets/images/thumbs/flag6.png'
+                        src='/assets/images/thumbs/flag6.png'
                         alt=''
                         className='w-16 h-12 rounded-4 border border-gray-100'
                       />
@@ -634,7 +634,7 @@ const HeaderOne = () => {
                       onClick={() => handleCurrencyChange("WON")}
                     >
                       <img
-                        src='assets/images/thumbs/flag5.png'
+                        src='/assets/images/thumbs/flag5.png'
                         alt=''
                         className='w-16 h-12 rounded-4 border border-gray-100'
                       />
@@ -668,8 +668,24 @@ const HeaderOne = () => {
           <nav className='header-inner flex-between'>
             {/* Logo Start */}
             <div className='logo'>
-              <Link to='/' className='link'>
-                <img src='assets/images/logo/logo.png' alt='Logo' />
+              <Link to='/' className='link text-main-600 d-flex align-items-center'>
+                <svg width="150" height="38" viewBox="0 0 150 38" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ verticalAlign: 'middle' }}>
+                  <path d="M14 2L3 21H15L11 36L27 14H16L22 2H14Z" fill="url(#logoGrad1)" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+                  <text x="34" y="25" fill="currentColor" fontFamily="'Outfit', 'Inter', sans-serif" fontSize="18" fontWeight="800" letterSpacing="0.8">
+                    VALKEY
+                  </text>
+                  <text x="110" y="25" fill="#299E60" fontFamily="'Outfit', 'Inter', sans-serif" fontSize="18" fontWeight="400">
+                    MART
+                  </text>
+                  <circle cx="128" cy="20" r="3" fill="#299E60" />
+                  <defs>
+                    <linearGradient id="logoGrad1" x1="3" y1="2" x2="27" y2="36" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stopColor="#299E60" />
+                      <stop offset="50%" stopColor="#3B82F6" />
+                      <stop offset="100%" stopColor="#8B5CF6" />
+                    </linearGradient>
+                  </defs>
+                </svg>
               </Link>
             </div>
             {/* Logo End  */}
@@ -824,7 +840,7 @@ const HeaderOne = () => {
                   {/* Logo Start */}
                   <div className='logo px-16 d-lg-none d-block'>
                     <Link to='/' className='link'>
-                      <img src='assets/images/logo/logo.png' alt='Logo' />
+                      <img src='/assets/images/logo/logo.png' alt='Logo' />
                     </Link>
                   </div>
                   {/* Logo End */}
