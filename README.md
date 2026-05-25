@@ -1,4 +1,4 @@
-# Valkey E-Commerce Demo
+# Valkey E-Commerce Demo Application 
 
 An e-commerce platform starter built with React, designed to showcase [Valkey](https://valkey.io/) capabilities across multiple subsystems. Created for the **Build Beyond Limits** hackathon powered by Valkey, hosted by React Hyderabad.
 
