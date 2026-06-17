@@ -19,6 +19,8 @@ import VendorTwoPage from "./pages/VendorTwoPage";
 import VendorTwoDetailsPage from "./pages/VendorTwoDetailsPage";
 import BecomeSellerPage from "./pages/BecomeSellerPage";
 import WishlistPage from "./pages/WishlistPage";
+import ValkeyViewer from "./components/ValkeyViewer";
+
 function App() {
   return (
     <BrowserRouter>
@@ -57,6 +59,9 @@ function App() {
           element={<VendorTwoDetailsPage />}
         />
       </Routes>
+
+      {/* Floating Realtime Valkey Monitor */}
+      <ValkeyViewer />
     </BrowserRouter>
   );
 }
