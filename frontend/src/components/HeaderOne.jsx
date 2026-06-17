@@ -2,8 +2,76 @@ import React, { useEffect, useState } from "react";
 import query from "jquery";
 import { Link, NavLink } from "react-router-dom";
 
-const HeaderOne = () => {
+const HeaderOne = ({
+  searchResults,
+  setSearchResults,
+  searchMetrics,
+  setSearchMetrics,
+  searchQuery,
+  setSearchQuery,
+  isSearching,
+  setIsSearching,
+  chatHistory,
+  setChatHistory,
+  sessionId
+}) => {
   const [scroll, setScroll] = useState(false);
+
+  const [trendingSearches, setTrendingSearches] = useState([]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const fetchTrending = async () => {
+    try {
+      const res = await fetch("http://localhost:5005/trending");
+      if (res.ok) {
+        const data = await res.json();
+        setTrendingSearches(data);
+      }
+    } catch (err) {
+      console.error("Failed to fetch trending searches:", err);
+    }
+  };
+
+  const handleSearchSubmit = async (e, customQuery = null) => {
+    if (e) e.preventDefault();
+    const queryToSearch = customQuery !== null ? customQuery : searchQuery;
+    if (!queryToSearch.trim()) return;
+
+    setIsSearching(true);
+    setSearchQuery(queryToSearch);
+    setIsDropdownOpen(true);
+
+    try {
+      const res = await fetch("http://localhost:5005/agent-search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: queryToSearch, sessionId }),
+      });
+
+      if (res.ok) {
+        const result = await res.json();
+        setSearchResults(result.data);
+        setSearchMetrics({
+          source: result.source,
+          responseTime: result.responseTime,
+          aiIntent: result.aiIntent
+        });
+        setChatHistory(result.history || []);
+        
+        // Close dropdown so results render directly on the main e-commerce page body
+        setIsDropdownOpen(false);
+        fetchTrending();
+      }
+    } catch (err) {
+      console.error("Search failed:", err);
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchTrending();
+  }, []);
   useEffect(() => {
     window.onscroll = () => {
       if (window.pageYOffset < 150) {
@@ -675,7 +743,7 @@ const HeaderOne = () => {
             {/* Logo End  */}
             {/* form location Start */}
             <form
-              action='#'
+              onSubmit={handleSearchSubmit}
               className='flex-align flex-wrap form-location-wrapper'
             >
               <div className='search-category d-flex h-48 select-border-end-0 radius-end-0 search-form d-sm-flex d-none'>
@@ -701,6 +769,12 @@ const HeaderOne = () => {
                     type='text'
                     className='search-form__input common-input py-13 ps-16 pe-18 rounded-end-pill pe-44'
                     placeholder='Search for a product or brand'
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onFocus={() => {
+                      setIsDropdownOpen(true);
+                      fetchTrending();
+                    }}
                   />
                   <button
                     type='submit'
@@ -708,6 +782,250 @@ const HeaderOne = () => {
                   >
                     <i className='ph ph-magnifying-glass' />
                   </button>
+
+                  {/* Valkey Agentic Search Floating Dashboard */}
+                  {isDropdownOpen && (
+                    <div 
+                      className="position-absolute bg-white border border-gray-100 p-20 z-3"
+                      style={{
+                        top: "105%",
+                        left: 0,
+                        width: "100%",
+                        minWidth: "550px",
+                        borderRadius: "16px",
+                        boxShadow: "0 10px 30px rgba(0,0,0,0.12)",
+                        backdropFilter: "blur(12px)",
+                        background: "rgba(255, 255, 255, 0.98)",
+                        textAlign: "left",
+                        padding: "20px"
+                      }}
+                    >
+                      {/* Top Row: Trending Searches */}
+                      <div className="mb-16" style={{ marginBottom: '16px' }}>
+                        <div className="d-flex justify-content-between align-items-center mb-8" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                          <span className="text-gray-900 fw-semibold text-sm d-flex align-items-center gap-4" style={{ fontWeight: 600, color: '#111', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                            <i className="ph ph-fire text-danger" style={{ color: "#E25822", fontSize: '16px' }} /> Trending Searches
+                          </span>
+                          <button 
+                            type="button" 
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setIsDropdownOpen(false);
+                            }}
+                            className="text-xs text-gray-400 hover-text-gray-700"
+                            style={{ fontSize: '12px', color: '#888', border: 'none', background: 'none', cursor: 'pointer' }}
+                          >
+                            Close
+                          </button>
+                        </div>
+                        <div className="d-flex flex-wrap gap-8" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                          {trendingSearches.length === 0 ? (
+                            <span className="text-gray-400 text-xs" style={{ fontSize: '12px', color: '#999' }}>No searches recorded yet. Search "gaming laptop" to start!</span>
+                          ) : (
+                            trendingSearches.map((trend) => (
+                              <button
+                                key={trend.query}
+                                type="button"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setSearchQuery(trend.query);
+                                  handleSearchSubmit(null, trend.query);
+                                }}
+                                className="px-12 py-6 rounded-pill border border-gray-100 text-xs bg-gray-50 text-gray-700 hover-bg-main-600 hover-text-white transition-all flex-align gap-4"
+                                style={{
+                                  padding: "6px 12px",
+                                  borderRadius: "20px",
+                                  border: "1px solid #f0f0f0",
+                                  background: "#f9f9f9",
+                                  fontSize: "11px",
+                                  color: "#444",
+                                  cursor: "pointer",
+                                  display: "inline-flex",
+                                  alignItems: "center",
+                                  gap: "4px"
+                                }}
+                              >
+                                <span>{trend.query}</span>
+                                <span className="text-gray-400 text-10" style={{ fontSize: '10px', color: '#888' }}>({trend.count}x)</span>
+                              </button>
+                            ))
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Valkey Cache Dashboard / Analytics */}
+                      {searchMetrics && (
+                        <div 
+                          className="mb-16 p-12 rounded-12 border transition-all"
+                          style={{
+                            marginBottom: '16px',
+                            padding: '12px',
+                            borderWidth: '1px',
+                            borderStyle: 'solid',
+                            background: searchMetrics.source === 'valkey-cache' ? 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)' : 'linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%)',
+                            borderColor: searchMetrics.source === 'valkey-cache' ? '#bbf7d0' : '#fde68a',
+                            borderRadius: '12px'
+                          }}
+                        >
+                          <div className="d-flex justify-content-between align-items-center mb-8" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                            {searchMetrics.source === 'valkey-cache' ? (
+                              <span className="badge bg-success text-white px-8 py-4 rounded-pill fw-bold text-xs" style={{ background: '#16a34a', color: '#fff', padding: '4px 8px', borderRadius: '12px', fontWeight: 'bold', fontSize: '11px' }}>
+                                ⚡ Powered by Valkey Cache
+                              </span>
+                            ) : (
+                              <span className="badge bg-warning text-white px-8 py-4 rounded-pill fw-bold text-xs" style={{ background: '#d97706', color: '#fff', padding: '4px 8px', borderRadius: '12px', fontWeight: 'bold', fontSize: '11px' }}>
+                                ❌ Uncached Database Miss
+                              </span>
+                            )}
+                            <span 
+                              className="fw-bold text-sm" 
+                              style={{ fontWeight: 'bold', fontSize: '13px', color: searchMetrics.source === 'valkey-cache' ? '#16a34a' : '#b45309' }}
+                            >
+                              Latency: {searchMetrics.responseTime}
+                            </span>
+                          </div>
+
+                          {searchMetrics.aiIntent && (
+                            <div className="text-xs text-gray-700 mt-6 pt-6 border-top" style={{ fontSize: '11px', color: '#555', marginTop: '6px', paddingTop: '6px', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
+                              <span className="fw-semibold text-gray-900" style={{ fontWeight: 600, color: '#222' }}>AI Logic: </span>
+                              {searchMetrics.aiIntent.aiExplanation}
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Search Results */}
+                      <div>
+                        <span className="text-gray-900 fw-semibold text-sm d-block mb-8" style={{ fontWeight: 600, color: '#111', fontSize: '13px', display: 'block', marginBottom: '8px' }}>
+                          Search Results
+                        </span>
+
+                        {isSearching ? (
+                          <div className="py-20 text-center" style={{ padding: '20px 0', textAlign: 'center' }}>
+                            <div className="spinner-border spinner-border-sm text-success" role="status" style={{ display: 'inline-block', width: '16px', height: '16px', border: '2px solid #299E60', borderRightColor: 'transparent', borderRadius: '50%', animation: 'spinner-border .75s linear infinite' }} />
+                            <span className="ms-8 text-xs text-gray-500" style={{ fontSize: '12px', color: '#777', marginLeft: '8px' }}>AI parsing query and loading database...</span>
+                          </div>
+                        ) : searchResults === null ? (
+                          <div className="py-20 text-center text-gray-400 text-xs" style={{ padding: '20px 0', textAlign: 'center', fontSize: '12px', color: '#999' }}>
+                            Enter a search query like "gaming laptop" or "shoes under 4000" to start.
+                          </div>
+                        ) : searchResults.length === 0 ? (
+                          <div className="py-20 text-center text-gray-500 text-xs" style={{ padding: '20px 0', textAlign: 'center', fontSize: '12px', color: '#666' }}>
+                            No products matched your search.
+                          </div>
+                        ) : (
+                          <div className="d-flex flex-column gap-8 scroll-sm" style={{ display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '280px', overflowY: 'auto' }}>
+                            {searchResults.map((product) => (
+                              <div 
+                                key={product.id} 
+                                className="p-12 border border-gray-100 rounded-12 hover-bg-neutral-50 transition-all"
+                                style={{
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  padding: '12px',
+                                  border: '1px solid #f0f0f0',
+                                  borderRadius: '12px',
+                                  background: '#fff',
+                                  marginBottom: '4px',
+                                  boxShadow: '0 2px 8px rgba(0,0,0,0.01)',
+                                  transition: 'all 0.2s ease-in-out',
+                                  cursor: 'pointer'
+                                }}
+                              >
+                                {/* Left Section: Rounded product thumbnail */}
+                                <div style={{ flexShrink: 0, marginRight: '14px' }}>
+                                  <img 
+                                    src={product.image} 
+                                    alt={product.name} 
+                                    style={{
+                                      width: '56px',
+                                      height: '56px',
+                                      objectFit: 'cover',
+                                      borderRadius: '8px',
+                                      border: '1px solid #f0f0f0',
+                                      display: 'block'
+                                    }}
+                                  />
+                                </div>
+
+                                {/* Middle Section: Category, Name, Gold Star Rating */}
+                                <div style={{ flexGrow: 1, minWidth: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left' }}>
+                                  <span 
+                                    style={{
+                                      fontSize: '9px',
+                                      fontWeight: 600,
+                                      color: '#71717a',
+                                      textTransform: 'uppercase',
+                                      background: '#f4f4f5',
+                                      padding: '2px 8px',
+                                      borderRadius: '4px',
+                                      marginBottom: '4px',
+                                      letterSpacing: '0.05em'
+                                    }}
+                                  >
+                                    {product.category}
+                                  </span>
+                                  <h4 
+                                    style={{ 
+                                      fontSize: '13px', 
+                                      fontWeight: 600, 
+                                      color: '#18181b', 
+                                      margin: '0 0 4px 0',
+                                      whiteSpace: 'nowrap',
+                                      overflow: 'hidden',
+                                      textOverflow: 'ellipsis',
+                                      width: '100%'
+                                    }}
+                                    title={product.name}
+                                  >
+                                    {product.name}
+                                  </h4>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: '#eab308' }}>
+                                    <i className="ph ph-star-fill" style={{ color: '#eab308' }} />
+                                    <span style={{ fontWeight: 600, color: '#4b5563' }}>{product.rating}</span>
+                                    <span style={{ color: '#9ca3af' }}>({product.reviews} reviews)</span>
+                                  </div>
+                                </div>
+
+                                {/* Right Section: Indian Comma Pricing & Action Button */}
+                                <div style={{ flexShrink: 0, marginLeft: '14px', display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+                                  <span 
+                                    style={{ 
+                                      fontSize: '14px', 
+                                      fontWeight: 700, 
+                                      color: '#299E60', 
+                                      marginBottom: '6px',
+                                      display: 'block'
+                                    }}
+                                  >
+                                    ₹{product.price.toLocaleString("en-IN")}
+                                  </span>
+                                  <button
+                                    type="button"
+                                    style={{
+                                      width: '28px',
+                                      height: '28px',
+                                      borderRadius: '50%',
+                                      background: '#f0fdf4',
+                                      color: '#299E60',
+                                      border: 'none',
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      justifyContent: 'center',
+                                      cursor: 'pointer',
+                                      transition: 'all 0.15s ease'
+                                    }}
+                                  >
+                                    <i className="ph ph-shopping-cart-simple" style={{ fontSize: '14px' }} />
+                                  </button>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
               <div className='location-box bg-white flex-align gap-8 py-6 px-16 rounded-pill border border-gray-100'>
