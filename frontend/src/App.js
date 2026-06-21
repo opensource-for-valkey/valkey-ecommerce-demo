@@ -19,6 +19,10 @@ import VendorTwoPage from "./pages/VendorTwoPage";
 import VendorTwoDetailsPage from "./pages/VendorTwoDetailsPage";
 import BecomeSellerPage from "./pages/BecomeSellerPage";
 import WishlistPage from "./pages/WishlistPage";
+import AiSearchPage from "./pages/AiSearchPage";
+import AssistantPage from "./pages/AssistantPage";
+import OrdersPage from "./pages/OrdersPage";
+import AdminDashboardPage from "./pages/AdminDashboardPage";
 function App() {
   return (
     <BrowserRouter>
@@ -56,6 +60,18 @@ function App() {
           path='/vendor-two-details'
           element={<VendorTwoDetailsPage />}
         />
+        <Route exact path='/ai-search' element={<AiSearchPage />} />
+        <Route exact path='/assistant' element={<AssistantPage />} />
+        <Route exact path='/orders' element={<OrdersPage />} />
+        <Route exact path='/orders/:id' element={<OrdersPage />} />
+        <Route exact path='/admin' element={<AdminDashboardPage />} />
+        <Route exact path='/admin/products' element={<AdminDashboardPage />} />
+        <Route exact path='/admin/inventory' element={<AdminDashboardPage />} />
+        <Route exact path='/admin/coupons' element={<AdminDashboardPage />} />
+        <Route exact path='/admin/orders' element={<AdminDashboardPage />} />
+        <Route exact path='/admin/users' element={<AdminDashboardPage />} />
+        <Route exact path='/admin/analytics' element={<AdminDashboardPage />} />
+        <Route exact path='/admin/observability' element={<AdminDashboardPage />} />
       </Routes>
     </BrowserRouter>
   );
