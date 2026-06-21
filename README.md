@@ -1,4 +1,24 @@
-# Valkey E-Commerce Demo
+# ShopMind AI
+
+Next Generation AI Commerce Powered by Valkey.
+
+## Quick Start
+
+```bash
+docker compose up --build
+```
+
+Open:
+
+- Storefront: http://localhost:3000
+- API docs: http://localhost:4000/api/docs
+- Grafana: http://localhost:3001, admin/shopmind
+
+See [docs/SHOPMIND_AI.md](docs/SHOPMIND_AI.md) for architecture, Valkey key usage, API contracts, setup, deployment, and hackathon demo notes.
+
+---
+
+# Original Valkey E-Commerce Demo
 
 An e-commerce platform starter built with React, designed to showcase [Valkey](https://valkey.io/) capabilities across multiple subsystems. Created for the **Build Beyond Limits** hackathon powered by Valkey, hosted by React Hyderabad.
 

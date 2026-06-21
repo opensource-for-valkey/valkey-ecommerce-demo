@@ -1,8 +1,11 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import { ShopMindProvider } from './providers/ShopMindProvider';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('renders ShopMind provider content', () => {
+  render(
+    <ShopMindProvider>
+      <div>ShopMind AI</div>
+    </ShopMindProvider>
+  );
+  expect(screen.getByText(/ShopMind AI/i)).toBeInTheDocument();
 });

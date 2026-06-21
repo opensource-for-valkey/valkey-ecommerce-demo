@@ -1,0 +1,70 @@
+services:
+  valkey:
+    image: valkey/valkey-bundle:9-alpine
+    container_name: shopmind-valkey
+    ports:
+      - "6379:6379"
+    volumes:
+      - valkey-data:/data
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  backend:
+    build:
+      context: ./backend
+    container_name: shopmind-backend
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      FRONTEND_URL: http://localhost:3000
+      VALKEY_URL: redis://valkey:6379
+      JWT_SECRET: ${JWT_SECRET:-shopmind-local-development-secret}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      DEMO_SEED_COUNT: 1000
+    ports:
+      - "4000:4000"
+    depends_on:
+      valkey:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: shopmind-frontend
+    environment:
+      REACT_APP_API_URL: http://localhost:4000/api
+      REACT_APP_SOCKET_URL: http://localhost:4000
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+  prometheus:
+    image: prom/prometheus:v2.52.0
+    container_name: shopmind-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    depends_on:
+      - backend
+
+  grafana:
+    image: grafana/grafana:10.4.2
+    container_name: shopmind-grafana
+    ports:
+      - "3001:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: shopmind
+    volumes:
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - prometheus
+
+volumes:
+  valkey-data:

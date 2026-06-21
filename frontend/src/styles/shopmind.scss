@@ -1,0 +1,589 @@
+:root {
+  --sm-bg: #f6f5ef;
+  --sm-panel: #ffffff;
+  --sm-panel-2: #ecf6f1;
+  --sm-text: #171915;
+  --sm-muted: #687067;
+  --sm-line: rgba(23, 25, 21, 0.12);
+  --sm-green: #1f7a4d;
+  --sm-coral: #d95d39;
+  --sm-ink: #151f2b;
+  --sm-gold: #b98921;
+  --sm-shadow: 0 20px 50px rgba(21, 31, 43, 0.12);
+}
+
+:root[data-shopmind-theme="dark"] {
+  --sm-bg: #101411;
+  --sm-panel: #181e1a;
+  --sm-panel-2: #202820;
+  --sm-text: #f3f1e8;
+  --sm-muted: #b8c0b5;
+  --sm-line: rgba(243, 241, 232, 0.14);
+  --sm-green: #5ec48c;
+  --sm-coral: #f07b55;
+  --sm-ink: #f3f1e8;
+  --sm-gold: #e6b64b;
+  --sm-shadow: 0 22px 60px rgba(0, 0, 0, 0.34);
+}
+
+.shopmind-app {
+  min-height: 100vh;
+  background: linear-gradient(135deg, rgba(31, 122, 77, 0.12), transparent 30%), radial-gradient(circle at 80% 10%, rgba(217, 93, 57, 0.12), transparent 24%), var(--sm-bg);
+  color: var(--sm-text);
+  display: grid;
+  grid-template-columns: 86px 1fr;
+}
+
+.shopmind-rail {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: 18px 12px;
+  border-right: 1px solid var(--sm-line);
+  background: color-mix(in srgb, var(--sm-panel) 88%, transparent);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  z-index: 5;
+}
+
+.shopmind-brand {
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  background: var(--sm-ink);
+  color: var(--sm-bg);
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.shopmind-rail nav {
+  display: grid;
+  gap: 8px;
+}
+
+.shopmind-nav,
+.shopmind-icon-btn {
+  min-height: 48px;
+  border: 1px solid var(--sm-line);
+  background: transparent;
+  color: var(--sm-text);
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+}
+
+.shopmind-nav span {
+  position: absolute;
+  left: 78px;
+  background: var(--sm-ink);
+  color: var(--sm-bg);
+  padding: 6px 10px;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.shopmind-nav:hover span,
+.shopmind-nav.is-active span {
+  opacity: 1;
+}
+
+.shopmind-nav.is-active {
+  background: var(--sm-green);
+  color: #fff;
+}
+
+.shopmind-icon-btn {
+  margin-top: auto;
+}
+
+.shopmind-main {
+  width: min(1280px, 100%);
+  margin: 0 auto;
+  padding: 28px;
+}
+
+.sm-hero {
+  min-height: 520px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 24px;
+  align-items: end;
+  padding: 42px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--sm-panel-2) 92%, transparent), color-mix(in srgb, var(--sm-panel) 94%, transparent));
+  background-size: cover;
+  box-shadow: var(--sm-shadow);
+}
+
+.sm-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--sm-green);
+  font-weight: 800;
+}
+
+.sm-hero h1,
+.sm-section-head h1 {
+  font-size: clamp(42px, 6vw, 82px);
+  line-height: 0.95;
+  letter-spacing: 0;
+  margin: 14px 0;
+  color: var(--sm-text);
+}
+
+.sm-hero p,
+.sm-section-head p {
+  color: var(--sm-muted);
+  max-width: 760px;
+}
+
+.sm-searchbox,
+.sm-composer {
+  margin-top: 28px;
+  background: var(--sm-panel);
+  border: 1px solid var(--sm-line);
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px;
+}
+
+.sm-searchbox input,
+.sm-composer input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--sm-text);
+  min-height: 44px;
+}
+
+.sm-searchbox button,
+.sm-composer button,
+.sm-product button,
+.sm-prompt-row button,
+.sm-link-button {
+  border: 0;
+  border-radius: 8px;
+  background: var(--sm-coral);
+  color: #fff;
+  min-height: 44px;
+  padding: 0 18px;
+  font-weight: 800;
+}
+
+.sm-prompt-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.sm-prompt-row button {
+  background: var(--sm-panel);
+  color: var(--sm-text);
+  border: 1px solid var(--sm-line);
+}
+
+.sm-realtime,
+.sm-side-panel,
+.sm-delivery,
+.sm-panel,
+.sm-analysis article,
+.sm-metrics article,
+.sm-order,
+.sm-bundle,
+.sm-product,
+.sm-chat {
+  background: var(--sm-panel);
+  border: 1px solid var(--sm-line);
+  border-radius: 8px;
+}
+
+.sm-realtime,
+.sm-side-panel,
+.sm-delivery,
+.sm-panel,
+.sm-analysis article,
+.sm-metrics article,
+.sm-order,
+.sm-bundle {
+  padding: 18px;
+}
+
+.sm-realtime {
+  display: grid;
+  gap: 12px;
+  align-self: stretch;
+}
+
+.sm-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--sm-green);
+  display: inline-block;
+  margin-right: 8px;
+  box-shadow: 0 0 0 8px color-mix(in srgb, var(--sm-green) 18%, transparent);
+}
+
+.sm-realtime article {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border-top: 1px solid var(--sm-line);
+  padding-top: 10px;
+}
+
+.sm-analysis,
+.sm-metrics,
+.sm-admin-grid,
+.sm-orders,
+.sm-chat-layout,
+.sm-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.sm-analysis,
+.sm-metrics,
+.sm-admin-grid,
+.sm-orders,
+.sm-chat-layout {
+  margin-top: 24px;
+}
+
+.sm-analysis,
+.sm-grid--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.sm-analysis strong,
+.sm-metrics strong {
+  display: block;
+  font-size: 32px;
+  color: var(--sm-text);
+}
+
+.sm-section-head {
+  margin: 42px 0 18px;
+}
+
+.sm-section-head h2,
+.sm-panel h2,
+.sm-side-panel h2,
+.sm-product h3 {
+  color: var(--sm-text);
+}
+
+.sm-product {
+  overflow: hidden;
+  display: grid;
+  min-height: 100%;
+}
+
+.sm-product__image {
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+  background: var(--sm-panel-2);
+}
+
+.sm-product__image img {
+  max-width: 82%;
+  max-height: 82%;
+  object-fit: contain;
+}
+
+.sm-product__body {
+  padding: 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.sm-product__meta,
+.sm-product__footer,
+.sm-bundle,
+.sm-order,
+.sm-panel h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sm-product__meta,
+.sm-product p {
+  color: var(--sm-muted);
+}
+
+.sm-product h3 {
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.sm-product__footer {
+  justify-content: space-between;
+}
+
+.sm-product__footer button,
+.sm-composer button {
+  width: 44px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+
+.sm-empty,
+.sm-skeleton {
+  border: 1px dashed var(--sm-line);
+  border-radius: 8px;
+  padding: 34px;
+  background: color-mix(in srgb, var(--sm-panel) 72%, transparent);
+  color: var(--sm-muted);
+}
+
+.sm-skeleton {
+  min-height: 280px;
+  background: linear-gradient(90deg, var(--sm-panel), var(--sm-panel-2), var(--sm-panel));
+  animation: smPulse 1.4s infinite;
+}
+
+.sm-chat-layout {
+  grid-template-columns: minmax(0, 1fr) 360px;
+}
+
+.sm-chat {
+  min-height: 76vh;
+  padding: 24px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.sm-thread {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 18px 0;
+}
+
+.sm-message {
+  max-width: 78%;
+  padding: 14px 16px;
+  border-radius: 8px;
+  background: var(--sm-panel-2);
+}
+
+.sm-message--user {
+  justify-self: end;
+  background: var(--sm-green);
+  color: #fff;
+}
+
+.sm-orders {
+  grid-template-columns: minmax(0, 1fr) 340px;
+}
+
+.sm-progress {
+  height: 10px;
+  background: var(--sm-panel-2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.sm-progress span {
+  display: block;
+  height: 100%;
+  background: var(--sm-green);
+}
+
+.sm-metrics {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.sm-metrics article {
+  display: grid;
+  gap: 8px;
+}
+
+.sm-admin-grid {
+  grid-template-columns: 1.2fr 0.8fr;
+}
+
+.sm-insight,
+.sm-chip-cloud span {
+  display: inline-flex;
+  margin: 8px 8px 0 0;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: var(--sm-panel-2);
+  color: var(--sm-text);
+}
+
+.sm-link-button {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 18px;
+}
+
+@keyframes smPulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 960px) {
+  .shopmind-app {
+    grid-template-columns: 1fr;
+  }
+
+  .shopmind-rail {
+    position: sticky;
+    bottom: 0;
+    top: auto;
+    height: auto;
+    order: 2;
+    flex-direction: row;
+    border-right: 0;
+    border-top: 1px solid var(--sm-line);
+  }
+
+  .shopmind-rail nav {
+    display: flex;
+    flex: 1;
+  }
+
+  .shopmind-nav {
+    flex: 1;
+  }
+
+  .shopmind-nav span,
+  .shopmind-brand {
+    display: none;
+  }
+
+  .shopmind-main {
+    padding: 16px;
+  }
+
+  .sm-hero,
+  .sm-chat-layout,
+  .sm-orders,
+  .sm-admin-grid,
+  .sm-grid--three,
+  .sm-analysis,
+  .sm-metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+.shopmind-home-strip {
+  padding: 34px 0;
+  background: var(--sm-bg);
+}
+
+.shopmind-home-strip__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px;
+  border-radius: 8px;
+  background: var(--sm-ink);
+  color: var(--sm-bg);
+}
+
+.shopmind-home-strip__inner span,
+.shopmind-home-strip__actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.shopmind-home-strip__inner h2 {
+  margin: 8px 0 0;
+  color: var(--sm-bg);
+  font-size: 28px;
+}
+
+.shopmind-home-strip__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.shopmind-home-strip__actions a {
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 8px;
+  background: var(--sm-coral);
+  color: #fff;
+  font-weight: 800;
+}
+
+.shopmind-trending-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.shopmind-trending-row article,
+.shopmind-mini-skeleton {
+  min-height: 98px;
+  border-radius: 8px;
+  border: 1px solid var(--sm-line);
+  background: var(--sm-panel);
+}
+
+.shopmind-trending-row article {
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 10px;
+}
+
+.shopmind-trending-row img {
+  width: 76px;
+  height: 76px;
+  object-fit: contain;
+  background: var(--sm-panel-2);
+  border-radius: 8px;
+}
+
+.shopmind-trending-row strong {
+  display: block;
+  color: var(--sm-text);
+  line-height: 1.25;
+}
+
+.shopmind-trending-row span {
+  color: var(--sm-muted);
+}
+
+.shopmind-mini-skeleton {
+  background: linear-gradient(90deg, var(--sm-panel), var(--sm-panel-2), var(--sm-panel));
+  animation: smPulse 1.4s infinite;
+}
+
+@media (max-width: 960px) {
+  .shopmind-home-strip__inner,
+  .shopmind-trending-row {
+    grid-template-columns: 1fr;
+  }
+
+  .shopmind-home-strip__inner {
+    display: grid;
+  }
+}

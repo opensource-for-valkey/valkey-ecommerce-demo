@@ -1,0 +1,22 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "panels": [
+    {
+      "type": "stat",
+      "title": "HTTP Requests",
+      "targets": [{ "expr": "sum(shopmind_http_requests_total)" }],
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 0 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Request Rate",
+      "targets": [{ "expr": "rate(shopmind_http_requests_total[1m])" }],
+      "gridPos": { "h": 8, "w": 16, "x": 8, "y": 0 }
+    }
+  ],
+  "schemaVersion": 39,
+  "title": "ShopMind AI Overview",
+  "uid": "shopmind-overview",
+  "version": 1
+}

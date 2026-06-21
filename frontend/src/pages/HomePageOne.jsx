@@ -22,6 +22,7 @@ import FooterOne from "../components/FooterOne";
 import BottomFooter from "../components/BottomFooter";
 import ScrollToTop from "react-scroll-to-top";
 import ColorInit from "../helper/ColorInit";
+import ShopMindHomeStrip from "../components/shopmind/ShopMindHomeStrip";
 const HomePageOne = () => {
 
   return (
@@ -42,6 +43,9 @@ const HomePageOne = () => {
 
       {/* BannerOne */}
       <BannerOne />
+
+      {/* ShopMind AI */}
+      <ShopMindHomeStrip />
 
       {/* FeatureOne */}
       <FeatureOne />
